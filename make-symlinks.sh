@@ -5,9 +5,10 @@
 #
 # TODO: replace all the lines by a for loop
 
+cd ~
 
-ln -s bashrc ~/.bashrc
-ln -s bash_aliases ~/.bash_aliases
-ln -s bash_logout ~/.bash_logout
-ln -s motd ~/.motd
-ln -s vimrc ~/.vimrc
+ln -s .dotfiles/bashrc .bashrc
+ln -s .dotfiles/bash_aliases .bash_aliases
+ln -s .dotfiles/bash_logout .bash_logout
+ln -s .dotfiles/motd .motd
+ln -s .dotfiles/vimrc .vimrc
