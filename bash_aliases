@@ -95,7 +95,7 @@ function pushdotfiles {
 
   git add *
   git commit
-  #git push origin master
+  git push origin master
 
   cd $CUR_DIR
   echo "done"
