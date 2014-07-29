@@ -120,6 +120,12 @@ function cl {
   ls;
 }
 
+# prompt all files after cd
+function cla {
+  cd $1;
+  la;
+}
+
 # opens graphical explorer after cd
 function co {
   cd $1;
