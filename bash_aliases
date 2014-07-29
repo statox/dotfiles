@@ -66,6 +66,21 @@ alias ccat='pygmentize -g'
 #                   functions                      #
 ####################################################
 
+# updates dotfiles via git
+function updatedotfiles {
+  if [ -d ~/.dotfiles ]; then
+    echo "updating dotfiles"
+    CUR_DIR=$(pwd) 
+    cd ~/.dotfiles
+    git pull origin master
+    cd $CUR_DIR
+    echo "done"
+  else
+    echo "~/.dotfiles does not exist, please clone the repo github.com/statox/dotfiles"
+  fi
+}
+
+
 # exectute last command with root privileges
 function resudo {
   # get the last command
