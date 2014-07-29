@@ -5,6 +5,8 @@
 # This script makes a copy of dotfiles in home directory
 
 SAVE_DIR=~/.dotfiles/saved-dotfiles
+FILES=~/.dotfiles/scripts/files_list
+
 
 if [ ! -d $SAVE_DIR ]; then
     echo "create dir $SAVE_DIR"
@@ -14,10 +16,11 @@ else
 fi
 
 echo "saving files"
-cat ~/.bashrc > $SAVE_DIR/bashrc
-cat ~/.bash_aliases > $SAVE_DIR/bash_aliases
-cat ~/.bash_logout > $SAVE_DIR/bash_logout
-cat ~/.motd > $SAVE_DIR/motd
-cat ~/.vimrc > $SAVE_DIR/vimrc
+
+for f in $(cat $FILES)
+do
+  echo "   " $f
+  cat ~/.$f > $SAVE_DIR/$f
+done
 
 echo "done"

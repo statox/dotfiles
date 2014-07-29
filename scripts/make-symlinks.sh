@@ -3,12 +3,18 @@
 # Author: Adrien Fabre (statox)
 # This script symlinks all the dotfiles of the directory
 #
-# TODO: replace all the lines by a for loop
 
+FILES=~/.dotfiles/scripts/files_list
+CUR_DIR=$(pwd)
+
+# go to home directory
 cd ~
 
-ln -s .dotfiles/bashrc .bashrc
-ln -s .dotfiles/bash_aliases .bash_aliases
-ln -s .dotfiles/bash_logout .bash_logout
-ln -s .dotfiles/motd .motd
-ln -s .dotfiles/vimrc .vimrc
+# for each file in the list make a symlink
+for f in $(cat $FILES)
+do
+  ln -s .dotfiles/$f .$f
+done
+
+# go back to original directory
+cd $CUR_DIR
