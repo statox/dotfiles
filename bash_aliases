@@ -70,9 +70,14 @@ alias ccat='pygmentize -g'
 function updatedotfiles {
   if [ -d ~/.dotfiles ]; then
     echo "updating dotfiles"
+    
     CUR_DIR=$(pwd) 
     cd ~/.dotfiles
+    
     git pull origin master
+    
+    reloadbash
+    
     cd $CUR_DIR
     echo "done"
   else
