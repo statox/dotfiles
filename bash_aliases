@@ -85,6 +85,21 @@ function updatedotfiles {
   fi
 }
 
+# push dotfile changes on git
+function pushdotfiles {
+ 
+  echo "pushing dotfiles"
+
+  CUR_DIR=$(pwd)
+  cd ~/.dotfiles
+
+  git add *
+  git commit
+  #git push origin master
+
+  cd $CUR_DIR
+  echo "done"
+}
 
 # exectute last command with root privileges
 function resudo {
