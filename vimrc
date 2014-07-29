@@ -24,8 +24,8 @@ filetype indent plugin on
 syntax on
 
 "------------------------------------------------------------
-" Vundle manager de plugins
-"voir: https://github.com/gmarik/Vundle.vim
+" Vundle : Plugins manager
+" see : https://github.com/gmarik/Vundle.vim
 "
 
 filetype off
@@ -36,7 +36,6 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-" Le manager de plugin
 Plugin 'gmarik/Vundle.vim'
 
 " configurer en fonction des types de fichier
