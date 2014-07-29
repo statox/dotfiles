@@ -7,15 +7,8 @@
 # and call the make-symlink.sh script to replace them
 
 
-# TODO: check if the directory already exists
-mkdir saved-dotfiles
+# make a save of the current dotfiles
+sh ./save-dotfiles.sh
 
-
-# TODO: replace that by a for loop
-mv ~/.bash_aliases saved-dotfiles/
-mv ~/.bashrc saved-dotfiles/
-mv ~/.bash_logout saved-dotfiles/
-mv ~/.motd saved-dotfiles/
-mv ~/.vimrc saved-dotfiles/
-
+# creating symlinks 
 sh ./make-symlinks.sh
