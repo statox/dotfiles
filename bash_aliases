@@ -82,11 +82,11 @@ function resudo {
 function seed {
 
   if [ "$1" = mount ] || [ "$1" = m ]; then 
-    echo "mounting /home/adrien/seedbox"
-    sshfs -o reconnect -C -p 22 statox@koala.statox.fr:/home/seed/seedstatox /home/adrien/seedbox
+    echo "mounting ~/seedbox"
+    sshfs -o reconnect -C -p 22 koala:/home/seed/seedstatox ~/seedbox
   elif [ "$1" = unmount ] || [ "$1" = u ]; then
-    echo "unmounting /home/adrien/seedbox"
-    fusermount -u /home/adrien/seedbox
+    echo "unmounting ~/seedbox"
+    fusermount -u ~/seedbox
   elif [ -z "$1" ]; then
     echo "argument vide"
   else
