@@ -26,10 +26,11 @@ do
   if [ -d ~/.$f ]; then
     echo "directory"
     cp -r ~/.$f $SAVE_DIR/$f
+    rm -rf ~/.$f
   elif [ -f ~/.$f ]; then
     echo "file"
     cat ~/.$f > $SAVE_DIR/$f
-    #rm ~/.$f
+    rm -f ~/.$f
   else
     echo "not found"
   fi
