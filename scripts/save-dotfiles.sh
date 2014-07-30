@@ -7,6 +7,9 @@
 SAVE_DIR=~/.dotfiles/saved-dotfiles
 FILES=~/.dotfiles/scripts/files_list
 
+DATE=$(date +%y%m%d_%H%M%S)
+
+SAVE_DIR=$SAVE_DIR/$DATE
 
 if [ ! -d $SAVE_DIR ]; then
     echo "create dir $SAVE_DIR"
@@ -20,8 +23,16 @@ echo "saving files"
 for f in $(cat $FILES)
 do
   echo "   " $f
-  cat ~/.$f > $SAVE_DIR/$f
-  rm ~/.$f
-done
+  if [ -d ~/.$f ]; then
+    echo "directory"
+    cp -r ~/.$f $SAVE_DIR/$f
+  elif [ -f ~/.$f ]; then
+    echo "file"
+    cat ~/.$f > $SAVE_DIR/$f
+    #rm ~/.$f
+  else
+    echo "not found"
+  fi
+  done
 
 echo "done"
