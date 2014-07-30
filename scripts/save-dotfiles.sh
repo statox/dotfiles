@@ -21,6 +21,7 @@ for f in $(cat $FILES)
 do
   echo "   " $f
   cat ~/.$f > $SAVE_DIR/$f
+  rm ~/.$f
 done
 
 echo "done"
