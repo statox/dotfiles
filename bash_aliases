@@ -32,7 +32,7 @@ alias vi='vim'
 
 # IDEs
 alias codeblocks='sudo codeblocks'
-alias adt='/home/adrien/developpement_android/adt-bundle-linux-x86-20140702/eclipse/eclipse'
+alias adt='/home/adrien/developpement_android/adt-bundle-linux-x86-20140702/eclipse/eclipse $1 > /dev/null &'
 
 # ssh
 # voir /home/adrien/.ssh/config pour les alias ssh
@@ -44,7 +44,7 @@ alias poney='ssh poney'
 # apt
 alias install='sudo apt-get install'
 alias search='apt-cache search'
-alias update='sudo apt-get update && apt-get upgrade'
+alias update='sudo apt-get update && sudo apt-get upgrade'
 
 # directories navigation
 alias back='cd $OLDPWD'
@@ -57,6 +57,9 @@ alias .....='cd ../../../..'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
+
+# quickly output iptables rules
+alias ipt='sudo iptables -L'
 
 # colorize cat
 #/!\ python-pygments needed: sudo apt-get install python-pygments
