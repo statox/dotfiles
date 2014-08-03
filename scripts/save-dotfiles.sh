@@ -25,7 +25,7 @@ do
   echo "   " $f
   if [ -d ~/.$f ]; then
     echo "directory"
-    cp -r ~/.$f $SAVE_DIR/$f
+    cp -Lr ~/.$f $SAVE_DIR/$f
     rm -rf ~/.$f
   elif [ -f ~/.$f ]; then
     echo "file"
