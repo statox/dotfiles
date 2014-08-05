@@ -6,6 +6,17 @@
 # It must be called in ~/basrc
 
 
+
+####################################################
+#                 local  aliases                   #
+####################################################
+
+# Aliases used only in this machine (not synched with git)
+
+if [ -f ~/.bash_aliases_local ]; then
+	. ~/.bash_aliases_local
+fi
+
 ####################################################
 #                   aliases                        #
 ####################################################
@@ -29,17 +40,6 @@ alias restnow='sudo shutdown -r now'
 
 #vim
 alias vi='vim'
-
-# IDEs
-alias codeblocks='sudo codeblocks'
-alias adt='/home/adrien/developpement_android/adt-bundle-linux-x86-20140702/eclipse/eclipse $1 > /dev/null &'
-
-# ssh
-# voir /home/adrien/.ssh/config pour les alias ssh
-alias choam='ssh choam'
-alias efrei='ssh darnassus'
-alias koala='ssh koala'
-alias poney='ssh poney'
 
 # apt
 alias install='sudo apt-get install'
@@ -114,24 +114,6 @@ function resudo {
   echo "$CMD"
   # execution
   $CMD
-}
-
-# mount remote directory via ssh
-function seed {
-
-  if [ "$1" = mount ] || [ "$1" = m ]; then 
-    echo "mounting ~/seedbox"
-    sshfs -o reconnect -C -p 22 koala:/home/seed/seedstatox ~/seedbox
-  elif [ "$1" = unmount ] || [ "$1" = u ]; then
-    echo "unmounting ~/seedbox"
-    fusermount -u ~/seedbox
-  elif [ -z "$1" ]; then
-    echo "argument vide"
-  else
-    echo "Error: invalid argument $1"
-    echo "usage: seed mount|m|unmount|u"
-  fi
-  
 }
 
 # opens a directory with graphical explorer
