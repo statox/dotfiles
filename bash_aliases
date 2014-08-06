@@ -190,3 +190,21 @@ fi
 function maketar { tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"; }
 # Create a ZIP archive of a file or folder.
 function makezip { zip -r "${1%%/}.zip" "$1" ; }
+
+# Create an archive of a given format from a given file or directory
+function archive {
+  
+  if [ ! -d "$2" ] && [ ! -f "$2" ];then
+    echo "not a file or directory"
+    echo "Usage: archive [format] [path/to/file/or/directory]"
+    return -1
+  fi
+
+  case "$1" in
+    tar.gz)   tar cvzf "${2%%/}.tar.gz"  "${2%%/}/";;  
+    zip)      zip -r "${2%%/}.zip" "$2" ;;
+    gz|gzip)  cat $2 | gzip > $2.gz;;
+    *)    echo "wrong archive type" 
+          echo "Usage: archive [format] [path/to/file/or/directory]";;
+  esac
+}
