@@ -26,7 +26,7 @@ alias reloadbashrc='source ~/.bashrc'
 
 #ls
 alias ll='ls -alFh'
-alias la='ls -a'
+alias la='ls -aCF'
 alias l='ls -CF'
 
 #mkdir: create parents directories + verbose
