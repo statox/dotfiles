@@ -29,6 +29,9 @@ alias ll='ls -alFh'
 alias la='ls -aCF'
 alias l='ls -CF'
 
+#clear screen
+alias c='clear'
+
 #mkdir: create parents directories + verbose
 alias mkdir='mkdir -p -v'
 
