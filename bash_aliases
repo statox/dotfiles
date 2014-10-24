@@ -32,6 +32,10 @@ alias l='ls -CF'
 #clear screen
 alias c='clear'
 
+#fast acces to history 
+alias h='history'
+alias hg='history | grep '
+
 #mkdir: create parents directories + verbose
 alias mkdir='mkdir -p -v'
 
@@ -55,6 +59,12 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+alias .......='cd ../../../../../..'
+alias ........='cd ../../../../../../..'
+alias .........='cd ../../../../../../../..'
+alias ..........='cd ../../../../../../../../..'
+
 
 # securisation to avoid unwanted deletions
 alias rm='rm -i'
@@ -64,13 +74,24 @@ alias mv='mv -i'
 # quickly output iptables rules
 alias ipt='sudo iptables -L'
 
-# colorize cat
-#/!\ python-pygments needed: sudo apt-get install python-pygments
-alias ccat='pygmentize -g'
-
 ####################################################
 #                   functions                      #
 ####################################################
+#magnifying the cat utility
+#/!\ python-pygments needed: sudo apt-get install python-pygments
+
+function cat {
+  for file in "$@"
+  do
+    if [ -f $file ];then
+      pygmentize -g $file | more
+    else
+      echo $file "isn't a file can't display it"
+    fi
+
+  done
+}
+
 
 # updates dotfiles via git
 function updatedotfiles {
@@ -211,3 +232,4 @@ function archive {
           echo "Usage: archive [format] [path/to/file/or/directory]";;
   esac
 }
+
