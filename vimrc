@@ -27,6 +27,10 @@ syntax on
 " Vundle : Plugins manager
 " see : https://github.com/gmarik/Vundle.vim
 "
+"/!\ Remember to use 
+" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+" The first time you install vim to avoid error each time you open a file
+
 
 filetype off
 " set the runtime path to include Vundle and initialize
