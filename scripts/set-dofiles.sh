@@ -12,3 +12,6 @@ sh ./save-dotfiles.sh
 
 # creating symlinks 
 sh ./make-symlinks.sh
+
+# source the .bashrc
+reloadbashrc
