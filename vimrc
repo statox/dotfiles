@@ -31,6 +31,10 @@ syntax on
 " git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " The first time you install vim to avoid error each time you open a file
 
+" Check if Vundle installation directory exists
+if !isdirectory("/home/adrien/.vim/bundle/Vundle.vim")
+  :echo "Vundle not installed"
+endif
 
 filetype off
 " set the runtime path to include Vundle and initialize

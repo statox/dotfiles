@@ -148,4 +148,4 @@ export PATH=$PATH:/home/adrien/developpement_android/adt-bundle-linux*/eclipse/
 # JAVA_HOME et PATH pour MAVEN (sur samsung-adrien)
 export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-i386
 export PATH=$PATH:$JAVA_HOME/bin
-
+export PATH=$PATH::/usr/lib/gradle-2.1/bin
