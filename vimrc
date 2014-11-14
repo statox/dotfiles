@@ -6,22 +6,11 @@
 "              on this file is still a good idea.
 
 "------------------------------------------------------------
-" Features {{{1
-"
-" These options and commands enable some very useful features in Vim, that
-" no user should have to live without.
+" Basic configuration
 
-" Set 'nocompatible' to ward off unexpected things that your distro might
-" have made, as well as sanely reset options when re-sourcing .vimrc
-set nocompatible
-
-" Attempt to determine the type of a file based on its name and possibly its
-" contents. Use this to allow intelligent auto-indenting for each filetype,
-" and for plugins that are filetype specific.
-filetype indent plugin on
-
-" Enable syntax highlighting
-syntax on
+set nocompatible 	"Required, fix lot of stuff
+filetype off		"Detect the type of a file based on its name (Vundle needs it to be set to off)
+syntax on			" Enable syntax highlighting	
 
 "------------------------------------------------------------
 " Vundle : Plugins manager
@@ -31,45 +20,35 @@ syntax on
 " git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " The first time you install vim to avoid error each time you open a file
 
+" TEST (NOT FINISHED)
 " Check if Vundle installation directory exists
-if !isdirectory("/home/adrien/.vim/bundle/Vundle.vim")
-  :echo "Vundle not installed"
-endif
+"if !isdirectory("/home/adrien/.vim/bundle/Vundle.vim")
+"  :echo "Vundle not installed"
+"endif
 
-filetype off
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" configurer en fonction des types de fichier
+" detects files type and has an accorded behaviour 
 Plugin 'vim-scripts/editorconfig-vim'
-" colorer les parentheses qui matchent
+" matching parenthesis are coloured
 Plugin 'nablaa/vim-rainbow-parenthesis'
 " utiliser tab pour faire les complétions
-Plugin 'ervandew/supertab'
+" Plugin 'ervandew/supertab'
+
+" insert or delete brackets, parens, quotes in pair
+Plugin 'jiangmiao/auto-pairs'
+" Vim plugin for intensely orgasmic commenting
+Plugin 'scrooloose/nerdcommenter'
+" Vim script for text filtering and alignment
+Plugin 'godlygeek/tabular'
 
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-" Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
-" Git plugin not hosted on GitHub
-" Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
-" " The sparkup vim script is in a subdirectory of this repo called vim.
-" " Pass the path to set the runtimepath properly.
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" " Avoid a name conflict with L9
-" Plugin 'user/L9', {'name': 'newL9'}
-"
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -79,29 +58,9 @@ filetype plugin indent on    " required
 
 "------------------------------------------------------------
 " Must have options {{{1
-"
-" These are highly recommended options.
 
-" Vim with default settings does not allow easy switching between multiple files
-" in the same editor window. Users can use multiple split windows or multiple
-" tab pages to edit multiple files, but it is still best to enable an option to
-" allow easier switching between files.
-"
-" One such option is the 'hidden' option, which allows you to re-use the same
-" window and switch from an unsaved buffer without saving it first. Also allows
-" you to keep an undo history for multiple files when re-using the same window
-" in this way. Note that using persistent undo also lets you undo in multiple
-" files even in the same window, but is less efficient and is actually designed
-" for keeping undo history after closing Vim entirely. Vim will complain if you
-" try to quit without saving, and swap files will keep you safe if your computer
-" crashes.
-set hidden
-
-" Note that not everyone likes working this way (with the hidden option).
-" Alternatives include using tabs or split windows instead of re-using the same
-" window as mentioned above, and/or either of the following options:
-" set confirm
-" set autowriteall
+" Allows better switching between files
+set hidden	
 
 " Better command-line completion
 set wildmenu
@@ -113,19 +72,8 @@ set showcmd
 " mapping of <C-L> below)
 set hlsearch
 
-" Modelines have historically been a source of security vulnerabilities. As
-" such, it may be a good idea to disable them and use the securemodelines
-" script, <http://www.vim.org/scripts/script.php?script_id=1876>.
-" set nomodeline
-
-
 "------------------------------------------------------------
 " Usability options {{{1
-"
-" These are options that users frequently set in their .vimrc. Some of them
-" change Vim's behaviour in ways which deviate from the true Vi way, but
-" which are considered to add usability. Which, if any, of these options to
-" use is very much a personal preference, but they are harmless.
 
 " Use case insensitive search, except when using capital letters
 set ignorecase
@@ -181,19 +129,11 @@ set pastetoggle=<F11>
 
 "------------------------------------------------------------
 " Indentation options {{{1
-"
-" Indentation settings according to personal preference.
-
-" Indentation settings for using 2 spaces instead of tabs.
-" Do not change 'tabstop' from its default value of 8 with this setup.
-set shiftwidth=2
-set softtabstop=2
-set expandtab
 
 " Indentation settings for using hard tabs for indent. Display tabs as
 " two characters wide.
-"set shiftwidth=2
-"set tabstop=2
+set shiftwidth=4
+set tabstop=4
 
 
 "------------------------------------------------------------
@@ -209,5 +149,7 @@ map Y y$
 " next search
 nnoremap <C-L> :nohl<CR><C-L>
 
+" <C-Y> in insert mode will past like p in normal mode
+inoremap <C-Y> <C-O>p i
 
 "------------------------------------------------------------
