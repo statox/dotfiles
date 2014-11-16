@@ -55,15 +55,15 @@ alias update='sudo apt-get update && sudo apt-get upgrade'
 
 # directories navigation
 alias back='cd $OLDPWD'
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-alias ......='cd ../../../../..'
-alias .......='cd ../../../../../..'
-alias ........='cd ../../../../../../..'
-alias .........='cd ../../../../../../../..'
-alias ..........='cd ../../../../../../../../..'
+alias ..='cd ../'
+alias ...='cd ../../'
+alias ....='cd ../../../'
+alias .....='cd ../../../../'
+alias ......='cd ../../../../../'
+alias .......='cd ../../../../../../'
+alias ........='cd ../../../../../../../'
+alias .........='cd ../../../../../../../../'
+alias ..........='cd ../../../../../../../../../'
 
 
 # securisation to avoid unwanted deletions
@@ -80,11 +80,11 @@ alias ipt='sudo iptables -L'
 #magnifying the cat utility
 #/!\ python-pygments needed: sudo apt-get install python-pygments
 
-function cat {
+function ccat {
   for file in "$@"
   do
     if [ -f $file ];then
-      pygmentize -g $file | more
+      pygmentize -g $file
     else
       echo $file "isn't a file can't display it"
     fi
@@ -144,18 +144,43 @@ function resudo {
 #       if no argument is passed, opens current directory
 #       else, try to open passed directory
 function o {
-  if [ -z "$1" ]
+  if [ -z "$1" ]    # empty argument
   then
     # opened in background, output redirected to /dev/null
     nautilus $(pwd) > /dev/null &
   else
-    if [ -d "$1" ]
+    if [ -d "$1" ] # argument is a directory
     then
       nautilus $1 > /dev/null &
     else
       echo "Error: not a directory"
     fi
   fi
+}
+
+# "universal" opener function: the function tries to open
+# the file passed as argument depending on its name
+# TODO: Maybe I'm just reinventing the wheel and I should try 
+# to find an existing solution
+# TODO: Make it work with several files passed as arguments
+# TODO: Find a better way to test the extensions
+
+function uof {
+    # treat only files
+    if [ -f "$1" ]
+    then
+        if [[ $1 == *.pdf ]] || [[ $1 == *.PDF ]]
+        then
+            evince $1
+        else if [[ $1 == *.txt ]] || [[ $1 == *.TXT ]] || [[ $1 == *.c ]] || [[ $1 == *.C ]]
+        then
+            vim $1
+        else
+            echo "I dont know how to open this file"
+        fi
+    else
+        echo "Error: not a file"
+    fi
 }
 
 # prompt files after cd
