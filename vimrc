@@ -1,16 +1,69 @@
+" This vimrc file is freely inspired by several sources:
 " URL: http://vim.wikia.com/wiki/Example_vimrc
-" Authors: http://vim.wikia.com/wiki/Vim_on_Freenode
-" Description: A minimal, but feature rich, example .vimrc. If you are a
-"              newbie, basing your first .vimrc on this file is a good choice.
-"              If you're a more advanced user, building your own .vimrc based
-"              on this file is still a good idea.
+" URL: https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim
+" URL: https://github.com/nobe4/dotfiles/blob/master/.vimrc
+
+
 
 "------------------------------------------------------------
-" Basic configuration
+" General configuration
 
 set nocompatible 	"Required, fix lot of stuff
 filetype off		"Detect the type of a file based on its name (Vundle needs it to be set to off)
 syntax on			" Enable syntax highlighting	
+
+
+let mapleader="\<Space>"    " remap mapleader to space
+
+" :W sudo saves the file
+" " (useful for handling the permission-denied error)
+command W w !sudo tee % > /dev/null"
+
+" Allows better switching between files
+set hidden	
+
+" Better command-line completion
+set wildmenu
+
+" Show partial commands in the last line of the screen
+set showcmd
+
+
+
+"------------------------------------------------------------
+" Color configuration
+
+try
+	colorscheme mustang
+catch
+endtry
+
+" Highlight searches (use <C-L> to temporarily turn off highlighting; see the
+" mapping of <C-L> below)
+set hlsearch
+
+
+
+"------------------------------------------------------------
+" Text, tab and indent related configuration
+
+" Use spaces instead of tabs
+set expandtab
+
+" Be smart when using tabs ;)
+set smarttab
+
+" 1 tab == 4 spaces
+set shiftwidth=4
+set tabstop=4
+
+" Linebreak on 500 characters
+set lbr
+set tw=500
+set ai "Auto indent
+set si "Smart indent
+set wrap "Wrap lines"
+
 
 "------------------------------------------------------------
 " Vundle : Plugins manager
@@ -19,12 +72,6 @@ syntax on			" Enable syntax highlighting
 "/!\ Remember to use 
 " git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " The first time you install vim to avoid error each time you open a file
-
-" TEST (NOT FINISHED)
-" Check if Vundle installation directory exists
-"if !isdirectory("/home/adrien/.vim/bundle/Vundle.vim")
-"  :echo "Vundle not installed"
-"endif
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -37,9 +84,6 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'vim-scripts/editorconfig-vim'
 " matching parenthesis are coloured
 Plugin 'nablaa/vim-rainbow-parenthesis'
-" utiliser tab pour faire les complétions
-" Plugin 'ervandew/supertab'
-
 " insert or delete brackets, parens, quotes in pair
 Plugin 'jiangmiao/auto-pairs'
 " Vim plugin for intensely orgasmic commenting
@@ -55,22 +99,6 @@ filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 " "filetype plugin on
 
-
-"------------------------------------------------------------
-" Must have options {{{1
-
-" Allows better switching between files
-set hidden	
-
-" Better command-line completion
-set wildmenu
-
-" Show partial commands in the last line of the screen
-set showcmd
-
-" Highlight searches (use <C-L> to temporarily turn off highlighting; see the
-" mapping of <C-L> below)
-set hlsearch
 
 "------------------------------------------------------------
 " Usability options {{{1
@@ -132,8 +160,8 @@ set pastetoggle=<F11>
 
 " Indentation settings for using hard tabs for indent. Display tabs as
 " two characters wide.
-set shiftwidth=4
-set tabstop=4
+" set shiftwidth=4
+" set tabstop=4
 
 
 "------------------------------------------------------------
@@ -151,5 +179,16 @@ nnoremap <C-L> :nohl<CR><C-L>
 
 " <C-Y> in insert mode will past like p in normal mode
 inoremap <C-Y> <C-O>p i
+
+" Ctrl+Space autocomplete (yay eclipse)
+" (TODO: understand how the heck this mapping works. 
+" I found it there: http://stackoverflow.com/questions/510503/ctrlspace-for-omni-and-keyword-completion-in-vim)
+inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
+            \ "\<lt>C-n>" :
+            \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
+            \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
+            \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
+imap <C-@> <C-Space>
+
 
 "------------------------------------------------------------
