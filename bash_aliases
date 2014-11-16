@@ -172,7 +172,7 @@ function uof {
         if [[ $1 == *.pdf ]] || [[ $1 == *.PDF ]]
         then
             evince $1
-        else if [[ $1 == *.txt ]] || [[ $1 == *.TXT ]] || [[ $1 == *.c ]] || [[ $1 == *.C ]]
+        elif [[ $1 == *.txt ]] || [[ $1 == *.TXT ]] || [[ $1 == *.c ]] || [[ $1 == *.C ]]
         then
             vim $1
         else
