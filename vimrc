@@ -65,6 +65,25 @@ set si "Smart indent
 set wrap "Wrap lines"
 
 
+
+"------------------------------------------------------------
+" Dictionnaries
+
+" (un)set english dictionnary with F7
+map <silent> <F7> "<Esc>:silent setlocal spell! spelllang=en<CR>"
+imap <silent> <F7> "<Esc>:silent setlocal spell! spelllang=en<CR>"
+" (un)set french dictionnary with F6
+map <silent> <F6> "<Esc>:silent setlocal spell! spelllang=fr<CR>"
+imap <silent> <F6> "<Esc>:silent setlocal spell! spelllang=fr<CR>"
+
+" next word
+nmap <Leader>n "<Esc>]s" 
+" prev word
+nmap <Leader>b "<Esc>[s" 
+" suggest word correction
+nmap <Leader>v "<Esc>z="
+
+
 "------------------------------------------------------------
 " Vundle : Plugins manager
 " see : https://github.com/gmarik/Vundle.vim
