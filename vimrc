@@ -69,6 +69,10 @@ set wrap "Wrap lines"
 "------------------------------------------------------------
 " Dictionnaries
 
+" /!\ Do not forget to get the dictionnaries files in ~/.vim/spell
+" wget http://ftp.vim.org/vim/runtime/spell/en.utf-8.sug
+" wget http://ftp.vim.org/vim/runtime/spell/en.utf-8.spl
+
 " (un)set english dictionnary with F7
 map <silent> <F7> "<Esc>:silent setlocal spell! spelllang=en<CR>"
 imap <silent> <F7> "<Esc>:silent setlocal spell! spelllang=en<CR>"
