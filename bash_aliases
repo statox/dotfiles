@@ -140,7 +140,7 @@ function resudo {
   $CMD
 }
 
-# opens a directory with graphical explorer
+# opens a directory with graphical explorer or use uof function to open a file (see below)
 #       if no argument is passed, opens current directory
 #       else, try to open passed directory
 function o {
