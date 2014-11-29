@@ -4,3 +4,4 @@ bashrc
 motd
 vimrc
 vim
+tmux.conf
