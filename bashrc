@@ -77,6 +77,7 @@ if [ "$color_prompt" = yes ]; then
    	# original debian PS1
 	#PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 # my PS1
+
 PS1='\n\n\[\033[01m\]\$\
 \[\033[34m\]\u\
 \[\033[37m\]@\
@@ -85,6 +86,17 @@ PS1='\n\n\[\033[01m\]\$\
 \[\033[33m\]\w     \
 \[\033[37m\]\t \
 \[\033[39m\]\n'
+
+#PS1='\n\n\
+#\[\033[33m\]\w\n\
+#\[\033[37m\]\$\
+#\[\033[34m\]\u\
+#\[\033[37m\]@\
+#\[\033[32m\]\H\
+#\[\033[37m\]: \
+#\[\033[37m\]\
+#\[\033[39m\]'
+
 
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
@@ -142,7 +154,17 @@ fi
 export VISUAL=vim
 export EDITOR=$VISUAL
 
-
+################################################################
+#       TMUX
+################################################################
+# if tmux is installed and the session isn't already a tmux session
+# then use tmux
+if ! { [ -z $(which tmux) ]; }
+then
+    if ! { [ "$TERM" = "screen"  ] && [ -n "$TMUX"  ];  } then
+        tmux
+    fi
+fi
 # normalement les definitions suivantes sont dans le bash_alias_local
 # modification du PATH pour eclipse ADT  (sur samsung-adrien)
 #export PATH=$PATH:/home/adrien/developpement_android/adt-bundle-linux*/eclipse/
