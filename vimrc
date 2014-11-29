@@ -16,8 +16,8 @@ syntax on			" Enable syntax highlighting
 let mapleader="\<Space>"    " remap mapleader to space
 
 " :W sudo saves the file
-" " (useful for handling the permission-denied error)
-command W w !sudo tee % > /dev/null"
+" (useful for handling the permission-denied error)
+command W w !sudo tee % > /dev/null
 
 " Allows better switching between files
 set hidden	
@@ -28,14 +28,15 @@ set wildmenu
 " Show partial commands in the last line of the screen
 set showcmd
 
-
-
 "------------------------------------------------------------
 " Color configuration
 
 try
-	colorscheme mustang
+"    syntax enable
+"    set background=dark
+"    colorscheme solarized
 catch
+    echo "Colorscheme not found"
 endtry
 
 " Highlight searches (use <C-L> to temporarily turn off highlighting; see the
@@ -203,7 +204,7 @@ nnoremap <C-L> :nohl<CR><C-L>
 " <C-Y> in insert mode will past like p in normal mode
 inoremap <C-Y> <C-O>p i
 
-" Ctrl+Space autocomplete (yay eclipse)
+" Ctrl+Space autocomplete 
 " (TODO: understand how the heck this mapping works. 
 " I found it there: http://stackoverflow.com/questions/510503/ctrlspace-for-omni-and-keyword-completion-in-vim)
 inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
