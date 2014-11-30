@@ -2,14 +2,25 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-# prompt ~/.motd
-#cat ~/.motd
-
 # moving to home directory
 cd ~ 
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
+
+###################################################
+#       TMUX
+###################################################
+# TMUX
+if which tmux >/dev/null 2>&1; then
+    # if no session is started, start a new session
+    test -z ${TMUX} && tmux
+
+    # when quitting tmux, try to attach
+    while test -z ${TMUX}; do
+        tmux attach || break
+    done
+fi
 
 ###################################################
 #            History
@@ -36,9 +47,9 @@ shopt -s cmdhist
 # on force a sauvegarder a chaque commande histoire de pas perdre en cas de sessions qui plante
 PROMPT_COMMAND='history -a'
 
-################################################################
+###################################################
 #         Fancy prompt :)
-################################################################
+###################################################
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -86,16 +97,6 @@ PS1='\n\n\[\033[01m\]\$\
 \[\033[33m\]\w     \
 \[\033[37m\]\t \
 \[\033[39m\]\n'
-
-#PS1='\n\n\
-#\[\033[33m\]\w\n\
-#\[\033[37m\]\$\
-#\[\033[34m\]\u\
-#\[\033[37m\]@\
-#\[\033[32m\]\H\
-#\[\033[37m\]: \
-#\[\033[37m\]\
-#\[\033[39m\]'
 
 
 else
@@ -154,17 +155,6 @@ fi
 export VISUAL=vim
 export EDITOR=$VISUAL
 
-################################################################
-#       TMUX
-################################################################
-# if tmux is installed and the session isn't already a tmux session
-# then use tmux
-if ! { [ -z $(which tmux) ]; }
-then
-    if ! { [ "$TERM" = "screen"  ] && [ -n "$TMUX"  ];  } then
-        tmux
-    fi
-fi
 # normalement les definitions suivantes sont dans le bash_alias_local
 # modification du PATH pour eclipse ADT  (sur samsung-adrien)
 #export PATH=$PATH:/home/adrien/developpement_android/adt-bundle-linux*/eclipse/
