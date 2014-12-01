@@ -84,20 +84,25 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-if [ "$color_prompt" = yes ]; then
-   	# original debian PS1
-	#PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-# my PS1
 
-PS1='\n\n\[\033[01m\]\$\
+if [ "$color_prompt" = yes ]; then
+
+    # shorten the pwd
+    PS1_PWD_MAX=15
+    __pwd_ps1() { echo -n $PWD | sed -e "s|${HOME}|~|" -e "s|\(/[^/]*/\).*\(/.\{${PS1_PWD_MAX}\}\)|\1...\2|";  }
+
+    GIT_PS1_SHOWDIRTYSTATE=1
+
+
+    PS1='\n\n\
+\[\033[01m\]\$\
 \[\033[34m\]\u\
 \[\033[37m\]@\
 \[\033[32m\]\H\
 \[\033[37m\]: \
-\[\033[33m\]\w     \
-\[\033[37m\]\t \
-\[\033[39m\]\n'
-
+\[\033[33m\]$(__pwd_ps1) \
+\[\033[35m\]$(__git_ps1 "[%s]") \
+\[\033[37m\]\n'
 
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
@@ -124,7 +129,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
-
 
 ################################################################
 #         aliases
