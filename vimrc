@@ -214,13 +214,13 @@ inoremap <C-Y> <C-O>p i
             "\ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
             "\ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
 "imap <C-@> <C-Space>
-inoremap <expr> <S-Space> pumvisible() \|\| &omnifunc == '' ?
-            \ "\<lt>C-n>" :
-            \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
-            \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
-            \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
-imap <C-@> <S-Space>
-imap <C-a> <S-Space>
+"inoremap <expr> <S-Space> pumvisible() \|\| &omnifunc == '' ?
+            "\ "\<lt>C-n>" :
+            "\ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
+            "\ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
+            "\ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
+"imap <C-@> <S-Space>
+"imap <C-a> <S-Space>
 
 
 " manage windows
