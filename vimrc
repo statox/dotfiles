@@ -43,8 +43,6 @@ endtry
 " mapping of <C-L> below)
 set hlsearch
 
-
-
 "------------------------------------------------------------
 " Text, tab and indent related configuration
 
@@ -64,8 +62,6 @@ set tw=500
 set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines"
-
-
 
 "------------------------------------------------------------
 " Dictionnaries
@@ -87,7 +83,6 @@ nmap <Leader>n "<Esc>]s"
 nmap <Leader>b "<Esc>[s" 
 " suggest word correction
 nmap <Leader>v "<Esc>z="
-
 
 "------------------------------------------------------------
 " Vundle : Plugins manager
@@ -122,7 +117,6 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 " "filetype plugin on
-
 
 "------------------------------------------------------------
 " Usability options {{{1
@@ -178,7 +172,6 @@ set notimeout ttimeout ttimeoutlen=200
 " Use <F11> to toggle between 'paste' and 'nopaste'
 set pastetoggle=<F11>
 
-
 "------------------------------------------------------------
 " Indentation options {{{1
 
@@ -186,7 +179,6 @@ set pastetoggle=<F11>
 " two characters wide.
 " set shiftwidth=4
 " set tabstop=4
-
 
 "------------------------------------------------------------
 " Mappings {{{1
@@ -205,14 +197,33 @@ nnoremap <C-L> :nohl<CR><C-L>
 inoremap <C-Y> <C-O>p i
 
 " Ctrl+Space autocomplete 
-" (TODO: understand how the heck this mapping works. 
+" (TODO: understand how the heck this mapping works, 
 " I found it there: http://stackoverflow.com/questions/510503/ctrlspace-for-omni-and-keyword-completion-in-vim)
-inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
+"inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
+            "\ "\<lt>C-n>" :
+            "\ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
+            "\ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
+            "\ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
+"imap <C-@> <C-Space>
+inoremap <expr> <S-Space> pumvisible() \|\| &omnifunc == '' ?
             \ "\<lt>C-n>" :
             \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
             \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
             \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
-imap <C-@> <C-Space>
+imap <C-@> <S-Space>
+imap <C-a> <S-Space>
+
+
+" manage windows
+" vertical and horizontal splits
+noremap <Leader>! <C-w>v 
+noremap <Leader>/ <C-w>s 
+
+" move between windows
+noremap <Leader>h <C-w>h
+noremap <Leader>j <C-w>j
+noremap <Leader>k <C-w>k
+noremap <Leader>l <C-w>l
 
 
 "------------------------------------------------------------
