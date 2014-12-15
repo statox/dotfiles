@@ -116,6 +116,8 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'godlygeek/tabular'
 " Pop-up autocomplete code
 Plugin 'vim-scripts/AutoComplPop'
+" Easily navigate through files, see ":h NERD_tree.txt" for help
+Plugin 'scrooloose/nerdtree'
 
 
 " All of your Plugins must be added before the following line
@@ -231,5 +233,10 @@ noremap <Leader>h <C-w>h
 noremap <Leader>j <C-w>j
 noremap <Leader>k <C-w>k
 noremap <Leader>l <C-w>l
+
+
+"NERD_tree usage
+noremap <Leader>o :NERDTree
+
 
 "------------------------------------------------------------
