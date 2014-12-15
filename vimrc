@@ -91,6 +91,11 @@ nmap <Leader>v "<Esc>z="
 "/!\ Remember to use 
 " git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " The first time you install vim to avoid error each time you open a file
+" Also use
+":PluginInstall
+":PluginUpdate
+":PluginClean
+"To install and update plugins
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -109,7 +114,8 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'scrooloose/nerdcommenter'
 " Vim script for text filtering and alignment
 Plugin 'godlygeek/tabular'
-
+" Pop-up autocomplete code
+Plugin 'vim-scripts/AutoComplPop'
 
 
 " All of your Plugins must be added before the following line
@@ -117,6 +123,7 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 " "filetype plugin on
+
 
 "------------------------------------------------------------
 " Usability options {{{1
@@ -224,6 +231,5 @@ noremap <Leader>h <C-w>h
 noremap <Leader>j <C-w>j
 noremap <Leader>k <C-w>k
 noremap <Leader>l <C-w>l
-
 
 "------------------------------------------------------------
