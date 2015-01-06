@@ -74,6 +74,10 @@ alias mv='mv -i'
 # quickly output iptables rules
 alias ipt='sudo iptables -L'
 
+
+# show hubic client status
+alias hubicstatus='watch -n 0,1 hubic status'
+
 ####################################################
 #                   functions                      #
 ####################################################
