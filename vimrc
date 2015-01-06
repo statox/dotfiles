@@ -114,11 +114,12 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'scrooloose/nerdcommenter'
 " Vim script for text filtering and alignment
 Plugin 'godlygeek/tabular'
-" Pop-up autocomplete code
-Plugin 'vim-scripts/AutoComplPop'
+" completion with <Tab>
+Plugin 'ervandew/supertab'
 " Easily navigate through files, see ":h NERD_tree.txt" for help
 Plugin 'scrooloose/nerdtree'
-
+" Visually signals the marks
+Plugin 'vim-scripts/ShowMarks'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -126,6 +127,12 @@ filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 " "filetype plugin on
 
+
+"------------------------------------------------------------
+"NERD_tree configuration
+
+" show hidden files
+let NERDTreeShowHidden=1
 
 "------------------------------------------------------------
 " Usability options {{{1
