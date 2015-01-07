@@ -93,8 +93,8 @@ if [ "$color_prompt" = yes ]; then
 
     GIT_PS1_SHOWDIRTYSTATE=1
 
-        PS1='\n\n\
-\[\033[01m\]\$\
+    PS1='\n\n\
+\[\e[m\]\$\
 \[\033[34m\]\u\
 \[\e[m\]@\
 \[\033[32m\]\H\
