@@ -93,16 +93,15 @@ if [ "$color_prompt" = yes ]; then
 
     GIT_PS1_SHOWDIRTYSTATE=1
 
-
-    PS1='\n\n\
+        PS1='\n\n\
 \[\033[01m\]\$\
 \[\033[34m\]\u\
-\[\033[37m\]@\
+\[\e[m\]@\
 \[\033[32m\]\H\
 \[\033[37m\] \
 \[\033[33m\]$(__pwd_ps1) \
 \[\033[35m\]$(__git_ps1 "[%s]") \
-\[\033[37m\]\n'
+\[\e[m\]'
 
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
