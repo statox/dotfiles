@@ -13,13 +13,14 @@ cd ~
 ###################################################
 # TMUX
 if which tmux >/dev/null 2>&1; then
-    # if no session is started, start a new session
-    test -z ${TMUX} && tmux
+
+    # try to attach an existing session, if no session is started, start a new session
+    test -z ${TMUX} && (tmux attach || tmux new)
 
     # when quitting tmux, try to attach
-    while test -z ${TMUX}; do
-        tmux attach || break
-    done
+    #while test -z ${TMUX}; do
+        #tmux attach || break
+    #done
 fi
 
 ###################################################
