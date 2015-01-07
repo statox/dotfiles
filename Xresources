@@ -1,0 +1,95 @@
+! This file configure X applications
+! remenber to use
+!   xrdb -merge ~/.Xresources 
+! to load changes
+
+!------------------------------------------------
+! XTerm configuration
+!------------------------------------------------
+
+! Here are several links I used to create my configuration:
+! http://lukas.zapletalovi.com/2013/07/hidden-gems-of-xterm.html
+! https://wiki.archlinux.org/index.php/Xterm
+! https://wiki.archlinux.org/index.php/X_resources
+
+! size of the font
+XTerm*font:             *-fixed-*-*-*-18-*
+
+! default size of the window
+XTerm.vt100.geometry:   200x40
+
+! number of line possible to scroll back
+XTerm*saveLines:        4096
+
+! scroll down when pressing a key 
+! (TODO: doesnt work for me, find why. I suspect tmux)
+XTerm*scrollKey:        true
+
+! scroll bar options
+XTerm*scrollBar:        true
+XTerm*rightScrollBar:   true
+XTerm*jumpScroll:       true
+XTerm*multiScroll:      true
+
+! set visual bell
+XTerm*visualbell: true
+XTerm*bellIsUrgent: true
+
+! Cursor apparence
+Xcursor.theme: gnome
+Xcursor.size:  22
+XTerm*cursorBlink: false
+
+! Copy and past to clipboard and to primary buffer
+XTerm*VT100.translations: #override <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0)
+
+! double-click to select whole URLs 
+! TODO: make it work into a tmux session
+xterm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
+
+! random stuff to test and comment (maybe on day)
+XTerm*dynamicColors:    true
+XTerm*utf8:             2
+XTerm*eightBitInput:    true
+
+! color theme
+! see http://web.archive.org/web/20090130061234/http://phraktured.net/terminal-colors/ for a lot of color scheme
+! This one is the theme Rezza from the previous linked page
+XTerm*foreground:     rgb:dd/dd/dd
+XTerm*background:     rgb:22/22/22
+!black
+XTerm*color0:         rgb:19/19/19
+XTerm*color8:         rgb:25/25/25
+!red
+XTerm*color1:         rgb:80/32/32
+XTerm*color9:         rgb:98/2b/2b
+!green
+XTerm*color2:         rgb:5b/76/2f
+XTerm*color10:        rgb:89/b8/3f
+!brown/yellow
+XTerm*color3:         rgb:aa/99/43
+XTerm*color11:        rgb:ef/ef/60
+!blue
+XTerm*color4:         rgb:32/4c/80
+XTerm*color12:        rgb:2b/4f/98
+!magenta
+XTerm*color5:         rgb:70/6c/9a
+XTerm*color13:        rgb:82/6a/b1
+!cyan
+XTerm*color6:         rgb:92/b1/9e
+XTerm*color14:        rgb:a1/cd/cd
+!white
+XTerm*color7:         rgb:ff/ff/ff
+XTerm*color15:        rgb:dd/dd/dd
+
+! man pages colors
+!  bold coloration
+XTerm*VT100.colorBDMode:        true
+XTerm*VT100.colorBD:            #5D5E5B
+! underline coloration
+XTerm*VT100.colorULMode:        true
+XTerm*VT100.colorUL:            #5D5E5B
+! keep coloration AND decoration (bold and underline)
+XTerm*VT100.veryBoldColors:     6
+
+
