@@ -26,7 +26,8 @@ XTerm*saveLines:        4096
 XTerm*scrollKey:        true
 
 ! scroll bar options
-XTerm*scrollBar:        true
+! (actually don't output the scrollBar it is not that usefull and pretty ugly in my XTerm)
+XTerm*scrollBar:        false
 XTerm*rightScrollBar:   true
 XTerm*jumpScroll:       true
 XTerm*multiScroll:      true
