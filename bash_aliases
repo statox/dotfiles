@@ -151,20 +151,16 @@ function o {
   if [ -z "$1" ]    # empty argument
   then
     # opened in background, output redirected to /dev/null
-    nautilus $(pwd) > /dev/null &
+    nautilus $(pwd) > /dev/null &  
   else
     if [ -d "$1" ] # argument is a directory
     then
       nautilus $1 > /dev/null &
     elif [ -f "$1" ] # argument is a file try to open it
     then
-        if [ $(head -c 4 "$1") = "%PDF"  ]; then # PDF files
-            evince $1 &
-        else
-            echo "I dont know how to open this file"
-        fi
+        uof $1
     else
-      echo "Error: not a directory"
+      echo "Error: not a directory or a file"
     fi
   fi
 }
@@ -180,17 +176,15 @@ function uof {
     # treat only files
     if [ -f "$1" ]
     then
-        if [[ $1 == *.pdf ]] || [[ $1 == *.PDF ]]
+        if [ $(head -c 4 "$1") = "%PDF"  ] # PDF files
         then
-            evince $1
-        elif [[ $1 == *.txt ]] || [[ $1 == *.TXT ]] || [[ $1 == *.c ]] || [[ $1 == *.C ]]
-        then
-            vim $1
+            evince $1 &
+        #elif [[ $1 == *.txt ]] || [[ $1 == *.TXT ]] || [[ $1 == *.c ]] || [[ $1 == *.C ]]
+        #then
+            #vim $1
         else
             echo "I dont know how to open this file"
         fi
-    else
-        echo "Error: not a file"
     fi
 }
 
