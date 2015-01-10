@@ -159,7 +159,7 @@ function o {
     elif [ -f "$1" ] # argument is a file try to open it
     then
         if [ $(head -c 4 "$1") = "%PDF"  ]; then # PDF files
-            evince $1
+            evince $1 &
         else
             echo "I dont know how to open this file"
         fi
