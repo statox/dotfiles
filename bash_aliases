@@ -178,7 +178,7 @@ function uof {
     then
         if [ $(head -c 4 "$1") = "%PDF"  ] # PDF files
         then
-            evince $1 &
+            evince $1 > /dev/null 2>&1 &
         #elif [[ $1 == *.txt ]] || [[ $1 == *.TXT ]] || [[ $1 == *.c ]] || [[ $1 == *.C ]]
         #then
             #vim $1
