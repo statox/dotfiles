@@ -28,6 +28,15 @@ set wildmenu
 " Show partial commands in the last line of the screen
 set showcmd
 
+" Color the 81st column when your line is too long
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%81v', 100)
+
+" automatically wrap text at 80 columns (makes the above lines useless)
+"set tw=79
+"set formatoptions+=t
+
+
 "------------------------------------------------------------
 " Color configuration
 
@@ -245,5 +254,7 @@ noremap <Leader>l <C-w>l
 "NERD_tree usage
 noremap <Leader>o :NERDTree
 
+" % go to the matching brace et now it also select the lines between the braces
+noremap % v%
 
 "------------------------------------------------------------
