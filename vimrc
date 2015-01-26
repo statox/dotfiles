@@ -2,15 +2,15 @@
 " URL: http://vim.wikia.com/wiki/Example_vimrc
 " URL: https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim
 " URL: https://github.com/nobe4/dotfiles/blob/master/.vimrc
-
+" URL: https://github.com/thoughtstream/Damian-Conway-s-Vim-Setup/blob/master/.vimrc
 
 
 "------------------------------------------------------------
 " General configuration
 
-set nocompatible 	"Required, fix lot of stuff
-filetype off		"Detect the type of a file based on its name (Vundle needs it to be set to off)
-syntax on			" Enable syntax highlighting	
+set nocompatible    " Required, fix lot of stuff
+filetype off        " Detect the type of a file based on its name (Vundle needs it to be set to off)
+syntax on           " Enable syntax highlighting	
 
 
 let mapleader="\<Space>"    " remap mapleader to space
@@ -20,7 +20,7 @@ let mapleader="\<Space>"    " remap mapleader to space
 command W w !sudo tee % > /dev/null
 
 " Allows better switching between files
-set hidden	
+set hidden
 
 " Better command-line completion
 set wildmenu
@@ -37,6 +37,7 @@ call matchadd('ColorColumn', '\%81v', 100)
 "set formatoptions+=t
 
 
+
 "------------------------------------------------------------
 " Color configuration
 
@@ -47,10 +48,6 @@ try
 catch
     echo "Colorscheme not found"
 endtry
-
-" Highlight searches (use <C-L> to temporarily turn off highlighting; see the
-" mapping of <C-L> below)
-set hlsearch
 
 "------------------------------------------------------------
 " Text, tab and indent related configuration
@@ -87,9 +84,9 @@ map <silent> <F6> "<Esc>:silent setlocal spell! spelllang=fr<CR>"
 imap <silent> <F6> "<Esc>:silent setlocal spell! spelllang=fr<CR>"
 
 " next word
-nmap <Leader>n "<Esc>]s" 
+nmap <Leader>n "<Esc>]s"
 " prev word
-nmap <Leader>b "<Esc>[s" 
+nmap <Leader>b "<Esc>[s"
 " suggest word correction
 nmap <Leader>v "<Esc>z="
 
@@ -145,10 +142,6 @@ let NERDTreeShowHidden=1
 
 "------------------------------------------------------------
 " Usability options {{{1
-
-" Use case insensitive search, except when using capital letters
-set ignorecase
-set smartcase
 
 " Allow backspacing over autoindent, line breaks and start of insert action
 set backspace=indent,eol,start
@@ -241,8 +234,8 @@ inoremap <C-Y> <C-O>p i
 
 " manage windows
 " vertical and horizontal splits
-noremap <Leader>! <C-w>v 
-noremap <Leader>/ <C-w>s 
+noremap <Leader>! <C-w>v
+noremap <Leader>/ <C-w>s
 
 " move between windows
 noremap <Leader>h <C-w>h
@@ -258,3 +251,57 @@ noremap <Leader>o :NERDTree
 noremap % v%
 
 "------------------------------------------------------------
+" Set up smarter search behaviour
+
+set incsearch   " Lookahead as search pattern is specified
+set ignorecase  " Ignore case in all searches...
+set smartcase   " unless uppercase letters used
+set hlsearch    " Highlight all matches
+                " use <C-L> to temporarily turn off highlighting
+
+highlight clear Search
+highlight       Search ctermbg=Yellow
+
+" This rewires n and N to do the highlighing...
+nnoremap <silent> n   n:call HLNext(0.8)<cr>
+nnoremap <silent> N   N:call HLNext(0.8)<cr>
+
+" Highlighting function
+function! HLNext (blinktime)
+    highlight WhiteOnRed ctermfg=white ctermbg=red
+    let [bufnum, lnum, col, off] = getpos('.')
+    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+    let target_pat = '\c\%#\%('.@/.'\)'
+    let ring = matchadd('WhiteOnRed', target_pat, 101)
+    redraw
+    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+    call matchdelete(ring)
+    redraw
+endfunction
+
+"------------------------------------------------------------
+" Toggle visibility of naughty characters (thanks to Damian Conway )
+" Make naughty characters visible
+" (uBB is right double angle, uB7 is middle dot)
+
+exec "set lcs=tab:\uBB\uBB,trail:\uB7,nbsp:~"
+
+augroup VisibleNaughtiness
+ autocmd!
+ autocmd BufEnter * set list
+ autocmd BufEnter *.txt set nolist
+ autocmd BufEnter *.vp* set nolist
+ autocmd BufEnter * if !&modifiable
+ autocmd BufEnter * set nolist
+ autocmd BufEnter * endif
+augroup END
+
+"------------------------------------------------------------
+" Swap v and CTRL-V, because Block mode is more useful that Visual mode
+
+nnoremap    v   <C-V>
+nnoremap <C-V>     v
+
+vnoremap    v   <C-V>
+vnoremap <C-V>     v
+
