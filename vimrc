@@ -10,7 +10,7 @@
 
 set nocompatible    " Required, fix lot of stuff
 filetype off        " Detect the type of a file based on its name (Vundle needs it to be set to off)
-syntax on           " Enable syntax highlighting	
+syntax on           " Enable syntax highlighting
 
 
 let mapleader="\<Space>"    " remap mapleader to space
@@ -27,121 +27,6 @@ set wildmenu
 
 " Show partial commands in the last line of the screen
 set showcmd
-
-" Color the 81st column when your line is too long
-highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%81v', 100)
-
-" automatically wrap text at 80 columns (makes the above lines useless)
-"set tw=79
-"set formatoptions+=t
-
-
-
-"------------------------------------------------------------
-" Color configuration
-
-try
-"    syntax enable
-"    set background=dark
-"    colorscheme solarized
-catch
-    echo "Colorscheme not found"
-endtry
-
-"------------------------------------------------------------
-" Text, tab and indent related configuration
-
-" Use spaces instead of tabs
-set expandtab
-
-" Be smart when using tabs ;)
-set smarttab
-
-" 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
-
-" Linebreak on 500 characters
-set lbr
-set tw=500
-set ai "Auto indent
-set si "Smart indent
-set wrap "Wrap lines"
-
-"------------------------------------------------------------
-" Dictionnaries
-
-" /!\ Do not forget to get the dictionnaries files in ~/.vim/spell
-" wget http://ftp.vim.org/vim/runtime/spell/en.utf-8.sug
-" wget http://ftp.vim.org/vim/runtime/spell/en.utf-8.spl
-
-" (un)set english dictionnary with F7
-map <silent> <F7> "<Esc>:silent setlocal spell! spelllang=en<CR>"
-imap <silent> <F7> "<Esc>:silent setlocal spell! spelllang=en<CR>"
-" (un)set french dictionnary with F6
-map <silent> <F6> "<Esc>:silent setlocal spell! spelllang=fr<CR>"
-imap <silent> <F6> "<Esc>:silent setlocal spell! spelllang=fr<CR>"
-
-" next word
-nmap <Leader>n "<Esc>]s"
-" prev word
-nmap <Leader>b "<Esc>[s"
-" suggest word correction
-nmap <Leader>v "<Esc>z="
-
-"------------------------------------------------------------
-" Vundle : Plugins manager
-" see : https://github.com/gmarik/Vundle.vim
-"
-"/!\ Remember to use 
-" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-" The first time you install vim to avoid error each time you open a file
-" Also use
-":PluginInstall
-":PluginUpdate
-":PluginClean
-"To install and update plugins
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-
-" detects files type and has an accorded behaviour 
-Plugin 'vim-scripts/editorconfig-vim'
-" matching parenthesis are coloured
-Plugin 'nablaa/vim-rainbow-parenthesis'
-" insert or delete brackets, parens, quotes in pair
-Plugin 'jiangmiao/auto-pairs'
-" Vim plugin for intensely orgasmic commenting
-Plugin 'scrooloose/nerdcommenter'
-" Vim script for text filtering and alignment
-Plugin 'godlygeek/tabular'
-" completion with <Tab>
-Plugin 'ervandew/supertab'
-" Easily navigate through files, see ":h NERD_tree.txt" for help
-Plugin 'scrooloose/nerdtree'
-" Visually signals the marks
-Plugin 'vim-scripts/ShowMarks'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-" "filetype plugin on
-
-
-"------------------------------------------------------------
-"NERD_tree configuration
-
-" show hidden files
-let NERDTreeShowHidden=1
-
-"------------------------------------------------------------
-" Usability options {{{1
 
 " Allow backspacing over autoindent, line breaks and start of insert action
 set backspace=indent,eol,start
@@ -190,18 +75,53 @@ set notimeout ttimeout ttimeoutlen=200
 " Use <F11> to toggle between 'paste' and 'nopaste'
 set pastetoggle=<F11>
 
-"------------------------------------------------------------
-" Indentation options {{{1
-
-" Indentation settings for using hard tabs for indent. Display tabs as
-" two characters wide.
-" set shiftwidth=4
-" set tabstop=4
 
 "------------------------------------------------------------
-" Mappings {{{1
+" Vundle : Plugins manager
+" see : https://github.com/gmarik/Vundle.vim
 "
-" Useful mappings
+"/!\ Remember to use 
+" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+" The first time you install vim to avoid error each time you open a file
+" Also use
+":PluginInstall
+":PluginUpdate
+":PluginClean
+"To install and update plugins
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" detects files type and has an accorded behaviour 
+Plugin 'vim-scripts/editorconfig-vim'
+" matching parenthesis are coloured
+Plugin 'nablaa/vim-rainbow-parenthesis'
+" insert or delete brackets, parens, quotes in pair
+Plugin 'jiangmiao/auto-pairs'
+" Vim plugin for intensely orgasmic commenting
+Plugin 'scrooloose/nerdcommenter'
+" Vim script for text filtering and alignment
+Plugin 'godlygeek/tabular'
+" completion with <Tab>
+Plugin 'ervandew/supertab'
+" Easily navigate through files, see ":h NERD_tree.txt" for help
+Plugin 'scrooloose/nerdtree'
+" Visually signals the marks
+Plugin 'vim-scripts/ShowMarks'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+" "filetype plugin on
+
+
+"------------------------------------------------------------
+" Mappings
 
 " Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
 " which is the default
@@ -214,24 +134,18 @@ nnoremap <C-L> :nohl<CR><C-L>
 " <C-Y> in insert mode will past like p in normal mode
 inoremap <C-Y> <C-O>p i
 
-" Ctrl+Space autocomplete 
-" (TODO: understand how the heck this mapping works, 
-" I found it there: http://stackoverflow.com/questions/510503/ctrlspace-for-omni-and-keyword-completion-in-vim)
-"inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
-            "\ "\<lt>C-n>" :
-            "\ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
-            "\ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
-            "\ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
-"imap <C-@> <C-Space>
-"inoremap <expr> <S-Space> pumvisible() \|\| &omnifunc == '' ?
-            "\ "\<lt>C-n>" :
-            "\ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
-            "\ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
-            "\ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
-"imap <C-@> <S-Space>
-"imap <C-a> <S-Space>
+" % go to the matching brace et now it also select the lines between the braces
+noremap % v%
+
+" Swap v and CTRL-V, because Block mode is more useful that Visual mode
+"nnoremap    v   <C-V>
+"nnoremap <C-V>     v
+
+"vnoremap    v   <C-V>
+"vnoremap <C-V>     v
 
 
+"------------------------------------------------------------
 " manage windows
 " vertical and horizontal splits
 noremap <Leader>! <C-w>v
@@ -244,11 +158,82 @@ noremap <Leader>k <C-w>k
 noremap <Leader>l <C-w>l
 
 
-"NERD_tree usage
-noremap <Leader>o :NERDTree
+"------------------------------------------------------------
+" Color the 81st column when your line is too long
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%81v', 100)
 
-" % go to the matching brace et now it also select the lines between the braces
-noremap % v%
+
+"------------------------------------------------------------
+" Color configuration
+
+try
+"    syntax enable
+"    set background=dark
+"    colorscheme solarized
+catch
+    echo "Colorscheme not found"
+endtry
+
+
+"------------------------------------------------------------
+" Text, tab and indent related configuration
+
+" Use spaces instead of tabs
+set expandtab
+
+" Be smart when using tabs ;)
+set smarttab
+
+" 1 tab == 4 spaces
+set shiftwidth=4
+set tabstop=4
+
+" Linebreak on 500 characters
+set lbr
+set tw=500
+set ai "Auto indent
+set si "Smart indent
+set wrap "Wrap lines"
+
+" automatically wrap text at 80 columns
+"set tw=79
+"set formatoptions+=t
+
+" Indentation settings for using hard tabs for indent. Display tabs as
+" two characters wide.
+" set shiftwidth=4
+" set tabstop=4
+
+
+"------------------------------------------------------------
+" Spelling
+
+" /!\ Do not forget to get the dictionnaries files in ~/.vim/spell
+" wget http://ftp.vim.org/vim/runtime/spell/en.utf-8.sug
+" wget http://ftp.vim.org/vim/runtime/spell/en.utf-8.spl
+
+" (un)set english dictionnary with F7
+map     <silent> <F7> "<Esc>:silent setlocal spell! spelllang=en<CR>"
+imap    <silent> <F7> "<Esc>:silent setlocal spell! spelllang=en<CR>"
+" (un)set french dictionnary with F6
+map     <silent> <F6> "<Esc>:silent setlocal spell! spelllang=fr<CR>"
+imap    <silent> <F6> "<Esc>:silent setlocal spell! spelllang=fr<CR>"
+
+" next word
+nmap <Leader>n "<Esc>]s"
+" prev word
+nmap <Leader>b "<Esc>[s"
+" suggest word correction
+nmap <Leader>v "<Esc>z="
+
+
+"------------------------------------------------------------
+" NERD_tree configuration
+
+let NERDTreeShowHidden=1    " show hidden files
+noremap <Leader>o :NERDTree " NERD_tree usage
+
 
 "------------------------------------------------------------
 " Set up smarter search behaviour
@@ -279,6 +264,7 @@ function! HLNext (blinktime)
     redraw
 endfunction
 
+
 "------------------------------------------------------------
 " Toggle visibility of naughty characters (thanks to Damian Conway )
 " Make naughty characters visible
@@ -296,12 +282,4 @@ augroup VisibleNaughtiness
  autocmd BufEnter * endif
 augroup END
 
-"------------------------------------------------------------
-" Swap v and CTRL-V, because Block mode is more useful that Visual mode
-
-nnoremap    v   <C-V>
-nnoremap <C-V>     v
-
-vnoremap    v   <C-V>
-vnoremap <C-V>     v
 
