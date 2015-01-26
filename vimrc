@@ -248,8 +248,8 @@ highlight clear Search
 highlight       Search ctermbg=Yellow
 
 " This rewires n and N to do the highlighing...
-nnoremap <silent> n   n:call HLNext(0.8)<cr>
-nnoremap <silent> N   N:call HLNext(0.8)<cr>
+nnoremap <silent> n   n:call HLNext(0.5)<cr>
+nnoremap <silent> N   N:call HLNext(0.5)<cr>
 
 " Highlighting function
 function! HLNext (blinktime)
