@@ -14,7 +14,7 @@
 # Aliases used only in this machine (not synched with git)
 
 if [ -f ~/.bash_aliases_local ]; then
-	. ~/.bash_aliases_local
+    . ~/.bash_aliases_local
 fi
 
 ####################################################
@@ -67,9 +67,10 @@ alias ..........='cd ../../../../../../../../../'
 
 
 # securisation to avoid unwanted deletions
-alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
+# finally it is not a really good way to do it
+#alias rm='rm -i'
+#alias cp='cp -i'
+#alias mv='mv -i'
 
 # quickly output iptables rules
 alias ipt='sudo iptables -L'
