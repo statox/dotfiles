@@ -134,7 +134,7 @@ nnoremap <C-L> :nohl<CR><C-L>
 " <C-Y> in insert mode will past like p in normal mode
 inoremap <C-Y> <C-O>p i
 
-" % go to the matching brace et now it also select the lines between the braces
+" % go to the matching brace and now it also select the lines between the braces
 noremap % v%
 
 " Swap v and CTRL-V, because Block mode is more useful that Visual mode
@@ -149,7 +149,7 @@ noremap j gj
 noremap k gk
 
 " fast save and quit
-noremap <Leader>w     :w<CR>
+noremap <Leader>w     :w<CR> :echo "saving"<CR>
 noremap <Leader>x     :x<CR>
 
 "------------------------------------------------------------
