@@ -1,6 +1,6 @@
 ! This file configure X applications
 ! remenber to use
-!   xrdb -merge ~/.Xresources 
+!   xrdb -merge ~/.Xresources
 ! to load changes
 
 !------------------------------------------------
@@ -26,7 +26,7 @@ XTerm*saveLines:        4096
 XTerm*scrollKey:        true
 
 ! scroll bar options
-! (actually don't output the scrollBar it is not that usefull and pretty ugly in my XTerm)
+! (actually dont output the scrollBar it is not that usefull and pretty ugly in my XTerm)
 XTerm*scrollBar:        false
 XTerm*rightScrollBar:   true
 XTerm*jumpScroll:       true
