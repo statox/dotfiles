@@ -151,6 +151,10 @@ noremap k gk
 " fast save and quit
 noremap <Leader>w     :w<CR> :echo "saving"<CR>
 noremap <Leader>x     :x<CR>
+noremap <Leader>q     :q<CR>
+
+" make G going at the end of the last line
+noremap G G$
 
 "------------------------------------------------------------
 " manage windows
@@ -239,7 +243,7 @@ nmap <Leader>v "<Esc>z="
 " NERD_tree configuration
 
 let NERDTreeShowHidden=1    " show hidden files
-noremap <Leader>o :NERDTree " NERD_tree usage
+noremap <Leader>o :NERDTree <CR> " NERD_tree usage
 
 
 "------------------------------------------------------------
@@ -255,8 +259,8 @@ highlight clear Search
 highlight       Search ctermbg=Yellow
 
 " This rewires n and N to do the highlighing...
-nnoremap <silent> n   n:call HLNext(0.5)<cr>
-nnoremap <silent> N   N:call HLNext(0.5)<cr>
+nnoremap <silent> n   n:call HLNext(0.1)<cr>
+nnoremap <silent> N   N:call HLNext(0.1)<cr>
 
 " Highlighting function
 function! HLNext (blinktime)
@@ -305,4 +309,3 @@ function! HelpInNewTab ()
         execute "normal \<C-W>T"
     endif
 endfunction
-
