@@ -112,6 +112,8 @@ Plugin 'ervandew/supertab'
 Plugin 'scrooloose/nerdtree'
 " Visually signals the marks
 Plugin 'vim-scripts/ShowMarks'
+" Syntax checker
+Plugin 'scrooloose/syntastic'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -244,6 +246,19 @@ nmap <Leader>v "<Esc>z="
 
 let NERDTreeShowHidden=1    " show hidden files
 noremap <Leader>o :NERDTree <CR> " NERD_tree usage
+
+"------------------------------------------------------------
+" syntastic configuration
+" this is the recommended configuration (see https://github.com/scrooloose/syntastic/blob/master/README.markdown#3-recommended-settings)
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 
 "------------------------------------------------------------
