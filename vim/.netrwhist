@@ -1,4 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_cnt =4
 let g:netrw_dirhist_1='/home/adrien/.dotfiles'
 let g:netrw_dirhist_2='/home/adrien/tests'
+let g:netrw_dirhist_3='/media/Documents/programmation/caramel/application/config'
+let g:netrw_dirhist_4='/etc/resolvconf'
