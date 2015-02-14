@@ -111,7 +111,7 @@ Plugin 'ervandew/supertab'
 " Easily navigate through files, see ":h NERD_tree.txt" for help
 Plugin 'scrooloose/nerdtree'
 " Visually signals the marks
-Plugin 'vim-scripts/ShowMarks'
+"Plugin 'vim-scripts/ShowMarks'
 " Syntax checker
 Plugin 'scrooloose/syntastic'
 
@@ -157,6 +157,20 @@ noremap <Leader>q     :q<CR>
 
 " make G going at the end of the last line
 noremap G G$
+
+
+"------------------------------------------------------------
+" manage tabs
+" move to new/previous tabs
+noremap <Leader><Leader>l  :tabn<CR>
+noremap <Leader><Leader>h  :tabp<CR>
+" open/close tab
+noremap <Leader><Leader>t  :tabnew<CR>
+noremap <Leader><Leader>q  :tabclose<CR>
+" move current tab to left/right
+noremap <Leader><Leader><Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+noremap <Leader><Leader><Right> :execute 'silent! tabmove ' . tabpagenr()<CR>
+
 
 "------------------------------------------------------------
 " manage windows
