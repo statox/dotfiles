@@ -32,9 +32,19 @@ alias l='ls -CF'
 #clear screen
 alias c='clear'
 
-#fast acces to history 
-alias h='history'
-alias hg='history | grep '
+#fast acces to history
+alias h='hg'
+#grep several words in the history
+function hg {
+    cmd="history"
+    for arg in $@
+    do
+        cmd=$cmd" | grep "$arg
+    done
+    echo $cmd
+    eval "$cmd"
+}
+
 
 #mkdir: create parents directories + verbose
 alias mkdir='mkdir -p -v'
