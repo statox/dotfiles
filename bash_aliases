@@ -26,8 +26,9 @@ alias reloadbashrc='source ~/.bashrc'
 alias reloadzshrc='source ~/.zshrc'
 
 #ls
-alias ll='ls -alFh'
-alias la='ls -aCF'
+alias ldot='ls -d .*'
+alias ll='ls -AlFh'
+alias la='ls -ACF'
 alias l='ls -CF'
 
 #clear screen
