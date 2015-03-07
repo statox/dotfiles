@@ -14,7 +14,7 @@
 !! see http://web.archive.org/web/20090130061234/http://phraktured.net/terminal-colors/ for a lot of color scheme
 
 !! size of the font
-XTerm*font:             *-fixed-*-*-*-18-*
+XTerm*font:             *-fixed-medium-*-*-18-*
 
 !! default size of the window
 XTerm.vt100.geometry:   200x40
