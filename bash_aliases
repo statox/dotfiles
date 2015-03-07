@@ -23,6 +23,7 @@ fi
 
 # reload .bashrc (after modifying it)
 alias reloadbashrc='source ~/.bashrc'
+alias reloadzshrc='source ~/.zshrc'
 
 #ls
 alias ll='ls -alFh'
@@ -37,10 +38,13 @@ alias h='hg'
 #grep several words in the history
 function hg {
     cmd="history"
+
+    # append as many grep as needed
     for arg in $@
     do
         cmd=$cmd" | grep "$arg
     done
+
     echo $cmd
     eval "$cmd"
 }
@@ -145,14 +149,24 @@ function pushdotfiles {
 
 # exectute last command with root privileges
 function resudo {
-  # get the last command
-  LAST=$(fc -ln | tail -n 2 | sed -n 1p)
-  # put "sudo " behind it
-  CMD="sudo "$LAST
-  # prompt what is going to be executed
-  echo "$CMD"
-  # execution
-  $CMD
+    
+
+    # get the last command
+    # the behavior of sed seems not to be the same in bash and zsh
+    # so we adapt with $DELIM
+    if [[ $SHELL == *"zsh"* ]]; then
+        DELIM=2p
+    else
+        DELIM=1p
+    fi    
+    
+    LAST=$(fc -ln | tail -n 2 | sed -n $DELIM)
+    # put "sudo " behind it
+    CMD="sudo "$LAST
+    # prompt what is going to be executed
+    echo "$CMD"
+    # execution
+    eval $CMD
 }
 
 # opens a directory with graphical explorer or use uof function to open a file (see below)
