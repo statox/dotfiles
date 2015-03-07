@@ -114,6 +114,13 @@ Plugin 'scrooloose/nerdtree'
 "Plugin 'vim-scripts/ShowMarks'
 " Syntax checker
 Plugin 'scrooloose/syntastic'
+" Color scheme manager
+"Plugin 'flazz/vim-colorschemes'
+" Sexy colorscheme
+"Plugin 'morhetz/gruvbox'
+Plugin 'altercation/vim-colors-solarized'
+" Wrapper for git
+Plugin 'tpope/vim-fugitive'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -134,17 +141,10 @@ map Y y$
 nnoremap <C-L> :nohl<CR><C-L>
 
 " <C-Y> in insert mode will past like p in normal mode
-inoremap <C-Y> <C-O>p i
+inoremap <C-Y> <C-O>p
 
 " % go to the matching brace and now it also select the lines between the braces
 noremap % v%
-
-" Swap v and CTRL-V, because Block mode is more useful that Visual mode
-"nnoremap    v   <C-V>
-"nnoremap <C-V>     v
-
-"vnoremap    v   <C-V>
-"vnoremap <C-V>     v
 
 " when a line is longer than the screen j and k behave like its different lines
 noremap j gj
@@ -157,7 +157,8 @@ noremap <Leader>q     :q<CR>
 
 " make G going at the end of the last line
 noremap G G$
-
+" make gg going at the begin of the first line
+noremap gg gg0
 
 "------------------------------------------------------------
 " manage tabs
@@ -195,13 +196,14 @@ call matchadd('ColorColumn', '\%81v', 100)
 " Color configuration
 
 try
-"    syntax enable
-"    set background=dark
-"    colorscheme solarized
+    "syntax enable
+    "set t_Co=256            " let Vim in terminal use 256 colors
+    set background=dark
+    "colorscheme gruvbox
+    colorscheme solarized
 catch
     echo "Colorscheme not found"
 endtry
-
 
 "------------------------------------------------------------
 " Text, tab and indent related configuration
@@ -256,10 +258,18 @@ nmap <Leader>v "<Esc>z="
 
 
 "------------------------------------------------------------
+" fugitive configuration
+
+" make Gdiff vertical split by default
+set diffopt+=vertical
+
+
+"------------------------------------------------------------
 " NERD_tree configuration
 
 let NERDTreeShowHidden=1    " show hidden files
 noremap <Leader>o :NERDTree <CR> " NERD_tree usage
+
 
 "------------------------------------------------------------
 " syntastic configuration
@@ -310,17 +320,17 @@ endfunction
 " Make naughty characters visible
 " (uBB is right double angle, uB7 is middle dot)
 
-exec "set lcs=tab:\uBB\uBB,trail:\uB7,nbsp:~"
+"exec "set lcs=tab:\uBB\uBB,trail:\uB7,nbsp:~"
 
-augroup VisibleNaughtiness
- autocmd!
- autocmd BufEnter * set list
- autocmd BufEnter *.txt set nolist
- autocmd BufEnter *.vp* set nolist
- autocmd BufEnter * if !&modifiable
- autocmd BufEnter * set nolist
- autocmd BufEnter * endif
-augroup END
+"augroup VisibleNaughtiness
+ "autocmd!
+ "autocmd BufEnter * set list
+ "autocmd BufEnter *.txt set nolist
+ "autocmd BufEnter *.vp* set nolist
+ "autocmd BufEnter * if !&modifiable
+ "autocmd BufEnter * set nolist
+ "autocmd BufEnter * endif
+"augroup END
 
 "------------------------------------------------------------
 " Make :help appear in a full-screen tab, instead of a window
