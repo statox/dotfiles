@@ -111,42 +111,6 @@ function ccat {
   done
 }
 
-
-# updates dotfiles via git
-function updatedotfiles {
-  if [ -d ~/.dotfiles ]; then
-    echo "updating dotfiles"
-    
-    CUR_DIR=$(pwd) 
-    cd ~/.dotfiles
-    
-    git pull origin master
-    
-    reloadbash
-    
-    cd $CUR_DIR
-    echo "done"
-  else
-    echo "~/.dotfiles does not exist, please clone the repo github.com/statox/dotfiles"
-  fi
-}
-
-# push dotfile changes on git
-function pushdotfiles {
- 
-  echo "pushing dotfiles"
-
-  CUR_DIR=$(pwd)
-  cd ~/.dotfiles
-
-  git add *
-  git commit
-  git push origin master
-
-  cd $CUR_DIR
-  echo "done"
-}
-
 # exectute last command with root privileges
 function resudo {
     
@@ -265,6 +229,7 @@ else
   fi
 fi
 }
+
 # Creates an archive (*.tar.gz) from given directory.
 function maketar { tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"; }
 # Create a ZIP archive of a file or folder.
