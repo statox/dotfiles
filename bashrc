@@ -1,17 +1,19 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
+# to set bash as default shell interpreter, use this:
+# chsh -s $(which bash)
 
 # moving to home directory
-cd ~ 
+cd ~
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-###################################################
+
+#------------------------------------------------------------
 #       TMUX
-###################################################
-# TMUX
+
 if which tmux >/dev/null 2>&1; then
 
     # try to attach an existing session, if no session is started, start a new session
@@ -23,9 +25,8 @@ if which tmux >/dev/null 2>&1; then
     #done
 fi
 
-###################################################
+#------------------------------------------------------------
 #            History
-###################################################
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
@@ -48,9 +49,8 @@ shopt -s cmdhist
 # on force a sauvegarder a chaque commande histoire de pas perdre en cas de sessions qui plante
 PROMPT_COMMAND='history -a'
 
-###################################################
+#------------------------------------------------------------
 #         Fancy prompt :)
-###################################################
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -76,12 +76,12 @@ force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
     else
-	color_prompt=
+    color_prompt=
     fi
 fi
 
@@ -130,9 +130,8 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-################################################################
+#------------------------------------------------------------
 #         aliases
-################################################################
 
 
 # Alias definitions.
@@ -141,7 +140,7 @@ fi
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 if [ -f ~/.bash_aliases ]; then
-	. ~/.bash_aliases
+    . ~/.bash_aliases
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -152,11 +151,17 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 
-################################################################
+#------------------------------------------------------------
 #       Variables definitions
-################################################################
+
 # set vim as default editor
 export VISUAL=vim
 export EDITOR=$VISUAL
 
 
+#------------------------------------------------------------
+#       key binding
+# check available bindings with 'bind -P'
+
+# use vim mode
+set -o vi
