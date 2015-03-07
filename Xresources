@@ -1,96 +1,118 @@
-! This file configure X applications
-! remenber to use
-!   xrdb -merge ~/.Xresources
-! to load changes
+!! This file configure X applications
+!! remember to use
+!!   xrdb -merge ~/.Xresources
+!! to load changes
 
-!------------------------------------------------
-! XTerm configuration
-!------------------------------------------------
+!!------------------------------------------------
+!! XTerm configuration
+!!------------------------------------------------
 
-! Here are several links I used to create my configuration:
-! http://lukas.zapletalovi.com/2013/07/hidden-gems-of-xterm.html
-! https://wiki.archlinux.org/index.php/Xterm
-! https://wiki.archlinux.org/index.php/X_resources
+!! Here are several links I used to create my configuration:
+!! http://lukas.zapletalovi.com/2013/07/hidden-gems-of-xterm.html
+!! https://wiki.archlinux.org/index.php/Xterm
+!! https://wiki.archlinux.org/index.php/X_resources
+!! see http://web.archive.org/web/20090130061234/http://phraktured.net/terminal-colors/ for a lot of color scheme
 
-! size of the font
+!! size of the font
 XTerm*font:             *-fixed-*-*-*-18-*
 
-! default size of the window
+!! default size of the window
 XTerm.vt100.geometry:   200x40
 
-! number of line possible to scroll back
+!! number of line possible to scroll back
 XTerm*saveLines:        4096
 
-! scroll down when pressing a key 
-! (TODO: doesnt work for me, find why. I suspect tmux)
-XTerm*scrollKey:        true
-
-! scroll bar options
-! (actually dont output the scrollBar it is not that usefull and pretty ugly in my XTerm)
-XTerm*scrollBar:        false
-XTerm*rightScrollBar:   true
-XTerm*jumpScroll:       true
-XTerm*multiScroll:      true
-
-! set visual bell
+!! set visual bell
 XTerm*visualbell: true
 XTerm*bellIsUrgent: true
 
-! Cursor apparence
+!! Cursor apparence
 Xcursor.theme: gnome
 Xcursor.size:  22
 XTerm*cursorBlink: false
 
-! Copy and past to clipboard and to primary buffer
+!! Copy and past to clipboard and to primary buffer
 XTerm*VT100.translations: #override <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0)
 
-! double-click to select whole URLs 
-! TODO: make it work into a tmux session
-xterm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
+!! double-click to select whole URLs 
+!! TODO: make it work into a tmux session
+!xterm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
 
-! random stuff to test and comment (maybe on day)
-XTerm*dynamicColors:    true
-XTerm*utf8:             2
-XTerm*eightBitInput:    true
+!! random stuff to test and comment (maybe on day)
+!XTerm*dynamicColors:    true
+!XTerm*utf8:             2
+!XTerm*eightBitInput:    true
 
-! color theme
-! see http://web.archive.org/web/20090130061234/http://phraktured.net/terminal-colors/ for a lot of color scheme
-! This one is the theme Rezza from the previous linked page
-XTerm*foreground:     rgb:dd/dd/dd
-XTerm*background:     rgb:22/22/22
-!black
-XTerm*color0:         rgb:19/19/19
-XTerm*color8:         rgb:25/25/25
-!red
-XTerm*color1:         rgb:80/32/32
-XTerm*color9:         rgb:98/2b/2b
-!green
-XTerm*color2:         rgb:5b/76/2f
-XTerm*color10:        rgb:89/b8/3f
-!brown/yellow
-XTerm*color3:         rgb:aa/99/43
-XTerm*color11:        rgb:ef/ef/60
-!blue
-XTerm*color4:         rgb:32/4c/80
-XTerm*color12:        rgb:2b/4f/98
-!magenta
-XTerm*color5:         rgb:70/6c/9a
-XTerm*color13:        rgb:82/6a/b1
-!cyan
-XTerm*color6:         rgb:92/b1/9e
-XTerm*color14:        rgb:a1/cd/cd
-!white
-XTerm*color7:         rgb:ff/ff/ff
-XTerm*color15:        rgb:dd/dd/dd
+*customization: -color
+XTerm*termName:  xterm-256color
 
-! man pages colors
-!  bold coloration
-XTerm*VT100.colorBDMode:        true
-XTerm*VT100.colorBD:            #5D5E5B
-! underline coloration
-XTerm*VT100.colorULMode:        true
-XTerm*VT100.colorUL:            #5D5E5B
-! keep coloration AND decoration (bold and underline)
-XTerm*VT100.veryBoldColors:     6
 
+! drop in Solarized colorscheme for Xresources/Xdefaults
+
+!!SOLARIZED     HEX     16/8    TERMCOL     XTERM/HEX   L*A*B       RGB         HSB
+!!---------     ------- ----    -------     ----------- ----------  ----------- -----------
+!!base03        #002b36 8/4     brblack     234 #1c1c1c 15 -12 -12    0  43  54 193 100 21
+!!base02        #073642 0/4     black       235 #262626 20 -12 -12    7  54  66 192  90 26
+!!base01        #586e75 10/7    brgreen     240 #585858 45 -07 -07   88 110 117 194  25 46
+!!base00        #657b83 11/7    bryellow    241 #626262 50 -07 -07  101 123 131 195  23 51
+!!base0         #839496 12/6    brblue      244 #808080 60 -06 -03  131 148 150 186  13 59
+!!base1         #93a1a1 14/4    brcyan      245 #8a8a8a 65 -05 -02  147 161 161 180   9 63
+!!base2         #eee8d5 7/7     white       254 #e4e4e4 92 -00  10  238 232 213  44  11 93
+!!base3         #fdf6e3 15/7    brwhite     230 #ffffd7 97  00  10  253 246 227  44  10 99
+!!yellow        #b58900 3/3     yellow      136 #af8700 60  10  65  181 137   0  45 100 71
+!!orange        #cb4b16 9/3     brred       166 #d75f00 50  50  55  203  75  22  18  89 80
+!!red           #dc322f 1/1     red         160 #d70000 50  65  45  220  50  47   1  79 86
+!!magenta       #d33682 5/5     magenta     125 #af005f 50  65 -05  211  54 130 331  74 83
+!!violet        #6c71c4 13/5    brmagenta    61 #5f5faf 50  15 -45  108 113 196 237  45 77
+!!blue          #268bd2 4/4     blue         33 #0087ff 55 -10 -45   38 139 210 205  82  82
+!!cyan          #2aa198 6/6     cyan         37 #00afaf 60 -35 -05   42 161 152 175  74  63
+!!green         #859900 2/2     green        64 #5f8700 60 -20  65  133 153   0  68 100  60
+
+#define S_base03 #002b36
+#define S_base02 #073642
+#define S_base01 #586e75
+#define S_base00 #657b83
+#define S_base0 #839496
+#define S_base1 #93a1a1
+#define S_base2 #eee8d5
+#define S_base3 #fdf6e3
+#define S_yellow #b58900
+#define S_orange #cb4b16
+#define S_red #dc322f
+#define S_magenta #d33682
+#define S_violet #6c71c4
+#define S_blue #268bd2
+#define S_cyan #2aa198
+#define S_green #859900
+XTerm*background: S_base03
+XTerm*foreground: S_base00
+XTerm*fading: 40
+XTerm*fadeColor: S_base03
+XTerm*cursorColor: S_base1
+XTerm*pointerColorBackground:S_base01
+XTerm*pointerColorForeground:S_base1
+!! black dark/light
+XTerm*color0: S_base02
+XTerm*color8: S_base03
+!! red dark/light
+XTerm*color1: S_red
+XTerm*color9: S_orange
+!! green dark/light
+XTerm*color2: S_green
+XTerm*color10: S_base01
+!! yellow dark/light
+XTerm*color3: S_yellow
+XTerm*color11: S_base00
+!! blue dark/light
+XTerm*color4: S_blue
+XTerm*color12: S_base0
+!! magenta dark/light
+XTerm*color5: S_magenta
+XTerm*color13: S_violet
+!! cyan dark/light
+XTerm*color6: S_cyan
+XTerm*color14: S_base1
+!! white dark/light
+XTerm*color7: S_base2
+XTerm*color15: S_base3
 
