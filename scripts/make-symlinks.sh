@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Author: Adrien Fabre (statox)
 # This script symlinks all the dotfiles of the directory
