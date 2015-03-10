@@ -121,7 +121,8 @@ Plugin 'scrooloose/syntastic'
 Plugin 'altercation/vim-colors-solarized'
 " Wrapper for git
 Plugin 'tpope/vim-fugitive'
-
+" highlight hmtl matching tag
+Plugin 'gregsexton/MatchTag'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -159,6 +160,13 @@ noremap <Leader>q     :q<CR>
 noremap G G$
 " make gg going at the begin of the first line
 noremap gg gg0
+
+" insert newline in normal
+noremap <Leader><CR> i<CR><esc>
+
+" Go to 80column
+noremap <Leader><tab> 80\|
+
 
 "------------------------------------------------------------
 " manage tabs
