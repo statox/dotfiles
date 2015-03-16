@@ -168,7 +168,7 @@ noremap <Leader><CR> i<CR><esc>
 noremap <Leader><tab> 80\|
 
 " In visual mode use A to select all of the file
-vnoremap a <esc>ggvG
+vnoremap a <esc>gg0vG$
 
 
 "------------------------------------------------------------
