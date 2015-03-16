@@ -167,6 +167,9 @@ noremap <Leader><CR> i<CR><esc>
 " Go to 80column
 noremap <Leader><tab> 80\|
 
+" In visual mode use A to select all of the file
+vnoremap a <esc>ggvG
+
 
 "------------------------------------------------------------
 " manage tabs
