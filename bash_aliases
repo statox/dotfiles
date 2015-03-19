@@ -254,3 +254,12 @@ function archive {
   esac
 }
 
+
+# looping through a command
+loop() {
+    echo Starting: "$@"
+    while true; do
+        eval $(printf "%q " "$@")
+        sleep 1;
+    done
+}
