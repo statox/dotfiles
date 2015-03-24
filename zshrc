@@ -156,6 +156,7 @@ PROMPT="\
 
 # the plugin git-prompt already set the first part of RPROMPT
 RPROMPT=$RPROMPT"\
+%{$fg[green]%}%(?..[%?])\
 %{$fg_no_bold[yellow]%}%3~\
 %{$reset_color%}"
 
