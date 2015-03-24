@@ -95,6 +95,9 @@ alias ipt='sudo iptables -L'
 # show hubic client status
 alias hubicstatus='watch -n 0,1 hubic status'
 
+# make df human readable
+alias df='df -h'
+
 ####################################################
 #                   functions                      #
 ####################################################

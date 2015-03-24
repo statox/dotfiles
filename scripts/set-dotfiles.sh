@@ -14,4 +14,13 @@ sh ./save-dotfiles.sh
 sh ./make-symlinks.sh
 
 # source the .bashrc
-reloadbashrc
+
+if [ -f ~/.bashrc ]
+then
+    echo "sourcing bashrc"
+    source ~/.bashrc
+elif [ -f ~/.zshrc ]
+then
+    echo "sourcing zshrc"
+    source ~/.zshrc
+fi
