@@ -48,7 +48,6 @@ export MANPATH="/usr/local/man:$MANPATH"
 export ZSH_TMUX_AUTOSTART=true
 
 # Path to oh-my-zsh installation.
-export ZSH=/home/adrien/.oh-my-zsh
 export ZSH=~/.oh-my-zsh
 
 
