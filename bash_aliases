@@ -66,7 +66,8 @@ alias vi='vim'
 # apt
 alias install='sudo apt-get install'
 alias search='apt-cache search'
-alias update='sudo apt-get update && sudo apt-get upgrade'
+alias update='sudo apt-get update'
+alias upgrade='sudo apt-get upgrade'
 
 # directories navigation
 alias back='cd $OLDPWD'
