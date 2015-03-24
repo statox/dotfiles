@@ -1,9 +1,11 @@
 # save files #
 ##############
-
 saved-dotfiles/*
+
+# save files #
+##############
+scripts/files_list
 
 # tmp files #
 # ###########
-
 *.swp
