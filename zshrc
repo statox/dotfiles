@@ -153,7 +153,7 @@ PROMPT="\
 %{$fg[blue]%}%n\
 %{$reset_color%}@\
 %{$fg[green]%}%m\
-%{$reset_color%}%# "
+%{$reset_color%} "
 
 # the plugin git-prompt already set the first part of RPROMPT
 RPROMPT=$RPROMPT"\
