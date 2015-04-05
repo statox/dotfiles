@@ -1,0 +1,39 @@
+"------------------------------------------------------------
+" Configuration file for Vimperator (Firefox/Iceweasel extension)
+
+
+"------------------------------------------------------------
+" general configuration
+
+" set <Space> as leader
+let mapleader = "<Space>"
+
+" disable beep
+set visualbell
+
+" useful for command-line completion
+set autocomplete
+set wildmode=list:longest,full
+
+"------------------------------------------------------------
+" Colorscheme
+
+" remember to copy colorscheme file in ~/.vimperator/color/
+"   https://github.com/vimpr/vimperator-colors/raw/master/solarized_dark.vimp
+
+colorscheme solarized_dark
+
+"------------------------------------------------------------
+" Mappings
+
+" navigate through tabs with h and l
+nmap h :tabNext<CR>
+nmap l :tabnext<CR>
+
+" close tab with q
+nmap q :tabclose<CR>
+
+" open window with n
+nmap n :winopen<CR>
+" close window with x
+nmap x :winclose<CR>
