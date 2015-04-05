@@ -37,3 +37,6 @@ nmap q :tabclose<CR>
 nmap n :winopen<CR>
 " close window with x
 nmap x :winclose<CR>
+
+" override <C-a> to select all
+inoremap <C-a> <C-Home><C-S-End>
