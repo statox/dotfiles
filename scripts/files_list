@@ -1,6 +1,11 @@
+# This file contains the dotfiles to treat
+# You can comment a file with # so the file wont be proceded
+
 bash_aliases
 bash_logout
+dircolors.256dark
 tmux.conf
 vimrc
+vimperatorrc
 Xresources
 zshrc
