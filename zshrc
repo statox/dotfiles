@@ -14,8 +14,8 @@ plugins=(bgnotify colored-man cp extract git git-prompt tmux z zsh-syntax-highli
 #   miscelanious zsh configuration
 
 # line added by zsh auto config
-# perform cd when something which is not a command is entered 
-setopt autocd 
+# perform cd when something which is not a command is entered
+setopt autocd
 # beep on error in zle
 setopt beep
 # report the status of background jobs immediately
@@ -27,7 +27,7 @@ setopt interactivecomments
 # spelling corrector
 setopt correct_all
 
-setopt extendedglob nomatch 
+setopt extendedglob nomatch
 
 # fast acces to man page with <Esc-h> while typping a command
 autoload run-help
