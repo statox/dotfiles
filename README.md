@@ -15,13 +15,13 @@ It is possible to add to $PATH the path to the scripts.
 `export PATH=$PATH:path/to/.dotfiles/scripts`
 
 ### Select which files to manage
-In `/scripts/files_list` 
+In `./scripts/files_list` 
 
 Select the files you want to simlink and keep under this repo. Not wanted files can be commented with "#"
 
 ### Execute the script
 Execute the script
-`/scripts/set-dotfiles.sh`
+`./scripts/set-dotfiles.sh`
 
 ### And voila
 The dotfiles in your home directory are now symlinked to the files in ~/.dotfiles!
