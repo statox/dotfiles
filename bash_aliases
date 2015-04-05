@@ -267,3 +267,28 @@ loop() {
         sleep 1;
     done
 }
+
+loopd() {
+
+    CMD=""
+    DELAY=1
+    re='^[0-9]+$'
+
+    # get the command and skip the first argument if it is a number
+    if [[ $1 =~ $re  ]] ; then
+        DELAY=$1
+        CMD=$2
+        for i in "${@:3}"; do
+            CMD="$CMD $i"
+        done
+    else
+        CMD=$@
+    fi
+
+    echo Starting: "$CMD"
+    echo Delay: "$DELAY"
+    while true; do
+        eval $(printf "%q " "$CMD")
+        sleep $DELAY;
+    done
+}
