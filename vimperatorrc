@@ -33,10 +33,8 @@ nmap l :tabnext<CR>
 " close tab with q
 nmap q :tabclose<CR>
 
-" open window with n
-nmap n :winopen<CR>
-" close window with x
-nmap x :winclose<CR>
+" close window (and save session) with x
+nmap x ZZ
 
 " override <C-a> to select all
 inoremap <C-a> <C-Home><C-S-End>
