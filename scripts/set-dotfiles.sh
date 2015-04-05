@@ -6,13 +6,14 @@
 # it save the original dotfiles in ./saved-dotfiles
 # and call the make-symlink.sh script to replace them
 
+CUR_DIR=`dirname $0`
 
 # make a save of the current dotfiles
-./save-dotfiles.sh
+$CUR_DIR/save-dotfiles.sh
 echo ""
 
 # creating symlinks 
-./make-symlinks.sh
+$CUR_DIR/make-symlinks.sh
 
 # source the .bashrc
 
