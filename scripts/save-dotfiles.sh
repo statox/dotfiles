@@ -4,8 +4,9 @@
 #
 # This script makes a copy of dotfiles in home directory
 
-SAVE_DIR=~/.dotfiles/saved-dotfiles
-FILES=~/.dotfiles/scripts/files_list
+CUR_DIR=`dirname $0`
+SAVE_DIR=$CUR_DIR/../saved-dotfiles
+FILES=$CUR_DIR/files_list
 
 DATE=$(date +%y%m%d_%H%M%S)
 

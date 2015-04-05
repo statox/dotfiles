@@ -4,8 +4,8 @@
 # This script symlinks all the dotfiles of the directory
 #
 
-FILES=~/.dotfiles/scripts/files_list
-CUR_DIR=$(pwd)
+CUR_DIR=`dirname $0`
+FILES=$CUR_DIR/files_list
 
 echo "creating the simlinks"
 
