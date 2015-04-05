@@ -161,7 +161,7 @@ RPROMPT=$RPROMPT"\
 %{$reset_color%}"
 
 # set dircolors to follow solarized colors
-if [ -f ~/.dircolors.256dark ]
+if [ -f ~/.dircolors ]
 then
-    eval `dircolors ~/.dircolors.256dark`
+    eval `dircolors ~/.dircolors`
 fi
