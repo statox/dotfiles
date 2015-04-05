@@ -4,7 +4,6 @@
 " URL: https://github.com/nobe4/dotfiles/blob/master/.vimrc
 " URL: https://github.com/thoughtstream/Damian-Conway-s-Vim-Setup/blob/master/.vimrc
 
-
 "------------------------------------------------------------
 " General configuration
 
@@ -123,6 +122,10 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-fugitive'
 " highlight hmtl matching tag
 Plugin 'gregsexton/MatchTag'
+" help you stop repeating the basic movement keys
+Plugin 'takac/vim-hardtime'
+
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -150,6 +153,10 @@ noremap % v%
 " when a line is longer than the screen j and k behave like its different lines
 noremap j gj
 noremap k gk
+
+" use <Leader>j and <Leader>k to scroll faster
+noremap <Leader>jj 20j
+noremap <Leader>kk 20k
 
 " fast save and quit
 noremap <Leader>w     :w<CR> :echo "saving"<CR>
@@ -297,6 +304,21 @@ let g:syntastic_check_on_wq = 0
 
 
 "------------------------------------------------------------
+" vim-hardtime configuration
+
+let g:hardtime_default_on = 1
+
+let g:list_of_normal_keys = ["h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+let g:list_of_visual_keys = ["h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+let g:list_of_insert_keys = ["<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+
+let g:hardtime_timeout = 500
+
+let g:hardtime_ignore_buffer_patterns = [ "NERD.*" ]
+
+" allow a key if it is different from the previous key (example allow 'jh' but not 'jj')
+let g:hardtime_allow_different_key = 1
+"------------------------------------------------------------
 " Set up smarter search behaviour
 
 set incsearch   " Lookahead as search pattern is specified
@@ -331,17 +353,17 @@ endfunction
 " Make naughty characters visible
 " (uBB is right double angle, uB7 is middle dot)
 
-"exec "set lcs=tab:\uBB\uBB,trail:\uB7,nbsp:~"
+exec "set lcs=tab:\uBB\uBB,trail:\uB7,nbsp:~"
 
-"augroup VisibleNaughtiness
- "autocmd!
- "autocmd BufEnter * set list
- "autocmd BufEnter *.txt set nolist
- "autocmd BufEnter *.vp* set nolist
- "autocmd BufEnter * if !&modifiable
- "autocmd BufEnter * set nolist
- "autocmd BufEnter * endif
-"augroup END
+augroup VisibleNaughtiness
+    autocmd!
+    autocmd BufEnter * set list
+    autocmd BufEnter *.txt set nolist
+    autocmd BufEnter *.vp* set nolist
+    autocmd BufEnter * if !&modifiable
+    autocmd BufEnter * set nolist
+    autocmd BufEnter * endif
+augroup END
 
 "------------------------------------------------------------
 " Make :help appear in a full-screen tab, instead of a window
