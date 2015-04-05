@@ -3,9 +3,11 @@
 
 bash_aliases
 bash_logout
+bashrc
 dircolors.256dark
+motd
 tmux.conf
-vimrc
 vimperatorrc
+vimrc
 Xresources
 zshrc
