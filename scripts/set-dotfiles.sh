@@ -8,10 +8,11 @@
 
 
 # make a save of the current dotfiles
-sh ./save-dotfiles.sh
+./save-dotfiles.sh
+echo ""
 
 # creating symlinks 
-sh ./make-symlinks.sh
+./make-symlinks.sh
 
 # source the .bashrc
 
