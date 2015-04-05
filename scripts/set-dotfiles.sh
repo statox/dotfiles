@@ -3,7 +3,7 @@
 # Author: Adrien Fabre (statox)
 #
 # This script is to use after cloning the repo
-# it save the original dotfiles in ./saved-dotfiles
+# It saves the original dotfiles in ./saved-dotfiles
 # and call the make-symlink.sh script to replace them
 
 CUR_DIR=`dirname $0`
