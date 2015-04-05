@@ -6,8 +6,8 @@
 #------------------------------------------------------------------------------
 #   plugins
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(bgnotify colored-man cp extract git git-prompt tmux z)
+# IMPORTANT: zsh-syntax-highlighting MUST be placed in last position
+plugins=(bgnotify colored-man cp extract git git-prompt tmux z zsh-syntax-highlighting)
 
 
 #------------------------------------------------------------------------------
@@ -160,3 +160,8 @@ RPROMPT=$RPROMPT"\
 %{$fg_no_bold[yellow]%}%3~\
 %{$reset_color%}"
 
+# set dircolors to follow solarized colors
+if [ -f ~/.dircolors.256dark ]
+then
+    eval `dircolors ~/.dircolors.256dark`
+fi
