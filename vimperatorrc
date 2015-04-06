@@ -38,3 +38,9 @@ nmap x ZZ
 
 " override <C-a> to select all
 inoremap <C-a> <C-Home><C-S-End>
+
+" Remove search highlighting witj <C-l>
+nmap <C-l> :nohlsearch<CR>
+
+" go back in history with backspace key
+nmap <BS> :back<CR>
