@@ -141,23 +141,24 @@ function resudo {
 # opens a directory with graphical explorer or use uof function to open a file (see below)
 #       if no argument is passed, opens current directory
 #       else, try to open passed directory
-function o {
-  if [ -z "$1" ]    # empty argument
-  then
-    # opened in background, output redirected to /dev/null
-    nautilus $(pwd) > /dev/null &  
-  else
-    if [ -d "$1" ] # argument is a directory
-    then
-      nautilus $1 > /dev/null &
-    elif [ -f "$1" ] # argument is a file try to open it
-    then
-        uof $1
-    else
-      echo "Error: not a directory or a file"
-    fi
-  fi
-}
+alias o='gnome-open'
+#function o {
+  #if [ -z "$1" ]    # empty argument
+  #then
+    ## opened in background, output redirected to /dev/null
+    #nautilus $(pwd) > /dev/null &  
+  #else
+    #if [ -d "$1" ] # argument is a directory
+    #then
+      #nautilus $1 > /dev/null &
+    #elif [ -f "$1" ] # argument is a file try to open it
+    #then
+        #uof $1
+    #else
+      #echo "Error: not a directory or a file"
+    #fi
+  #fi
+#}
 
 # "universal" opener function: the function tries to open
 # the file passed as argument depending on its name
