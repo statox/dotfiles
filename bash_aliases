@@ -91,12 +91,14 @@ alias ..........='cd ../../../../../../../../../'
 # quickly output iptables rules
 alias ipt='sudo iptables -L'
 
-
 # show hubic client status
 alias hubicstatus='watch -n 0,1 hubic status'
 
 # make df human readable
 alias df='df -h'
+
+# quickping
+alias p8='ping -v -c 8 8.8.8.8'
 
 ####################################################
 #                   functions                      #
