@@ -15,9 +15,11 @@ set visualbell
 set autocomplete
 set wildmode=list:longest,full
 
+" char used to open links
+set hintchars=hjklyubnio
+
 "------------------------------------------------------------
 " Colorscheme
-
 " remember to copy colorscheme file in ~/.vimperator/color/
 "   https://github.com/vimpr/vimperator-colors/raw/master/solarized_dark.vimp
 
@@ -30,8 +32,15 @@ colorscheme solarized_dark
 nmap h :tabNext<CR>
 nmap l :tabnext<CR>
 
-" close tab with q
-nmap q :tabclose<CR>
+" open hints with nj and nk
+map nj f
+map nk F
+
+" open new tab with nh
+map nh :tabopen 
+
+" close tab with nl
+map nl :tabclose<CR>
 
 " close window (and save session) with x
 nmap x ZZ
@@ -44,3 +53,11 @@ nmap <C-l> :nohlsearch<CR>
 
 " go back in history with backspace key
 nmap <BS> :back<CR>
+
+" scroll faster
+noremap j 3j
+noremap k 3k
+
+" scroll even faster with <C-j> and <C-k>
+noremap <C-j> 10j
+noremap <C-k> 10k
