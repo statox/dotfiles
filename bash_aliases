@@ -140,10 +140,11 @@ function resudo {
     eval $CMD
 }
 
+# Open files or directory in GUI application (better than gnome-open because it is desktop agnostic)
+alias o='xdg-open'
 # opens a directory with graphical explorer or use uof function to open a file (see below)
 #       if no argument is passed, opens current directory
 #       else, try to open passed directory
-alias o='gnome-open'
 #function o {
   #if [ -z "$1" ]    # empty argument
   #then
