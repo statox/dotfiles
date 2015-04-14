@@ -5,8 +5,6 @@
 # This file contains useful aliases and functions
 # It must be called in ~/basrc
 
-
-
 ####################################################
 #                 local  aliases                   #
 ####################################################
@@ -50,7 +48,6 @@ function hg {
     eval "$cmd"
 }
 
-
 #mkdir: create parents directories + verbose
 alias mkdir='mkdir -p -v'
 
@@ -80,13 +77,6 @@ alias .......='cd ../../../../../../'
 alias ........='cd ../../../../../../../'
 alias .........='cd ../../../../../../../../'
 alias ..........='cd ../../../../../../../../../'
-
-
-# securisation to avoid unwanted deletions
-# finally it is not a really good way to do it
-#alias rm='rm -i'
-#alias cp='cp -i'
-#alias mv='mv -i'
 
 # quickly output iptables rules
 alias ipt='sudo iptables -L'
@@ -125,8 +115,6 @@ function ccat {
 
 # exectute last command with root privileges
 function resudo {
-    
-
     # get the last command
     # the behavior of sed seems not to be the same in bash and zsh
     # so we adapt with $DELIM
@@ -134,8 +122,8 @@ function resudo {
         DELIM=2p
     else
         DELIM=1p
-    fi    
-    
+    fi
+
     LAST=$(fc -ln | tail -n 2 | sed -n $DELIM)
     # put "sudo " behind it
     CMD="sudo "$LAST
@@ -147,49 +135,6 @@ function resudo {
 
 # Open files or directory in GUI application (better than gnome-open because it is desktop agnostic)
 alias o='xdg-open'
-# opens a directory with graphical explorer or use uof function to open a file (see below)
-#       if no argument is passed, opens current directory
-#       else, try to open passed directory
-#function o {
-  #if [ -z "$1" ]    # empty argument
-  #then
-    ## opened in background, output redirected to /dev/null
-    #nautilus $(pwd) > /dev/null &  
-  #else
-    #if [ -d "$1" ] # argument is a directory
-    #then
-      #nautilus $1 > /dev/null &
-    #elif [ -f "$1" ] # argument is a file try to open it
-    #then
-        #uof $1
-    #else
-      #echo "Error: not a directory or a file"
-    #fi
-  #fi
-#}
-
-# "universal" opener function: the function tries to open
-# the file passed as argument depending on its name
-# TODO: Maybe I'm just reinventing the wheel and I should try 
-# to find an existing solution
-# TODO: Make it work with several files passed as arguments
-# TODO: Find a better way to test the extensions
-
-function uof {
-    # treat only files
-    if [ -f "$1" ]
-    then
-        if [ $(head -c 4 "$1") = "%PDF"  ] # PDF files
-        then
-            evince $1 > /dev/null 2>&1 &
-        #elif [[ $1 == *.txt ]] || [[ $1 == *.TXT ]] || [[ $1 == *.c ]] || [[ $1 == *.C ]]
-        #then
-            #vim $1
-        else
-            echo "I dont know how to open this file"
-        fi
-    fi
-}
 
 # prompt files after cd
 function cl {
@@ -251,7 +196,7 @@ function makezip { zip -r "${1%%/}.zip" "$1" ; }
 
 # Create an archive of a given format from a given file or directory
 function archive {
-  
+
   if [ ! -d "$2" ] && [ ! -f "$2" ];then
     echo "not a file or directory"
     echo "Usage: archive [format] [path/to/file/or/directory]"
@@ -259,7 +204,7 @@ function archive {
   fi
 
   case "$1" in
-    tar.gz)   tar cvzf "${2%%/}.tar.gz"  "${2%%/}/";;  
+    tar.gz)   tar cvzf "${2%%/}.tar.gz"  "${2%%/}/";;
     zip)      zip -r "${2%%/}.zip" "$2" ;;
     gz|gzip)  cat $2 | gzip > $2.gz;;
     *)    echo "wrong archive type" 
