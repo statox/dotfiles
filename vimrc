@@ -11,7 +11,6 @@ set nocompatible    " Required, fix lot of stuff
 filetype off        " Detect the type of a file based on its name (Vundle needs it to be set to off)
 syntax on           " Enable syntax highlighting
 
-
 let mapleader="\<Space>"    " remap mapleader to space
 
 " :W sudo saves the file
@@ -57,7 +56,7 @@ set visualbell
 " And reset the terminal code for the visual bell. If visualbell is set, and
 " this line is also included, vim will neither flash nor beep. If visualbell
 " is unset, this does nothing.
-set t_vb=
+"set t_vb=
 
 " Enable use of the mouse for all modes
 set mouse=a
@@ -82,7 +81,7 @@ set cursorline
 " Vundle : Plugins manager
 " see : https://github.com/gmarik/Vundle.vim
 "
-"/!\ Remember to use 
+"/!\ Remember to use
 " git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " The first time you install vim to avoid error each time you open a file
 " Also use
@@ -125,8 +124,6 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-fugitive'
 " highlight hmtl matching tag
 Plugin 'gregsexton/MatchTag'
-" help you stop repeating the basic movement keys
-"Plugin 'takac/vim-hardtime'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -192,13 +189,23 @@ noremap <Leader><Leader>q  :tabclose<CR>
 noremap <Leader><Leader><Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 noremap <Leader><Leader><Right> :execute 'silent! tabmove ' . tabpagenr()<CR>
 
+"------------------------------------------------------------
+" manage buffers
+
+" show buffer list with <Leader>bo
+noremap <Leader>bo :ls<CR>
+" change buffer with <Leader>bh and <Leader>bl
+noremap <Leader>bl :bn<CR>
+noremap <Leader>bh :bN<CR>
+" close a buffer with <Leader>bq
+noremap <Leader>bq :bd<CR>
+
 
 "------------------------------------------------------------
 " manage windows
 " vertical and horizontal splits
 noremap <Leader>! <C-w>v
 noremap <Leader>/ <C-w>s
-
 " move between windows
 noremap <Leader>h <C-w>h
 noremap <Leader>j <C-w>j
@@ -272,7 +279,7 @@ imap    <silent> <F6> "<Esc>:silent setlocal spell! spelllang=fr<CR>"
 " next word
 nmap <Leader>n "<Esc>]s"
 " prev word
-nmap <Leader>b "<Esc>[s"
+"nmap <Leader>b "<Esc>[s"
 " suggest word correction
 nmap <Leader>v "<Esc>z="
 
@@ -308,21 +315,6 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 
-"------------------------------------------------------------
-" vim-hardtime configuration
-
-let g:hardtime_default_on = 1
-
-let g:list_of_normal_keys = ["h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
-let g:list_of_visual_keys = ["h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
-let g:list_of_insert_keys = ["<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
-
-let g:hardtime_timeout = 500
-
-let g:hardtime_ignore_buffer_patterns = [ "NERD.*" ]
-
-" allow a key if it is different from the previous key (example allow 'jh' but not 'jj')
-let g:hardtime_allow_different_key = 1
 "------------------------------------------------------------
 " Set up smarter search behaviour
 
