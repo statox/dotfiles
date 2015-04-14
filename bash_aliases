@@ -91,8 +91,10 @@ alias df='df -h'
 function p {
     ping -vD 8.8.8.8 | while read row
     do
-        DATE=$(date +"%d-%m-%y %T" -d @$(echo $row | grep -Eo "[0-9]{10}.[0-9]{6}"))
-        sed -r -e "s/[0-9]{10}.[0-9]{6}/$DATE/g" -e 's/icmp.req.//g' <<< "$row"
+        if [[ $row == \[*\]*  ]]; then
+            DATE=$(date +"%d-%m-%y %T" -d @$(echo $row | grep -Eo "[0-9]{10}.[0-9]{6}"))
+            sed -r -e "s/[0-9]{10}.[0-9]{6}/$DATE/g" -e 's/icmp.req.//g' <<< "$row"
+        fi
     done
 }
 ####################################################
