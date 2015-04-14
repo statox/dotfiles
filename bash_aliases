@@ -97,9 +97,14 @@ alias hubicstatus='watch -n 0,1 hubic status'
 # make df human readable
 alias df='df -h'
 
-# quickping
-alias p8='ping -v -c 8 8.8.8.8'
-
+# quickping with human readable timestamp
+function p {
+    ping -vD 8.8.8.8 | while read row
+    do
+        DATE=$(date +"%d-%m-%y %T" -d @$(echo $row | grep -Eo "[0-9]{10}.[0-9]{6}"))
+        sed -r -e "s/[0-9]{10}.[0-9]{6}/$DATE/g" -e 's/icmp.req.//g' <<< "$row"
+    done
+}
 ####################################################
 #                   functions                      #
 ####################################################
