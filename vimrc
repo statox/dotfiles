@@ -23,6 +23,7 @@ set hidden
 
 " Better command-line completion
 set wildmenu
+set wildmode=longest,list,full
 
 " Show partial commands in the last line of the screen
 set showcmd
@@ -74,6 +75,8 @@ set notimeout ttimeout ttimeoutlen=200
 " Use <F11> to toggle between 'paste' and 'nopaste'
 set pastetoggle=<F11>
 
+" highlight current line
+set cursorline
 
 "------------------------------------------------------------
 " Vundle : Plugins manager
@@ -123,8 +126,7 @@ Plugin 'tpope/vim-fugitive'
 " highlight hmtl matching tag
 Plugin 'gregsexton/MatchTag'
 " help you stop repeating the basic movement keys
-Plugin 'takac/vim-hardtime'
-
+"Plugin 'takac/vim-hardtime'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -292,6 +294,9 @@ noremap <Leader>o :NERDTree <CR> " NERD_tree usage
 "------------------------------------------------------------
 " syntastic configuration
 " this is the recommended configuration (see https://github.com/scrooloose/syntastic/blob/master/README.markdown#3-recommended-settings)
+
+" Toggle syntastic with <Leader-s>
+nmap <Leader>s :SyntasticToggleMode<CR>
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
