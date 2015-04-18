@@ -16,7 +16,10 @@ set autocomplete
 set wildmode=list:longest,full
 
 " char used to open links
-set hintchars=hjklyubnio
+set hintchars=hjkl
+
+" reduce hints font size
+highlight Hint -append font-size:11px
 
 "------------------------------------------------------------
 " Colorscheme
@@ -37,10 +40,10 @@ map nj f
 map nk F
 
 " open new tab with nh
-map nh :tabopen 
+map nl :tabopen 
 
 " close tab with nl
-map nl :tabclose<CR>
+map nh :tabclose<CR>
 
 " close window (and save session) with x
 nmap x ZZ
