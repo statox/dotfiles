@@ -1,8 +1,4 @@
-" This vimrc file is freely inspired by several sources:
-" URL: http://vim.wikia.com/wiki/Example_vimrc
-" URL: https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim
-" URL: https://github.com/nobe4/dotfiles/blob/master/.vimrc
-" URL: https://github.com/thoughtstream/Damian-Conway-s-Vim-Setup/blob/master/.vimrc
+" ~/.vimrc
 
 "------------------------------------------------------------
 " General configuration
@@ -124,6 +120,12 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-fugitive'
 " highlight hmtl matching tag
 Plugin 'gregsexton/MatchTag'
+" status/tab line light as air
+Plugin 'bling/vim-airline'
+" Show buffers in status line
+Plugin 'bling/vim-bufferline'
+" Show lines indent
+Plugin 'Yggdroot/indentLine'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -174,7 +176,7 @@ noremap <Leader><CR> i<CR><esc>
 noremap <Leader><tab> 80\|
 
 " In visual mode use A to select all of the file
-vnoremap a <esc>gg0vG$
+vnoremap aa <esc>gg0vG$
 
 
 "------------------------------------------------------------
@@ -189,11 +191,12 @@ noremap <Leader><Leader>q  :tabclose<CR>
 noremap <Leader><Leader><Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 noremap <Leader><Leader><Right> :execute 'silent! tabmove ' . tabpagenr()<CR>
 
+
 "------------------------------------------------------------
 " manage buffers
 
-" show buffer list with <Leader>bo
-noremap <Leader>bo :ls<CR>
+" show buffer list and allow to type the buffer name to use with <Leader>bb
+noremap <Leader>bb :ls<CR>:b
 " change buffer with <Leader>bh and <Leader>bl
 noremap <Leader>bl :bn<CR>
 noremap <Leader>bh :bN<CR>
@@ -313,6 +316,33 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+
+"------------------------------------------------------------
+" airline configuration
+
+" appearence configuration
+let g:airline_powerline_fonts = 1
+let g:airline_theme             = 'murmur'
+
+" features
+"let g:airline_enable_branch     = 1
+"let g:airline_enable_syntastic  = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#nerdtree#enabled = 1
+let g:airline#extensions#fugitive#enabled = 1
+let g:airline#extensions#vimbufferline#enabled = 1
+
+" separators symbols
+let g:airline_left_sep          = ''
+let g:airline_left_alt_sep      = ''
+let g:airline_right_sep         = ''
+let g:airline_right_alt_sep     = ''
+let g:airline_branch_prefix     = ''
+let g:airline_readonly_symbol   = ''
+let g:airline_linecolumn_prefix = ''
 
 
 "------------------------------------------------------------
