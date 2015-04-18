@@ -9,8 +9,7 @@ syntax on           " Enable syntax highlighting
 
 let mapleader="\<Space>"    " remap mapleader to space
 
-" :W sudo saves the file
-" (useful for handling the permission-denied error)
+" :W save file with sudo permissions
 command W w !sudo tee % > /dev/null
 
 " Allows better switching between files
@@ -80,11 +79,6 @@ set cursorline
 "/!\ Remember to use
 " git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " The first time you install vim to avoid error each time you open a file
-" Also use
-":PluginInstall
-":PluginUpdate
-":PluginClean
-"To install and update plugins
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -221,14 +215,12 @@ call matchadd('ColorColumn', '\%81v', 100)
 " Color configuration
 
 try
-    "syntax enable
-    "set t_Co=256            " let Vim in terminal use 256 colors
     set background=dark
-    "colorscheme gruvbox
     colorscheme solarized
 catch
     echo "Colorscheme not found"
 endtry
+
 
 "------------------------------------------------------------
 " Text, tab and indent related configuration
@@ -249,15 +241,6 @@ set tw=500
 set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines"
-
-" automatically wrap text at 80 columns
-"set tw=79
-"set formatoptions+=t
-
-" Indentation settings for using hard tabs for indent. Display tabs as
-" two characters wide.
-" set shiftwidth=4
-" set tabstop=4
 
 
 "------------------------------------------------------------
@@ -308,9 +291,9 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_auto_loc_list            = 1
+let g:syntastic_check_on_open            = 1
+let g:syntastic_check_on_wq              = 0
 
 
 "------------------------------------------------------------
@@ -318,16 +301,14 @@ let g:syntastic_check_on_wq = 0
 
 " appearence configuration
 let g:airline_powerline_fonts = 1
-let g:airline_theme             = 'murmur'
+let g:airline_theme           = 'murmur'
 
 " features
-"let g:airline_enable_branch     = 1
-"let g:airline_enable_syntastic  = 1
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#nerdtree#enabled = 1
-let g:airline#extensions#fugitive#enabled = 1
+let g:airline#extensions#branch#enabled        = 1
+let g:airline#extensions#syntastic#enabled     = 1
+let g:airline#extensions#tabline#enabled       = 1
+let g:airline#extensions#nerdtree#enabled      = 1
+let g:airline#extensions#fugitive#enabled      = 1
 let g:airline#extensions#vimbufferline#enabled = 1
 
 " separators symbols
@@ -386,6 +367,7 @@ augroup VisibleNaughtiness
     autocmd BufEnter * set nolist
     autocmd BufEnter * endif
 augroup END
+
 
 "------------------------------------------------------------
 " Make :help appear in a full-screen tab, instead of a window
