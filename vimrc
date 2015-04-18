@@ -107,14 +107,9 @@ Plugin 'godlygeek/tabular'
 Plugin 'ervandew/supertab'
 " Easily navigate through files, see ":h NERD_tree.txt" for help
 Plugin 'scrooloose/nerdtree'
-" Visually signals the marks
-"Plugin 'vim-scripts/ShowMarks'
 " Syntax checker
 Plugin 'scrooloose/syntastic'
-" Color scheme manager
-"Plugin 'flazz/vim-colorschemes'
-" Sexy colorscheme
-"Plugin 'morhetz/gruvbox'
+" Solarized colorscheme
 Plugin 'altercation/vim-colors-solarized'
 " Wrapper for git
 Plugin 'tpope/vim-fugitive'
