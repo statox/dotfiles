@@ -35,6 +35,9 @@ colorscheme solarized_dark
 nmap h :tabNext<CR>
 nmap l :tabnext<CR>
 
+" duplicate tab with nd
+nmap nd :tabduplicate<CR>
+
 " open hints with nj and nk
 map nj f
 map nk F
