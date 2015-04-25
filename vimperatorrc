@@ -50,6 +50,9 @@ map nh :tabclose<CR>
 " close window (and save session) with x
 nmap x ZZ
 
+" open private navigation window with pw
+nmap pw i<C-S-p>
+
 " override <C-a> to select all
 inoremap <C-a> <C-Home><C-S-End>
 
