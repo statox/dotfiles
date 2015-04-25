@@ -112,7 +112,7 @@ Plugin 'gregsexton/MatchTag'
 " status/tab line light as air
 Plugin 'bling/vim-airline'
 " Show buffers in status line
-Plugin 'bling/vim-bufferline'
+"Plugin 'bling/vim-bufferline'
 " Show lines indent
 Plugin 'Yggdroot/indentLine'
 
@@ -309,7 +309,7 @@ let g:airline#extensions#syntastic#enabled     = 1
 let g:airline#extensions#tabline#enabled       = 1
 let g:airline#extensions#nerdtree#enabled      = 1
 let g:airline#extensions#fugitive#enabled      = 1
-let g:airline#extensions#vimbufferline#enabled = 1
+"let g:airline#extensions#vimbufferline#enabled = 1
 
 " separators symbols
 let g:airline_left_sep          = ''
@@ -319,6 +319,17 @@ let g:airline_right_alt_sep     = ''
 let g:airline_branch_prefix     = ''
 let g:airline_readonly_symbol   = ''
 let g:airline_linecolumn_prefix = ''
+
+
+"------------------------------------------------------------
+" vim-bufferline configuration
+
+"let g:bufferline_modified = '*'
+"let g:bufferline_echo = 1
+
+"autocmd VimEnter *
+            "\ let &statusline='%{bufferline#refresh_status()}'
+            "\ .bufferline#get_status_string()
 
 
 "------------------------------------------------------------
