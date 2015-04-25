@@ -19,8 +19,7 @@ set wildmode=list:longest,full
 set hintchars=hjkl
 
 " reduce hints font size
-highlight Hint -append font-size:11px
-
+highlight Hint font-size: 11px;
 "------------------------------------------------------------
 " Colorscheme
 " remember to copy colorscheme file in ~/.vimperator/color/
