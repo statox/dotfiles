@@ -8,6 +8,7 @@
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # IMPORTANT: zsh-syntax-highlighting MUST be placed in last position
 plugins=(bgnotify colored-man cp extract git git-prompt tmux z zsh-syntax-highlighting)
+#plugins=(bgnotify colored-man cp extract git git-prompt z zsh-syntax-highlighting)
 
 
 #------------------------------------------------------------------------------
