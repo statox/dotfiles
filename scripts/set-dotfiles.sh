@@ -70,6 +70,7 @@ echo ""
 
 # creating symlinks
 make-symlinks
+echo ""
 
 # source the shell configuration file
 if [ -f ~/.bashrc ]
