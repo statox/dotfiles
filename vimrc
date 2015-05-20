@@ -72,6 +72,10 @@ set pastetoggle=<F11>
 " highlight current line
 set cursorline
 
+" set the working directory to the current file's directory
+autocmd BufEnter * lcd %:p:h
+
+
 "------------------------------------------------------------
 " Vundle : Plugins manager
 " see : https://github.com/gmarik/Vundle.vim
