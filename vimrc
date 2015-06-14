@@ -72,6 +72,9 @@ set pastetoggle=<F11>
 " highlight current line
 set cursorline
 
+" <C-a> and <C-x> also increase/decrease letters characters
+set nrformats+=alpha
+
 "------------------------------------------------------------
 " Vundle : Plugins manager
 " see : https://github.com/gmarik/Vundle.vim
@@ -128,7 +131,7 @@ filetype plugin indent on    " required
 
 " Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
 " which is the default
-map Y y$
+"map Y y$   " actually the default behavior is not that bad
 
 " Map <C-L> (redraw screen) to also turn off search highlighting until the
 " next search
@@ -138,15 +141,11 @@ nnoremap <C-L> :nohl<CR><C-L>
 inoremap <C-Y> <C-O>p
 
 " % go to the matching brace and now it also select the lines between the braces
-noremap % v%
+"noremap % v%
 
 " when a line is longer than the screen j and k behave like its different lines
 noremap j gj
 noremap k gk
-
-" use <Leader>j and <Leader>k to scroll faster
-noremap <Leader>jj 20j
-noremap <Leader>kk 20k
 
 " fast save and quit
 noremap <Leader>w     :w<CR> :echo "saving"<CR>
@@ -154,7 +153,7 @@ noremap <Leader>x     :x<CR>
 noremap <Leader>q     :q<CR>
 
 " make G going at the end of the last line
-noremap G G$
+"noremap G G$
 " make gg going at the begin of the first line
 noremap gg gg0
 
@@ -166,6 +165,9 @@ noremap <Leader><tab> 80\|
 
 " In visual mode use A to select all of the file
 vnoremap aa <esc>gg0vG$
+
+" quickly redefine mapping
+nnoremap <Leader>r :nnoremap <lt>Leader>t 
 
 
 "------------------------------------------------------------
