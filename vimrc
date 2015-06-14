@@ -75,6 +75,10 @@ set cursorline
 " <C-a> and <C-x> also increase/decrease letters characters
 set nrformats+=alpha
 
+" set the working directory to the current file's directory
+autocmd BufEnter * lcd %:p:h
+
+
 "------------------------------------------------------------
 " Vundle : Plugins manager
 " see : https://github.com/gmarik/Vundle.vim
