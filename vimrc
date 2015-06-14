@@ -177,7 +177,7 @@ noremap <Leader><Leader>l  :tabn<CR>
 noremap <Leader><Leader>h  :tabp<CR>
 " open/close tab
 noremap <Leader><Leader>t  :tabnew<CR>
-noremap <Leader><Leader>q  :tabclose<CR>
+noremap <Leader>tc         :tabclose<CR>
 " move current tab to left/right
 noremap <Leader><Leader><Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 noremap <Leader><Leader><Right> :execute 'silent! tabmove ' . tabpagenr()<CR>
@@ -189,10 +189,10 @@ noremap <Leader><Leader><Right> :execute 'silent! tabmove ' . tabpagenr()<CR>
 " show buffer list and allow to type the buffer name to use with <Leader>bb
 noremap <Leader>bb :ls<CR>:b
 " change buffer with <Leader>bh and <Leader>bl
-noremap <Leader>bl :bn<CR>
-noremap <Leader>bh :bN<CR>
-" close a buffer with <Leader>bq
-noremap <Leader>bq :bd<CR>
+noremap <Leader>l :bn<CR>
+noremap <Leader>h :bN<CR>
+" close a buffer with <Leader>bc
+noremap <Leader>bc :bd<CR>
 
 
 "------------------------------------------------------------
@@ -201,11 +201,12 @@ noremap <Leader>bq :bd<CR>
 noremap <Leader>! <C-w>v
 noremap <Leader>/ <C-w>s
 " move between windows
-noremap <Leader>h <C-w>h
-noremap <Leader>j <C-w>j
-noremap <Leader>k <C-w>k
-noremap <Leader>l <C-w>l
-
+"noremap <Leader>h <C-w>h
+noremap <Leader>j <C-w>w
+noremap <Leader>k <C-w>W
+"noremap <Leader>l <C-w>l
+" close a window with <Leader>wc
+noremap <Leader>wc <C-w>c
 
 "------------------------------------------------------------
 " Color the 81st column when your line is too long
