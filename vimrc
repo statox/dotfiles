@@ -122,6 +122,9 @@ Plugin 'bling/vim-airline'
 "Plugin 'bling/vim-bufferline'
 " Show lines indent
 Plugin 'Yggdroot/indentLine'
+" Create submode (used for windows resizing mappings)
+Plugin 'kana/vim-submode'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -211,6 +214,20 @@ noremap <Leader>k <C-w>W
 "noremap <Leader>l <C-w>l
 " close a window with <Leader>wc
 noremap <Leader>wc <C-w>c
+
+" resize windows with <Leader><arrow key>
+" submodes are used so it is possible to keep the arrow key pressed to repeat the mapping
+call submode#enter_with('grow/shrink', 'n', '', '<leader><UP>', '<C-w>+')
+call submode#enter_with('grow/shrink', 'n', '', '<leader><DOWN>', '<C-w>-')
+call submode#enter_with('grow/shrink', 'n', '', '<leader><LEFT>', '<C-w><')
+call submode#enter_with('grow/shrink', 'n', '', '<leader><RIGHT>', '<C-w>>')
+call submode#map('grow/shrink', 'n', '', '<DOWN>', '<C-w>-')
+call submode#map('grow/shrink', 'n', '', '<UP>', '<C-w>+')
+call submode#map('grow/shrink', 'n', '', '<LEFT>', '<C-w><')
+call submode#map('grow/shrink', 'n', '', '<RIGHT>', '<C-w>>')
+let g:submode_keep_leaving_key = 1
+let g:submode_timeout = 0
+
 
 "------------------------------------------------------------
 " Color the 81st column when your line is too long
