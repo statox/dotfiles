@@ -97,13 +97,13 @@
     " set the runtime path to include Vundle and initialize
     
     " With Linux
-    " set rtp+=~/.vim/bundle/Vundle.vim
-    " call vundle#begin()
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
 
     " With Windows
-    set rtp+=~/vimfiles/bundle/Vundle.vim/
-    let path='~/vimfiles/bundle'
-    call vundle#begin(path)
+    "set rtp+=~/vimfiles/bundle/Vundle.vim/
+    "let path='~/vimfiles/bundle'
+    "call vundle#begin(path)
 
     " gmarik/Vundle.vim {{{
         " let Vundle manage Vundle, required
