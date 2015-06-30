@@ -1,10 +1,6 @@
 "~/.vimrc
 " vim:fdm=marker
 
-" Temporary settings for particular job {{{
-    nnoremap <C-x> 0"*yyj
-    nnoremap <C-c> 0vG$"*y
-"}}}
 " General configuration {{{
     set nocompatible    " Required, fix lot of stuff
     filetype off        " Detect the type of a file based on its name (Vundle needs it to be set to off)
