@@ -1,6 +1,10 @@
 "~/.vimrc
 " vim:fdm=marker
 
+" Temporary settings for particular job {{{
+    nnoremap <C-x> 0"*yyj
+    nnoremap <C-c> 0vG$"*y
+"}}}
 " General configuration {{{
     set nocompatible    " Required, fix lot of stuff
     filetype off        " Detect the type of a file based on its name (Vundle needs it to be set to off)
@@ -88,54 +92,42 @@
     set autoread
 "}}}
 " Plugins {{{
-    " see : https://github.com/gmarik/Vundle.vim
-    "
-    "/!\ Remember to use
-    " git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    " The first time you install vim to avoid error each time you open a file
-
-    " set the runtime path to include Vundle and initialize
-    
-    " With Linux
-    set rtp+=~/.vim/bundle/Vundle.vim
-    call vundle#begin()
-
-    " With Windows
-    "set rtp+=~/vimfiles/bundle/Vundle.vim/
-    "let path='~/vimfiles/bundle'
-    "call vundle#begin(path)
+    " Manage plugins with vim-plug (https://github.com/junegunn/vim-plug)
+    " to install execute:
+    " curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    call plug#begin('~/.vim/plugged')
 
     " gmarik/Vundle.vim {{{
         " let Vundle manage Vundle, required
-        Plugin 'gmarik/Vundle.vim'
+        Plug 'gmarik/Vundle.vim'
     "}}}
     " vim-scripts/editorconfig-vim {{{
         " detects files type and has an accorded behaviour 
-        "Plugin 'vim-scripts/editorconfig-vim'
+        "Plug 'vim-scripts/editorconfig-vim'
     "}}}
     " nablaa/vim-rainbow-parenthesis {{{
         " matching parenthesis are coloured
-        Plugin 'nablaa/vim-rainbow-parenthesis'
+        Plug 'nablaa/vim-rainbow-parenthesis'
     "}}}
     " jiangmiao/auto-pairs {{{
         " insert or delete brackets, parens, quotes in pair
-        Plugin 'jiangmiao/auto-pairs'
+        Plug 'jiangmiao/auto-pairs'
     "}}}
     " scrooloose/nerdcommenter {{{
         " Vim plugin for intensely orgasmic commenting
-        Plugin 'scrooloose/nerdcommenter'
+        Plug 'scrooloose/nerdcommenter'
     "}}}
     " godlygeek/tabular {{{
         " Vim script for text filtering and alignment
-        Plugin 'godlygeek/tabular'
+        Plug 'godlygeek/tabular'
     "}}}
     " ervandew/supertab {{{
         " completion with <Tab>
-        Plugin 'ervandew/supertab'
+        Plug 'ervandew/supertab'
     "}}}
     " scrooloose/nerdtree {{{
         " Easily navigate through files, see ":h NERD_tree.txt" for help
-        "Plugin 'scrooloose/nerdtree'
+        "Plug 'scrooloose/nerdtree'
 
         "let NERDTreeShowHidden=1    " show hidden files
         "let NERDTreeHijackNetrw=1   " behave as a split explorer like netrw
@@ -145,7 +137,7 @@
     "}}}
     " scrooloose/syntastic {{{
         " Syntax checker
-        Plugin 'scrooloose/syntastic'
+        Plug 'scrooloose/syntastic'
 
         " this is the recommended configuration (see https://github.com/scrooloose/syntastic/blob/master/README.markdown#3-recommended-settings)
 
@@ -163,22 +155,22 @@
     "}}}
     " altercation/vim-colors-solarized {{{
         " Solarized colorscheme
-        Plugin 'altercation/vim-colors-solarized'
+        Plug 'altercation/vim-colors-solarized'
     "}}}
     " tpope/vim-fugitive {{{
         " Wrapper for git
-        Plugin 'tpope/vim-fugitive'
+        Plug 'tpope/vim-fugitive'
 
         " make Gdiff vertical split by default
         set diffopt+=vertical
     "}}}
     " gregsexton/MatchTag {{{
         " highlight hmtl matching tag
-        Plugin 'gregsexton/MatchTag'
+        Plug 'gregsexton/MatchTag'
     "}}}
     " bling/vim-airline {{{
         " status/tab line light as air
-        Plugin 'bling/vim-airline'
+        Plug 'bling/vim-airline'
 
         " appearence configuration
         let g:airline_powerline_fonts = 1
@@ -207,7 +199,7 @@
     "}}}
     " bling/vim-bufferline {{{
         " Show buffers in status line
-        "Plugin 'bling/vim-bufferline'
+        "Plug 'bling/vim-bufferline'
         
         "let g:bufferline_modified = '*'
         "let g:bufferline_echo = 1
@@ -218,31 +210,31 @@
     "}}}
     " Yggdroot/indentLine {{{
         " Show lines indent
-        Plugin 'Yggdroot/indentLine'
+        Plug 'Yggdroot/indentLine'
     "}}}
     " tpope/vim-surround {{{
         " Surround text with matching caracters
-        Plugin 'tpope/vim-surround'
+        Plug 'tpope/vim-surround'
     "}}}
     " kana/vim-submode {{{
         " Create submode (used for windows resizing mappings)
-        Plugin 'kana/vim-submode'
+        Plug 'kana/vim-submode'
     "}}}
     " tpope/vim-vinegar {{{
         " Improved netrw by Tim Pope
-        "Plugin 'tpope/vim-vinegar'
+        "Plug 'tpope/vim-vinegar'
     "}}}
     " vim-scripts/SearchComplete {{{
         " auto complete in search mode /
-        Plugin 'vim-scripts/SearchComplete'
+        Plug 'vim-scripts/SearchComplete'
     "}}}
     " junegunn/vim-pseudocl {{{
         "Pseudo-command-line (experimental) 
-        Plugin 'junegunn/vim-pseudocl'
+        Plug 'junegunn/vim-pseudocl'
     "}}}
     " junegunn/vim-oblique {{{
         " Improved search for Vim.
-        Plugin 'junegunn/vim-oblique'
+        Plug 'junegunn/vim-oblique'
 
         " Clear autocommand
         autocmd! User Oblique
@@ -256,7 +248,7 @@
     "}}}
     " kien/ctrlp.vim {{{
         " fuzzy finder for files, buffers and mru
-        Plugin 'kien/ctrlp.vim'
+        Plug 'kien/ctrlp.vim'
 
         " mapping to open control p
         let g:ctrlp_map = '<c-p>'
@@ -267,10 +259,7 @@
         let g:ctrlp_working_path_mode = 'ra'
     "}}}
 
-    " All of your Plugins must be added before the following line
-    call vundle#end()            " required
-    filetype plugin indent on    " required
-    filetype plugin on
+    call plug#end()
 
     " matchit {{{
         " expand matching text objects
