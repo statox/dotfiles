@@ -95,7 +95,7 @@
 
     " gmarik/Vundle.vim {{{
         " let Vundle manage Vundle, required
-        Plug 'gmarik/Vundle.vim'
+        " Plug 'gmarik/Vundle.vim'
     "}}}
     " vim-scripts/editorconfig-vim {{{
         " detects files type and has an accorded behaviour 
