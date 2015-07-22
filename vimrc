@@ -9,7 +9,7 @@
     let mapleader="\<Space>"    " remap mapleader to space
 
     " :W save file with sudo permissions
-    command W w !sudo tee % > /dev/null
+    command! W w !sudo tee % > /dev/null
 
     " Allow to change buffer even if the current one is not written
     set hidden
@@ -123,13 +123,21 @@
     "}}}
     " scrooloose/nerdtree {{{
         " Easily navigate through files, see ":h NERD_tree.txt" for help
-        "Plug 'scrooloose/nerdtree'
+        Plug 'scrooloose/nerdtree'
 
-        "let NERDTreeShowHidden=1    " show hidden files
-        "let NERDTreeHijackNetrw=1   " behave as a split explorer like netrw
-        "noremap <Leader>o :NERDTree <CR> " NERD_tree usage
-
+        let NERDTreeShowHidden=1    " show hidden files
+        let NERDTreeHijackNetrw=1   " behave as a split explorer like netrw
+        noremap - :NERDTreeToggle <CR> " NERD_tree usage
+        
         "map d<CR> <CR> :NERDTree <CR> :bd<CR>
+        autocmd BufEnter NERD_tree_* silent! nnoremap d<CR> <CR> :NERDTreeToggle <CR>
+        autocmd BufLeave NERD_tree_* silent! unmap d<CR>
+
+        " use gg to go on the line \.. (previous directory) in NERDTree explorer
+        autocmd BufEnter NERD_tree_* silent! nnoremap gg /\.\.<CR>
+        autocmd BufLeave NERD_tree_* silent! unmap gg
+        
+        
     "}}}
     " scrooloose/syntastic {{{
         " Syntax checker
@@ -253,6 +261,12 @@
         " ra= the nearest ancestor that contains one version control repo file
         " but only if the current working directory outside of CtrlP is not a direct ancestor of the directory of the current file.
         let g:ctrlp_working_path_mode = 'ra'
+
+       " open CtrlP bookmarks
+       " nnoremap <C-b> :CtrlPBookmarkDir <CR>
+        " Bookmark the current directory
+       " nnoremap <C-n><C-b> :CtrlPBookmarkDirAdd ./
+ 
     "}}}
 
     call plug#end()
@@ -283,7 +297,7 @@
         noremap k gk
     "}}}
     " Fast save and quit {{{
-        noremap <Leader>w     :w<CR> :echo "saving"<CR>
+        "noremap <Leader>w     :w<CR> :echo "saving"<CR>
         noremap <Leader>x     :x<CR>
         noremap <Leader>q     :q<CR>
     "}}}
@@ -308,6 +322,8 @@
     " Quickly escape insert mode with jj {{{
         inoremap jj <Esc>
         inoremap jk <Esc>:w<CR>
+        " Let's try it in normal mode too
+        noremap  <Leader>jk <Esc>:w<cr>:echo "saving"<CR>
     "}}}
     " Quickly insert an empty new line without entering insert mode {{{
         nnoremap <Leader>o o<Esc>0D
@@ -510,5 +526,10 @@
 
         " insert newline in normal
         "noremap <Leader><CR> i<CR><esc>
+    "}}}
+    " quickly access to commands and searches history "{{{
+        "nnoremap : q:i
+        "nnoremap / q/i
+        "nnoremap ? q?i
     "}}}
 "}}}
