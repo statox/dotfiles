@@ -323,7 +323,7 @@
         inoremap jj <Esc>
         inoremap jk <Esc>:w<CR>
         " Let's try it in normal mode too
-        noremap  <Leader>jk <Esc>:w<cr>:echo "saving"<CR>
+        nnoremap  <Leader>jk <Esc>:w<cr>:echo "saving"<CR>
     "}}}
     " Quickly insert an empty new line without entering insert mode {{{
         nnoremap <Leader>o o<Esc>0D
