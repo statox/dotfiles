@@ -16,7 +16,10 @@ set autocomplete
 set wildmode=list:longest,full
 
 " char used to open links
-set hintchars=hjkl
+set hintchars=hjklnbyu
+
+" Hide firefox navigation bar
+set gui=nonavigation,nomenu
 
 " reduce hints font size
 highlight Hint font-size: 11px;
@@ -34,6 +37,10 @@ colorscheme solarized_dark
 nmap h :tabNext<CR>
 nmap l :tabnext<CR>
 
+" move tabs with <Leader><arrow key>
+nmap <Left>  :tabmove -1 <CR>
+nmap <Right> :tabmove +1  <CR>
+
 " duplicate tab with nd
 nmap nd :tabduplicate<CR>
 
@@ -41,10 +48,10 @@ nmap nd :tabduplicate<CR>
 map nj f
 map nk F
 
-" open new tab with nh
+" open new tab with nl
 map nl :tabopen 
 
-" close tab with nl
+" close tab with nh
 map nh :tabclose<CR>
 
 " close window (and save session) with x
