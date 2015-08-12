@@ -368,6 +368,9 @@
     " move current tab to left/right
     noremap <Leader><Leader><Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
     noremap <Leader><Leader><Right> :execute 'silent! tabmove ' . tabpagenr()<CR>
+
+    "noremap <Leader><Leader><Left>  :execute 'silent! tabmove -1'<CR>
+    "noremap <Leader><Leader><Right> :execute 'silent! tabmove +1'<CR>
 "}}}
 " Manage buffers {{{
     " show buffer list and allow to type the buffer name to use with <Leader>bb
