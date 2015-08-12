@@ -127,6 +127,7 @@
 
         let NERDTreeShowHidden=1    " show hidden files
         let NERDTreeHijackNetrw=1   " behave as a split explorer like netrw
+        let NERDTreeShowBookmarks=1 " show bookmarks on opening
         noremap - :NERDTreeToggle <CR> " NERD_tree usage
         
         "map d<CR> <CR> :NERDTree <CR> :bd<CR>
