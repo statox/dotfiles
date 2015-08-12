@@ -269,9 +269,29 @@
        " nnoremap <C-n><C-b> :CtrlPBookmarkDirAdd ./
  
     "}}}
-    " nanotech/jellybeans.vim "{{{
+    " nanotech/jellybeans.vim {{{
         " Cool colorscheme
         Plug 'nanotech/jellybeans.vim'
+    "}}}
+    " haya14busa/incsearch.vim {{{
+        "incrementally highlights ALL pattern matches unlike default 'incsearch'
+        Plug 'haya14busa/incsearch.vim'
+    " }}}
+    " junegunn/goyo.vim {{{
+        " Make vim disctration less
+        Plug 'junegunn/goyo.vim'
+    "}}}
+    " statox/betterTabs.voim "{{{
+        " separate buffers under tabs
+        Plug 'statox/betterTabs.vim'
+    "}}}
+    " vim-pandoc/vim-pandoc {{{
+        " Pandonc document converter integration
+        Plug 'vim-pandoc/vim-pandoc'
+    "}}}
+    " vim-pandoc/vim-pandoc-syntax {{{
+        " Syntax file for pandoc markdown
+        Plug 'vim-pandoc/vim-pandoc-syntax'
     "}}}
 
     call plug#end()
