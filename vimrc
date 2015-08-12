@@ -465,38 +465,6 @@
         redraw
     endfunction
 "}}}
-" Make :help appear in a full-screen tab, instead of a window {{{
-    "Only apply to .txt files...
-    augroup HelpInTabs
-        autocmd!
-        autocmd BufEnter  *.txt   call HelpInNewTab()
-    augroup END
-
-    ""Only apply to help files...
-    function! HelpInNewTab ()
-        if &buftype == 'help'
-            "Convert the help window to a tab
-            "execute "normal \<C-W>T"
-            "Convert the help window to a buffer
-            execute "normal \<C-W>o"
-        endif
-    endfunction
-
-    function! s:help(subject)
-        let buftype = &buftype
-        let &buftype = 'help'
-        let v:errmsg = ''
-        let cmd = "help " . a:subject
-        silent! execute  cmd
-        if v:errmsg != ''
-            let &buftype = buftype
-            return cmd
-        else
-            call setbufvar('#', '&buftype', buftype)
-        endif
-    endfunction
-    command! -nargs=? -bar -complete=help H execute <SID>help(<q-args>)
-"}}}
 "Maximize windows of gvim {{{
     autocmd GUIEnter * simalt ~n
 
@@ -561,5 +529,37 @@
         "nnoremap : q:i
         "nnoremap / q/i
         "nnoremap ? q?i
+    "}}}
+    " Make :help appear in a full-screen tab, instead of a window {{{
+        "Only apply to .txt files...
+        "augroup HelpInTabs
+            "autocmd!
+            "autocmd BufEnter  *.txt   call HelpInNewTab()
+        "augroup END
+
+        """Only apply to help files...
+        "function! HelpInNewTab ()
+            "if &buftype == 'help'
+                ""Convert the help window to a tab
+                ""execute "normal \<C-W>T"
+                ""Convert the help window to a buffer
+                "execute "normal \<C-W>o"
+            "endif
+        "endfunction
+
+        "function! s:help(subject)
+            "let buftype = &buftype
+            "let &buftype = 'help'
+            "let v:errmsg = ''
+            "let cmd = "help " . a:subject
+            "silent! execute  cmd
+            "if v:errmsg != ''
+                "let &buftype = buftype
+                "return cmd
+            "else
+                "call setbufvar('#', '&buftype', buftype)
+            "endif
+        "endfunction
+        "command! -nargs=? -bar -complete=help H execute <SID>help(<q-args>)
     "}}}
 "}}}
