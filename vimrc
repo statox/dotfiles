@@ -436,7 +436,7 @@
     set tw=500
     set ai "Auto indent
     set si "Smart indent
-    set wrap "Wrap lines"
+    set wrap "Wrap lines
 "}}}
 " Set up smarter search behaviour {{{
     set incsearch   " Lookahead as search pattern is specified
