@@ -354,6 +354,9 @@
         nnoremap <Leader>o o<Esc>0D
         nnoremap <Leader>O O<Esc>0D
     "}}}
+    " insert newline in normal mode {{{
+        nnoremap <Leader><CR> i<CR><esc>
+    "}}}
 "}}}
 " Manage tabs {{{
     " move to new/previous tabs
@@ -548,9 +551,6 @@
 
         " % go to the matching text objects and now it also select the lines between the text objects
         "noremap % v%
-
-        " insert newline in normal
-        "noremap <Leader><CR> i<CR><esc>
     "}}}
     " quickly access to commands and searches history "{{{
         "nnoremap : q:i
