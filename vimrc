@@ -160,7 +160,7 @@
     "}}}
     " altercation/vim-colors-solarized {{{
         " Solarized colorscheme
-        Plug 'altercation/vim-colors-solarized'
+        "Plug 'altercation/vim-colors-solarized'
     "}}}
     " tpope/vim-fugitive {{{
         " Wrapper for git
@@ -268,6 +268,10 @@
         " Bookmark the current directory
        " nnoremap <C-n><C-b> :CtrlPBookmarkDirAdd ./
  
+    "}}}
+    " nanotech/jellybeans.vim "{{{
+        " Cool colorscheme
+        Plug 'nanotech/jellybeans.vim'
     "}}}
 
     call plug#end()
@@ -383,8 +387,8 @@
 " Color configuration {{{
     try
         set background=dark
-        let g:solarized_italic=0    "disable solarized italic which is messy with gvim
-        colorscheme solarized
+        "let g:solarized_italic=0    "disable solarized italic which is messy with gvim
+        colorscheme jellybeans
     catch
         echo "Colorscheme not found"
     endtry
