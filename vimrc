@@ -380,6 +380,8 @@
     noremap <Leader>h :bN<CR>
     " close a buffer with <Leader>bc
     noremap <Leader>bc :bd<CR>
+    " open buffer with <Leader><Leader>b
+    nnoremap <Leader><Leader>b :enew<CR>
 "}}}
 " Manage windows {{{
     " vertical and horizontal splits
