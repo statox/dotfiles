@@ -327,8 +327,8 @@
         noremap <Leader>q     :q<CR>
     "}}}
     " Make G gg going at the end and begin of the line {{{
-        noremap G G$
-        noremap gg gg0
+        "noremap G G$
+        "noremap gg gg0
     "}}}
     " Go to 80column {{{
         noremap <Leader><tab> 80\|
