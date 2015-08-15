@@ -3,7 +3,8 @@
 !!!   xrdb -merge ~/.Xresources
 !!! to load changes
 
-#include ".xdefaults/colors.rc"
+!#include ".xdefaults/colors.rc"
+#include ".xdefaults/colors.jellybeans.rc"
 #include ".xdefaults/xterm.rc"
 #include ".xdefaults/rxvt.rc"
 
