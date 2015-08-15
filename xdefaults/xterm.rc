@@ -1,0 +1,45 @@
+!!------------------------------------------------
+!! xterm configuration
+!!------------------------------------------------
+
+!! Here are several links I used to create my configuration:
+!! http://lukas.zapletalovi.com/2013/07/hidden-gems-of-xterm.html
+!! https://wiki.archlinux.org/index.php/Xterm
+!! https://wiki.archlinux.org/index.php/X_resources
+!! see http://web.archive.org/web/20090130061234/http://phraktured.net/terminal-colors/ for a lot of color scheme
+
+!xterm*scrollBar: true
+
+
+!! size of the font
+xterm*font:             *-fixed-medium-*-*-18-*
+
+!! default size of the window
+xterm.vt100.geometry:   200x40
+
+!! number of line possible to scroll back
+xterm*saveLines:        4096
+
+!! set visual bell
+xterm*visualBell: true
+xterm*bellIsUrgent: true
+
+!! Cursor apparence
+Xcursor.theme: gnome
+Xcursor.size:  22
+xterm*cursorBlink: false
+
+!! Copy and past to clipboard and to primary buffer
+!xterm*VT100.translations: #override <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0)
+xterm*selectToClipboard: true
+!! double-click to select whole URLs 
+!! TODO: make it work into a tmux session
+!xterm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
+
+!! random stuff to test and comment (maybe on day)
+!xterm*dynamicColors:    true
+!xterm*utf8:             2
+!xterm*eightBitInput:    true
+
+!xterm*customization: -color
+xterm*termName:  xterm-256color

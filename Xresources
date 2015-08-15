@@ -1,118 +1,161 @@
 !! This file configure X applications
-!! remember to use
-!!   xrdb -merge ~/.Xresources
-!! to load changes
+!!! remember to use
+!!!   xrdb -merge ~/.Xresources
+!!! to load changes
 
-!!------------------------------------------------
-!! XTerm configuration
-!!------------------------------------------------
+#include ".xdefaults/colors.rc"
+#include ".xdefaults/xterm.rc"
+#include ".xdefaults/rxvt.rc"
 
-!! Here are several links I used to create my configuration:
-!! http://lukas.zapletalovi.com/2013/07/hidden-gems-of-xterm.html
-!! https://wiki.archlinux.org/index.php/Xterm
-!! https://wiki.archlinux.org/index.php/X_resources
-!! see http://web.archive.org/web/20090130061234/http://phraktured.net/terminal-colors/ for a lot of color scheme
-
-!! size of the font
-XTerm*font:             *-fixed-medium-*-*-18-*
-
-!! default size of the window
-XTerm.vt100.geometry:   200x40
-
-!! number of line possible to scroll back
-XTerm*saveLines:        4096
-
-!! set visual bell
-XTerm*visualbell: true
-XTerm*bellIsUrgent: true
-
-!! Cursor apparence
-Xcursor.theme: gnome
-Xcursor.size:  22
-XTerm*cursorBlink: false
-
-!! Copy and past to clipboard and to primary buffer
-!XTerm*VT100.translations: #override <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0)
-XTerm*selectToClipboard: true
-!! double-click to select whole URLs 
-!! TODO: make it work into a tmux session
-!xterm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
-
-!! random stuff to test and comment (maybe on day)
-!XTerm*dynamicColors:    true
-!XTerm*utf8:             2
-!XTerm*eightBitInput:    true
-
-*customization: -color
-XTerm*termName:  xterm-256color
-
-
-! drop in Solarized colorscheme for Xresources/Xdefaults
-
-!!SOLARIZED     HEX     16/8    TERMCOL     XTERM/HEX   L*A*B       RGB         HSB
-!!---------     ------- ----    -------     ----------- ----------  ----------- -----------
-!!base03        #002b36 8/4     brblack     234 #1c1c1c 15 -12 -12    0  43  54 193 100 21
-!!base02        #073642 0/4     black       235 #262626 20 -12 -12    7  54  66 192  90 26
-!!base01        #586e75 10/7    brgreen     240 #585858 45 -07 -07   88 110 117 194  25 46
-!!base00        #657b83 11/7    bryellow    241 #626262 50 -07 -07  101 123 131 195  23 51
-!!base0         #839496 12/6    brblue      244 #808080 60 -06 -03  131 148 150 186  13 59
-!!base1         #93a1a1 14/4    brcyan      245 #8a8a8a 65 -05 -02  147 161 161 180   9 63
-!!base2         #eee8d5 7/7     white       254 #e4e4e4 92 -00  10  238 232 213  44  11 93
-!!base3         #fdf6e3 15/7    brwhite     230 #ffffd7 97  00  10  253 246 227  44  10 99
-!!yellow        #b58900 3/3     yellow      136 #af8700 60  10  65  181 137   0  45 100 71
-!!orange        #cb4b16 9/3     brred       166 #d75f00 50  50  55  203  75  22  18  89 80
-!!red           #dc322f 1/1     red         160 #d70000 50  65  45  220  50  47   1  79 86
-!!magenta       #d33682 5/5     magenta     125 #af005f 50  65 -05  211  54 130 331  74 83
-!!violet        #6c71c4 13/5    brmagenta    61 #5f5faf 50  15 -45  108 113 196 237  45 77
-!!blue          #268bd2 4/4     blue         33 #0087ff 55 -10 -45   38 139 210 205  82  82
-!!cyan          #2aa198 6/6     cyan         37 #00afaf 60 -35 -05   42 161 152 175  74  63
-!!green         #859900 2/2     green        64 #5f8700 60 -20  65  133 153   0  68 100  60
-
-#define S_base03 #002b36
-#define S_base02 #073642
-#define S_base01 #586e75
-#define S_base00 #657b83
-#define S_base0 #839496
-#define S_base1 #93a1a1
-#define S_base2 #eee8d5
-#define S_base3 #fdf6e3
-#define S_yellow #b58900
-#define S_orange #cb4b16
-#define S_red #dc322f
-#define S_magenta #d33682
-#define S_violet #6c71c4
-#define S_blue #268bd2
-#define S_cyan #2aa198
-#define S_green #859900
-XTerm*background: S_base03
-XTerm*foreground: S_base00
-XTerm*fading: 40
-XTerm*fadeColor: S_base03
-XTerm*cursorColor: S_base1
-XTerm*pointerColorBackground:S_base01
-XTerm*pointerColorForeground:S_base1
-!! black dark/light
-XTerm*color0: S_base02
-XTerm*color8: S_base03
-!! red dark/light
-XTerm*color1: S_red
-XTerm*color9: S_orange
-!! green dark/light
-XTerm*color2: S_green
-XTerm*color10: S_base01
-!! yellow dark/light
-XTerm*color3: S_yellow
-XTerm*color11: S_base00
-!! blue dark/light
-XTerm*color4: S_blue
-XTerm*color12: S_base0
-!! magenta dark/light
-XTerm*color5: S_magenta
-XTerm*color13: S_violet
-!! cyan dark/light
-XTerm*color6: S_cyan
-XTerm*color14: S_base1
-!! white dark/light
-XTerm*color7: S_base2
-XTerm*color15: S_base3
+!!! This file configure X applications
+!!! remember to use
+!!!   xrdb -merge ~/.Xresources
+!!! to load changes
+!
+!!!------------------------------------------------
+!!! xterm configuration
+!!!------------------------------------------------
+!
+!!! Here are several links I used to create my configuration:
+!!! http://lukas.zapletalovi.com/2013/07/hidden-gems-of-xterm.html
+!!! https://wiki.archlinux.org/index.php/Xterm
+!!! https://wiki.archlinux.org/index.php/X_resources
+!!! see http://web.archive.org/web/20090130061234/http://phraktured.net/terminal-colors/ for a lot of color scheme
+!
+!!! size of the font
+!xterm*font:             *-fixed-medium-*-*-18-*
+!
+!!! default size of the window
+!xterm.vt100.geometry:   200x40
+!
+!!! number of line possible to scroll back
+!xterm*saveLines:        4096
+!
+!!! set visual bell
+!xterm*visualBell: true
+!xterm*bellIsUrgent: true
+!
+!!! Cursor apparence
+!Xcursor.theme: gnome
+!Xcursor.size:  22
+!xterm*cursorBlink: false
+!
+!!! Copy and past to clipboard and to primary buffer
+!!xterm*VT100.translations: #override <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0)
+!xterm*selectToClipboard: true
+!!! double-click to select whole URLs 
+!!! TODO: make it work into a tmux session
+!!xterm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
+!
+!!! random stuff to test and comment (maybe on day)
+!!xterm*dynamicColors:    true
+!!xterm*utf8:             2
+!!xterm*eightBitInput:    true
+!
+!!xterm*customization: -color
+!xterm*termName:  xterm-256color
+!
+!
+!! drop in Solarized colorscheme for Xresources/Xdefaults
+!
+!!!SOLARIZED     HEX     16/8    TERMCOL     XTERM/HEX   L*A*B       RGB         HSB
+!!!---------     ------- ----    -------     ----------- ----------  ----------- -----------
+!!!base03        #002b36 8/4     brblack     234 #1c1c1c 15 -12 -12    0  43  54 193 100 21
+!!!base02        #073642 0/4     black       235 #262626 20 -12 -12    7  54  66 192  90 26
+!!!base01        #586e75 10/7    brgreen     240 #585858 45 -07 -07   88 110 117 194  25 46
+!!!base00        #657b83 11/7    bryellow    241 #626262 50 -07 -07  101 123 131 195  23 51
+!!!base0         #839496 12/6    brblue      244 #808080 60 -06 -03  131 148 150 186  13 59
+!!!base1         #93a1a1 14/4    brcyan      245 #8a8a8a 65 -05 -02  147 161 161 180   9 63
+!!!base2         #eee8d5 7/7     white       254 #e4e4e4 92 -00  10  238 232 213  44  11 93
+!!!base3         #fdf6e3 15/7    brwhite     230 #ffffd7 97  00  10  253 246 227  44  10 99
+!!!yellow        #b58900 3/3     yellow      136 #af8700 60  10  65  181 137   0  45 100 71
+!!!orange        #cb4b16 9/3     brred       166 #d75f00 50  50  55  203  75  22  18  89 80
+!!!red           #dc322f 1/1     red         160 #d70000 50  65  45  220  50  47   1  79 86
+!!!magenta       #d33682 5/5     magenta     125 #af005f 50  65 -05  211  54 130 331  74 83
+!!!violet        #6c71c4 13/5    brmagenta    61 #5f5faf 50  15 -45  108 113 196 237  45 77
+!!!blue          #268bd2 4/4     blue         33 #0087ff 55 -10 -45   38 139 210 205  82  82
+!!!cyan          #2aa198 6/6     cyan         37 #00afaf 60 -35 -05   42 161 152 175  74  63
+!!!green         #859900 2/2     green        64 #5f8700 60 -20  65  133 153   0  68 100  60
+!
+!#define S_base03 #002b36
+!#define S_base02 #073642
+!#define S_base01 #586e75
+!#define S_base00 #657b83
+!#define S_base0 #839496
+!#define S_base1 #93a1a1
+!#define S_base2 #eee8d5
+!#define S_base3 #fdf6e3
+!#define S_yellow #b58900
+!#define S_orange #cb4b16
+!#define S_red #dc322f
+!#define S_magenta #d33682
+!#define S_violet #6c71c4
+!#define S_blue #268bd2
+!#define S_cyan #2aa198
+!#define S_green #859900
+!xterm*background: S_base03
+!xterm*foreground: S_base00
+!xterm*fading: 40
+!xterm*fadeColor: S_base03
+!xterm*cursorColor: S_base1
+!xterm*pointerColorBackground:S_base01
+!xterm*pointerColorForeground:S_base1
+!!! black dark/light
+!xterm*color0: S_base02
+!xterm*color8: S_base03
+!!! red dark/light
+!xterm*color1: S_red
+!xterm*color9: S_orange
+!!! green dark/light
+!xterm*color2: S_green
+!xterm*color10: S_base01
+!!! yellow dark/light
+!xterm*color3: S_yellow
+!xterm*color11: S_base00
+!!! blue dark/light
+!xterm*color4: S_blue
+!xterm*color12: S_base0
+!!! magenta dark/light
+!xterm*color5: S_magenta
+!xterm*color13: S_violet
+!!! cyan dark/light
+!xterm*color6: S_cyan
+!xterm*color14: S_base1
+!!! white dark/light
+!xterm*color7: S_base2
+!xterm*color15: S_base3
+!
+!
+!
+!rxvt*background: S_base03
+!rxvt*foreground: S_base00
+!rxvt*fading: 40
+!rxvt*fadeColor: S_base03
+!rxvt*cursorColor: S_base1
+!rxvt*pointerColorBackground:S_base01
+!rxvt*pointerColorForeground:S_base1
+!!! black dark/light
+!rxvt*color0: S_base02
+!rxvt*color8: S_base03
+!!! red dark/light
+!rxvt*color1: S_red
+!rxvt*color9: S_orange
+!!! green dark/light
+!rxvt*color2: S_green
+!rxvt*color10: S_base01
+!!! yellow dark/light
+!rxvt*color3: S_yellow
+!rxvt*color11: S_base00
+!!! blue dark/light
+!rxvt*color4: S_blue
+!rxvt*color12: S_base0
+!!! magenta dark/light
+!rxvt*color5: S_magenta
+!rxvt*color13: S_violet
+!!! cyan dark/light
+!rxvt*color6: S_cyan
+!rxvt*color14: S_base1
+!!! white dark/light
+!rxvt*color7: S_base2
+!rxvt*color15: S_base3
 
