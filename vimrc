@@ -509,6 +509,19 @@
     set guioptions-=r  "remove right-hand scroll bar
     set guioptions-=L  "remove left-hand scroll bar
 "}}}
+" Source a local vimrc {{{
+    if has('win32')
+        let $MYLOCALVIMRC = $HOME . "/_local.vim"
+    else
+        let $MYLOCALVIMRC = $HOME . "/.local.vim"
+    endif
+
+    if filereadable($MYLOCALVIMRC)
+        source $MYLOCALVIMRC
+    else
+        echom "local vimrc does not exists"
+    endif
+" }}} 
 " Misc. not used anymore or to improve {{{
     " Spelling {{{
         "" /!\ Do not forget to get the dictionnaries files in ~/.vim/spell
