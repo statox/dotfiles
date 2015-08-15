@@ -287,7 +287,9 @@
     "}}}
     " vim-pandoc/vim-pandoc {{{
         " Pandonc document converter integration
-        Plug 'vim-pandoc/vim-pandoc'
+        if version >= 704
+            Plug 'vim-pandoc/vim-pandoc'
+        endif
     "}}}
     " vim-pandoc/vim-pandoc-syntax {{{
         " Syntax file for pandoc markdown
