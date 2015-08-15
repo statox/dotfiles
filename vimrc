@@ -389,9 +389,6 @@
 
         nnoremap <silent> h :call MyHMotion()<CR>
         nnoremap <silent> l :call MyLMotion()<CR>
-        vnoremap <silent> h :call MyHMotion()<CR>
-        vnoremap <silent> l :call MyLMotion()<CR>
-
     "}}}
 "}}}
 " Manage tabs {{{
