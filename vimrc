@@ -522,6 +522,10 @@
         echom "local vimrc does not exists"
     endif
 " }}} 
+" Rename TMUX tab vim name of edited file {{{
+    autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window 'vim | " . expand("%:t") . "'")
+" }}}
+
 " Misc. not used anymore or to improve {{{
     " Spelling {{{
         "" /!\ Do not forget to get the dictionnaries files in ~/.vim/spell
