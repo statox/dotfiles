@@ -522,6 +522,27 @@
 " Rename TMUX tab vim name of edited file {{{
     autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window 'vim | " . expand("%:t") . "'")
 " }}}
+" Get a link to the online page of an help tag {{{
+    function! GetOnlineDoc(string)
+
+        " Go to specified help tag locally
+        execute "h " . a:string
+
+        " Get the help filename without the ".txt" extension
+        let filename = expand("%:t:r")
+
+        " Create the link
+        let link = "http://vimdoc.sourceforge.net/htmldoc/" . filename . ".html#" . a:string
+
+        " Put it in the clipboard register
+        let @* = link
+
+        " Optional, close the opened help file
+        "execute "bd"
+    endfunction
+
+    command! -nargs=1 -complete=help GOD call GetOnlineDoc(<f-args>)
+"}}}
 
 " Misc. not used anymore or to improve {{{
     " Spelling {{{
