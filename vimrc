@@ -391,6 +391,12 @@
         nnoremap <silent> l :call MyLMotion()<CR>
     "}}}
 "}}}
+" Abbreviations {{{
+    " Open help vertically with H or HR {{{
+        cnoreabbrev H vert h
+        cnoreabbrev HR vert bo h
+    "}}}
+"}}}
 " Manage tabs {{{
     " move to new/previous tabs
     noremap <Leader><Leader>l  :tabn<CR>
@@ -634,3 +640,4 @@
         "command! -nargs=? -bar -complete=help H execute <SID>help(<q-args>)
     "}}}
 "}}}
+
