@@ -541,7 +541,11 @@
         let link = "http://vimdoc.sourceforge.net/htmldoc/" . filename . ".html#" . a:string
 
         " Put it in the clipboard register
-        let @* = link
+        if has('win32')
+            let @* = link
+        else
+            let @+ = link
+        endif
 
         " Optional, close the opened help file
         "execute "bd"
