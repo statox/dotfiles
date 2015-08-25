@@ -295,6 +295,10 @@
         " Syntax file for pandoc markdown
         Plug 'vim-pandoc/vim-pandoc-syntax'
     "}}}
+    " tpope/vim-scriptease {{{
+        " A plugin to create plugins
+        Plug 'tpope/vim-scriptease'
+    "}}}
 
     call plug#end()
 
@@ -526,7 +530,7 @@
     endif
 " }}} 
 " Rename TMUX tab vim name of edited file {{{
-    autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window 'vim | " . expand("%:t") . "'")
+    autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window '" . expand("%:t") . "'")
 " }}}
 " Get a link to the online page of an help tag {{{
     function! GetOnlineDoc(string)
@@ -644,4 +648,3 @@
         "command! -nargs=? -bar -complete=help H execute <SID>help(<q-args>)
     "}}}
 "}}}
-
