@@ -394,6 +394,9 @@
         nnoremap <silent> h :call MyHMotion()<CR>
         nnoremap <silent> l :call MyLMotion()<CR>
     "}}}
+    " Use T in visual mode to start Tabular function
+        vnoremap T :Tabular / 
+    "}}}
 "}}}
 " Abbreviations {{{
     " Open help vertically with H or HR {{{
