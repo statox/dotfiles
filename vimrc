@@ -394,7 +394,7 @@
         nnoremap <silent> h :call MyHMotion()<CR>
         nnoremap <silent> l :call MyLMotion()<CR>
     "}}}
-    " Use T in visual mode to start Tabular function
+    " Use T in visual mode to start Tabular function {{{
         vnoremap T :Tabular / 
     "}}}
 "}}}
