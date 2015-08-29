@@ -377,6 +377,9 @@
     " Use T in visual mode to start Tabular function {{{
         vnoremap T :Tabular / 
     "}}}
+    " Use gp to select last pasted text {{{
+        nnoremap gp '[v']
+    "}}}
 "}}}
 " Abbreviations {{{
     " Open help vertically with H or HR {{{
