@@ -200,7 +200,7 @@
                     "\ .bufferline#get_status_string()
     "}}}
     " Yggdroot/indentLine: Show lines indent{{{
-        Plug 'Yggdroot/indentLine'
+        "Plug 'Yggdroot/indentLine'
     "}}}
     " tpope/vim-surround: Surround text with matching caracters{{{
         Plug 'tpope/vim-surround'
