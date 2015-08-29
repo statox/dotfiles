@@ -270,6 +270,17 @@
     " tpope/vim-scriptease: A plugin to create plugins{{{
         Plug 'tpope/vim-scriptease'
     "}}}
+    " Snippets pluggins: Group dependencies, vim-snippets depends on ultisnips{{{
+        if has('python')
+            Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'    
+
+            " Trigger snippets with the keys next to "1" on azerty keyboards
+            let g:UltiSnipsExpandTrigger="œ"
+            let g:UltiSnipsListSnippets="<c-œ>"
+            let g:UltiSnipsJumpForwardTrigger="<c-b>"
+            let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+        endif
+    "}}}
 
     call plug#end()
 
