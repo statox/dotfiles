@@ -93,36 +93,28 @@
     " curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     call plug#begin('~/.vim/plugged')
 
-    " gmarik/Vundle.vim {{{
-        " let Vundle manage Vundle, required
+    " gmarik/Vundle.vim: let Vundle manage Vundle, required{{{
         " Plug 'gmarik/Vundle.vim'
     "}}}
-    " vim-scripts/editorconfig-vim {{{
-        " detects files type and has an accorded behaviour 
-        "Plug 'vim-scripts/editorconfig-vim'
+    " vim-scripts/editorconfig-vim: detects files type and has an accorded behaviour {{{
+        Plug 'vim-scripts/editorconfig-vim'
     "}}}
-    " nablaa/vim-rainbow-parenthesis {{{
-        " matching parenthesis are coloured
+    " nablaa/vim-rainbow-parenthesis: matching parenthesis are coloured{{{
         Plug 'nablaa/vim-rainbow-parenthesis'
     "}}}
-    " jiangmiao/auto-pairs {{{
-        " insert or delete brackets, parens, quotes in pair
+    " jiangmiao/auto-pairs: insert or delete brackets, parens, quotes in pair{{{
         Plug 'jiangmiao/auto-pairs'
     "}}}
-    " scrooloose/nerdcommenter {{{
-        " Vim plugin for intensely orgasmic commenting
+    " scrooloose/nerdcommenter: Vim plugin for intensely orgasmic commenting{{{
         Plug 'scrooloose/nerdcommenter'
     "}}}
-    " godlygeek/tabular {{{
-        " Vim script for text filtering and alignment
+    " godlygeek/tabular: Vim script for text filtering and alignment{{{
         Plug 'godlygeek/tabular'
     "}}}
-    " ervandew/supertab {{{
-        " completion with <Tab>
+    " ervandew/supertab: completion with <Tab>{{{
         Plug 'ervandew/supertab'
     "}}}
-    " scrooloose/nerdtree {{{
-        " Easily navigate through files, see ":h NERD_tree.txt" for help
+    " scrooloose/nerdtree " Easily navigate through files, see ":h NERD_tree.tx: for help{{{
         Plug 'scrooloose/nerdtree'
 
         let NERDTreeShowHidden=1    " show hidden files
@@ -140,8 +132,7 @@
         
         
     "}}}
-    " scrooloose/syntastic {{{
-        " Syntax checker
+    " scrooloose/syntastic: Syntax checker{{{
         Plug 'scrooloose/syntastic'
 
         " this is the recommended configuration (see https://github.com/scrooloose/syntastic/blob/master/README.markdown#3-recommended-settings)
@@ -158,23 +149,19 @@
         let g:syntastic_check_on_open            = 1
         let g:syntastic_check_on_wq              = 0
     "}}}
-    " altercation/vim-colors-solarized {{{
-        " Solarized colorscheme
+    " altercation/vim-colors-solarized: Solarized colorscheme{{{
         "Plug 'altercation/vim-colors-solarized'
     "}}}
-    " tpope/vim-fugitive {{{
-        " Wrapper for git
+    " tpope/vim-fugitive: Wrapper for git{{{
         Plug 'tpope/vim-fugitive'
 
         " make Gdiff vertical split by default
         set diffopt+=vertical
     "}}}
-    " gregsexton/MatchTag {{{
-        " highlight hmtl matching tag
+    " gregsexton/MatchTag: highlight hmtl matching tag{{{
         Plug 'gregsexton/MatchTag'
     "}}}
-    " bling/vim-airline {{{
-        " status/tab line light as air
+    " bling/vim-airline: status/tab line light as air{{{
         Plug 'bling/vim-airline'
 
         " appearence configuration
@@ -202,8 +189,7 @@
         "let g:airline_readonly_symbol   = ''
         "let g:airline_linecolumn_prefix = ''
     "}}}
-    " bling/vim-bufferline {{{
-        " Show buffers in status line
+    " bling/vim-bufferline: Show buffers in status line{{{
         "Plug 'bling/vim-bufferline'
         
         "let g:bufferline_modified = '*'
@@ -213,32 +199,25 @@
                     "\ let &statusline='%{bufferline#refresh_status()}'
                     "\ .bufferline#get_status_string()
     "}}}
-    " Yggdroot/indentLine {{{
-        " Show lines indent
+    " Yggdroot/indentLine: Show lines indent{{{
         Plug 'Yggdroot/indentLine'
     "}}}
-    " tpope/vim-surround {{{
-        " Surround text with matching caracters
+    " tpope/vim-surround: Surround text with matching caracters{{{
         Plug 'tpope/vim-surround'
     "}}}
-    " kana/vim-submode {{{
-        " Create submode (used for windows resizing mappings)
+    " kana/vim-submode: Create submode (used for windows resizing mappings){{{
         Plug 'kana/vim-submode'
     "}}}
-    " tpope/vim-vinegar {{{
-        " Improved netrw by Tim Pope
+    " tpope/vim-vinegar: Improved netrw by Tim Pope{{{
         "Plug 'tpope/vim-vinegar'
     "}}}
-    " vim-scripts/SearchComplete {{{
-        " auto complete in search mode /
+    " vim-scripts/SearchComplete: auto complete in search mode /{{{
         Plug 'vim-scripts/SearchComplete'
     "}}}
-    " junegunn/vim-pseudocl {{{
-        "Pseudo-command-line (experimental) 
+    " junegunn/vim-pseudocl:Pseudo-command-line (experimental) {{{
         Plug 'junegunn/vim-pseudocl'
     "}}}
-    " junegunn/vim-oblique {{{
-        " Improved search for Vim.
+    " junegunn/vim-oblique: Improved search for Vim.{{{
         Plug 'junegunn/vim-oblique'
 
         " Clear autocommand
@@ -251,17 +230,16 @@
         autocmd User ObliqueStar   normal! zz
         autocmd User ObliqueRepeat normal! zz
     "}}}
-    " kien/ctrlp.vim {{{
-        " fuzzy finder for files, buffers and mru
-        Plug 'kien/ctrlp.vim'
+    " kien/ctrlp.vim: fuzzy finder for files, buffers and mru{{{
+        "Plug 'kien/ctrlp.vim'
 
         " mapping to open control p
-        let g:ctrlp_map = '<c-p>'
-        let g:ctrlp_cmd = 'CtrlP'
+        "let g:ctrlp_map = '<c-p>'
+        "let g:ctrlp_cmd = 'CtrlP'
 
         " ra= the nearest ancestor that contains one version control repo file
         " but only if the current working directory outside of CtrlP is not a direct ancestor of the directory of the current file.
-        let g:ctrlp_working_path_mode = 'ra'
+        "let g:ctrlp_working_path_mode = 'ra'
 
        " open CtrlP bookmarks
        " nnoremap <C-b> :CtrlPBookmarkDir <CR>
@@ -269,45 +247,36 @@
        " nnoremap <C-n><C-b> :CtrlPBookmarkDirAdd ./
  
     "}}}
-    " nanotech/jellybeans.vim {{{
-        " Cool colorscheme
+    " nanotech/jellybeans.vim: Cool colorscheme{{{
         Plug 'nanotech/jellybeans.vim'
     "}}}
-    " haya14busa/incsearch.vim {{{
-        "incrementally highlights ALL pattern matches unlike default 'incsearch'
+    " haya14busa/incsearch.vim:incrementally highlights ALL pattern matches unlike default 'incsearch'{{{
         Plug 'haya14busa/incsearch.vim'
     " }}}
-    " junegunn/goyo.vim {{{
-        " Make vim disctration less
+    " junegunn/goyo.vim: Make vim disctration less{{{
         Plug 'junegunn/goyo.vim'
     "}}}
-    " statox/betterTabs.voim "{{{
-        " separate buffers under tabs
+    " statox/betterTabs.voim : separate buffers under tabs{{{
         Plug 'statox/betterTabs.vim'
     "}}}
-    " vim-pandoc/vim-pandoc {{{
-        " Pandonc document converter integration
+    " vim-pandoc/vim-pandoc: Pandonc document converter integration{{{
         if version >= 704
             Plug 'vim-pandoc/vim-pandoc'
         endif
     "}}}
-    " vim-pandoc/vim-pandoc-syntax {{{
-        " Syntax file for pandoc markdown
+    " vim-pandoc/vim-pandoc-syntax: Syntax file for pandoc markdown{{{
         Plug 'vim-pandoc/vim-pandoc-syntax'
     "}}}
-    " tpope/vim-scriptease {{{
-        " A plugin to create plugins
+    " tpope/vim-scriptease: A plugin to create plugins{{{
         Plug 'tpope/vim-scriptease'
     "}}}
 
     call plug#end()
 
-    " matchit {{{
-        " expand matching text objects
+    " matchit: expand matching text objects{{{
         runtime macros/matchit.vim
     "}}}
-    " netrw {{{
-        " The builtin file explorer
+    " netrw: The builtin file explorer{{{
 
         "use tree view
         "let g:netrw_liststyle=3 " Bad idea thats actually pretty bugged
