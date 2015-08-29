@@ -304,8 +304,8 @@
         inoremap <C-Y> <C-O>p
     "}}}
     " When a line is longer than the screen j and k behave like its different lines {{{
-        noremap j gj
-        noremap k gk
+        nnoremap j gj
+        nnoremap k gk
     "}}}
     " Fast save and quit {{{
         "noremap <Leader>w     :w<CR> :echo "saving"<CR>
