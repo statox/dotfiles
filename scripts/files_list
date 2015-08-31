@@ -5,6 +5,7 @@ bash_aliases
 bash_logout
 bashrc
 dircolors
+gitignore_global
 motd
 tmux.conf
 vimperatorrc
