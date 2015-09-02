@@ -423,17 +423,21 @@
     "noremap <Leader>l <C-w>l
     " close a window with <Leader>wc
     noremap <Leader>wc <C-w>c
-
-    " resize wuindows with <Leader>arow key
-    " submodes are used to repeat the mapping without hitting the key several times
-    call submode#enter_with('grow/shrink', 'n', '', '<leader><UP>', '<C-w>+')
-    call submode#enter_with('grow/shrink', 'n', '', '<leader><DOWN>', '<C-w>-')
-    call submode#enter_with('grow/shrink', 'n', '', '<leader><LEFT>', '<C-w><')
-    call submode#enter_with('grow/shrink', 'n', '', '<leader><RIGHT>', '<C-w>>')
-    call submode#map('grow/shrink', 'n', '', '<DOWN>', '<C-w>-')
-    call submode#map('grow/shrink', 'n', '', '<UP>', '<C-w>+')
-    call submode#map('grow/shrink', 'n', '', '<LEFT>', '<C-w><')
-    call submode#map('grow/shrink', 'n', '', '<RIGHT>', '<C-w>>')
+ 
+    " Create a submode to handle windows
+    " The submode is entered whith <C-S-w>
+    call submode#enter_with('WindowsMode', 'n', '', '<C-S-w>', ':echo "windows mode"<CR>')
+    " Resize windows with hjkl
+    call submode#map('WindowsMode', 'n', '', 'j', '<C-w>-')
+    call submode#map('WindowsMode', 'n', '', 'k', '<C-w>+')
+    call submode#map('WindowsMode', 'n', '', 'h', '<C-w><')
+    call submode#map('WindowsMode', 'n', '', 'l', '<C-w>>')
+    " Move windows with <Leader>hjkl
+    call submode#map('WindowsMode', 'n', '', '<Leader>j', '<C-w>J')
+    call submode#map('WindowsMode', 'n', '', '<Leader>k', '<C-w>K')
+    call submode#map('WindowsMode', 'n', '', '<Leader>h', '<C-w>H')
+    call submode#map('WindowsMode', 'n', '', '<Leader>l', '<C-w>L')
+ 
     let g:submode_keep_leaving_key = 1
     let g:submode_timeout = 0
 "}}}
@@ -543,7 +547,6 @@
 
     command! -nargs=1 -complete=help GOD call GetOnlineDoc(<f-args>)
 "}}}
-
 " Misc. not used anymore or to improve {{{
     " Spelling {{{
         "" /!\ Do not forget to get the dictionnaries files in ~/.vim/spell
