@@ -383,8 +383,8 @@
 "}}}
 " Abbreviations {{{
     " Open help vertically with H or HR {{{
-        cnoreabbrev H vert h
-        cnoreabbrev HR vert bo h
+        cnoreabbrev HL vert h
+        cnoreabbrev H vert bo h
     "}}}
 "}}}
 " Manage tabs {{{
