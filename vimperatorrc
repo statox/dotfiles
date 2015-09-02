@@ -26,9 +26,9 @@ highlight Hint font-size: 11px;
 "------------------------------------------------------------
 " Colorscheme
 " remember to copy colorscheme file in ~/.vimperator/color/
-"   https://github.com/vimpr/vimperator-colors/raw/master/solarized_dark.vimp
+"   https://github.com/vimpr/vimperator-colors
 
-colorscheme solarized_dark
+colorscheme indigo-fx3
 
 "------------------------------------------------------------
 " Mappings
