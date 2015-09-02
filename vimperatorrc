@@ -58,7 +58,7 @@ map nh :tabclose<CR>
 nmap x ZZ
 
 " open private navigation window with pw
-nmap pw i<C-S-p>
+nmap pw :window -private open https://www.duckduckgo.com<CR>
 
 " override <C-a> to select all
 inoremap <C-a> <C-Home><C-S-End>
