@@ -413,30 +413,30 @@
     nnoremap <Leader><Leader>b :enew<CR>
 "}}}
 " Manage windows {{{
-    " vertical and horizontal splits
-    noremap <Leader>! <C-w>v
-    noremap <Leader>/ <C-w>s
-    " move between windows
-    "noremap <Leader>h <C-w>h
-    noremap <Leader>j <C-w>w
-    noremap <Leader>k <C-w>W
-    "noremap <Leader>l <C-w>l
-    " close a window with <Leader>wc
-    noremap <Leader>wc <C-w>c
- 
     " Create a submode to handle windows
-    " The submode is entered whith <C-S-w>
-    call submode#enter_with('WindowsMode', 'n', '', '<C-S-w>', ':echo "windows mode"<CR>')
-    " Resize windows with hjkl
-    call submode#map('WindowsMode', 'n', '', 'j', '<C-w>-')
-    call submode#map('WindowsMode', 'n', '', 'k', '<C-w>+')
-    call submode#map('WindowsMode', 'n', '', 'h', '<C-w><')
-    call submode#map('WindowsMode', 'n', '', 'l', '<C-w>>')
-    " Move windows with <Leader>hjkl
-    call submode#map('WindowsMode', 'n', '', '<Leader>j', '<C-w>J')
-    call submode#map('WindowsMode', 'n', '', '<Leader>k', '<C-w>K')
-    call submode#map('WindowsMode', 'n', '', '<Leader>h', '<C-w>H')
-    call submode#map('WindowsMode', 'n', '', '<Leader>l', '<C-w>L')
+    " The submode is entered whith <Leader>k and exited with <Leader>
+    call submode#enter_with('WindowsMode', 'n', '', '<Leader>k', ':echo "windows mode"<CR>')
+    call submode#leave_with('WindowsMode', 'n', '', '<Leader>')
+    " Change of windows with hjkl
+    call submode#map('WindowsMode', 'n', '', 'j', '<C-w>j')
+    call submode#map('WindowsMode', 'n', '', 'k', '<C-w>k')
+    call submode#map('WindowsMode', 'n', '', 'h', '<C-w>h')
+    call submode#map('WindowsMode', 'n', '', 'l', '<C-w>l')
+    " Resize windows with <C-hjkl>
+    call submode#map('WindowsMode', 'n', '', '<C-j>', '<C-w>-')
+    call submode#map('WindowsMode', 'n', '', '<C-k>', '<C-w>+')
+    call submode#map('WindowsMode', 'n', '', '<C-h>', '<C-w><')
+    call submode#map('WindowsMode', 'n', '', '<C-l>', '<C-w>>')
+    " Move windows with <S-hjkl>
+    call submode#map('WindowsMode', 'n', '', '<S-j>', '<C-w>J')
+    call submode#map('WindowsMode', 'n', '', '<S-k>', '<C-w>K')
+    call submode#map('WindowsMode', 'n', '', '<S-h>', '<C-w>H')
+    call submode#map('WindowsMode', 'n', '', '<S-l>', '<C-w>L')
+    " close a window with c
+    call submode#map('WindowsMode', 'n', '', 'c', '<C-w>c')
+    " split windows with / and !
+    call submode#map('WindowsMode', 'n', '', '/', '<C-w>s')
+    call submode#map('WindowsMode', 'n', '', '!', '<C-w>v')
  
     let g:submode_keep_leaving_key = 1
     let g:submode_timeout = 0
