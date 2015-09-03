@@ -479,7 +479,6 @@
                     " use <C-L> to temporarily turn off highlighting
 
     highlight clear Search
-    highlight       Search ctermbg=Yellow
 
     " This rewires n and N to do the highlighing...
     nnoremap <silent> n   n:call HLNext(0.1)<cr>
