@@ -432,8 +432,8 @@
     call submode#map('WindowsMode', 'n', '', '<S-k>', '<C-w>K')
     call submode#map('WindowsMode', 'n', '', '<S-h>', '<C-w>H')
     call submode#map('WindowsMode', 'n', '', '<S-l>', '<C-w>L')
-    " close a window with c
-    call submode#map('WindowsMode', 'n', '', 'c', '<C-w>c')
+    " close a window with q
+    call submode#map('WindowsMode', 'n', '', 'q', '<C-w>c')
     " split windows with / and !
     call submode#map('WindowsMode', 'n', '', '/', '<C-w>s')
     call submode#map('WindowsMode', 'n', '', '!', '<C-w>v')
