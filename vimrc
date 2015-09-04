@@ -149,17 +149,11 @@
         let g:syntastic_check_on_open            = 1
         let g:syntastic_check_on_wq              = 0
     "}}}
-    " altercation/vim-colors-solarized: Solarized colorscheme{{{
-        "Plug 'altercation/vim-colors-solarized'
-    "}}}
     " tpope/vim-fugitive: Wrapper for git{{{
         Plug 'tpope/vim-fugitive'
 
         " make Gdiff vertical split by default
         set diffopt+=vertical
-    "}}}
-    " gregsexton/MatchTag: highlight hmtl matching tag{{{
-        Plug 'gregsexton/MatchTag'
     "}}}
     " bling/vim-airline: status/tab line light as air{{{
         Plug 'bling/vim-airline'
@@ -189,30 +183,11 @@
         "let g:airline_readonly_symbol   = ''
         "let g:airline_linecolumn_prefix = ''
     "}}}
-    " bling/vim-bufferline: Show buffers in status line{{{
-        "Plug 'bling/vim-bufferline'
-        
-        "let g:bufferline_modified = '*'
-        "let g:bufferline_echo = 1
-
-        "autocmd VimEnter *
-                    "\ let &statusline='%{bufferline#refresh_status()}'
-                    "\ .bufferline#get_status_string()
-    "}}}
-    " Yggdroot/indentLine: Show lines indent{{{
-        "Plug 'Yggdroot/indentLine'
-    "}}}
     " tpope/vim-surround: Surround text with matching caracters{{{
         Plug 'tpope/vim-surround'
     "}}}
     " kana/vim-submode: Create submode (used for windows resizing mappings){{{
         Plug 'kana/vim-submode'
-    "}}}
-    " tpope/vim-vinegar: Improved netrw by Tim Pope{{{
-        "Plug 'tpope/vim-vinegar'
-    "}}}
-    " vim-scripts/SearchComplete: auto complete in search mode /{{{
-        Plug 'vim-scripts/SearchComplete'
     "}}}
     " junegunn/vim-pseudocl:Pseudo-command-line (experimental) {{{
         Plug 'junegunn/vim-pseudocl'
