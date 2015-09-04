@@ -86,6 +86,9 @@
 
     " automatically reload file when its modified outside vim 
     set autoread
+
+    " Allows vim to record more lines in history
+    set history=500
 "}}}
 " Plugins {{{
     " Manage plugins with vim-plug (https://github.com/junegunn/vim-plug)
