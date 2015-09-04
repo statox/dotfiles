@@ -301,9 +301,16 @@
         nnoremap <Leader>r :nnoremap <lt>Leader>t 
     "}}}
     " Easier clipboard access {{{
-        nnoremap <Leader>y "*y
-        nnoremap <Leader>p "*p
-        nnoremap <Leader>P "*P
+        if has('win32')
+            vnoremap <Leader>y "*y
+            nnoremap <Leader>p "*p
+            nnoremap <Leader><S-p> "*P
+        else
+            vnoremap <Leader>y "+y
+            nnoremap <Leader>p "+p
+            nnoremap <Leader><S-p> "+P
+
+        endif
     "}}}
     " Quickly escape insert mode with jj {{{
         inoremap jj <Esc>
