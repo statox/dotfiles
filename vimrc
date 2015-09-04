@@ -397,16 +397,16 @@
     call submode#map('WindowsMode', 'n', '', 'k', '<C-w>k')
     call submode#map('WindowsMode', 'n', '', 'h', '<C-w>h')
     call submode#map('WindowsMode', 'n', '', 'l', '<C-w>l')
-    " Resize windows with <C-hjkl>
-    call submode#map('WindowsMode', 'n', '', '<C-j>', '<C-w>-')
-    call submode#map('WindowsMode', 'n', '', '<C-k>', '<C-w>+')
-    call submode#map('WindowsMode', 'n', '', '<C-h>', '<C-w><')
-    call submode#map('WindowsMode', 'n', '', '<C-l>', '<C-w>>')
-    " Move windows with <S-hjkl>
-    call submode#map('WindowsMode', 'n', '', '<S-j>', '<C-w>J')
-    call submode#map('WindowsMode', 'n', '', '<S-k>', '<C-w>K')
-    call submode#map('WindowsMode', 'n', '', '<S-h>', '<C-w>H')
-    call submode#map('WindowsMode', 'n', '', '<S-l>', '<C-w>L')
+    " Resize windows with <C-yuio> (interesting on azerty keyboards)
+    call submode#map('WindowsMode', 'n', '', 'u', '<C-w>-')
+    call submode#map('WindowsMode', 'n', '', 'i', '<C-w>+')
+    call submode#map('WindowsMode', 'n', '', 'y', '<C-w><')
+    call submode#map('WindowsMode', 'n', '', 'o', '<C-w>>')
+    " Move windows with <C-hjkl>
+    call submode#map('WindowsMode', 'n', '', '<C-j>', '<C-w>J')
+    call submode#map('WindowsMode', 'n', '', '<C-k>', '<C-w>K')
+    call submode#map('WindowsMode', 'n', '', '<C-h>', '<C-w>H')
+    call submode#map('WindowsMode', 'n', '', '<C-l>', '<C-w>L')
     " close a window with q
     call submode#map('WindowsMode', 'n', '', 'q', '<C-w>c')
     " split windows with / and !
