@@ -96,9 +96,6 @@
     " curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     call plug#begin('~/.vim/plugged')
 
-    " gmarik/Vundle.vim: let Vundle manage Vundle, required{{{
-        " Plug 'gmarik/Vundle.vim'
-    "}}}
     " vim-scripts/editorconfig-vim: detects files type and has an accorded behaviour {{{
         Plug 'vim-scripts/editorconfig-vim'
     "}}}
