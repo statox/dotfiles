@@ -301,7 +301,7 @@
         nnoremap <Leader>r :nnoremap <lt>Leader>t 
     "}}}
     " Easier clipboard access {{{
-        if has('win32')
+        if has('win32') || has('win64')
             vnoremap <Leader>y "*y
             nnoremap <Leader>p "*p
             nnoremap <Leader><S-p> "*P
