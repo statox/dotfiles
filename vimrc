@@ -122,20 +122,20 @@
         Plug 'ervandew/supertab'
     "}}}
     " scrooloose/nerdtree " Easily navigate through files, see ":h NERD_tree.tx: for help{{{
-        Plug 'scrooloose/nerdtree'
+        "Plug 'scrooloose/nerdtree'
 
-        let NERDTreeShowHidden=1    " show hidden files
-        let NERDTreeHijackNetrw=1   " behave as a split explorer like netrw
-        let NERDTreeShowBookmarks=1 " show bookmarks on opening
-        noremap - :NERDTreeToggle <CR> " NERD_tree usage
+        "let NERDTreeShowHidden=1    " show hidden files
+        "let NERDTreeHijackNetrw=1   " behave as a split explorer like netrw
+        "let NERDTreeShowBookmarks=1 " show bookmarks on opening
+        "noremap - :NERDTreeToggle <CR> " NERD_tree usage
         
-        "map d<CR> <CR> :NERDTree <CR> :bd<CR>
-        autocmd BufEnter NERD_tree_* silent! nnoremap d<CR> <CR> :NERDTreeToggle <CR>
-        autocmd BufLeave NERD_tree_* silent! unmap d<CR>
+        ""map d<CR> <CR> :NERDTree <CR> :bd<CR>
+        "autocmd BufEnter NERD_tree_* silent! nnoremap d<CR> <CR> :NERDTreeToggle <CR>
+        "autocmd BufLeave NERD_tree_* silent! unmap d<CR>
 
-        " use gg to go on the line \.. (previous directory) in NERDTree explorer
-        autocmd BufEnter NERD_tree_* silent! nnoremap gg /\.\.<CR>
-        autocmd BufLeave NERD_tree_* silent! unmap gg
+        "" use gg to go on the line \.. (previous directory) in NERDTree explorer
+        "autocmd BufEnter NERD_tree_* silent! nnoremap gg /\.\.<CR>
+        "autocmd BufLeave NERD_tree_* silent! unmap gg
         
         
     "}}}
@@ -212,34 +212,15 @@
         autocmd User ObliqueStar   normal! zz
         autocmd User ObliqueRepeat normal! zz
     "}}}
-    " kien/ctrlp.vim: fuzzy finder for files, buffers and mru{{{
-        "Plug 'kien/ctrlp.vim'
-
-        " mapping to open control p
-        "let g:ctrlp_map = '<c-p>'
-        "let g:ctrlp_cmd = 'CtrlP'
-
-        " ra= the nearest ancestor that contains one version control repo file
-        " but only if the current working directory outside of CtrlP is not a direct ancestor of the directory of the current file.
-        "let g:ctrlp_working_path_mode = 'ra'
-
-       " open CtrlP bookmarks
-       " nnoremap <C-b> :CtrlPBookmarkDir <CR>
-        " Bookmark the current directory
-       " nnoremap <C-n><C-b> :CtrlPBookmarkDirAdd ./
- 
-    "}}}
     " nanotech/jellybeans.vim: Cool colorscheme{{{
         Plug 'nanotech/jellybeans.vim'
     "}}}
-    " haya14busa/incsearch.vim:incrementally highlights ALL pattern matches unlike default 'incsearch'{{{
-        Plug 'haya14busa/incsearch.vim'
-    " }}}
     " junegunn/goyo.vim: Make vim disctration less{{{
         Plug 'junegunn/goyo.vim'
     "}}}
     " statox/betterTabs.voim : separate buffers under tabs{{{
-        Plug 'statox/betterTabs.vim'
+        "Plug 'statox/betterTabs.vim'
+        "Plug '~/betterTabs.vim'
     "}}}
     " vim-pandoc/vim-pandoc: Pandonc document converter integration{{{
         if version >= 704
@@ -263,6 +244,25 @@
             let g:UltiSnipsJumpBackwardTrigger="<c-z>"
         endif
     "}}}
+    " vim-scripts/taglist.vim: Better tags navigation for different languages{{{
+        Plug 'vim-scripts/taglist.vim'
+        " Open taglist with _
+        nnoremap <silent> _ :TlistToggle<CR>
+        " process files even when the taglist windows is not open
+        let Tlist_Process_File_Always = 1
+    " }}}
+    " Shougo/unite.vim: Unite and create user interfaces {{{
+        Plug 'Shougo/unite.vim' | Plug 'Shougo/vimproc.vim'
+        " File searching à la ctrl-p
+        nnoremap <C-p> :Unite file_rec/async<cr>
+    " }}}
+    " Shougo/vimfiler.vim: File explorer based on Unite.vim {{{
+        Plug 'Shougo/vimfiler.vim'
+        " Make it default explorer
+        let g:vimfiler_as_default_explorer = 1
+        " Toggle the explorer with -
+        nnoremap - :VimFiler -force-quit -toggle<CR>
+    " }}}
 
     call plug#end()
 
