@@ -62,6 +62,13 @@
     " Display line numbers on the left
     set number
     set relativenumber
+    augroup Numbers
+        autocmd!
+        autocmd WinEnter * setlocal number
+        autocmd WinEnter * setlocal relativenumber
+        autocmd WinLeave * setlocal nonumber
+        autocmd WinLeave * setlocal norelativenumber
+    augroup END
 
     " Quickly time out on keycodes, but never time out on mappings
     set notimeout ttimeout ttimeoutlen=200
