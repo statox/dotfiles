@@ -1,26 +1,33 @@
 [user]
-	name = statox
+	name  = statox
     email = adrien.fabre92@gmail.com
 
 [core]
     excludesfile = ~/.gitignore_global
+    editor       = vim
+    # convert windows end of line (CRLF) to unix format(LF)
+    autocrlf     = input
 
 [push]
 	default = current
 
+[help]
+    # When mispelling a fonction automatically correct it
+    autocorrect = 20
+
 # Messages coloring
 [color]
-        ui = auto
+    ui         = auto
 [color "branch"]
-        current = yellow reverse
-        local = yellow
-        remote = green
+    current    = yellow reverse
+    local      = yellow
+    remote     = green
 [color "diff"]
-        meta = yellow bold
-        frag = magenta bold
-        old = red bold
-        new = green bold
+    meta       = yellow bold
+    frag       = magenta bold
+    old        = red bold
+    new        = green bold
 [color "status"]
-        added = yellow
-        changed = green
-        untracked = cyan
+    added      = yellow
+    changed    = green
+    untracked  = cyan
