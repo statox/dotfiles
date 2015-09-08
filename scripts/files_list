@@ -5,10 +5,12 @@ bash_aliases
 bash_logout
 bashrc
 dircolors
+gitconfig
 gitignore_global
 motd
 tmux.conf
 vimperatorrc
 vimrc
+xdefaults
 Xresources
 zshrc
