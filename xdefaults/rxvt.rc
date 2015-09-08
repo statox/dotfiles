@@ -5,8 +5,8 @@ URxvt*scrollBar: false
 
 ! Font definition
 ! (TIP: `fc-list|cut -f2 -d:|sort|uniq` to list the available fonts)
-URxvt*font: xft:Nimbus Mono L:size=11
-URxvt*boldFont: xft:Nimbus Mono L:size=11
+URxvt*font: xft:Nimbus Mono L:size=9
+URxvt*boldFont: xft:Nimbus Mono L:size=9
 
 ! Fix font space
 !URxvt*letterSpace: -2
