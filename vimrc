@@ -326,8 +326,8 @@
         nnoremap  <Leader>jk <Esc>:w<cr>:echo "saving"<CR>
     "}}}
     " Quickly insert an empty new line without entering insert mode {{{
-        nnoremap <Leader>o o<Esc>0D
-        nnoremap <Leader>O O<Esc>0D
+        nnoremap <Leader>o o<Esc>0"_D
+        nnoremap <Leader>O O<Esc>0"_D
     "}}}
     " insert newline in normal mode {{{
         nnoremap <Leader><CR> i<CR><esc>
