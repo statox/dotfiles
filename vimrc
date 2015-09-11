@@ -486,13 +486,15 @@
         redraw
     endfunction
 "}}}
-"Maximize windows of gvim {{{
+"Configuration specific to gvim {{{
+    " Maximize window when starting gVim (works on MS windows only)
     autocmd GUIEnter * simalt ~n
 
-    set guioptions-=m  "remove menu bar
-    set guioptions-=T  "remove toolbar
-    set guioptions-=r  "remove right-hand scroll bar
-    set guioptions-=L  "remove left-hand scroll bar
+    " Remove useless graphical stuff
+    set guioptions-=m  "menu bar
+    set guioptions-=T  "toolbar
+    set guioptions-=r  "right-hand scroll bar
+    set guioptions-=L  "left-hand scroll bar
 "}}}
 " Source a local vimrc {{{
     if has('win32')
