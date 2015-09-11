@@ -503,8 +503,6 @@
 
     if filereadable($MYLOCALVIMRC)
         source $MYLOCALVIMRC
-    else
-        echom "local vimrc does not exists"
     endif
 " }}} 
 " Rename TMUX tab vim name of edited file {{{
