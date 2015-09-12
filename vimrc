@@ -432,7 +432,7 @@
 "}}}
 " Color the 81st column when your line is too long {{{
     highlight ColorColumn ctermbg=magenta
-    call matchadd('ColorColumn', '\%81v', 100)
+    call matchadd('ColorColumn', '\%81v\%#=1', 100)
 "}}}
 " Color configuration {{{
     try
