@@ -107,6 +107,16 @@
     " curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     call plug#begin('~/.vim/plugged')
 
+    " Use a local file for plugins which shouldn't be synched in github {{{
+        if has('win32')
+            let $MYLOCALPLUG = $HOME . "/_local.plug.vim"
+        else
+            let $MYLOCALPLUG = $HOME . "/.local.plug.vim"
+        endif
+        if filereadable($MYLOCALPLUG)
+            source $MYLOCALPLUG
+        endif
+    "}}}
     " vim-scripts/editorconfig-vim: detects files type and has an accorded behaviour {{{
         Plug 'vim-scripts/editorconfig-vim'
     "}}}
@@ -206,7 +216,6 @@
     "}}}
     " statox/betterTabs.voim : separate buffers under tabs{{{
         "Plug 'statox/betterTabs.vim'
-        "Plug '~/betterTabs.vim'
     "}}}
     " vim-pandoc/vim-pandoc: Pandonc document converter integration{{{
         if version >= 704
