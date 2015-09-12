@@ -121,24 +121,6 @@
     " ervandew/supertab: completion with <Tab>{{{
         Plug 'ervandew/supertab'
     "}}}
-    " scrooloose/nerdtree " Easily navigate through files, see ":h NERD_tree.tx: for help{{{
-        "Plug 'scrooloose/nerdtree'
-
-        "let NERDTreeShowHidden=1    " show hidden files
-        "let NERDTreeHijackNetrw=1   " behave as a split explorer like netrw
-        "let NERDTreeShowBookmarks=1 " show bookmarks on opening
-        "noremap - :NERDTreeToggle <CR> " NERD_tree usage
-        
-        ""map d<CR> <CR> :NERDTree <CR> :bd<CR>
-        "autocmd BufEnter NERD_tree_* silent! nnoremap d<CR> <CR> :NERDTreeToggle <CR>
-        "autocmd BufLeave NERD_tree_* silent! unmap d<CR>
-
-        "" use gg to go on the line \.. (previous directory) in NERDTree explorer
-        "autocmd BufEnter NERD_tree_* silent! nnoremap gg /\.\.<CR>
-        "autocmd BufLeave NERD_tree_* silent! unmap gg
-        
-        
-    "}}}
     " scrooloose/syntastic: Syntax checker{{{
         Plug 'scrooloose/syntastic'
 
