@@ -96,6 +96,10 @@
 
     " Allows vim to record more lines in history
     set history=500
+
+    " Swap and backup files are pretty annoying: get rid of them
+    set noswapfile
+    set nobackup
 "}}}
 " Plugins {{{
     " Manage plugins with vim-plug (https://github.com/junegunn/vim-plug)
