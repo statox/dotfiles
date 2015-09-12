@@ -279,6 +279,7 @@
         "noremap <Leader>w     :w<CR> :echo "saving"<CR>
         noremap <Leader>x     :x<CR>
         noremap <Leader>q     :q<CR>
+        nnoremap <Leader><S-Q> :qa!<CR>
     "}}}
     " Make G gg going at the end and begin of the line {{{
         "noremap G G$
