@@ -277,8 +277,8 @@
     "}}}
     " Fast save and quit {{{
         "noremap <Leader>w     :w<CR> :echo "saving"<CR>
-        noremap <Leader>x     :x<CR>
-        noremap <Leader>q     :q<CR>
+        nnoremap <Leader>x     :x<CR>
+        nnoremap <Leader>q     :q<CR>
         nnoremap <Leader><S-Q> :qa!<CR>
     "}}}
     " Make G gg going at the end and begin of the line {{{
@@ -286,7 +286,7 @@
         "noremap gg gg0
     "}}}
     " Go to 80column {{{
-        noremap <Leader><tab> 80\|
+        nnoremap <Leader><tab> 80\|
     "}}}
     " In visual mode use A to select all of the file {{{
         vnoremap aa <esc>gg0vG$
