@@ -365,6 +365,13 @@
     " Use gp to select last pasted text {{{
         nnoremap gp '[v']
     "}}}
+    " Use <F3> to source vimrc only when editting vimrc {{{
+    augroup SourceVimrc
+        autocmd!
+        autocmd BufEnter *vimrc nnoremap <F3> :so %<CR>
+        autocmd BufLeave *vimrc unmap <F3>
+    augroup END
+    "}}}
 "}}}
 " Abbreviations {{{
     " Open help vertically with H or HR {{{
