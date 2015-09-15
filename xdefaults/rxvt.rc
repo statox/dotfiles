@@ -1,4 +1,5 @@
-URxvt*geometry: 200x40
+! Wat bigger than my screen but it seems that is still fits
+URxvt*geometry: 20000x50000
 
 URxvt*saveLines: 10000
 URxvt*scrollBar: false
