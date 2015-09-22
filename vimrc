@@ -24,10 +24,6 @@
     " Allow backspacing over autoindent, line breaks and start of insert action
     set backspace=indent,eol,start
 
-    " When opening a new line and no filetype-specific indenting is enabled, keep
-    " the same indent as the line you're currently on. Useful for READMEs, etc.
-    set autoindent
-
     " Stop certain movements from always going to the first character of a line.
     " While this behaviour deviates from that of Vi, it does what most users
     " coming from other editors would expect.
@@ -47,11 +43,6 @@
     " Use visual bell instead of beeping when doing something wrong
     set visualbell
 
-    " And reset the terminal code for the visual bell. If visualbell is set, and
-    " this line is also included, vim will neither flash nor beep. If visualbell
-    " is unset, this does nothing.
-    "set t_vb=
-
     " Enable use of the mouse for all modes
     set mouse=a
 
@@ -62,6 +53,7 @@
     " Display line numbers on the left
     set number
     set relativenumber
+    " Display it only on the current window
     augroup Numbers
         autocmd!
         autocmd WinEnter * setlocal number
@@ -79,12 +71,6 @@
     " highlight current line
     set cursorline
 
-    " <C-a> and <C-x> also increase/decrease letters characters
-    set nrformats+=alpha
-
-    " set the working directory to the current file's directory
-    autocmd BufEnter * lcd %:p:h
-
     " set some mapping to work with an azerty keyboard
     set langmap+=à@,ù%
 
@@ -98,8 +84,7 @@
     set history=500
 
     " Swap and backup files are pretty annoying: get rid of them
-    set noswapfile
-    set nobackup
+    set noswapfile nobackup
 "}}}
 " Plugins {{{
     " Manage plugins with vim-plug (https://github.com/junegunn/vim-plug)
@@ -120,11 +105,8 @@
     " vim-scripts/editorconfig-vim: detects files type and has an accorded behaviour {{{
         Plug 'vim-scripts/editorconfig-vim'
     "}}}
-    " nablaa/vim-rainbow-parenthesis: matching parenthesis are coloured{{{
-        Plug 'nablaa/vim-rainbow-parenthesis'
-    "}}}
     " jiangmiao/auto-pairs: insert or delete brackets, parens, quotes in pair{{{
-        Plug 'jiangmiao/auto-pairs'
+        "Plug 'jiangmiao/auto-pairs'
     "}}}
     " scrooloose/nerdcommenter: Vim plugin for intensely orgasmic commenting{{{
         Plug 'scrooloose/nerdcommenter'
@@ -149,14 +131,8 @@
 
         let g:syntastic_always_populate_loc_list = 1
         let g:syntastic_auto_loc_list            = 1
-        let g:syntastic_check_on_open            = 1
+        let g:syntastic_check_on_open            = 0
         let g:syntastic_check_on_wq              = 0
-    "}}}
-    " tpope/vim-fugitive: Wrapper for git{{{
-        Plug 'tpope/vim-fugitive'
-
-        " make Gdiff vertical split by default
-        set diffopt+=vertical
     "}}}
     " bling/vim-airline: status/tab line light as air{{{
         Plug 'bling/vim-airline'
@@ -211,22 +187,10 @@
     " nanotech/jellybeans.vim: Cool colorscheme{{{
         Plug 'nanotech/jellybeans.vim'
     "}}}
-    " junegunn/goyo.vim: Make vim disctration less{{{
-        Plug 'junegunn/goyo.vim'
-    "}}}
-    " statox/betterTabs.voim : separate buffers under tabs{{{
-        "Plug 'statox/betterTabs.vim'
-    "}}}
-    " vim-pandoc/vim-pandoc: Pandonc document converter integration{{{
+    " vim-pandoc/vim-pandoc: Pandoc document converter integration{{{
         if version >= 704
-            Plug 'vim-pandoc/vim-pandoc'
+            Plug 'vim-pandoc/vim-pandoc' | Plug 'vim-pandoc/vim-pandoc-syntax'
         endif
-    "}}}
-    " vim-pandoc/vim-pandoc-syntax: Syntax file for pandoc markdown{{{
-        Plug 'vim-pandoc/vim-pandoc-syntax'
-    "}}}
-    " tpope/vim-scriptease: A plugin to create plugins{{{
-        Plug 'tpope/vim-scriptease'
     "}}}
     " Snippets pluggins: Group dependencies, vim-snippets depends on ultisnips{{{
         if has('python')
@@ -241,22 +205,14 @@
     "}}}
     " vim-scripts/taglist.vim: Better tags navigation for different languages{{{
         Plug 'vim-scripts/taglist.vim'
+
         " Open taglist with _
         nnoremap <silent> _ :TlistToggle<CR>
         " process files even when the taglist windows is not open
         let Tlist_Process_File_Always = 1
     " }}}
-    " Shougo/unite.vim: Unite and create user interfaces {{{
-        Plug 'Shougo/unite.vim' | Plug 'Shougo/vimproc.vim'
-        " File searching à la ctrl-p
-        nnoremap <C-p> :Unite file_rec/async<cr>
-    " }}}
-    " Shougo/vimfiler.vim: File explorer based on Unite.vim {{{
-        Plug 'Shougo/vimfiler.vim'
-        " Make it default explorer
-        let g:vimfiler_as_default_explorer = 1
-        " Toggle the explorer with -
-        nnoremap - :VimFiler -force-quit -toggle<CR>
+    " tpope/vim-vinegar: Make netrw better {{{
+        Plug 'tpope/vim-vinegar'
     " }}}
 
     call plug#end()
@@ -264,35 +220,20 @@
     " matchit: expand matching text objects{{{
         runtime macros/matchit.vim
     "}}}
-    " netrw: The builtin file explorer{{{
+    "" netrw: The builtin file explorer{{{
 
-        "use tree view
+        ""use tree view
         "let g:netrw_liststyle=3 " Bad idea thats actually pretty bugged
-
-        " open netrw more easily
-        "noremap <Leader>o :Explore <CR>
-    "}}}
+    ""}}}
 "}}}
 " Mappings {{{
     " <C-L> turn off search highlighting until the next search {{{
         nnoremap <C-L> :nohl<CR><C-L>
     "}}}
-    " <C-Y> in insert mode will past like p in normal mode {{{
-        inoremap <C-Y> <C-O>p
-    "}}}
-    " When a line is longer than the screen j and k behave like its different lines {{{
-        nnoremap j gj
-        nnoremap k gk
-    "}}}
     " Fast save and quit {{{
-        "noremap <Leader>w     :w<CR> :echo "saving"<CR>
         nnoremap <Leader>x     :x<CR>
         nnoremap <Leader>q     :q<CR>
         nnoremap <Leader><S-Q> :qa!<CR>
-    "}}}
-    " Make G gg going at the end and begin of the line {{{
-        "noremap G G$
-        "noremap gg gg0
     "}}}
     " Go to 80column {{{
         nnoremap <Leader><tab> 80\|
@@ -304,15 +245,16 @@
         nnoremap <Leader>r :nnoremap <lt>Leader>t 
     "}}}
     " Easier clipboard access {{{
-        if has('win32') || has('win64')
-            vnoremap <Leader>y "*y
-            nnoremap <Leader>p "*p
-            nnoremap <Leader><S-p> "*P
-        else
-            vnoremap <Leader>y "+y
-            nnoremap <Leader>p "+p
-            nnoremap <Leader><S-p> "+P
-
+        if has('clipboard')
+            if has('win32') || has('win64')
+                vnoremap <Leader>y "*y
+                nnoremap <Leader>p "*p
+                nnoremap <Leader><S-p> "*P
+            else
+                vnoremap <Leader>y "+y
+                nnoremap <Leader>p "+p
+                nnoremap <Leader><S-p> "+P
+            endif
         endif
     "}}}
     " Quickly escape insert mode with jj {{{
@@ -366,11 +308,15 @@
         nnoremap gp '[v']
     "}}}
     " Use <F3> to source vimrc only when editting vimrc {{{
-    augroup SourceVimrc
-        autocmd!
-        autocmd BufEnter *vimrc nnoremap <F3> :so %<CR>
-        autocmd BufLeave *vimrc unmap <F3>
-    augroup END
+        augroup SourceVimrc
+            autocmd!
+            autocmd BufEnter *vimrc nnoremap <F3> :so %<CR>
+            autocmd BufLeave *vimrc unmap <F3>
+        augroup END
+    "}}}
+    " Record macros with Q instead of q {{{
+        nnoremap Q q
+        nnoremap q <Nop>
     "}}}
 "}}}
 " Abbreviations {{{
@@ -387,11 +333,8 @@
     noremap <Leader><Leader>t  :tabnew<CR>
     noremap <Leader>tc         :tabclose<CR>
     " move current tab to left/right
-    noremap <Leader><Leader><Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
-    noremap <Leader><Leader><Right> :execute 'silent! tabmove ' . tabpagenr()<CR>
-
-    "noremap <Leader><Leader><Left>  :execute 'silent! tabmove -1'<CR>
-    "noremap <Leader><Leader><Right> :execute 'silent! tabmove +1'<CR>
+    noremap <Leader><Leader><Left>  :execute 'silent! tabmove -1'<CR>
+    noremap <Leader><Leader><Right> :execute 'silent! tabmove +1'<CR>
 "}}}
 " Manage buffers {{{
     " show buffer list and allow to type the buffer name to use with <Leader>bb
@@ -430,21 +373,21 @@
     call submode#map('WindowsMode', 'n', '', '/', '<C-w>s')
     call submode#map('WindowsMode', 'n', '', '!', '<C-w>v')
  
-    let g:submode_keep_leaving_key = 1
+    let g:submode_keep_leaving_key = 0
     let g:submode_timeout = 0
-"}}}
-" Color the 81st column when your line is too long {{{
-    highlight ColorColumn ctermbg=magenta
-    call matchadd('ColorColumn', '\%81v\%#=1', 100)
 "}}}
 " Color configuration {{{
     try
         set background=dark
-        "let g:solarized_italic=0    "disable solarized italic which is messy with gvim
         colorscheme jellybeans
     catch
         echo "Colorscheme not found"
     endtry
+"}}}
+" Color 81st column on too long lines(Put this AFTER colorscheme definition) {{{
+    highlight ColorColumn ctermbg=black ctermfg=red guibg=black guifg=red
+    call matchadd('ColorColumn', '\%#=1\%81v', 100)
+    "call matchadd('ColorColumn', '\%81v', 100)
 "}}}
 " Text, tab and indent related configuration {{{
     " Use spaces instead of tabs
@@ -459,9 +402,9 @@
     " Linebreak on 500 characters
     set lbr
     set tw=500
-    set ai "Auto indent
-    set si "Smart indent
-    set wrap "Wrap lines
+    set autoindent   " Auto indent
+    set smartindent  " Smart indent
+    set wrap         " Wrap lines
 "}}}
 " Set up smarter search behaviour {{{
     set incsearch   " Lookahead as search pattern is specified
@@ -471,23 +414,6 @@
                     " use <C-L> to temporarily turn off highlighting
 
     highlight clear Search
-
-    " This rewires n and N to do the highlighing...
-    nnoremap <silent> n   n:call HLNext(0.1)<cr>
-    nnoremap <silent> N   N:call HLNext(0.1)<cr>
-
-    " Highlighting function
-    function! HLNext (blinktime)
-        highlight WhiteOnRed ctermfg=white ctermbg=red
-        let [bufnum, lnum, col, off] = getpos('.')
-        let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
-        let target_pat = '\c\%#\%('.@/.'\)'
-        let ring = matchadd('WhiteOnRed', target_pat, 101)
-        redraw
-        exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
-        call matchdelete(ring)
-        redraw
-    endfunction
 "}}}
 "Configuration specific to gvim {{{
     " Maximize window when starting gVim (works on MS windows only)
@@ -499,17 +425,6 @@
     set guioptions-=r  "right-hand scroll bar
     set guioptions-=L  "left-hand scroll bar
 "}}}
-" Source a local vimrc {{{
-    if has('win32')
-        let $MYLOCALVIMRC = $HOME . "/_local.vim"
-    else
-        let $MYLOCALVIMRC = $HOME . "/.local.vim"
-    endif
-
-    if filereadable($MYLOCALVIMRC)
-        source $MYLOCALVIMRC
-    endif
-" }}} 
 " Rename TMUX tab vim name of edited file {{{
     autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window '" . expand("%:t") . "'")
 " }}}
@@ -538,8 +453,19 @@
 
     command! -nargs=1 -complete=help GOD call GetOnlineDoc(<f-args>)
 "}}}
+" Source a local vimrc {{{
+    if has('win32')
+        let $MYLOCALVIMRC = $HOME . "/_local.vim"
+    else
+        let $MYLOCALVIMRC = $HOME . "/.local.vim"
+    endif
+
+    if filereadable($MYLOCALVIMRC)
+        source $MYLOCALVIMRC
+    endif
+" }}} 
 " Misc. not used anymore or to improve {{{
-    " Spelling {{{
+    "" Spelling {{{
         "" /!\ Do not forget to get the dictionnaries files in ~/.vim/spell
         "" wget http://ftp.vim.org/vim/runtime/spell/en.utf-8.sug
         "" wget http://ftp.vim.org/vim/runtime/spell/en.utf-8.spl
@@ -557,10 +483,9 @@
         ""nmap <Leader>b "<Esc>[s"
         "" suggest word correction
         "nmap <Leader>v "<Esc>z="
-    "}}}
-    " Typo auto correct{{{
-        " iabbrev lenght length
-    "}}}
+        "" this is a test stri_ng Weirdname 
+        "syn match wordsWithUndescore +\<Weirdname\>+ contains=@NoSpell
+    ""}}}
     " Toggle visibility of naughty characters (thanks to Damian Conway ) {{{
         " Make naughty characters visible
         " (uBB is right double angle, uB7 is middle dot)
@@ -581,50 +506,5 @@
         "set list
         "set listchars=trail:.
         "set listchars+=eol:$
-    "}}}
-    " Mappings {{{
-        " Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
-        " which is the default
-        "map Y y$
-
-        " % go to the matching text objects and now it also select the lines between the text objects
-        "noremap % v%
-    "}}}
-    " quickly access to commands and searches history "{{{
-        "nnoremap : q:i
-        "nnoremap / q/i
-        "nnoremap ? q?i
-    "}}}
-    " Make :help appear in a full-screen tab, instead of a window {{{
-        "Only apply to .txt files...
-        "augroup HelpInTabs
-            "autocmd!
-            "autocmd BufEnter  *.txt   call HelpInNewTab()
-        "augroup END
-
-        """Only apply to help files...
-        "function! HelpInNewTab ()
-            "if &buftype == 'help'
-                ""Convert the help window to a tab
-                ""execute "normal \<C-W>T"
-                ""Convert the help window to a buffer
-                "execute "normal \<C-W>o"
-            "endif
-        "endfunction
-
-        "function! s:help(subject)
-            "let buftype = &buftype
-            "let &buftype = 'help'
-            "let v:errmsg = ''
-            "let cmd = "help " . a:subject
-            "silent! execute  cmd
-            "if v:errmsg != ''
-                "let &buftype = buftype
-                "return cmd
-            "else
-                "call setbufvar('#', '&buftype', buftype)
-            "endif
-        "endfunction
-        "command! -nargs=? -bar -complete=help H execute <SID>help(<q-args>)
     "}}}
 "}}}
