@@ -76,3 +76,10 @@ noremap k 3k
 " scroll even faster with <C-j> and <C-k>
 noremap <C-j> 10j
 noremap <C-k> 10k
+
+" I inadvertently setup caplocks and wonder why 
+" vimperator doesnt work anymore
+noremap H :echo "CAPSLOCK IS ON"<CR>
+noremap J :echo "CAPSLOCK IS ON"<CR>
+noremap K :echo "CAPSLOCK IS ON"<CR>
+noremap L :echo "CAPSLOCK IS ON"<CR>
