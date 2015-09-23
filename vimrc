@@ -3,7 +3,7 @@
 
 " General configuration {{{
     set nocompatible    " Required, fix lot of stuff
-    filetype off        " Detect the type of a file based on its name (Vundle needs it to be set to off)
+    filetype on         " Detect the type of a file based on its name
     syntax on           " Enable syntax highlighting
 
     let mapleader="\<Space>"    " remap mapleader to space
