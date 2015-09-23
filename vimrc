@@ -53,14 +53,47 @@
     " Display line numbers on the left
     set number
     set relativenumber
-    " Display it only on the current window
-    augroup Numbers
-        autocmd!
-        autocmd WinEnter * setlocal number
-        autocmd WinEnter * setlocal relativenumber
-        autocmd WinLeave * setlocal nonumber
-        autocmd WinLeave * setlocal norelativenumber
-    augroup END
+
+    " Toggle number on windows which are not the current one {{{
+        " This function allow 2 behaviors:
+        " - current window has number and relativenumber and other window has nothing
+        " - current window has number and relativenumber and other window has number
+        " The command ToggleNumbersInOtherWindows allows to toggle these behaviors
+        function! ToggleNumbersAutoGroup()
+            let l:currentWindow=winnr()
+            if !exists('#NumbersOn#WinEnter')
+                augroup NumbersOn
+                    autocmd!
+                    autocmd WinEnter * setlocal number
+                    autocmd WinEnter * setlocal relativenumber
+                    autocmd WinLeave * setlocal nonumber
+                    autocmd WinLeave * setlocal norelativenumber
+                augroup END
+                augroup NumbersOff
+                    autocmd!
+                augroup END
+                windo setlocal nonumber norelativenumber
+                exe l:currentWindow . "wincmd w"
+                setlocal number relativenumber
+            else
+                augroup NumbersOff
+                    autocmd!
+                    autocmd WinEnter * setlocal number
+                    autocmd WinEnter * setlocal relativenumber
+                    autocmd WinLeave * setlocal norelativenumber
+                augroup END
+                augroup NumbersOn
+                    autocmd!
+                augroup END
+                windo setlocal number norelativenumber
+                exe l:currentWindow . "wincmd w"
+                setlocal relativenumber
+            endif
+        endfunction
+        call ToggleNumbersAutoGroup()
+
+        command! ToggleNumbersInOtherWindows call ToggleNumbersAutoGroup()
+    "}}}
 
     " Quickly time out on keycodes, but never time out on mappings
     set notimeout ttimeout ttimeoutlen=200
