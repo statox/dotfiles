@@ -428,6 +428,11 @@
 " Rename TMUX tab vim name of edited file {{{
     autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window '" . expand("%:t") . "'")
 " }}}
+" Create a command to quit and create a new session file {{{
+    " Remember to add the following bash alias:
+    " alias lvim='vim -S ~/Session.vim'
+    command! Q mksession! ~/Session.vim | qall
+"}}}
 " Get a link to the online page of an help tag {{{
     function! GetOnlineDoc(string)
 

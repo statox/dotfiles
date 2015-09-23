@@ -97,6 +97,9 @@ function p {
         fi
     done
 }
+
+# restore vim with a session file
+alias lvim='vim -S ~/Session.vim'
 ####################################################
 #                   functions                      #
 ####################################################
