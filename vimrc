@@ -340,13 +340,6 @@
     " Use gp to select last pasted text {{{
         nnoremap gp '[v']
     "}}}
-    " Use <F3> to source vimrc only when editting vimrc {{{
-        augroup SourceVimrc
-            autocmd!
-            autocmd BufEnter *vimrc nnoremap <F3> :so %<CR>
-            autocmd BufLeave *vimrc unmap <F3>
-        augroup END
-    "}}}
     " Record macros with Q instead of q {{{
         nnoremap Q q
         nnoremap q <Nop>
@@ -491,6 +484,16 @@
 
     command! -nargs=1 -complete=help GOD call GetOnlineDoc(<f-args>)
 "}}}
+" Filetype specific configurations {{{
+    " text {{{
+            " set tw=80 and wrap text
+            autocmd! FileType text setlocal tw=80 | normal gggqG
+    " }}}
+    " vim {{{
+            " Use <F3> to source
+            autocmd FileType vim  nnoremap <buffer> <F3> :so %<CR>
+    " }}}
+" }}}
 " Source a local vimrc {{{
     if has('win32')
         let $MYLOCALVIMRC = $HOME . "/_local.vim"
