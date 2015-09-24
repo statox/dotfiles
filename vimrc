@@ -454,35 +454,43 @@
 " Rename TMUX tab vim name of edited file {{{
     autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window '" . expand("%:t") . "'")
 " }}}
-" Create a command to quit and create a new session file {{{
-    " Remember to add the following bash alias:
-    " alias lvim='vim -S ~/Session.vim'
-    command! Q mksession! ~/Session.vim | qall
-"}}}
-" Get a link to the online page of an help tag {{{
-    function! GetOnlineDoc(string)
+" Custom functions and commands {{{
+    " Command to quit and create a new session file {{{
+        " Remember to add the following bash alias:
+        " alias lvim='vim -S ~/Session.vim'
+        command! Q mksession! ~/Session.vim | qall
+    "}}}
+    " Substitute to windo which doesn't change the current windo {{{
+        command! -nargs=+ -complete=command Windo
+              \ let s:currentWindow = winnr() |
+              \ execute "windo <args>" |
+              \ exe s:currentWindow . "wincmd w"
+    "}}}
+    " Get a link to the online page of an help tag {{{
+        function! GetOnlineDoc(string)
 
-        " Go to specified help tag locally
-        execute "h " . a:string
+            " Go to specified help tag locally
+            execute "h " . a:string
 
-        " Get the help filename without the ".txt" extension
-        let filename = expand("%:t:r")
+            " Get the help filename without the ".txt" extension
+            let filename = expand("%:t:r")
 
-        " Create the link
-        let link = "http://vimdoc.sourceforge.net/htmldoc/" . filename . ".html#" . a:string
+            " Create the link
+            let link = "http://vimdoc.sourceforge.net/htmldoc/" . filename . ".html#" . a:string
 
-        " Put it in the clipboard register
-        if has('win32')
-            let @* = link
-        else
-            let @+ = link
-        endif
+            " Put it in the clipboard register
+            if has('win32')
+                let @* = link
+            else
+                let @+ = link
+            endif
 
-        " Optional, close the opened help file
-        "execute "bd"
-    endfunction
+            " Optional, close the opened help file
+            "execute "bd"
+        endfunction
 
-    command! -nargs=1 -complete=help GOD call GetOnlineDoc(<f-args>)
+        command! -nargs=1 -complete=help GOD call GetOnlineDoc(<f-args>)
+    "}}}
 "}}}
 " Filetype specific configurations {{{
     " text {{{
