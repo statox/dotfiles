@@ -138,8 +138,16 @@ function resudo {
     eval $CMD
 }
 
-# Open files or directory in GUI application (better than gnome-open because it is desktop agnostic)
-alias o='xdg-open'
+# Open files or directory in GUI application
+# (xdg-open is better than gnome-open because it is desktop agnostic)
+function o {
+    # If no parameter is passed open current folder
+    if [ $# -eq 0 ]; then
+        xdg-open ./
+    else
+        xdg-open $@ 
+    fi
+}
 
 # prompt files after cd
 function cl {
