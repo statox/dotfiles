@@ -479,8 +479,13 @@
             " Get the help filename without the ".txt" extension
             let filename = expand("%:t:r")
 
+            " Replace some characters to get a correct url
+            let string = substitute(a:string, "'", "%27", "g")
+
             " Create the link
-            let link = "http://vimdoc.sourceforge.net/htmldoc/" . filename . ".html#" . a:string
+            let link = "http://vimdoc.sourceforge.net/htmldoc/" . filename . ".html#" . string
+
+            let link = "[`:h " . a:string . "`](" . link . ")"
 
             " Put it in the clipboard register
             if has('win32')
