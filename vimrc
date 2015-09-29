@@ -118,6 +118,10 @@
 
     " Swap and backup files are pretty annoying: get rid of them
     set noswapfile nobackup
+
+    " make autocomplete case sensitive even if 'ignorecase' is on
+    set infercase
+    set completeopt=longest,menuone,preview
 "}}}
 " Plugins {{{
     " Manage plugins with vim-plug (https://github.com/junegunn/vim-plug)
