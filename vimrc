@@ -118,6 +118,9 @@
     " make autocomplete case sensitive even if 'ignorecase' is on
     set infercase
     set completeopt=longest,menuone,preview
+
+    " Add subdirectories to path
+    set path +=**
 "}}}
 " Plugins {{{
     " Manage plugins with vim-plug (https://github.com/junegunn/vim-plug)
