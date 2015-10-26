@@ -509,6 +509,10 @@
             " Use <F3> to source
             autocmd FileType vim  nnoremap <buffer> <F3> :so %<CR>
     " }}}
+    " java {{{
+            " Print on stdout
+            autocmd FileType java :iabbrev <buffer> syso System.out.println("");<Left><Left><Left>
+    " }}}
 " }}}
 " Source a local vimrc {{{
     if has('win32')
