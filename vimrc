@@ -25,19 +25,15 @@
     set backspace=indent,eol,start
 
     " Stop certain movements from always going to the first character of a line.
-    " While this behaviour deviates from that of Vi, it does what most users
-    " coming from other editors would expect.
-    set nostartofline
+    "set nostartofline
 
-    " Display the cursor position on the last line of the screen or in the status
-    " line of a window
+    " Display the cursor position in the status line
     set ruler
 
     " Always display the status line, even if only one window is displayed
     set laststatus=2
 
-    " Instead of failing a command because of unsaved changes, instead raise a
-    " dialogue asking if you wish to save changed files.
+    " Raise dialog instead of failing a command because of unsaved changes
     set confirm
 
     " Use visual bell instead of beeping when doing something wrong
