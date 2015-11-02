@@ -100,6 +100,9 @@ function p {
 
 # restore vim with a session file
 alias lvim='vim -S ~/Session.vim'
+
+# Get debian version codename
+alias debianversion='lsb_release -a'
 ####################################################
 #                   functions                      #
 ####################################################
