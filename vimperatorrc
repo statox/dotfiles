@@ -84,7 +84,7 @@ noremap <C-k> 10k
 
 " I inadvertently setup caplocks and wonder why 
 " vimperator doesnt work anymore
-noremap H :echo "CAPSLOCK IS ON"<CR>
-noremap J :echo "CAPSLOCK IS ON"<CR>
-noremap K :echo "CAPSLOCK IS ON"<CR>
-noremap L :echo "CAPSLOCK IS ON"<CR>
+noremap H :echoe "CAPSLOCK IS ON"<CR>
+noremap J :echoe "CAPSLOCK IS ON"<CR>
+noremap K :echoe "CAPSLOCK IS ON"<CR>
+noremap L :echoe "CAPSLOCK IS ON"<CR>
