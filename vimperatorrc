@@ -23,6 +23,9 @@ set gui=nonavigation,nomenu
 
 " reduce hints font size
 highlight Hint font-size: 11px;
+
+" Change the content of the status bar at the bottom of the screen
+set status=input,bookmark,ssl,location,tabcount,position
 "------------------------------------------------------------
 " Colorscheme
 " remember to copy colorscheme file in ~/.vimperator/color/
