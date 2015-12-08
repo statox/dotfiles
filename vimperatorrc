@@ -71,6 +71,8 @@ nmap <C-l> :nohlsearch<CR>
 
 " go back in history with backspace key
 nmap <BS> :back<CR>
+" go forward in history with <shift-backspace>
+nmap <S-BS> :forward<CR>
 
 " scroll faster
 noremap j 3j
