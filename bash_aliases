@@ -145,7 +145,7 @@ function resudo {
 # (xdg-open is better than gnome-open because it is desktop agnostic)
 function o {
     # If no parameter is passed open current folder
-    if [ $# -eq 0 ]; then
+    if [ $# -eq 0 ] || [ -z $@ ]; then
         xdg-open ./
     else
         xdg-open $@ 
