@@ -290,11 +290,19 @@
         if has('clipboard')
             if has('win32') || has('win64')
                 vnoremap <Leader>y "*y
+
+                vnoremap <Leader>p "*p
                 nnoremap <Leader>p "*p
+
+                vnoremap <Leader><S-p> "*P
                 nnoremap <Leader><S-p> "*P
             else
                 vnoremap <Leader>y "+y
+
+                vnoremap <Leader>p "+p
                 nnoremap <Leader>p "+p
+
+                vnoremap <Leader><S-p> "+P
                 nnoremap <Leader><S-p> "+P
             endif
         endif
