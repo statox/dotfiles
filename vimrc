@@ -250,6 +250,12 @@
     " tpope/vim-vinegar: Make netrw better {{{
         Plug 'tpope/vim-vinegar'
     " }}}
+    " vim-scripts/summerfruit256.vim: light colorscheme {{{
+        Plug 'vim-scripts/summerfruit256.vim'
+    " }}}
+    " mhinz/vim-grepper: Helps you win at grep {{{
+        Plug 'mhinz/vim-grepper'
+    " }}}
 
     call plug#end()
 
