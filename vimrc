@@ -517,7 +517,7 @@
 " Filetype specific configurations {{{
     " text {{{
             " set tw=80 and wrap text
-            autocmd! FileType text setlocal tw=80 | normal gggqG
+            "autocmd! FileType text setlocal tw=80 | normal gggqG
     " }}}
     " vim {{{
             " Use <F3> to source
