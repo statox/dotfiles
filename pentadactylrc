@@ -38,6 +38,9 @@ imap -b <C-x> <C-v><C-x>
 "------------------------------------------------------------
 " Mappings
 
+" Define <Space> as the leader
+map <Space> <Leader>
+
 " navigate through tabs with h and l
 nmap -b l :bn<CR>
 nmap -b h :bN<CR>
@@ -50,18 +53,18 @@ nmap -b k 3k
 nmap -b <Left>  :tabmove -1<CR>
 nmap -b <Right> :tabmove +1<CR>
 
-" duplicate tab with nd
-nmap -b nd :tabduplicate<CR>
+" duplicate tab with <Leader>d
+nmap -b <Leader>d :tabduplicate<CR>
 
-" open hints with nj and nk
-nmap -b nk F
-nmap -b nj f
+" open hints with <Leader>j and <Leader>k
+nmap -b <Leader>k F
+nmap -b <Leader>j f
 
-" open new tab with nl
-nmap -b nl :tabopen 
+" open new tab with <Leader>l
+nmap -b <Leader>l :tabopen 
 
-" close tab with nh
-nmap -b nh :tabclose<CR>
+" close tab with <Leader>h
+nmap -b <Leader>h :tabclose<CR>
 
 " close window (and save session) with x
 nmap -b x :xall<CR>
