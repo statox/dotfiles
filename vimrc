@@ -432,6 +432,16 @@
     call matchadd('ColorColumn', '\%#=1\%81v', 100)
     "call matchadd('ColorColumn', '\%81v', 100)
 "}}}
+" Get a random number using system function {{{
+" http://vi.stackexchange.com/a/819/1821
+    function! GetRandomInteger()
+        if has('win32')
+            return system("echo %RANDOM%")
+        else
+            return system("echo $RANDOM")
+        endif
+    endfunction
+" }}}
 " Text, tab and indent related configuration {{{
     " Use spaces instead of tabs
     set expandtab
