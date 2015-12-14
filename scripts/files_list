@@ -8,6 +8,7 @@ dircolors
 gitconfig
 gitignore_global
 motd
+pentadactylrc
 tmux.conf
 vimperatorrc
 vimrc
