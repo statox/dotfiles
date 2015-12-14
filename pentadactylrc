@@ -1,0 +1,96 @@
+"------------------------------------------------------------
+" Configuration file for Pentadactyl (Firefox/Iceweasel extension)
+
+"------------------------------------------------------------
+" general configuration
+
+" disable beep
+set visualbell
+
+" useful for command-line completion
+set autocomplete=.*
+set wildmode=list:longest,full
+
+" char used to open links
+set hintkeys=uhjklnby
+
+" show find match as you type them
+set incfind
+set hlfind
+
+" normal mode copying and pasting
+nmap -b <C-c> <C-v><C-c>
+nmap -b <C-v> <C-v><C-v>
+nmap -b <C-x> <C-v><C-x>
+
+" insert mode copying and pasting
+imap -b <C-c> <C-v><C-c>
+imap -b <C-v> <C-v><C-v>
+imap -b <C-x> <C-v><C-x>
+
+"------------------------------------------------------------
+" Colorscheme
+" remember to copy colorscheme file in ~/.pentadactyl/colors/
+
+"colorscheme indigo-fx3
+
+
+"------------------------------------------------------------
+" Mappings
+
+" navigate through tabs with h and l
+nmap -b l :bn<CR>
+nmap -b h :bN<CR>
+
+" scroll faster
+nmap -b j 3j
+nmap -b k 3k
+
+" move tabs with <arrow key>
+nmap -b <Left>  :tabmove -1<CR>
+nmap -b <Right> :tabmove +1<CR>
+
+" duplicate tab with nd
+nmap -b nd :tabduplicate<CR>
+
+" open hints with nj and nk
+nmap -b nk F
+nmap -b nj f
+
+" open new tab with nl
+nmap -b nl :tabopen 
+
+" close tab with nh
+nmap -b nh :tabclose<CR>
+
+" close window (and save session) with x
+nmap -b x :xall<CR>
+
+" open private navigation window with pw
+nmap -b pw :window private open<CR>
+
+" override <C-a> to select all
+imap <C-a> <C-Home><C-S-End>
+
+" go back in history with backspace key
+nmap -b <BS> :back<CR>
+" go forward in history with <shift-backspace>
+nmap -b <S-BS> :forward<CR>
+
+" I inadvertently setup caplocks and wonder why 
+" vimperator doesnt work anymore
+nmap -b H :echoe "CAPSLOCK IS ON"<CR>
+nmap -b J :echoe "CAPSLOCK IS ON"<CR>
+nmap -b K :echoe "CAPSLOCK IS ON"<CR>
+nmap -b L :echoe "CAPSLOCK IS ON"<CR>
+
+" Source config file with <F3>
+nmap -b <F3> :source .pentadactylrc<CR>
+
+" Toogle navigation bar with <F10>
+nmap -b <F10> :toolbartoggle Navigation Toolbar<CR>
+
+" Toogle the extension with <F9> to let someone use your
+" browser normally
+nmap -b <F9> :exttoggle Pentadactyl<CR>
+
