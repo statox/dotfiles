@@ -59,6 +59,13 @@ save-dotfiles() {
     done < "$FILES"
 }
 
+additional-installs() {
+    echo "Configuring VimPlug"
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim 
+    vim +PlugInstall +qall &>/dev/null &
+    echo "Vim configured"
+}
+
 # Get the files needed to work
 CUR_DIR=`cd  $(dirname $0);pwd`
 SAVE_DIR=$CUR_DIR/../saved-dotfiles
@@ -70,6 +77,10 @@ echo ""
 
 # creating symlinks
 make-symlinks
+echo ""
+
+# additional installations
+additional-installs
 echo ""
 
 # source the shell configuration file
