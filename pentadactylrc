@@ -4,6 +4,9 @@
 "------------------------------------------------------------
 " general configuration
 
+" indicate the sourcing of the file
+echomsg "sourcing .pentadactylrc"
+
 " disable beep
 set visualbell
 
@@ -28,6 +31,12 @@ imap -b <C-c> <C-v><C-c>
 imap -b <C-v> <C-v><C-v>
 imap -b <C-x> <C-v><C-x>
 
+" show hints letters in uppercase
+highlight -a Hint text-transform: uppercase !important;
+
+" use duckduckgo as default search engine
+set defsearch=duckduckgo
+
 "------------------------------------------------------------
 " Colorscheme
 " remember to copy colorscheme file in ~/.pentadactyl/colors/
@@ -45,9 +54,9 @@ map <Space> <Leader>
 nmap -b l :bn<CR>
 nmap -b h :bN<CR>
 
-" scroll faster
-nmap -b j 3j
-nmap -b k 3k
+" Disable smooth scroll
+set scrollsteps=1
+set scrolltime=0
 
 " move tabs with <arrow key>
 nmap -b <Left>  :tabmove -1<CR>
@@ -97,3 +106,5 @@ nmap -b <F10> :toolbartoggle Navigation Toolbar<CR>
 " browser normally
 nmap -b <F9> :exttoggle Pentadactyl<CR>
 
+" Make <C-t> easier to use
+nmap <C-t> :tabopen<CR>o
