@@ -13,14 +13,14 @@ make-symlinks() {
     echo "creating the simlinks"
 
     # go to home directory
-    cd ~
+    cd ~ || exit
 
     while read -r line; do
         # ignore empty lines and comments in files_list
         [[ -z $line  ]] && continue
         [[ "$line" =~ ^#.*$  ]] && continue
             echo "${line}"
-            ln -s $CUR_DIR/../$line .$line
+            ln -s "$CUR_DIR"/../"$line" ."$line"
     done < "$FILES"
 }
 
@@ -33,9 +33,9 @@ save-dotfiles() {
 
     echo "saving current dotfiles"
 
-    if [ ! -d $SAVE_DIR ]; then
+    if [ ! -d "$SAVE_DIR" ]; then
         echo "Creating saving directory: $SAVE_DIR"
-        mkdir -p $SAVE_DIR
+        mkdir -p "$SAVE_DIR"
     else
         echo "Saving directory already exists: $SAVE_DIR"
     fi
@@ -45,14 +45,14 @@ save-dotfiles() {
     # ignore empty lines and comments in files_list
     [[ -z $line  ]] && continue
     [[ "$line" =~ ^#.*$  ]] && continue
-        if [ -d ~/.$line ]; then
+        if [ -d ~/."$line" ]; then
             echo "directory ${line}"
-            cp -Lr ~/.$line $SAVE_DIR/$line
-            rm -rf ~/.$line
-        elif [ -f ~/.$line ]; then
+            cp -Lr ~/."$line" "$SAVE_DIR"/"$line"
+            rm -rf ~/."$line"
+        elif [ -f ~/."$line" ]; then
             echo "file ${line}"
-            cat ~/.$line > $SAVE_DIR/$line
-            rm -f ~/.$line
+            cat ~/."$line" > "$SAVE_DIR"/"$line"
+            rm -f ~/."$line"
         else
             echo "not found ${line}"
         fi
@@ -67,7 +67,7 @@ additional-installs() {
 }
 
 # Get the files needed to work
-CUR_DIR=`cd  $(dirname $0);pwd`
+CUR_DIR=$(cd  $(dirname $0);pwd)
 SAVE_DIR=$CUR_DIR/../saved-dotfiles
 FILES=$CUR_DIR/files_list
 
