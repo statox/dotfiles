@@ -54,6 +54,10 @@ map <Space> <Leader>
 nmap -b l :bn<CR>
 nmap -b h :bN<CR>
 
+" navigate to first and last tabs
+nmap -b $ :tablast<CR>
+nmap -b 0 :tabfirst<CR>
+
 " Disable smooth scroll
 set scrollsteps=1
 set scrolltime=0
