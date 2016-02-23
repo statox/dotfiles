@@ -112,3 +112,6 @@ nmap -b <F9> :exttoggle Pentadactyl<CR>
 
 " Make <C-t> easier to use
 nmap <C-t> :tabopen<CR>o
+
+" Open downloads with D
+nmap -b D :dialog downloads<CR>
