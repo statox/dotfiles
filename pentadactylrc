@@ -96,9 +96,12 @@ nmap -b <S-BS> :forward<CR>
 " I inadvertently setup caplocks and wonder why 
 " vimperator doesnt work anymore
 nmap -b H :echoe "CAPSLOCK IS ON"<CR>
-nmap -b J :echoe "CAPSLOCK IS ON"<CR>
-nmap -b K :echoe "CAPSLOCK IS ON"<CR>
 nmap -b L :echoe "CAPSLOCK IS ON"<CR>
+
+" Use J and K to scroll faster
+nmap -b J 15j
+nmap -b K 15k
+
 
 " Source config file with <F3>
 nmap -b <F3> :source .pentadactylrc<CR>
