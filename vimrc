@@ -171,7 +171,8 @@
         let g:syntastic_check_on_wq              = 0
     "}}}
     " bling/vim-airline: status/tab line light as air{{{
-        Plug 'bling/vim-airline'
+        Plug 'vim-airline/vim-airline'
+        Plug 'vim-airline/vim-airline-themes'
 
         " appearence configuration
         let g:airline_powerline_fonts = 1
