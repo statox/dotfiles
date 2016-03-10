@@ -54,6 +54,10 @@ map <Space> <Leader>
 nmap -b l :bn<CR>
 nmap -b h :bN<CR>
 
+" navigate to first and last tabs
+nmap -b $ :tablast<CR>
+nmap -b 0 :tabfirst<CR>
+
 " Disable smooth scroll
 set scrollsteps=1
 set scrolltime=0
@@ -92,9 +96,12 @@ nmap -b <S-BS> :forward<CR>
 " I inadvertently setup caplocks and wonder why 
 " vimperator doesnt work anymore
 nmap -b H :echoe "CAPSLOCK IS ON"<CR>
-nmap -b J :echoe "CAPSLOCK IS ON"<CR>
-nmap -b K :echoe "CAPSLOCK IS ON"<CR>
 nmap -b L :echoe "CAPSLOCK IS ON"<CR>
+
+" Use J and K to scroll faster
+nmap -b J 15j
+nmap -b K 15k
+
 
 " Source config file with <F3>
 nmap -b <F3> :source .pentadactylrc<CR>
@@ -108,3 +115,6 @@ nmap -b <F9> :exttoggle Pentadactyl<CR>
 
 " Make <C-t> easier to use
 nmap <C-t> :tabopen<CR>o
+
+" Open downloads with D
+nmap -b D :dialog downloads<CR>
