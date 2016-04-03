@@ -37,6 +37,9 @@ highlight -a Hint text-transform: uppercase !important;
 " use duckduckgo as default search engine
 set defsearch=duckduckgo
 
+" begin :open command when loading or changing to a new tab page:
+autocmd LocationChange about:newtab normal o 
+
 "------------------------------------------------------------
 " Colorscheme
 " remember to copy colorscheme file in ~/.pentadactyl/colors/
