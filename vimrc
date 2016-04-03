@@ -127,7 +127,6 @@
     " to install execute:
     " curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     call plug#begin('~/.vim/plugged')
-
     " Use a local file for plugins which shouldn't be synched in github {{{
         if has('win32')
             let $MYLOCALPLUG = $HOME . "/_local.plug.vim"
@@ -251,13 +250,6 @@
     " tpope/vim-vinegar: Make netrw better {{{
         Plug 'tpope/vim-vinegar'
     " }}}
-    " vim-scripts/summerfruit256.vim: light colorscheme {{{
-        Plug 'vim-scripts/summerfruit256.vim'
-    " }}}
-    " mhinz/vim-grepper: Helps you win at grep {{{
-        Plug 'mhinz/vim-grepper'
-    " }}}
-
     call plug#end()
 
     " matchit: expand matching text objects{{{
