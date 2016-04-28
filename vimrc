@@ -232,11 +232,11 @@
         if has('python')
             Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'    
 
-            " Trigger snippets with the keys next to "1" on azerty keyboards
-            let g:UltiSnipsExpandTrigger="œ"
-            let g:UltiSnipsListSnippets="<c-œ>"
-            let g:UltiSnipsJumpForwardTrigger="<c-b>"
-            let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+            " Trigger snippets two *
+            inoremap ** <C-R>=UltiSnips#ExpandSnippetOrJump()<CR>
+            " Switch between the place holder with arrow keys
+            let g:UltiSnipsJumpForwardTrigger="<Right>"
+            let g:UltiSnipsJumpBackwardTrigger="<Left>"
         endif
     "}}}
     " vim-scripts/taglist.vim: Better tags navigation for different languages{{{
