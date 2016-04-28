@@ -112,4 +112,7 @@
     " Open downloads with D {{{
         nmap -b D :dialog downloads<CR>
     "}}}
+    " Make paste easier in command mode {{{
+        cmap -b <C-V> <C-V><C-V>
+    "}}}
 "}}}
