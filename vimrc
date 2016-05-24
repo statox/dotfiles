@@ -237,6 +237,8 @@
             " Switch between the place holder with arrow keys
             let g:UltiSnipsJumpForwardTrigger="<Right>"
             let g:UltiSnipsJumpBackwardTrigger="<Left>"
+            " Make :UltiSnipsEdit split window vertically
+            let g:UltiSnipsEditSplit="vertical"
         endif
     "}}}
     " vim-scripts/taglist.vim: Better tags navigation for different languages{{{
