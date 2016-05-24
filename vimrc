@@ -252,6 +252,10 @@
     " tpope/vim-vinegar: Make netrw better {{{
         Plug 'tpope/vim-vinegar'
     " }}}
+    " statox/vim-compare-lines: Easily compare two lines of a buffer {{{
+        Plug 'statox/vim-compare-lines'
+    " }}}
+
     call plug#end()
 
     " matchit: expand matching text objects{{{
