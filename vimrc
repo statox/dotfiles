@@ -253,10 +253,13 @@
         let Tlist_Process_File_Always = 1
     " }}}
     " tpope/vim-vinegar: Make netrw better {{{
-        Plug 'tpope/vim-vinegar'
+        "Plug 'tpope/vim-vinegar'
     " }}}
     " statox/vim-compare-lines: Easily compare two lines of a buffer {{{
         Plug 'statox/vim-compare-lines'
+    " }}}
+    " justinmk/vim-dirvish: Directory viewer for vim {{{
+        Plug 'justinmk/vim-dirvish'
     " }}}
 
     call plug#end()
