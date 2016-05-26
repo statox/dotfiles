@@ -1,6 +1,14 @@
+#vimscript functions
 priority 1
 snippet function "Vim function"
 function! ${1:function-name}
 	${2:code}
 endfunction
+endsnippet
+
+#Declaration of a Vim-plug plugin
+snippet Plug "Vim-plug declaration"
+" ${1:Plugin_path}: ${2:Plugin_description} {{{
+	Plug '$1'
+" }}}
 endsnippet
