@@ -239,6 +239,9 @@
             let g:UltiSnipsJumpBackwardTrigger="<Left>"
             " Make :UltiSnipsEdit split window vertically
             let g:UltiSnipsEditSplit="vertical"
+
+            " Add directory containing my custom plugins
+            set runtimepath +=~/.vim/my-snippets
         endif
     "}}}
     " vim-scripts/taglist.vim: Better tags navigation for different languages{{{
