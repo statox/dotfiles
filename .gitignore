@@ -6,3 +6,6 @@ scripts/files_list
 
 # tmp files
 *.swp
+
+# Vim plugins directory
+vim/plugged
