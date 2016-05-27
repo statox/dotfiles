@@ -288,9 +288,6 @@
     " In visual mode use A to select all of the file {{{
         vnoremap aa <esc>gg0vG$
     "}}}
-    " Quickly redefine mapping {{{
-        nnoremap <Leader>r :nnoremap <lt>Leader>t 
-    "}}}
     " Easier clipboard access {{{
         if has('clipboard')
             if has('win32') || has('win64')
@@ -396,9 +393,6 @@
     nnoremap <Leader><Leader>b :enew<CR>
 "}}}
 " Manage windows {{{
-    "if exists("g:submode_keyseqs_to_leave")
-    "silent! call submode#enter_with('WindowsMode', 'n', '', '<Leader>k', ':echo "windows mode"<CR>')
-    "echo "exists: " . g:submode_always_show_submode
     if (filereadable($HOME . "/.vim/plugged/vim-submode/autoload/submode.vim"))
         " Create a submode to handle windows
         " The submode is entered whith <Leader>k and exited with <Leader>
@@ -492,17 +486,6 @@
     autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window '" . expand("%:t") . "'")
 " }}}
 " Custom functions and commands {{{
-    " Command to quit and create a new session file {{{
-        " Remember to add the following bash alias:
-        " alias lvim='vim -S ~/Session.vim'
-        command! Q mksession! ~/Session.vim | qall
-    "}}}
-    " Substitute to windo which doesn't change the current windo {{{
-        command! -nargs=+ -complete=command Windo
-              \ let s:currentWindow = winnr() |
-              \ execute "windo <args>" |
-              \ exe s:currentWindow . "wincmd w"
-    "}}}
     " Get a link to the online page of an help tag {{{
         function! GetOnlineDoc(string)
 
@@ -543,10 +526,6 @@
             " Use <F3> to source
             autocmd FileType vim  nnoremap <buffer> <F3> :so %<CR>
     " }}}
-    " java {{{
-            " Print on stdout
-            autocmd FileType java :iabbrev <buffer> syso System.out.println("");<Left><Left><Left>
-    " }}}
 " }}}
 " Source a local vimrc {{{
     if has('win32')
@@ -559,47 +538,3 @@
         source $MYLOCALVIMRC
     endif
 " }}} 
-" Misc. not used anymore or to improve {{{
-    "" Spelling {{{
-        "" /!\ Do not forget to get the dictionnaries files in ~/.vim/spell
-        "" wget http://ftp.vim.org/vim/runtime/spell/en.utf-8.sug
-        "" wget http://ftp.vim.org/vim/runtime/spell/en.utf-8.spl
-
-        "" (un)set english dictionnary with F7
-        "map     <silent> <F7> "<Esc>:silent setlocal spell! spelllang=en<CR>"
-        "imap    <silent> <F7> "<Esc>:silent setlocal spell! spelllang=en<CR>"
-        "" (un)set french dictionnary with F6
-        "map     <silent> <F6> "<Esc>:silent setlocal spell! spelllang=fr<CR>"
-        "imap    <silent> <F6> "<Esc>:silent setlocal spell! spelllang=fr<CR>"
-
-        "" next word
-        "nmap <Leader>n "<Esc>]s"
-        "" prev word
-        ""nmap <Leader>b "<Esc>[s"
-        "" suggest word correction
-        "nmap <Leader>v "<Esc>z="
-        "" this is a test stri_ng Weirdname 
-        "syn match wordsWithUndescore +\<Weirdname\>+ contains=@NoSpell
-    ""}}}
-    " Toggle visibility of naughty characters (thanks to Damian Conway ) {{{
-        " Make naughty characters visible
-        " (uBB is right double angle, uB7 is middle dot)
-
-        "exec "set lcs=tab:\uBB\uBB,trail:\uB7,nbsp:~"
-
-        "augroup VisibleNaughtiness
-            "autocmd!
-            "autocmd BufEnter * set list
-            "autocmd BufEnter *.txt set nolist
-            "autocmd BufEnter *.vp* set nolist
-            "autocmd BufEnter * if !&modifiable
-            "autocmd BufEnter * set nolist
-            "autocmd BufEnter * endif
-        "augroup END
-    "}}}
-    " Make unwanted chars visible {{{
-        "set list
-        "set listchars=trail:.
-        "set listchars+=eol:$
-    "}}}
-"}}}
