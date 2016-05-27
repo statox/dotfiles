@@ -137,9 +137,6 @@
             source $MYLOCALPLUG
         endif
     "}}}
-    " vim-scripts/editorconfig-vim: detects files type and has an accorded behaviour {{{
-        Plug 'vim-scripts/editorconfig-vim'
-    "}}}
     " jiangmiao/auto-pairs: insert or delete brackets, parens, quotes in pair{{{
         "Plug 'jiangmiao/auto-pairs'
     "}}}
@@ -204,11 +201,8 @@
     " kana/vim-submode: Create submode (used for windows resizing mappings){{{
         Plug 'kana/vim-submode'
     "}}}
-    " junegunn/vim-pseudocl:Pseudo-command-line (experimental) {{{
-        Plug 'junegunn/vim-pseudocl'
-    "}}}
     " junegunn/vim-oblique: Improved search for Vim.{{{
-        Plug 'junegunn/vim-oblique'
+        Plug 'junegunn/vim-oblique' | Plug 'junegunn/vim-pseudocl'
 
         " Clear autocommand
         autocmd! User Oblique
@@ -222,11 +216,6 @@
     "}}}
     " nanotech/jellybeans.vim: Cool colorscheme{{{
         Plug 'nanotech/jellybeans.vim'
-    "}}}
-    " vim-pandoc/vim-pandoc: Pandoc document converter integration{{{
-        if version >= 704
-            Plug 'vim-pandoc/vim-pandoc' | Plug 'vim-pandoc/vim-pandoc-syntax'
-        endif
     "}}}
     " Snippets pluggins: Group dependencies, vim-snippets depends on ultisnips{{{
         if has('python')
@@ -244,24 +233,12 @@
             set runtimepath +=~/.vim/my-snippets
         endif
     "}}}
-    " vim-scripts/taglist.vim: Better tags navigation for different languages{{{
-        Plug 'vim-scripts/taglist.vim'
-
-        " Open taglist with _
-        nnoremap <silent> _ :TlistToggle<CR>
-        " process files even when the taglist windows is not open
-        let Tlist_Process_File_Always = 1
-    " }}}
-    " tpope/vim-vinegar: Make netrw better {{{
-        "Plug 'tpope/vim-vinegar'
-    " }}}
     " statox/vim-compare-lines: Easily compare two lines of a buffer {{{
         Plug 'statox/vim-compare-lines'
     " }}}
     " justinmk/vim-dirvish: Directory viewer for vim {{{
         Plug 'justinmk/vim-dirvish'
     " }}}
-
     call plug#end()
 
     " matchit: expand matching text objects{{{
