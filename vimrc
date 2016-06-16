@@ -239,6 +239,9 @@
     " justinmk/vim-dirvish: Directory viewer for vim {{{
         Plug 'justinmk/vim-dirvish'
     " }}}
+    " nobe4/vimcorrect: Enhance the correction mechanism {{{
+        Plug 'nobe4/vimcorrect'
+    " }}}
     call plug#end()
 
     " matchit: expand matching text objects{{{
