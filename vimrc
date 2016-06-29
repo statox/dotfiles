@@ -492,7 +492,7 @@
         command! -complete=help -nargs=1 H call VerticalHelp(<f-args>)
         function! VerticalHelp(topic)
             execute "vertical botright help " . a:topic
-            execute "vertical resize 80"
+            execute "vertical resize 78"
         endfunction
     "}}}
 "}}}
