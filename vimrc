@@ -80,6 +80,10 @@
 
     " Add subdirectories to path
     set path +=**
+
+    " Show unseeing characters
+    set list
+    set listchars=eol:$,tab:>-,trail:.
 "}}}
 " Plugins {{{
     " Manage plugins with vim-plug (https://github.com/junegunn/vim-plug)
