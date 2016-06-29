@@ -50,47 +50,6 @@
     set number
     set relativenumber
 
-    " Toggle number on windows which are not the current one {{{
-        " This function allow 2 behaviors:
-        " - current window has number and relativenumber and other window has nothing
-        " - current window has number and relativenumber and other window has number
-        " The command ToggleNumbersInOtherWindows allows to toggle these behaviors
-        function! ToggleNumbersAutoGroup()
-            let l:currentWindow=winnr()
-            if !exists('#NumbersOn#WinEnter')
-                augroup NumbersOn
-                    autocmd!
-                    autocmd WinEnter * setlocal number
-                    autocmd WinEnter * setlocal relativenumber
-                    autocmd WinLeave * setlocal nonumber
-                    autocmd WinLeave * setlocal norelativenumber
-                augroup END
-                augroup NumbersOff
-                    autocmd!
-                augroup END
-                windo setlocal nonumber norelativenumber
-                exe l:currentWindow . "wincmd w"
-                setlocal number relativenumber
-            else
-                augroup NumbersOff
-                    autocmd!
-                    autocmd WinEnter * setlocal number
-                    autocmd WinEnter * setlocal relativenumber
-                    autocmd WinLeave * setlocal norelativenumber
-                augroup END
-                augroup NumbersOn
-                    autocmd!
-                augroup END
-                windo setlocal number norelativenumber
-                exe l:currentWindow . "wincmd w"
-                setlocal relativenumber
-            endif
-        endfunction
-        call ToggleNumbersAutoGroup()
-
-        command! ToggleNumbersInOtherWindows call ToggleNumbersAutoGroup()
-    "}}}
-
     " Quickly time out on keycodes, but never time out on mappings
     set notimeout ttimeout ttimeoutlen=200
 
@@ -302,37 +261,6 @@
     " insert newline in normal mode {{{
         nnoremap <Leader><CR> i<CR><esc>
     "}}}
-    " make h and l skip indentation white spaces {{{
-
-        function! MyLMotion()
-            let cursorPosition=getpos(".")
-            normal ^
-            let firstChar=getpos(".")
-
-            if cursorPosition[2] < firstChar[2]
-                normal ^
-            else
-                call setpos('.', cursorPosition)
-                normal! l
-            endif
-        endfunction
-
-        function! MyHMotion()
-            let cursorPosition=getpos(".")
-            normal ^
-            let firstChar=getpos(".")
-
-            if cursorPosition[2] <= firstChar[2]
-                normal 0
-            else
-                call setpos('.', cursorPosition)
-                normal! h
-            endif
-        endfunction
-
-        nnoremap <silent> h :call MyHMotion()<CR>
-        nnoremap <silent> l :call MyLMotion()<CR>
-    "}}}
     " Use T in visual mode to start Tabular function {{{
         vnoremap T :Tabular / 
     "}}}
@@ -342,12 +270,6 @@
     " Record macros with Q instead of q {{{
         nnoremap Q q
         nnoremap q <Nop>
-    "}}}
-"}}}
-" Abbreviations {{{
-    " Open help vertically with H or HR {{{
-        cnoreabbrev HL vert h
-        cnoreabbrev H vert bo h
     "}}}
 "}}}
 " Manage tabs {{{
@@ -416,16 +338,6 @@
     call matchadd('ColorColumn', '\%#=1\%81v', 100)
     "call matchadd('ColorColumn', '\%81v', 100)
 "}}}
-" Get a random number using system function {{{
-" http://vi.stackexchange.com/a/819/1821
-    function! GetRandomInteger()
-        if has('win32')
-            return system("echo %RANDOM%")
-        else
-            return system("echo $RANDOM")
-        endif
-    endfunction
-" }}}
 " Text, tab and indent related configuration {{{
     " Use spaces instead of tabs
     set expandtab
@@ -495,6 +407,93 @@
         endfunction
 
         command! -nargs=1 -complete=help GOD call GetOnlineDoc(<f-args>)
+    "}}}
+    " Toggle number on windows which are not the current one {{{
+        " This function allow 2 behaviors:
+        " - current window has number and relativenumber and other window has nothing
+        " - current window has number and relativenumber and other window has number
+        " The command ToggleNumbersInOtherWindows allows to toggle these behaviors
+        function! ToggleNumbersAutoGroup()
+            let l:currentWindow=winnr()
+            if !exists('#NumbersOn#WinEnter')
+                augroup NumbersOn
+                    autocmd!
+                    autocmd WinEnter * setlocal number
+                    autocmd WinEnter * setlocal relativenumber
+                    autocmd WinLeave * setlocal nonumber
+                    autocmd WinLeave * setlocal norelativenumber
+                augroup END
+                augroup NumbersOff
+                    autocmd!
+                augroup END
+                windo setlocal nonumber norelativenumber
+                exe l:currentWindow . "wincmd w"
+                setlocal number relativenumber
+            else
+                augroup NumbersOff
+                    autocmd!
+                    autocmd WinEnter * setlocal number
+                    autocmd WinEnter * setlocal relativenumber
+                    autocmd WinLeave * setlocal norelativenumber
+                augroup END
+                augroup NumbersOn
+                    autocmd!
+                augroup END
+                windo setlocal number norelativenumber
+                exe l:currentWindow . "wincmd w"
+                setlocal relativenumber
+            endif
+        endfunction
+        call ToggleNumbersAutoGroup()
+
+        command! ToggleNumbersInOtherWindows call ToggleNumbersAutoGroup()
+    "}}}
+    " make h and l skip indentation white spaces {{{
+        function! MyLMotion()
+            let cursorPosition=getpos(".")
+            normal ^
+            let firstChar=getpos(".")
+
+            if cursorPosition[2] < firstChar[2]
+                normal ^
+            else
+                call setpos('.', cursorPosition)
+                normal! l
+            endif
+        endfunction
+
+        function! MyHMotion()
+            let cursorPosition=getpos(".")
+            normal ^
+            let firstChar=getpos(".")
+
+            if cursorPosition[2] <= firstChar[2]
+                normal 0
+            else
+                call setpos('.', cursorPosition)
+                normal! h
+            endif
+        endfunction
+
+        nnoremap <silent> h :call MyHMotion()<CR>
+        nnoremap <silent> l :call MyLMotion()<CR>
+    "}}}
+    " Get a random number using system function {{{
+    " http://vi.stackexchange.com/a/819/1821
+        function! GetRandomInteger()
+            if has('win32')
+                return system("echo %RANDOM%")
+            else
+                return system("echo $RANDOM")
+            endif
+        endfunction
+    " }}}
+    " Open help vertically with H {{{
+        command! -complete=help -nargs=1 H call VerticalHelp(<f-args>)
+        function! VerticalHelp(topic)
+            execute "vertical botright help " . a:topic
+            execute "vertical resize 80"
+        endfunction
     "}}}
 "}}}
 " Filetype specific configurations {{{
