@@ -418,8 +418,8 @@
             if !exists('#NumbersOn#WinEnter')
                 augroup NumbersOn
                     autocmd!
-                    autocmd WinEnter * setlocal number
-                    autocmd WinEnter * setlocal relativenumber
+                    autocmd WinEnter * if &ft!="help" | setlocal number | endif
+                    autocmd WinEnter * if &ft!="help" | setlocal relativenumber | endif
                     autocmd WinLeave * setlocal nonumber
                     autocmd WinLeave * setlocal norelativenumber
                 augroup END
