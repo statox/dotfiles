@@ -27,12 +27,6 @@
     " Stop certain movements from always going to the first character of a line.
     "set nostartofline
 
-    " Display the cursor position in the status line
-    set ruler
-
-    " Always display the status line, even if only one window is displayed
-    set laststatus=2
-
     " Raise dialog instead of failing a command because of unsaved changes
     set confirm
 
@@ -128,35 +122,6 @@
         let g:syntastic_auto_loc_list            = 1
         let g:syntastic_check_on_open            = 0
         let g:syntastic_check_on_wq              = 0
-    "}}}
-    " bling/vim-airline: status/tab line light as air{{{
-        Plug 'vim-airline/vim-airline'
-        Plug 'vim-airline/vim-airline-themes'
-
-        " appearence configuration
-        let g:airline_powerline_fonts = 1
-        let g:airline_theme           = 'jellybeans'
-
-        " features
-        let g:airline#extensions#branch#enabled        = 1
-        let g:airline#extensions#syntastic#enabled     = 1
-        let g:airline#extensions#tabline#enabled       = 1
-        let g:airline#extensions#nerdtree#enabled      = 1
-        let g:airline#extensions#fugitive#enabled      = 1
-        "let g:airline#extensions#vimbufferline#enabled = 1
-
-        " enable modified detection
-        let g:airline_detect_modified=1
-
-
-        " separators symbols
-        let g:airline_left_sep          = ''
-        let g:airline_left_alt_sep      = ''
-        let g:airline_right_sep         = ''
-        let g:airline_right_alt_sep     = ''
-        "let g:airline_branch_prefix     = ''
-        "let g:airline_readonly_symbol   = ''
-        "let g:airline_linecolumn_prefix = ''
     "}}}
     " tpope/vim-surround: Surround text with matching caracters{{{
         Plug 'tpope/vim-surround'
@@ -341,6 +306,13 @@
     highlight ColorColumn ctermbg=black ctermfg=red guibg=black guifg=red
     call matchadd('ColorColumn', '\%#=1\%81v', 100)
     "call matchadd('ColorColumn', '\%81v', 100)
+"}}}
+" status line configuration {{{
+    " Display the cursor position in the status line
+    set noruler
+
+    " Always display the status line, even if only one window is displayed
+    set laststatus=0
 "}}}
 " Text, tab and indent related configuration {{{
     " Use spaces instead of tabs
