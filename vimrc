@@ -24,9 +24,6 @@
     " Allow backspacing over autoindent, line breaks and start of insert action
     set backspace=indent,eol,start
 
-    " Stop certain movements from always going to the first character of a line.
-    "set nostartofline
-
     " Raise dialog instead of failing a command because of unsaved changes
     set confirm
 
@@ -49,9 +46,6 @@
 
     " Use <F11> to toggle between 'paste' and 'nopaste'
     set pastetoggle=<F11>
-
-    " highlight current line
-    set cursorline
 
     " set some mapping to work with an azerty keyboard
     set langmap+=à@,ù%
