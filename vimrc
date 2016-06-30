@@ -8,9 +8,6 @@
 
     let mapleader="\<Space>"    " remap mapleader to space
 
-    " :W save file with sudo permissions
-    command! W w !sudo tee % > /dev/null
-
     " Allow to change buffer even if the current one is not written
     set hidden
 
@@ -464,6 +461,9 @@
             execute "vertical botright help " . a:topic
             execute "vertical resize 78"
         endfunction
+    "}}}
+    " :W save file with sudo permissions {{{
+        command! W w !sudo tee % > /dev/null
     "}}}
 "}}}
 " Filetype specific configurations {{{
