@@ -85,9 +85,6 @@
             source $MYLOCALPLUG
         endif
     "}}}
-    " jiangmiao/auto-pairs: insert or delete brackets, parens, quotes in pair{{{
-        "Plug 'jiangmiao/auto-pairs'
-    "}}}
     " scrooloose/nerdcommenter: Vim plugin for intensely orgasmic commenting{{{
         Plug 'scrooloose/nerdcommenter'
     "}}}
@@ -96,23 +93,6 @@
     "}}}
     " ervandew/supertab: completion with <Tab>{{{
         Plug 'ervandew/supertab'
-    "}}}
-    " scrooloose/syntastic: Syntax checker{{{
-        Plug 'scrooloose/syntastic'
-
-        " this is the recommended configuration (see https://github.com/scrooloose/syntastic/blob/master/README.markdown#3-recommended-settings)
-
-        " Toggle syntastic with <Leader-s>
-        nmap <Leader>s :SyntasticToggleMode<CR>
-
-        set statusline+=%#warningmsg#
-        set statusline+=%{SyntasticStatuslineFlag()}
-        set statusline+=%*
-
-        let g:syntastic_always_populate_loc_list = 1
-        let g:syntastic_auto_loc_list            = 1
-        let g:syntastic_check_on_open            = 0
-        let g:syntastic_check_on_wq              = 0
     "}}}
     " tpope/vim-surround: Surround text with matching caracters{{{
         Plug 'tpope/vim-surround'
