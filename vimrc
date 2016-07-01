@@ -8,9 +8,6 @@
 
     let mapleader="\<Space>"    " remap mapleader to space
 
-    " :W save file with sudo permissions
-    command! W w !sudo tee % > /dev/null
-
     " Allow to change buffer even if the current one is not written
     set hidden
 
@@ -18,20 +15,11 @@
     set wildmenu
     set wildmode=longest,list,full
 
-    " Show partial commands in the last line of the screen
-    set showcmd
+    " Do not show partial commands in the last line of the screen
+    set noshowcmd
 
     " Allow backspacing over autoindent, line breaks and start of insert action
     set backspace=indent,eol,start
-
-    " Stop certain movements from always going to the first character of a line.
-    "set nostartofline
-
-    " Display the cursor position in the status line
-    set ruler
-
-    " Always display the status line, even if only one window is displayed
-    set laststatus=2
 
     " Raise dialog instead of failing a command because of unsaved changes
     set confirm
@@ -48,57 +36,9 @@
 
     " Display line numbers on the left
     set number
-    set relativenumber
-
-    " Toggle number on windows which are not the current one {{{
-        " This function allow 2 behaviors:
-        " - current window has number and relativenumber and other window has nothing
-        " - current window has number and relativenumber and other window has number
-        " The command ToggleNumbersInOtherWindows allows to toggle these behaviors
-        function! ToggleNumbersAutoGroup()
-            let l:currentWindow=winnr()
-            if !exists('#NumbersOn#WinEnter')
-                augroup NumbersOn
-                    autocmd!
-                    autocmd WinEnter * setlocal number
-                    autocmd WinEnter * setlocal relativenumber
-                    autocmd WinLeave * setlocal nonumber
-                    autocmd WinLeave * setlocal norelativenumber
-                augroup END
-                augroup NumbersOff
-                    autocmd!
-                augroup END
-                windo setlocal nonumber norelativenumber
-                exe l:currentWindow . "wincmd w"
-                setlocal number relativenumber
-            else
-                augroup NumbersOff
-                    autocmd!
-                    autocmd WinEnter * setlocal number
-                    autocmd WinEnter * setlocal relativenumber
-                    autocmd WinLeave * setlocal norelativenumber
-                augroup END
-                augroup NumbersOn
-                    autocmd!
-                augroup END
-                windo setlocal number norelativenumber
-                exe l:currentWindow . "wincmd w"
-                setlocal relativenumber
-            endif
-        endfunction
-        call ToggleNumbersAutoGroup()
-
-        command! ToggleNumbersInOtherWindows call ToggleNumbersAutoGroup()
-    "}}}
 
     " Quickly time out on keycodes, but never time out on mappings
     set notimeout ttimeout ttimeoutlen=200
-
-    " Use <F11> to toggle between 'paste' and 'nopaste'
-    set pastetoggle=<F11>
-
-    " highlight current line
-    set cursorline
 
     " set some mapping to work with an azerty keyboard
     set langmap+=à@,ù%
@@ -121,6 +61,10 @@
 
     " Add subdirectories to path
     set path +=**
+
+    " Show unseeing characters
+    set list
+    set listchars=eol:$,tab:>-,trail:.
 "}}}
 " Plugins {{{
     " Manage plugins with vim-plug (https://github.com/junegunn/vim-plug)
@@ -137,9 +81,6 @@
             source $MYLOCALPLUG
         endif
     "}}}
-    " jiangmiao/auto-pairs: insert or delete brackets, parens, quotes in pair{{{
-        "Plug 'jiangmiao/auto-pairs'
-    "}}}
     " scrooloose/nerdcommenter: Vim plugin for intensely orgasmic commenting{{{
         Plug 'scrooloose/nerdcommenter'
     "}}}
@@ -148,52 +89,6 @@
     "}}}
     " ervandew/supertab: completion with <Tab>{{{
         Plug 'ervandew/supertab'
-    "}}}
-    " scrooloose/syntastic: Syntax checker{{{
-        Plug 'scrooloose/syntastic'
-
-        " this is the recommended configuration (see https://github.com/scrooloose/syntastic/blob/master/README.markdown#3-recommended-settings)
-
-        " Toggle syntastic with <Leader-s>
-        nmap <Leader>s :SyntasticToggleMode<CR>
-
-        set statusline+=%#warningmsg#
-        set statusline+=%{SyntasticStatuslineFlag()}
-        set statusline+=%*
-
-        let g:syntastic_always_populate_loc_list = 1
-        let g:syntastic_auto_loc_list            = 1
-        let g:syntastic_check_on_open            = 0
-        let g:syntastic_check_on_wq              = 0
-    "}}}
-    " bling/vim-airline: status/tab line light as air{{{
-        Plug 'vim-airline/vim-airline'
-        Plug 'vim-airline/vim-airline-themes'
-
-        " appearence configuration
-        let g:airline_powerline_fonts = 1
-        let g:airline_theme           = 'jellybeans'
-
-        " features
-        let g:airline#extensions#branch#enabled        = 1
-        let g:airline#extensions#syntastic#enabled     = 1
-        let g:airline#extensions#tabline#enabled       = 1
-        let g:airline#extensions#nerdtree#enabled      = 1
-        let g:airline#extensions#fugitive#enabled      = 1
-        "let g:airline#extensions#vimbufferline#enabled = 1
-
-        " enable modified detection
-        let g:airline_detect_modified=1
-
-
-        " separators symbols
-        let g:airline_left_sep          = ''
-        let g:airline_left_alt_sep      = ''
-        let g:airline_right_sep         = ''
-        let g:airline_right_alt_sep     = ''
-        "let g:airline_branch_prefix     = ''
-        "let g:airline_readonly_symbol   = ''
-        "let g:airline_linecolumn_prefix = ''
     "}}}
     " tpope/vim-surround: Surround text with matching caracters{{{
         Plug 'tpope/vim-surround'
@@ -299,37 +194,6 @@
     " insert newline in normal mode {{{
         nnoremap <Leader><CR> i<CR><esc>
     "}}}
-    " make h and l skip indentation white spaces {{{
-
-        function! MyLMotion()
-            let cursorPosition=getpos(".")
-            normal ^
-            let firstChar=getpos(".")
-
-            if cursorPosition[2] < firstChar[2]
-                normal ^
-            else
-                call setpos('.', cursorPosition)
-                normal! l
-            endif
-        endfunction
-
-        function! MyHMotion()
-            let cursorPosition=getpos(".")
-            normal ^
-            let firstChar=getpos(".")
-
-            if cursorPosition[2] <= firstChar[2]
-                normal 0
-            else
-                call setpos('.', cursorPosition)
-                normal! h
-            endif
-        endfunction
-
-        nnoremap <silent> h :call MyHMotion()<CR>
-        nnoremap <silent> l :call MyLMotion()<CR>
-    "}}}
     " Use T in visual mode to start Tabular function {{{
         vnoremap T :Tabular / 
     "}}}
@@ -339,12 +203,6 @@
     " Record macros with Q instead of q {{{
         nnoremap Q q
         nnoremap q <Nop>
-    "}}}
-"}}}
-" Abbreviations {{{
-    " Open help vertically with H or HR {{{
-        cnoreabbrev HL vert h
-        cnoreabbrev H vert bo h
     "}}}
 "}}}
 " Manage tabs {{{
@@ -413,16 +271,13 @@
     call matchadd('ColorColumn', '\%#=1\%81v', 100)
     "call matchadd('ColorColumn', '\%81v', 100)
 "}}}
-" Get a random number using system function {{{
-" http://vi.stackexchange.com/a/819/1821
-    function! GetRandomInteger()
-        if has('win32')
-            return system("echo %RANDOM%")
-        else
-            return system("echo $RANDOM")
-        endif
-    endfunction
-" }}}
+" status line configuration {{{
+    " Display the cursor position in the status line
+    set noruler
+
+    " Always display the status line, even if only one window is displayed
+    set laststatus=0
+"}}}
 " Text, tab and indent related configuration {{{
     " Use spaces instead of tabs
     set expandtab
@@ -449,49 +304,89 @@
 
     highlight clear Search
 "}}}
-"Configuration specific to gvim {{{
-    " Maximize window when starting gVim (works on MS windows only)
-    autocmd GUIEnter * simalt ~n
-
-    " Remove useless graphical stuff
-    set guioptions-=m  "menu bar
-    set guioptions-=T  "toolbar
-    set guioptions-=r  "right-hand scroll bar
-    set guioptions-=L  "left-hand scroll bar
-"}}}
 " Rename TMUX tab vim name of edited file {{{
     autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window '" . expand("%:t") . "'")
 " }}}
 " Custom functions and commands {{{
-    " Get a link to the online page of an help tag {{{
-        function! GetOnlineDoc(string)
-
-            " Go to specified help tag locally
-            execute "h " . a:string
-
-            " Get the help filename without the ".txt" extension
-            let filename = expand("%:t:r")
-
-            " Replace some characters to get a correct url
-            let string = substitute(a:string, "'", "%27", "g")
-
-            " Create the link
-            let link = "http://vimdoc.sourceforge.net/htmldoc/" . filename . ".html#" . string
-
-            let link = "[`:h " . a:string . "`](" . link . ")"
-
-            " Put it in the clipboard register
-            if has('win32')
-                let @* = link
+    " Toggle number on windows which are not the current one {{{
+        " This function allow 2 behaviors:
+        " - current window has number and relativenumber and other window has nothing
+        " - current window has number and relativenumber and other window has number
+        " The command ToggleNumbersInOtherWindows allows to toggle these behaviors
+        function! ToggleNumbersAutoGroup()
+            let l:currentWindow=winnr()
+            if !exists('#NumbersOn#WinEnter')
+                augroup NumbersOn
+                    autocmd!
+                    autocmd WinEnter * if &ft!="help" | setlocal number | endif
+                    autocmd WinEnter * if &ft!="help" | setlocal relativenumber | endif
+                    autocmd WinLeave * setlocal nonumber
+                    autocmd WinLeave * setlocal norelativenumber
+                augroup END
+                augroup NumbersOff
+                    autocmd!
+                augroup END
+                windo setlocal nonumber norelativenumber
+                exe l:currentWindow . "wincmd w"
+                setlocal number relativenumber
             else
-                let @+ = link
+                augroup NumbersOff
+                    autocmd!
+                    autocmd WinEnter * setlocal number
+                    autocmd WinEnter * setlocal relativenumber
+                    autocmd WinLeave * setlocal norelativenumber
+                augroup END
+                augroup NumbersOn
+                    autocmd!
+                augroup END
+                windo setlocal number norelativenumber
+                exe l:currentWindow . "wincmd w"
+                setlocal relativenumber
             endif
+        endfunction
+        call ToggleNumbersAutoGroup()
 
-            " Optional, close the opened help file
-            "execute "bd"
+        command! ToggleNumbersInOtherWindows call ToggleNumbersAutoGroup()
+    "}}}
+    " make h and l skip indentation white spaces {{{
+        function! MyLMotion()
+            let cursorPosition=getpos(".")
+            normal ^
+            let firstChar=getpos(".")
+
+            if cursorPosition[2] < firstChar[2]
+                normal ^
+            else
+                call setpos('.', cursorPosition)
+                normal! l
+            endif
         endfunction
 
-        command! -nargs=1 -complete=help GOD call GetOnlineDoc(<f-args>)
+        function! MyHMotion()
+            let cursorPosition=getpos(".")
+            normal ^
+            let firstChar=getpos(".")
+
+            if cursorPosition[2] <= firstChar[2]
+                normal 0
+            else
+                call setpos('.', cursorPosition)
+                normal! h
+            endif
+        endfunction
+
+        nnoremap <silent> h :call MyHMotion()<CR>
+        nnoremap <silent> l :call MyLMotion()<CR>
+    "}}}
+    " Open help vertically with H {{{
+        command! -complete=help -nargs=1 H call VerticalHelp(<f-args>)
+        function! VerticalHelp(topic)
+            execute "vertical botright help " . a:topic
+            execute "vertical resize 78"
+        endfunction
+    "}}}
+    " :W save file with sudo permissions {{{
+        command! W w !sudo tee % > /dev/null
     "}}}
 "}}}
 " Filetype specific configurations {{{
