@@ -15,8 +15,8 @@
     set wildmenu
     set wildmode=longest,list,full
 
-    " Show partial commands in the last line of the screen
-    set showcmd
+    " Do not show partial commands in the last line of the screen
+    set noshowcmd
 
     " Allow backspacing over autoindent, line breaks and start of insert action
     set backspace=indent,eol,start
@@ -40,9 +40,6 @@
 
     " Quickly time out on keycodes, but never time out on mappings
     set notimeout ttimeout ttimeoutlen=200
-
-    " Use <F11> to toggle between 'paste' and 'nopaste'
-    set pastetoggle=<F11>
 
     " set some mapping to work with an azerty keyboard
     set langmap+=à@,ù%
