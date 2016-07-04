@@ -208,6 +208,9 @@
         nnoremap Q q
         nnoremap q <Nop>
     "}}}
+    " Delete the current word in insert mode with <C-backspace> {{{
+        inoremap  <C-w>
+    " }}}
 "}}}
 " Manage tabs {{{
     " move to new/previous tabs
