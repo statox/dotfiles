@@ -211,6 +211,9 @@
     " Use s instead of <C-w> to handle windows {{{
         nnoremap s <C-w>
     " }}}
+    " Show the current file name with <leader>f {{{
+        nnoremap <Leader>f :echo expand('%:p')<CR>
+    " }}}
 "}}}
 " Manage tabs {{{
     " move to new/previous tabs
