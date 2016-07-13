@@ -121,6 +121,8 @@
             let g:UltiSnipsJumpBackwardTrigger="<Left>"
             " Make :UltiSnipsEdit split window vertically
             let g:UltiSnipsEditSplit="vertical"
+            " Define where the customs plugins are stored
+            let g:UltiSnipsSnippetsDir="~/.vim/my-snippets/UltiSnips"
 
             " Add directory containing my custom plugins
             set runtimepath +=~/.vim/my-snippets
