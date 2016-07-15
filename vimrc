@@ -66,6 +66,9 @@
     " Show unseeing characters
     set list
     set listchars=eol:$,tab:>-,trail:.
+
+    " Better color handling
+    set t_Co=256
 "}}}
 " Plugins {{{
     " Manage plugins with vim-plug (https://github.com/junegunn/vim-plug)
