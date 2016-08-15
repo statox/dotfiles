@@ -69,6 +69,9 @@
 
     " Better color handling
     set t_Co=256
+
+    " Never show the tab line
+    set showtabline=0
 "}}}
 " Plugins {{{
     " Manage plugins with vim-plug (https://github.com/junegunn/vim-plug)
