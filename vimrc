@@ -222,6 +222,9 @@
     " Show the current file name with <leader>f {{{
         nnoremap <Leader>f :echo expand('%:p')<CR>
     " }}}
+    " Ease buffer navigation with <leader><s-b> {{{
+        nnoremap <leader><S-b> :buffers<CR>:buffer<space>
+    " }}}
 "}}}
 " Manage tabs {{{
     " move to new/previous tabs
