@@ -97,19 +97,6 @@
     " tpope/vim-surround: Surround text with matching caracters{{{
         Plug 'tpope/vim-surround'
     "}}}
-    " junegunn/vim-oblique: Improved search for Vim.{{{
-        Plug 'junegunn/vim-oblique' | Plug 'junegunn/vim-pseudocl'
-
-        " Clear autocommand
-        autocmd! User Oblique
-        autocmd! User ObliqueStar
-        autocmd! User ObliqueRepeat
-
-        " Put the cursor in the middle of the screen at each match
-        autocmd User Oblique       normal! zz
-        autocmd User ObliqueStar   normal! zz
-        autocmd User ObliqueRepeat normal! zz
-    "}}}
     " nanotech/jellybeans.vim: Cool colorscheme{{{
         Plug 'nanotech/jellybeans.vim'
     "}}}
