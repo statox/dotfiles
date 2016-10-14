@@ -294,20 +294,55 @@
 " Custom functions and commands {{{
     " Get a link to the online page of an help tag {{{
         function! GetOnlineDoc(string)
-
             " Go to specified help tag locally
             execute "h " . a:string
 
-            " Get the help filename without the ".txt" extension
-            let filename = expand("%:t:r")
+            " Get the help filename
+            let f = expand("%:t")
 
-            " Replace some characters to get a correct url
-            let string = substitute(a:string, "'", "%27", "g")
+            " Get the tag
+            let tag = expand('<cword>')
+
+            " URL encoding (taken from https://github.com/idbrii/vim-textconv/blob/master/autoload/textconv/urlencode.vim)
+            let dict = [
+                \['%21','!'],
+                \['%22',' '],
+                \['%23','#'],
+                \['%24','\$'],
+                \['%26','&'],
+                \['%27',"'"],
+                \['%28','('],
+                \['%29',')'],
+                \['%2A','*'],
+                \['%2B','+'],
+                \['%2C',','],
+                \['%2D','-'],
+                \['%2F','/'],
+                \['%3A',':'],
+                \['%3B',';'],
+                \['%3C','<'],
+                \['%3D','='],
+                \['%3E','>'],
+                \['%3F','?'],
+                \['%40','@'],
+                \['%5B','['],
+                \['%5C','\'],
+                \['%5D',']'],
+                \['%5E','\^'],
+                \['%60','`'],
+                \['%7B','{'],
+                \['%7C','|'],
+                \['%7D','}'],
+                \['%7E','\~']
+            \]
+
+            let s = tag
+            for i in dict
+                let s = substitute(s, i[1], i[0], 'g')
+            endfor
 
             " Create the link
-            let link = "http://vimdoc.sourceforge.net/htmldoc/" . filename . ".html#" . string
-
-            let link = "[`:h " . a:string . "`](" . link . ")"
+            let link = "[`:h " . tag . "`](http://vimhelp.appspot.com/" . f . ".html#" . s . ")"
 
             " Put it in the clipboard register
             if has('win32')
