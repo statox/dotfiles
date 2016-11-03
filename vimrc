@@ -210,7 +210,7 @@
         nnoremap <leader><S-b> :buffers<CR>:buffer<space>
     " }}}
     " Make command line navigation easier {{{
-        cnoremap <C-a> <Home>
+        cnoremap <C-a> USE CTRL - B
         cnoremap <C-l> <Right>
         cnoremap <C-h> <Left>
         cnoremap <C-k> <S-Up>
