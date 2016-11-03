@@ -209,6 +209,13 @@
     " Ease buffer navigation with <leader><s-b> {{{
         nnoremap <leader><S-b> :buffers<CR>:buffer<space>
     " }}}
+    " Make command line navigation easier {{{
+        cnoremap <C-a> <Home>
+        cnoremap <C-l> <Right>
+        cnoremap <C-h> <Left>
+        cnoremap <C-k> <S-Up>
+        cnoremap <C-j> <S-Down>
+    "}}}
 "}}}
 " Manage tabs {{{
     " move to new/previous tabs
