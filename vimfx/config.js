@@ -17,13 +17,6 @@ nmap('<space>h' , 'tab_close')
 nmap('<space>l' , 'tab_new_after_current')
 nmap('u'        , 'tab_restore')
 
-//Scrolling
-nmap('' , 'scroll_left')
-nmap('' , 'scroll_right')
-nmap('' , 'scroll_page_down')
-nmap('' , 'scroll_page_up')
-nmap('' , 'scroll_to_left')
-nmap('' , 'scroll_to_right')
 
 //Searchmode
 nmap('a/' , 'find')
@@ -37,9 +30,18 @@ nmap('<s-backspace>' , 'history_forward')
 nmap('<space>k' , 'follow_in_tab')
 
 //Interactionwithhints
-nmap(''   , 'paste_and_go')
 nmap('Y'  , 'copy_current_url')
 nmap('yy' , 'copy_current_url')
+
+//Unmap stuff for convenience
+nmap('' , 'scroll_left')
+nmap('' , 'scroll_right')
+nmap('' , 'scroll_page_down')
+nmap('' , 'scroll_page_up')
+nmap('' , 'scroll_to_left')
+nmap('' , 'scroll_to_right')
+nmap('' , 'mode.normal.element_text_caret')
+nmap('' , 'paste_and_go')
 
 //Privatewindow
 nmap('pw' , 'window_new_private')
