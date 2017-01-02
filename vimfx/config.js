@@ -1,5 +1,3 @@
-console.log('bite')
-
 //Define the hint chars
 vimfx.set('hints.chars', 'hjlyubn')
 
@@ -18,7 +16,7 @@ nmap('<space>l' , 'tab_new_after_current')
 nmap('u'        , 'tab_restore')
 
 
-//Searchmode
+//Search mode
 nmap('a/' , 'find')
 nmap('/'  , 'find_highlight_all')
 
@@ -26,10 +24,11 @@ nmap('/'  , 'find_highlight_all')
 nmap('<backspace>'   , 'history_back')
 nmap('<s-backspace>' , 'history_forward')
 
-//Followinglinks
+//Following links
 nmap('<space>k' , 'follow_in_tab')
+nmap("<space>j", "follow")
 
-//Interactionwithhints
+//Interaction with hints
 nmap('Y'  , 'copy_current_url')
 nmap('yy' , 'copy_current_url')
 
@@ -40,8 +39,8 @@ nmap('' , 'scroll_page_down')
 nmap('' , 'scroll_page_up')
 nmap('' , 'scroll_to_left')
 nmap('' , 'scroll_to_right')
-nmap('' , 'mode.normal.element_text_caret')
+nmap('' , 'element_text_caret')
 nmap('' , 'paste_and_go')
 
-//Privatewindow
+//Private window
 nmap('pw' , 'window_new_private')
