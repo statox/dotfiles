@@ -13,6 +13,7 @@ tmux.conf
 vimperatorrc
 vim
 vimrc
+vimfx
 xdefaults
 Xresources
 zshrc
