@@ -56,6 +56,10 @@ bindsym $mod+q focus parent
 # focus the child container
 bindsym $mod+c focus child
 
+# Rotate through workspaces
+bindcode $mod+23 workspace next
+bindcode $mod+Shift+23 workspace prev
+
 # switch to workspace
 bindsym $mod+ampersand workspace 1
 bindsym $mod+eacute workspace 2
