@@ -1,5 +1,5 @@
 # Start up applications
-exec --no-startup-id i3-msg 'workspace 1; exec i3-sensible-terminal'
+exec --no-startup-id i3-msg 'workspace 1; exec urxvt'
 exec --no-startup-id i3-msg 'workspace 2; exec firefox-esr'
 
 # Use Windows Key as leader
@@ -12,7 +12,7 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec urxvt
 
 # kill focused window
 bindsym $mod+Shift+A kill
@@ -33,8 +33,8 @@ bindsym $mod+Shift+l move right
 bindsym $mod+Shift+h move left
 
 # split in vertical horizontal orientation
-bindsym $mod+Shift+v split h; exec --no-startup-id i3-sensible-terminal
-bindsym $mod+v split v; exec --no-startup-id i3-sensible-terminal
+bindsym $mod+Shift+v split h; exec --no-startup-id urxvt
+bindsym $mod+v split v; exec --no-startup-id urxvt
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
