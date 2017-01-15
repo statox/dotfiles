@@ -1,126 +1,178 @@
-# Start up applications
-exec --no-startup-id i3-msg 'workspace 1; exec urxvt'
-exec --no-startup-id i3-msg 'workspace 2; exec firefox-esr'
+#~/.i3/config
+# vim:fdm=marker
 
-# Use Windows Key as leader
-set $mod Mod4
+# Start up {{{
+    exec_always --no-startup-id i3-msg 'workspace 1; exec urxvt; exec keepass2; layout tabbed'
+    exec_always --no-startup-id i3-msg 'workspace 2; exec firefox-esr'
+#}}}
+# Appearence settings {{{
+    # Hide screen borders
+    hide_edge_borders both
 
-# Font for window titles.
-font pango:monospace 8
+    # Set windows borders
+    for_window [class="^.*"] border pixel 10
 
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
+    # Font for window titles.
+    font pango:monospace 8
+#}}}
+# Bindings {{{
+    # Use Windows Key as leader
+    set $mod Mod4
 
-# start a terminal
-bindsym $mod+Return exec urxvt
+    # Use Mouse+$mod to drag floating windows to their wanted position
+    floating_modifier $mod
 
-# kill focused window
-bindsym $mod+Shift+A kill
+    # start a terminal
+    bindsym $mod+Return exec urxvt
 
-# start dmenu
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+    # kill focused window
+    bindsym $mod+Shift+A kill
 
-# change focus
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
-bindsym $mod+h focus left
+    # start dmenu
+    bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
-# move focused window
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
-bindsym $mod+Shift+h move left
+    # change focus
+    bindsym $mod+j focus down
+    bindsym $mod+k focus up
+    bindsym $mod+l focus right
+    bindsym $mod+h focus left
 
-# split in vertical horizontal orientation
-bindsym $mod+Shift+v split h; exec --no-startup-id urxvt
-bindsym $mod+v split v; exec --no-startup-id urxvt
+    # move focused window
+    bindsym $mod+Shift+j move down
+    bindsym $mod+Shift+k move up
+    bindsym $mod+Shift+l move right
+    bindsym $mod+Shift+h move left
 
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+    # split in vertical horizontal orientation
+    bindsym $mod+Shift+v split h; exec --no-startup-id urxvt
+    bindsym $mod+v split v; exec --no-startup-id urxvt
 
-# change container layout
-bindsym $mod+s layout stacking
-bindsym $mod+t layout tabbed
-bindsym $mod+e layout toggle split
+    # enter fullscreen mode for the focused container
+    bindsym $mod+f fullscreen toggle
 
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+    # change container layout
+    bindsym $mod+s layout stacking
+    bindsym $mod+t layout tabbed
+    bindsym $mod+e layout toggle split
 
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+    # toggle tiling / floating
+    bindsym $mod+Shift+space floating toggle
 
-# focus the parent container
-bindsym $mod+q focus parent
+    # change focus between tiling / floating windows
+    bindsym $mod+space focus mode_toggle
 
-# focus the child container
-bindsym $mod+c focus child
+    # focus the parent container
+    bindsym $mod+q focus parent
 
-# Rotate through workspaces
-bindcode $mod+23 workspace next
-bindcode $mod+Shift+23 workspace prev
+    # focus the child container
+    bindsym $mod+c focus child
 
-# switch to workspace
-bindsym $mod+ampersand workspace 1
-bindsym $mod+eacute workspace 2
-bindsym $mod+quotedbl workspace 3
-bindsym $mod+apostrophe workspace 4
-bindsym $mod+parenleft workspace 5
-bindsym $mod+minus workspace 6
-bindsym $mod+egrave workspace 7
-bindsym $mod+underscore workspace 8
-bindsym $mod+ccedilla workspace 9
-bindsym $mod+agrave workspace 10
+    # Rotate through workspaces
+    bindcode $mod+23 workspace next
+    bindcode $mod+Shift+23 workspace prev
+    bindsym $mod+space+l workspace next
+    bindsym $mod+space+h workspace prev
 
-# move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+eacute move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+egrave move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+ccedilla move container to workspace 9
-bindsym $mod+Shift+agrave move container to workspace 10
+    # switch to workspace
+    bindsym $mod+ampersand workspace 1
+    bindsym $mod+eacute workspace 2
+    bindsym $mod+quotedbl workspace 3
+    bindsym $mod+apostrophe workspace 4
+    bindsym $mod+parenleft workspace 5
+    bindsym $mod+minus workspace 6
+    bindsym $mod+egrave workspace 7
+    bindsym $mod+underscore workspace 8
+    bindsym $mod+ccedilla workspace 9
+    bindsym $mod+agrave workspace 10
 
-# reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-# exit i3 (logs out of X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Really exit i3? This will end X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+    # move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace 1
+    bindsym $mod+Shift+eacute move container to workspace 2
+    bindsym $mod+Shift+3 move container to workspace 3
+    bindsym $mod+Shift+4 move container to workspace 4
+    bindsym $mod+Shift+5 move container to workspace 5
+    bindsym $mod+Shift+6 move container to workspace 6
+    bindsym $mod+Shift+egrave move container to workspace 7
+    bindsym $mod+Shift+8 move container to workspace 8
+    bindsym $mod+Shift+ccedilla move container to workspace 9
+    bindsym $mod+Shift+agrave move container to workspace 10
 
-# resize window
-bindsym $mod+r mode "resize"
-mode "resize" {
-        # Resizing windows with hjkl
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
+    # reload the configuration file
+    bindsym $mod+Shift+c reload
+    # restart i3 inplace (preserves layout/session, can be used to upgrade i3)
+    bindsym $mod+Shift+r restart
+    # exit i3 (logs out of X session)
+    bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Really exit i3? This will end X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+    # Change Audio volume
+    bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -10%
+    bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +10%
+    # Sreen brightness controls
+    bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+    bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
+    # resize window
+    bindsym $mod+r mode "resize"
+    mode "resize" {
+            # Resizing windows with hjkl
+            bindsym h resize shrink width 10 px or 10 ppt
+            bindsym j resize grow height 10 px or 10 ppt
+            bindsym k resize shrink height 10 px or 10 ppt
+            bindsym l resize grow width 10 px or 10 ppt
 
-# Start i3bar
-bar {
+            # same bindings, but for the arrow keys
+            bindsym Left resize shrink width 10 px or 10 ppt
+            bindsym Down resize grow height 10 px or 10 ppt
+            bindsym Up resize shrink height 10 px or 10 ppt
+            bindsym Right resize grow width 10 px or 10 ppt
+
+            # back to normal: Enter or Escape
+            bindsym Return mode "default"
+            bindsym Escape mode "default"
+    }
+# }}}
+# Colors definitions {{{
+    # Bar Background Text
+    set $background #00000055
+    set $background #0A233D
+    # Bar Warning Colour
+    set $warning    #e84f4f
+    # Active Window Colour
+    set $border     #b8bbc3
+    # Bar Text Colour
+    set $bartext    #eeeeee
+    # Active Workspace Color
+    set $barfoc     #eeeeee
+    # Unfocused Window/Workspace Colour
+    set $ufocus     #4b4b4b
+    # Window Decoraction Text Colour
+    set $dectext    #ffffff
+    # Rofi Background Colour
+    set $rofibg     #191921
+#}}}
+# i3bar settings {{{
+    bar {
         status_command i3status
-        i3bar_command i3bar
+            i3bar_command i3bar
 
-        mode dock
-        hidden_state hide
-        modifier Mod4
+            mode dock
+            hidden_state hide
+            modifier Mod4
 
-        position top
+            position top
 
-        tray_output primary
-}
+            tray_output primary
+
+            colors {
+                background $background
+                statusline $bartext
+                separator  $background
+
+                #       class                border      background  text
+                focused_workspace    $background $background $barfoc
+                active_workspace     $background $background $barfoc
+                inactive_workspace   $background $background $ufocus
+                urgent_workspace     $background $background $warning
+            }
+    }
+#}}}
