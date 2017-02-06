@@ -58,7 +58,7 @@ alias shutnow='sudo shutdown -h now'
 alias restnow='sudo shutdown -r now'
 
 #vim
-alias vi='vim'
+alias v='vim'
 
 # apt
 alias install='sudo apt-get install'
