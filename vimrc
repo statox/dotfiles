@@ -70,8 +70,11 @@
     " Better color handling
     set t_Co=256
 
-    " Never show the tab line
-    set showtabline=0
+    " Show tab line only if there are at least two tab pages
+    set showtabline=1
+
+    " Highlight background of the current line
+    "set cursorline
 "}}}
 " Plugins {{{
     " Manage plugins with vim-plug (https://github.com/junegunn/vim-plug)
@@ -105,7 +108,7 @@
             Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'    
 
             " Trigger snippets two *
-            inoremap ** <C-R>=UltiSnips#ExpandSnippetOrJump()<CR>
+            inoremap jj <C-R>=UltiSnips#ExpandSnippetOrJump()<CR>
             " Switch between the place holder with arrow keys
             let g:UltiSnipsJumpForwardTrigger="<Right>"
             let g:UltiSnipsJumpBackwardTrigger="<Left>"
@@ -118,14 +121,29 @@
             set runtimepath +=~/.vim/my-snippets
         endif
     "}}}
-    " statox/vim-compare-lines: Easily compare two lines of a buffer {{{
-        Plug 'statox/vim-compare-lines'
-    " }}}
     " justinmk/vim-dirvish: Directory viewer for vim {{{
         Plug 'justinmk/vim-dirvish'
     " }}}
-    " nobe4/vimcorrect: Enhance the correction mechanism {{{
-        Plug 'nobe4/vimcorrect'
+    " tpope/vim-fugitive: Git wrapper {{{
+        Plug 'tpope/vim-fugitive'
+    " }}}
+    " ctrlpvim/ctrlp.vim: Fuzzy finder {{{
+        Plug 'ctrlpvim/ctrlp.vim'
+        " Ignore some files/directories
+        let g:ctrlp_custom_ignore = {
+          \ 'dir':  '\v[\/](platforms|plugins|assets|bin|target|test|lib|font|WEB-INF|svn)$',
+          \ 'file': '\v\.(exe|so|dll)$',
+          \ }
+        " Dont jump to a buffer when it is already open, instead open another instance
+        let g:ctrlp_switch_buffer = 0
+        " Use <c-m> for MRU mode
+        nnoremap <C-m> :CtrlPMRUFiles<CR>
+        " Be smart with the root directory
+        let g:ctrlp_working_path_mode = 'r'
+        let g:ctrlp_root_markers = ['pom.xml', '.eslintrc']
+    " }}}
+    " editorconfig/editorconfig-vim: Homogenous files settings {{{
+        "Plug 'editorconfig/editorconfig-vim'
     " }}}
     " statox/GOD.vim: Get online doc links {{{
         Plug 'statox/GOD.vim'
@@ -153,9 +171,6 @@
     " Go to 80column {{{
         nnoremap <Leader><tab> 80\|
     "}}}
-    " In visual mode use A to select all of the file {{{
-        vnoremap aa <esc>gg0vG$
-    "}}}
     " Easier clipboard access {{{
         if has('clipboard')
             if has('win32') || has('win64')
@@ -178,7 +193,7 @@
         endif
     "}}}
     " Quickly escape insert mode with jj {{{
-        inoremap jj <Esc>
+        "inoremap jj <Esc>
         inoremap jk <Esc>:w<CR>
         " Let's try it in normal mode too
         nnoremap  <Leader>jk <Esc>:w<cr>:echo "saving"<CR>
@@ -206,12 +221,6 @@
     " Use s instead of <C-w> to handle windows {{{
         nnoremap s <C-w>
     " }}}
-    " Show the current file name with <leader>f {{{
-        nnoremap <Leader>f :echo expand('%:p')<CR>
-    " }}}
-    " Ease buffer navigation with <leader><s-b> {{{
-        nnoremap <leader><S-b> :buffers<CR>:buffer<space>
-    " }}}
     " Make command line navigation easier {{{
         cnoremap <C-a> USE CTRL - B
         cnoremap <C-l> <Right>
@@ -219,6 +228,10 @@
         cnoremap <C-k> <S-Up>
         cnoremap <C-j> <S-Down>
     "}}}
+    " CtrlP mappings {{{
+        nnoremap <Leader>m :CtrlPBuffer<CR>
+        nnoremap <CR> :CtrlP<CR>
+    " }}}
 "}}}
 " Manage tabs {{{
     " move to new/previous tabs
@@ -238,7 +251,7 @@
     noremap <Leader>l :bn<CR>
     noremap <Leader>h :bN<CR>
     " close a buffer with <Leader>bc
-    noremap <Leader>bc :bd<CR>
+    noremap <Leader>bd :bd<CR>
     " open buffer with <Leader><Leader>b
     nnoremap <Leader><Leader>b :enew<CR>
 "}}}
@@ -249,11 +262,6 @@
     catch
         echo "Colorscheme not found"
     endtry
-"}}}
-" Color 81st column on too long lines(Put this AFTER colorscheme definition) {{{
-    highlight ColorColumn ctermbg=black ctermfg=red guibg=black guifg=red
-    call matchadd('ColorColumn', '\%#=1\%81v', 100)
-    "call matchadd('ColorColumn', '\%81v', 100)
 "}}}
 " status line configuration {{{
     " Display the cursor position in the status line
