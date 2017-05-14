@@ -104,10 +104,10 @@
         Plug 'nanotech/jellybeans.vim'
     "}}}
     " Snippets pluggins: Group dependencies, vim-snippets depends on ultisnips{{{
-        if has('python')
-            Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'    
+        if has('python') || has('python3')
+            Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
-            " Trigger snippets two *
+            " Trigger snippets with jj
             inoremap jj <C-R>=UltiSnips#ExpandSnippetOrJump()<CR>
             " Switch between the place holder with arrow keys
             let g:UltiSnipsJumpForwardTrigger="<Right>"
@@ -136,8 +136,6 @@
           \ }
         " Dont jump to a buffer when it is already open, instead open another instance
         let g:ctrlp_switch_buffer = 0
-        " Use <c-m> for MRU mode
-        nnoremap <C-m> :CtrlPMRUFiles<CR>
         " Be smart with the root directory
         let g:ctrlp_working_path_mode = 'r'
         let g:ctrlp_root_markers = ['pom.xml', '.eslintrc']
@@ -229,8 +227,9 @@
         cnoremap <C-j> <S-Down>
     "}}}
     " CtrlP mappings {{{
-        nnoremap <Leader>m :CtrlPBuffer<CR>
         nnoremap <CR> :CtrlP<CR>
+        nnoremap <Leader>m :CtrlPBuffer<CR>
+        nnoremap <C-m> :CtrlPMRUFiles<CR>
     " }}}
 "}}}
 " Manage tabs {{{
