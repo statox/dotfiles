@@ -164,4 +164,4 @@ export EDITOR=$VISUAL
 # check available bindings with 'bind -P'
 
 # use vim mode
-set -o vi
+#set -o vi
