@@ -227,8 +227,8 @@
         cnoremap <C-j> <S-Down>
     "}}}
     " CtrlP mappings {{{
-        nnoremap <CR> :CtrlP<CR>
-        nnoremap <Leader>m :CtrlPBuffer<CR>
+        nnoremap <Leader><CR> :CtrlP<CR>
+        nnoremap <Leader>bb :CtrlPBuffer<CR>
         nnoremap <C-m> :CtrlPMRUFiles<CR>
     " }}}
 "}}}
