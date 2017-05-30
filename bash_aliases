@@ -29,6 +29,15 @@ alias ll='ls -AlFh'
 alias la='ls -ACF'
 alias l='ls -CF'
 
+#git
+alias gs='git status'
+alias gd='git diff'
+alias ga='git add'
+alias gp='git pull'
+alias gP='git push'
+alias gc='git commit'
+alias gl='git log'
+
 #clear screen
 alias c='clear'
 
