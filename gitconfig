@@ -1,5 +1,5 @@
 [user]
-	name  = statox
+    name  = statox
     email = adrien.fabre92@gmail.com
 
 [core]
@@ -10,7 +10,7 @@
     pager = less -+F
 
 [push]
-	default = current
+    default = current
 
 [help]
     # When mispelling a fonction automatically correct it
