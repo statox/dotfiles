@@ -63,7 +63,9 @@ additional-installs() {
     echo "Configuring VimPlug"
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim 
     vim +PlugInstall +qall &>/dev/null &
-    echo "Vim configured"
+
+    echo "Installing git bash completion file"
+    curl -fLo ~/.git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
 }
 
 # Get the files needed to work
