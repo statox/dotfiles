@@ -235,10 +235,6 @@
         " Use <C-J> and <C-K> for ]c and [c in diff mode
         nnoremap <expr> <C-J> &diff ? ']c' : '<C-J>'
         nnoremap <expr> <C-K> &diff ? '[c' : '<C-K>'
-
-        " Use <C-H> and <C-L> for diffget and diffput in diff mode
-        nnoremap <expr> <C-H> &diff ? ':diffget<CR>' : '<C-H>'
-        nnoremap <expr> <C-L> &diff ? ':diffput<CR>' : '<C-L>'
     "}}}
 "}}}
 " Manage tabs {{{
@@ -285,7 +281,9 @@
         endif
 
         if &diffopt =~ "iwhite"
-            let opt = opt . "--ignore-all-space --ignore-blank-lines "
+            let opt = opt . "--ignore-all-space "
+            let opt = opt . "--ignore-blank-lines "
+            let opt = opt . "--ignore-space-change "
         endif
 
         silent execute "!diff -a --binary " . opt . v:fname_in . " " . v:fname_new .  " > " . v:fname_out
@@ -294,6 +292,8 @@
     " Easier diff commands
     command! DT windo diffthis
     command! DO windo diffoff
+    command! DG diffget
+    command! DP diffput
 "}}}
 " status line configuration {{{
     " Display the cursor position in the status line
