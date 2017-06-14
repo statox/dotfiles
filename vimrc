@@ -231,6 +231,15 @@
         nnoremap <Leader>bb :CtrlPBuffer<CR>
         nnoremap <C-m> :CtrlPMRUFiles<CR>
     " }}}
+    " Diff mode mapping {{{
+        " Use <C-J> and <C-K> for ]c and [c in diff mode
+        nnoremap <expr> <C-J> &diff ? ']c' : '<C-J>'
+        nnoremap <expr> <C-K> &diff ? '[c' : '<C-K>'
+
+        " Use <C-H> and <C-L> for diffget and diffput in diff mode
+        nnoremap <expr> <C-H> &diff ? ':diffget<CR>' : '<C-H>'
+        nnoremap <expr> <C-L> &diff ? ':diffput<CR>' : '<C-L>'
+    "}}}
 "}}}
 " Manage tabs {{{
     " move to new/previous tabs
@@ -261,6 +270,30 @@
     catch
         echo "Colorscheme not found"
     endtry
+"}}}
+" Diff configurations {{{
+    " Show fille lines, ignore whitespaces in diff
+    set diffopt=filler,iwhite
+
+    " Use custom command to create the diff
+    set diffexpr=DiffW()
+
+    function! DiffW()
+        let opt = ""
+        if &diffopt =~ "icase"
+            let opt = opt . "--ignore-case "
+        endif
+
+        if &diffopt =~ "iwhite"
+            let opt = opt . "--ignore-all-space --ignore-blank-lines "
+        endif
+
+        silent execute "!diff -a --binary " . opt . v:fname_in . " " . v:fname_new .  " > " . v:fname_out
+    endfunction
+
+    " Easier diff commands
+    command! DT windo diffthis
+    command! DO windo diffoff
 "}}}
 " status line configuration {{{
     " Display the cursor position in the status line
