@@ -45,7 +45,7 @@
     set langmap+=à@,ù%
 
     " change the current directory when openning a new file
-    autocmd BufEnter * silent! lcd %:p:h
+    "autocmd BufEnter * silent! lcd %:p:h
 
     " automatically reload file when its modified outside vim 
     set autoread
