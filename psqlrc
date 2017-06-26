@@ -1,0 +1,24 @@
+-- General configuration
+    -- Store separate histories for the different databases
+    -- REMEMBER TO USE mkdir ~/.psql_history
+    \set HISTFILE ~/.psql_history/ :DBNAME
+
+    -- Remove the help message at startup
+    \set QUIET 1
+
+-- Input settings
+    -- Change prompt
+    \set PROMPT1 '%M:%> %n@%/%R%#%x '
+
+    -- Autocomplete with uppercase keywords
+    \set COMP_KEYWORD_CASE upper
+
+-- Output settings
+    -- Use the best output format according to results
+    \x auto
+
+    -- Show execution time of queries
+    \timing
+
+    -- Show '(null)' isntead of blank for null values
+    \pset null '(null)'

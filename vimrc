@@ -45,7 +45,7 @@
     set langmap+=à@,ù%
 
     " change the current directory when openning a new file
-    autocmd BufEnter * silent! lcd %:p:h
+    "autocmd BufEnter * silent! lcd %:p:h
 
     " automatically reload file when its modified outside vim 
     set autoread
@@ -231,6 +231,11 @@
         nnoremap <Leader>bb :CtrlPBuffer<CR>
         nnoremap <C-m> :CtrlPMRUFiles<CR>
     " }}}
+    " Diff mode mapping {{{
+        " Use <C-J> and <C-K> for ]c and [c in diff mode
+        nnoremap <expr> <C-J> &diff ? ']c' : '<C-J>'
+        nnoremap <expr> <C-K> &diff ? '[c' : '<C-K>'
+    "}}}
 "}}}
 " Manage tabs {{{
     " move to new/previous tabs
@@ -261,6 +266,34 @@
     catch
         echo "Colorscheme not found"
     endtry
+"}}}
+" Diff configurations {{{
+    " Show fille lines, ignore whitespaces in diff
+    set diffopt=filler,iwhite
+
+    " Use custom command to create the diff
+    set diffexpr=DiffW()
+
+    function! DiffW()
+        let opt = ""
+        if &diffopt =~ "icase"
+            let opt = opt . "--ignore-case "
+        endif
+
+        if &diffopt =~ "iwhite"
+            let opt = opt . "--ignore-all-space "
+            let opt = opt . "--ignore-blank-lines "
+            let opt = opt . "--ignore-space-change "
+        endif
+
+        silent execute "!diff -a --binary " . opt . v:fname_in . " " . v:fname_new .  " > " . v:fname_out
+    endfunction
+
+    " Easier diff commands
+    command! DT windo diffthis
+    command! DO windo diffoff
+    command! DG diffget
+    command! DP diffput
 "}}}
 " status line configuration {{{
     " Display the cursor position in the status line
