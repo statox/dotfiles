@@ -12,6 +12,8 @@ i3status.conf
 motd
 pentadactylrc
 psqlrc
+motd
+pentadactylrc
 tmux.conf
 vimperatorrc
 vim
