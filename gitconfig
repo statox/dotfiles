@@ -53,4 +53,18 @@
     keepTemporaries = false
 
 [merge]
+    tool = winmerge
     stat = true
+
+[mergetool "winmerge"]
+    name = WinMerge
+    trustExitCode = true
+    cmd = winmergeportable.exe -u -e -dl \"Local\" -dr \"Remote\" $LOCAL $REMOTE $MERGED
+
+[diff]
+    tool = winmerge
+
+[difftool "winmerge"]
+    name = WinMerge
+    trustExitCode = true
+    cmd = winmergeportable.exe -u -e $LOCAL $REMOTE
