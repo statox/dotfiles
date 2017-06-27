@@ -40,6 +40,13 @@
     lg = !"git lg1"
     l5 = log -n 5
 
+[credential]
+    # When not using an ssh key, cache the credentials for about 8 hours
+    helper = cache --timeout 28800
+
+[rerere]
+    enabled = 1
+
 [mergetool]
     prompt = false
     keepBackup = false
