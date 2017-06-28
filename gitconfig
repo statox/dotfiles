@@ -14,7 +14,7 @@
 
 [help]
     # When mispelling a fonction automatically correct it
-    autocorrect = 20
+    autocorrect = 5
 
 # Messages coloring
 [color]
