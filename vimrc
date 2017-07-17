@@ -200,9 +200,6 @@
         nnoremap <Leader>o o<Esc>0"_D
         nnoremap <Leader>O O<Esc>0"_D
     "}}}
-    " insert newline in normal mode {{{
-        nnoremap <Leader><CR> i<CR><esc>
-    "}}}
     " Use T in visual mode to start Tabular function {{{
         vnoremap T :Tabular / 
     "}}}
@@ -229,7 +226,7 @@
     " CtrlP mappings {{{
         nnoremap <Leader><CR> :CtrlP<CR>
         nnoremap <Leader>bb :CtrlPBuffer<CR>
-        nnoremap <C-m> :CtrlPMRUFiles<CR>
+        "nnoremap <C-m> :CtrlPMRUFiles<CR>
     " }}}
     " Diff mode mapping {{{
         " Use <C-J> and <C-K> for ]c and [c in diff mode
