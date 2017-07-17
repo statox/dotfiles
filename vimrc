@@ -425,6 +425,12 @@
     " vim {{{
             " Use <F3> to source
             autocmd FileType vim  nnoremap <buffer> <F3> :so %<CR>
+    " gitcommit {{{
+        augroup gitcommit
+            autocmd!
+            autocmd Filetype gitcommit execute "normal! gg"
+            autocmd Filetype gitcommit startinsert
+        augroup end
     " }}}
 " }}}
 " Source a local vimrc {{{
