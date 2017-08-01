@@ -4,9 +4,6 @@
 # to set bash as default shell interpreter, use this:
 # chsh -s $(which bash)
 
-# moving to home directory
-cd ~
-
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -159,9 +156,3 @@ export VISUAL=vim
 export EDITOR=$VISUAL
 
 
-#------------------------------------------------------------
-#       key binding
-# check available bindings with 'bind -P'
-
-# use vim mode
-#set -o vi
