@@ -35,17 +35,13 @@
     set cmdheight=2
 
     " Display line numbers on the left
-    set number
-    set norelativenumber
+    set number norelativenumber
 
     " Quickly time out on keycodes, but never time out on mappings
     set notimeout ttimeout ttimeoutlen=200
 
     " set some mapping to work with an azerty keyboard
     set langmap+=à@,ù%
-
-    " change the current directory when openning a new file
-    "autocmd BufEnter * silent! lcd %:p:h
 
     " automatically reload file when its modified outside vim 
     set autoread
@@ -72,9 +68,6 @@
 
     " Show tab line only if there are at least two tab pages
     set showtabline=1
-
-    " Highlight background of the current line
-    "set cursorline
 "}}}
 " Plugins {{{
     " Manage plugins with vim-plug (https://github.com/junegunn/vim-plug)
@@ -140,9 +133,6 @@
         let g:ctrlp_working_path_mode = 'r'
         let g:ctrlp_root_markers = ['pom.xml', '.eslintrc']
     " }}}
-    " editorconfig/editorconfig-vim: Homogenous files settings {{{
-        "Plug 'editorconfig/editorconfig-vim'
-    " }}}
     " statox/GOD.vim: Get online doc links {{{
         Plug 'statox/GOD.vim'
     " }}}
@@ -151,11 +141,6 @@
     " matchit: expand matching text objects{{{
         runtime macros/matchit.vim
     "}}}
-    "" netrw: The builtin file explorer{{{
-
-        ""use tree view
-        "let g:netrw_liststyle=3 " Bad idea thats actually pretty bugged
-    ""}}}
 "}}}
 " Mappings {{{
     " <C-L> turn off search highlighting until the next search {{{
@@ -190,8 +175,7 @@
             endif
         endif
     "}}}
-    " Quickly escape insert mode with jj {{{
-        "inoremap jj <Esc>
+    " Quickly escape insert mode with jk {{{
         inoremap jk <Esc>:w<CR>
         " Let's try it in normal mode too
         nnoremap  <Leader>jk <Esc>:w<cr>:echo "saving"<CR>
@@ -314,7 +298,7 @@
     set tw=500
     set autoindent   " Auto indent
     set smartindent  " Smart indent
-    set wrap         " Wrap lines
+    set nowrap         " Wrap lines
 "}}}
 " Set up smarter search behaviour {{{
     set incsearch   " Lookahead as search pattern is specified
@@ -416,6 +400,9 @@
     " :W save file with sudo permissions {{{
         command! W w !sudo tee % > /dev/null
     "}}}
+    " :PrettyJson prettify json with python {{{
+        command! -range PrettyJson <line1>,<line2>!python -m json.tool
+    " }}}
 "}}}
 " Filetype specific configurations {{{
     " text {{{
@@ -425,6 +412,7 @@
     " vim {{{
             " Use <F3> to source
             autocmd FileType vim  nnoremap <buffer> <F3> :so %<CR>
+    " }}}
     " gitcommit {{{
         augroup gitcommit
             autocmd!
