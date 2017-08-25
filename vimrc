@@ -306,6 +306,7 @@
     set smartcase   " unless uppercase letters used
     set hlsearch    " Highlight all matches
                     " use <C-L> to temporarily turn off highlighting
+    set nowrapscan  " Do not go back to first match when searching
 "}}}
 "Configuration specific to gvim {{{
     " Maximize window when starting gVim (works on MS windows only)
