@@ -124,7 +124,7 @@
         Plug 'ctrlpvim/ctrlp.vim'
         " Ignore some files/directories
         let g:ctrlp_custom_ignore = {
-          \ 'dir':  '\v[\/](platforms|plugins|assets|bin|target|test|lib|font|WEB-INF|svn)$',
+          \ 'dir':  '\v[\/](platforms|plugins|assets|bin|target|test|lib|font|WEB-INF|svn|node_modules)$',
           \ 'file': '\v\.(exe|so|dll)$',
           \ }
         " Dont jump to a buffer when it is already open, instead open another instance
