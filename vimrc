@@ -124,7 +124,7 @@
         Plug 'ctrlpvim/ctrlp.vim'
         " Ignore some files/directories
         let g:ctrlp_custom_ignore = {
-          \ 'dir':  '\v[\/](platforms|plugins|assets|bin|target|test|lib|font|WEB-INF|svn|node_modules)$',
+          \ 'dir':  '\v[\/](platforms|plugins|assets|bin|target|test|lib|font|WEB-INF|svn|node_modules|out|dist)$',
           \ 'file': '\v\.(exe|so|dll)$',
           \ }
         " Dont jump to a buffer when it is already open, instead open another instance
@@ -136,6 +136,13 @@
     " statox/GOD.vim: Get online doc links {{{
         Plug 'statox/GOD.vim'
     " }}}
+    " airblade/vim-gitgutter: show git diff in number gutter {{{
+        Plug 'airblade/vim-gitgutter'
+    " }}}
+    " fcpg/vim-fahrenheit: clean colorscheme {{{
+        Plug 'fcpg/vim-fahrenheit'
+    " }}}
+    Plug 'statox/vim-compare-lines'
     call plug#end()
 
     " matchit: expand matching text objects{{{
@@ -217,6 +224,9 @@
         nnoremap <expr> <C-J> &diff ? ']c' : '<C-J>'
         nnoremap <expr> <C-K> &diff ? '[c' : '<C-K>'
     "}}}
+    " Center next match with <leader>n {{{
+        nnoremap <leader>n nzz
+    " }}}
 "}}}
 " Manage tabs {{{
     " move to new/previous tabs
@@ -319,7 +329,11 @@
     set guioptions-=L  "left-hand scroll bar
 "}}}
 " Rename TMUX tab vim name of edited file {{{
+    augroup tmux
+        autocmd!
     autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window '" . expand("%:t") . "'")
+        autocmd VimLeave * call system("tmux rename-window $(basename $PWD)")
+    augroup end
 " }}}
 " Custom functions and commands {{{
     " Easily quote from the doc {{{
