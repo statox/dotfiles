@@ -56,8 +56,8 @@
     set infercase
     set completeopt=longest,menuone,preview
 
-    " Add subdirectories to path
-    set path +=**
+    " Reset path to default and add subdirectories to path
+    set path& | let &path .= "**"
 
     " Show unseeing characters
     set list
