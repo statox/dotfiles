@@ -157,7 +157,6 @@
     "}}}
     " Fast save and quit {{{
         nnoremap <Leader>x     :x<CR>
-        nnoremap <Leader>q     :q<CR>
         nnoremap <Leader><S-Q> :qa!<CR>
     "}}}
     " Go to 80column {{{
