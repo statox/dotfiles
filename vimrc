@@ -2,7 +2,6 @@
 " vim:fdm=marker
 
 " General configuration {{{
-    set nocompatible           " Required, fix lot of stuff
     filetype plugin indent on  " Detect the type of a file automatically
                                " and use the ftplugin and indent plugin for this ft
     syntax on                  " Enable syntax highlighting
