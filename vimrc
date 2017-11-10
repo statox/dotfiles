@@ -253,7 +253,10 @@
 " Color configuration {{{
     try
         set background=dark
-        colorscheme jellybeans
+        let g:colorsDefault  = 'fahrenheit'
+        let g:colorsDiff     = 'jellybeans'
+
+        execute "colorscheme " . g:colorsDefault
     catch
         echo "Colorscheme not found"
     endtry
@@ -281,8 +284,8 @@
     endfunction
 
     " Easier diff commands
-    command! DT windo diffthis
-    command! DO windo diffoff
+    command! DT execute "colorscheme " . g:colorsDiff | windo diffthis
+    command! DO execute "colorscheme " . g:colorsDefault | windo diffoff
     command! DG diffget
     command! DP diffput
 "}}}
