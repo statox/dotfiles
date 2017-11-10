@@ -2,10 +2,6 @@
 " Maintainer:  Greg Sexton <gregsexton@gmail.com>
 " Credits: Bram Moolenar and the 'matchparen' plugin from which this draws heavily.
 
-if exists("b:did_ftplugin")
-    finish
-endif
-
 augroup matchhtmlparen
     autocmd! CursorMoved,CursorMovedI,WinEnter <buffer> call s:Highlight_Matching_Pair()
 augroup END
