@@ -2,9 +2,10 @@
 " vim:fdm=marker
 
 " General configuration {{{
-    set nocompatible    " Required, fix lot of stuff
-    filetype on         " Detect the type of a file based on its name
-    syntax on           " Enable syntax highlighting
+    set nocompatible           " Required, fix lot of stuff
+    filetype plugin indent on  " Detect the type of a file automatically
+                               " and use the ftplugin and indent plugin for this ft
+    syntax on                  " Enable syntax highlighting
 
     let mapleader="\<Space>"    " remap mapleader to space
 
