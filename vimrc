@@ -142,7 +142,9 @@
     " fcpg/vim-fahrenheit: clean colorscheme {{{
         Plug 'fcpg/vim-fahrenheit'
     " }}}
-    Plug 'statox/vim-compare-lines'
+    " romainl/vim-editorconfig: yet another plugin for EditorConfig {{{
+        Plug 'romainl/vim-editorconfig'
+    " }}}
     call plug#end()
 
     " matchit: expand matching text objects{{{
