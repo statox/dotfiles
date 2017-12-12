@@ -96,26 +96,8 @@
     " nanotech/jellybeans.vim: Cool colorscheme{{{
         Plug 'nanotech/jellybeans.vim'
     "}}}
-    " Snippets pluggins: Group dependencies, vim-snippets depends on ultisnips{{{
-        if has('python') || has('python3')
-            Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-
-            " Trigger snippets with jj
-            inoremap jj <C-R>=UltiSnips#ExpandSnippetOrJump()<CR>
-            " Switch between the place holder with arrow keys
-            let g:UltiSnipsJumpForwardTrigger="<Right>"
-            let g:UltiSnipsJumpBackwardTrigger="<Left>"
-            " Make :UltiSnipsEdit split window vertically
-            let g:UltiSnipsEditSplit="vertical"
-            " Define where the customs plugins are stored
-            let g:UltiSnipsSnippetsDir="~/.vim/my-snippets/UltiSnips"
-
-            " Add directory containing my custom plugins
-            set runtimepath +=~/.vim/my-snippets
-        endif
-    "}}}
-    " justinmk/vim-dirvish: Directory viewer for vim {{{
-        Plug 'justinmk/vim-dirvish'
+    " fcpg/vim-fahrenheit: clean colorscheme {{{
+        Plug 'fcpg/vim-fahrenheit'
     " }}}
     " tpope/vim-fugitive: Git wrapper {{{
         Plug 'tpope/vim-fugitive'
