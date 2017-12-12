@@ -113,7 +113,7 @@
         let g:ctrlp_switch_buffer = 0
         " Be smart with the root directory
         let g:ctrlp_working_path_mode = 'r'
-        let g:ctrlp_root_markers = ['pom.xml', '.eslintrc']
+        let g:ctrlp_root_markers = ['pom.xml', '.eslintrc', '.git']
     " }}}
     " statox/GOD.vim: Get online doc links {{{
         Plug 'statox/GOD.vim'
@@ -426,6 +426,13 @@
         command! -range PrettyJson <line1>,<line2>!python -m json.tool
     " }}}
 "}}}
+" Automatically open QuickFix window {{{
+    augroup QuickFixCmd
+        autocmd!
+        autocmd QuickFixCmdPost [^l]* cwindow
+        autocmd QuickFixCmdPost    l* lwindow
+    augroup END
+" }}}
 " Source a local vimrc {{{
     if has('win32')
         let $MYLOCALVIMRC = $HOME . "/_local.vim"
