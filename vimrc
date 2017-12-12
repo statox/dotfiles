@@ -41,7 +41,7 @@
     set notimeout ttimeout ttimeoutlen=200
 
     " set some mapping to work with an azerty keyboard
-    set langmap+=à@,ù%
+    set langmap+=à@,ù%,([,)]
 
     " automatically reload file when its modified outside vim 
     set autoread
@@ -138,9 +138,9 @@
     " }}}
     " airblade/vim-gitgutter: show git diff in number gutter {{{
         Plug 'airblade/vim-gitgutter'
-    " }}}
-    " fcpg/vim-fahrenheit: clean colorscheme {{{
-        Plug 'fcpg/vim-fahrenheit'
+
+        " I use my own mappings
+        let g:gitgutter_map_keys = 0
     " }}}
     " romainl/vim-editorconfig: yet another plugin for EditorConfig {{{
         Plug 'romainl/vim-editorconfig'
@@ -156,7 +156,6 @@
         nnoremap <C-L> :nohl<CR><C-L>
     "}}}
     " Fast save and quit {{{
-        nnoremap <Leader>x     :x<CR>
         nnoremap <Leader><S-Q> :qa!<CR>
     "}}}
     " Go to 80column {{{
@@ -184,6 +183,7 @@
         endif
     "}}}
     " Quickly escape insert mode with jk {{{
+        inoremap jj <Esc>
         inoremap jk <Esc>:w<CR>
         " Let's try it in normal mode too
         nnoremap  <Leader>jk <Esc>:w<cr>:echo "saving"<CR>
@@ -218,7 +218,6 @@
     " CtrlP mappings {{{
         nnoremap <Leader><CR> :CtrlP<CR>
         nnoremap <Leader>bb :CtrlPBuffer<CR>
-        "nnoremap <C-m> :CtrlPMRUFiles<CR>
     " }}}
     " Diff mode mapping {{{
         " Use <C-J> and <C-K> for ]c and [c in diff mode
@@ -227,6 +226,28 @@
     "}}}
     " Center next match with <leader>n {{{
         nnoremap <leader>n nzz
+    " }}}
+    " Use ]g and [g to navigate through git hunk thanks to gitgutter {{{
+        nnoremap ]g :GitGutterNextHunk<CR>
+        nnoremap [g :GitGutterPrevHunk<CR>
+    " }}}
+    " Update GitGutter signs with <leader>g{{{
+        nnoremap <leader>g :GitGutter<CR>
+    " }}}
+    " Search for selected text, forwards or backwards {{{
+        vnoremap <silent> # :<C-U>
+          \let saveReg=[getreg('"'), getregtype('"')]<CR>
+          \gvy?<C-R><C-R>=substitute(escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+          \gV:call setreg('"', saveReg[0], saveReg[1])<CR>
+
+        vnoremap <silent> * :<C-U>
+          \let saveReg=[getreg('"'), getregtype('"')]<CR>
+          \gvy/<C-R><C-R>=substitute(escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+          \gV:call setreg('"', saveReg[0], saveReg[1])<CR>
+    "}}}
+    " Easily navigate quickfix with ]q and [q {{{
+        nnoremap ]q :cn<CR>
+        nnoremap [q :cp<CR>
     " }}}
 "}}}
 " Manage tabs {{{
@@ -242,7 +263,7 @@
 "}}}
 " Manage buffers {{{
     " show buffer list and allow to type the buffer name to use with <Leader>bb
-    noremap <Leader>bb :ls<CR>:b
+    noremap gb :ls<CR>:b<space>
     " change buffer with <Leader>bh and <Leader>bl
     noremap <Leader>l :bn<CR>
     noremap <Leader>h :bN<CR>
