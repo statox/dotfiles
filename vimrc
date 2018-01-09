@@ -425,6 +425,21 @@
     " :PrettyJson prettify json with python {{{
         command! -range PrettyJson <line1>,<line2>!python -m json.tool
     " }}}
+    " Toggle quickfix window {{{
+        function! s:qf_toggle()
+            for i in range(1, winnr('$'))
+                let bnum = winbufnr(i)
+                if getbufvar(bnum, '&buftype') == 'quickfix'
+                    cclose
+                    return
+                endif
+            endfor
+
+            copen
+        endfunction
+        command! Ctoggle call s:qf_toggle()
+        nnoremap q :Ctoggle<CR>
+    "}}}
 "}}}
 " Automatically open QuickFix window {{{
     augroup QuickFixCmd
