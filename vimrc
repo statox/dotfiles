@@ -426,9 +426,6 @@
     " :W save file with sudo permissions {{{
         command! W w !sudo tee % > /dev/null
     "}}}
-    " :PrettyJson prettify json with python {{{
-        command! -range PrettyJson <line1>,<line2>!python -m json.tool
-    " }}}
     " Toggle quickfix window {{{
         function! s:qf_toggle()
             for i in range(1, winnr('$'))
