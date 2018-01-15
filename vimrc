@@ -231,6 +231,10 @@
         nnoremap ]q :cn<CR>
         nnoremap [q :cp<CR>
     " }}}
+    " Make * and # dont navigate to the next occurence {{{
+        nnoremap * *N
+        nnoremap # #N
+    "}}}
 "}}}
 " Manage tabs {{{
     " move to new/previous tabs
