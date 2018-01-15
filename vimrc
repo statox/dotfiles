@@ -238,23 +238,23 @@
 "}}}
 " Manage tabs {{{
     " move to new/previous tabs
-    noremap <Leader><Leader>l  :tabn<CR>
-    noremap <Leader><Leader>h  :tabp<CR>
+    nnoremap <Leader><Leader>l  :tabn<CR>
+    nnoremap <Leader><Leader>h  :tabp<CR>
     " open/close tab
-    noremap <Leader><Leader>t  :tabnew<CR>
-    noremap <Leader>tc         :tabclose<CR>
+    nnoremap <Leader><Leader>t  :tabnew<CR>
+    nnoremap <Leader>tc         :tabclose<CR>
     " move current tab to left/right
-    noremap <Leader><Leader><Left>  :execute 'silent! tabmove -1'<CR>
-    noremap <Leader><Leader><Right> :execute 'silent! tabmove +1'<CR>
+    nnoremap <Leader><Leader><Left>  :execute 'silent! tabmove -1'<CR>
+    nnoremap <Leader><Leader><Right> :execute 'silent! tabmove +1'<CR>
 "}}}
 " Manage buffers {{{
     " show buffer list and allow to type the buffer name to use with <Leader>bb
-    noremap gb :ls<CR>:b<space>
+    nnoremap gb :ls<CR>:b<space>
     " change buffer with <Leader>bh and <Leader>bl
-    noremap <Leader>l :bn<CR>
-    noremap <Leader>h :bN<CR>
+    nnoremap <Leader>l :bn<CR>
+    nnoremap <Leader>h :bN<CR>
     " close a buffer with <Leader>bc
-    noremap <Leader>bd :bd<CR>
+    nnoremap <Leader>bd :bd<CR>
     " open buffer with <Leader><Leader>b
     nnoremap <Leader><Leader>b :enew<CR>
 "}}}
