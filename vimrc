@@ -235,6 +235,10 @@
         nnoremap * *N
         nnoremap # #N
     "}}}
+    " make h and l skip indentation white spaces {{{
+        nnoremap <silent> h :call motion#MyHMotion()<CR>
+        nnoremap <silent> l :call motion#MyLMotion()<CR>
+    "}}}
 "}}}
 " Manage tabs {{{
     " move to new/previous tabs
@@ -346,7 +350,7 @@
         autocmd VimLeave * call system("tmux rename-window $(basename $PWD)")
     augroup end
 " }}}
-" Custom functions and commands {{{
+" Custom commands {{{
     " Easily quote from the doc {{{
         vnoremap <leader>dy :call QuoteDoc()<CR>
         function! QuoteDoc() range
@@ -376,57 +380,13 @@
             endif
         endfunction
     "}}}
-    " make h and l skip indentation white spaces {{{
-        function! MyLMotion()
-            let cursorPosition=getpos(".")
-            normal ^
-            let firstChar=getpos(".")
-
-            if cursorPosition[2] < firstChar[2]
-                normal ^
-            else
-                call setpos('.', cursorPosition)
-                normal! l
-            endif
-        endfunction
-
-        function! MyHMotion()
-            let cursorPosition=getpos(".")
-            normal ^
-            let firstChar=getpos(".")
-
-            if cursorPosition[2] <= firstChar[2]
-                normal 0
-            else
-                call setpos('.', cursorPosition)
-                normal! h
-            endif
-        endfunction
-
-        nnoremap <silent> h :call MyHMotion()<CR>
-        nnoremap <silent> l :call MyLMotion()<CR>
-    "}}}
-    " Get a random number using system function {{{
-    " http://vi.stackexchange.com/a/819/1821
-        function! GetRandomInteger()
-            if has('win32')
-                return system("echo %RANDOM%")
-            else
-                return system("echo $RANDOM")
-            endif
-        endfunction
-    " }}}
-    " Open help vertically with H {{{
-        command! -complete=help -nargs=1 H call VerticalHelp(<f-args>)
-        function! VerticalHelp(topic)
-            execute "vertical botright help " . a:topic
-            execute "vertical resize 78"
-        endfunction
+    " :H Open help vertically with H {{{
+        command! -complete=help -nargs=1 H call help#VerticalHelp(<f-args>)
     "}}}
     " :W save file with sudo permissions {{{
         command! W w !sudo tee % > /dev/null
     "}}}
-    " Toggle quickfix window {{{
+    " :Ctoggle Toggle quickfix window {{{
         function! s:qf_toggle()
             for i in range(1, winnr('$'))
                 let bnum = winbufnr(i)
