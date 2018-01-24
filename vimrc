@@ -63,9 +63,6 @@
     set list
     set listchars=eol:$,tab:>-,trail:.
 
-    " Better color handling
-    set t_Co=256
-
     " Show tab line only if there are at least two tab pages
     set showtabline=1
 "}}}
