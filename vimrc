@@ -371,7 +371,10 @@
 "}}}
 "Configuration specific to gvim {{{
     " Maximize window when starting gVim (works on MS windows only)
+    augroup GUI
+        autocmd!
     autocmd GUIEnter * simalt ~n
+    augroup END
 
     " Remove useless graphical stuff
     set guioptions-=m  "menu bar
