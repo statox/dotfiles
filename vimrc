@@ -299,11 +299,50 @@
     command! DP diffput
 "}}}
 " status line configuration {{{
+" status line configuration {{{
+    " Always display the status line, even if only one window is displayed
+    set laststatus=2
+
+    " Set the buffer variable g:gitbranch to the current git branch as a string
+    function! CurrentGitStatus()
+        let gitoutput = system('git branch 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/(\1)/" -e "s/[()]//g";')
+
+        if len(gitoutput) > 0
+            let b:gitbranch = gitoutput
+        else
+            let b:gitbranch = ''
+        endif
+    endfunc
+    augroup git
+        autocmd!
     " Display the cursor position in the status line
     set noruler
 
-    " Always display the status line, even if only one window is displayed
-    set laststatus=0
+    " From https://hackernoon.com/the-last-statusline-for-vim-a613048959b2
+    set statusline=
+    " Count current line/total lines
+    set statusline+=%l/%L
+    set statusline+=%*
+    " Flags modified buffer and help file
+    set statusline+=\ %m%h
+    set statusline+=%*
+    " Short name of the file
+    set statusline+=\ %t
+    set statusline+=%*
+    " Git branch
+    set statusline+=\ [%{b:gitbranch}]
+    set statusline+=%*
+    " Separator right-aligned left-aligned
+    set statusline+=%=
+    " Path of the file without the filename
+    set statusline+=\‹%{expand('%:h')}>
+    " Modification time :: buffer number
+    set statusline+=\ [
+    set statusline+=%{strftime('%R',getftime(expand('%')))}
+    set statusline+=\ ::
+    set statusline+=\ %n
+    set statusline+=]
+    set statusline+=%*
 "}}}
 " Text, tab and indent related configuration {{{
     " Use spaces instead of tabs
