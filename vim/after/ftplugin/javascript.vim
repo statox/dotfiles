@@ -1,3 +1,5 @@
+" javascript ftplugin
+
 " Setting elint to check the file
 setlocal errorformat=%f:\ line\ %l\\,\ col\ %c\\,\ %m,%-G%.%#
 setlocal makeprg=eslint\ --format\ compact
