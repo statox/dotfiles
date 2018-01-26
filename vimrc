@@ -132,7 +132,7 @@
 "}}}
 " Mappings {{{
     " <C-L> turn off search highlighting until the next search {{{
-        nnoremap <C-L> :nohl<CR><C-L>
+        nnoremap <C-L> :nohlsearch<CR><C-L>
     "}}}
     " Fast save and quit {{{
         nnoremap <Leader><S-Q> :qa!<CR>
@@ -225,8 +225,8 @@
           \gV:call setreg('"', saveReg[0], saveReg[1])<CR>
     "}}}
     " Easily navigate quickfix with ]q and [q {{{
-        nnoremap ]q :cn<CR>
-        nnoremap [q :cp<CR>
+        nnoremap ]q :cnext<CR>
+        nnoremap [q :cprevious<CR>
     " }}}
     " Make * and # dont navigate to the next occurence {{{
         nnoremap * *N
@@ -239,8 +239,8 @@
 "}}}
 " Manage tabs {{{
     " move to new/previous tabs
-    nnoremap <Leader><Leader>l  :tabn<CR>
-    nnoremap <Leader><Leader>h  :tabp<CR>
+    nnoremap <Leader><Leader>l  :tabnext<CR>
+    nnoremap <Leader><Leader>h  :tabprevious<CR>
     " open/close tab
     nnoremap <Leader><Leader>t  :tabnew<CR>
     nnoremap <Leader>tc         :tabclose<CR>
@@ -252,10 +252,10 @@
     " show buffer list and allow to type the buffer name to use with <Leader>bb
     nnoremap gb :ls<CR>:b<space>
     " change buffer with <Leader>bh and <Leader>bl
-    nnoremap <Leader>l :bn<CR>
-    nnoremap <Leader>h :bN<CR>
+    nnoremap <Leader>l :bnext<CR>
+    nnoremap <Leader>h :bNext<CR>
     " close a buffer with <Leader>bc
-    nnoremap <Leader>bd :bd<CR>
+    nnoremap <Leader>bd :bdelete<CR>
     " open buffer with <Leader><Leader>b
     nnoremap <Leader><Leader>b :enew<CR>
 "}}}
@@ -355,8 +355,8 @@
     set tabstop=4
 
     " Linebreak on 500 characters
-    set lbr
-    set tw=500
+    set linebreak
+    set textwidth=500
     set autoindent   " Auto indent
     set smartindent  " Smart indent
     set nowrap         " Wrap lines
