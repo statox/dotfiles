@@ -299,13 +299,12 @@
     command! DP diffput
 "}}}
 " status line configuration {{{
-" status line configuration {{{
     " Always display the status line, even if only one window is displayed
     set laststatus=2
 
     " Set the buffer variable g:gitbranch to the current git branch as a string
     function! CurrentGitStatus()
-        let gitoutput = system('git branch 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/(\1)/" -e "s/[()]//g";')
+        let gitoutput = systemlist('git branch 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/(\1)/" -e "s/[()]//g";')[0]
 
         if len(gitoutput) > 0
             let b:gitbranch = gitoutput
@@ -315,10 +314,9 @@
     endfunc
     augroup git
         autocmd!
-    " Display the cursor position in the status line
-    set noruler
+        autocmd BufEnter,BufWritePost * call CurrentGitStatus()
+    augroup end
 
-    " From https://hackernoon.com/the-last-statusline-for-vim-a613048959b2
     set statusline=
     " Count current line/total lines
     set statusline+=%l/%L
