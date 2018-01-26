@@ -143,20 +143,20 @@
     " Easier clipboard access {{{
         if has('clipboard')
             if has('win32') || has('win64')
-                vnoremap <Leader>y "*y
+                xnoremap <Leader>y "*y
 
-                vnoremap <Leader>p "*p
+                xnoremap <Leader>p "*p
                 nnoremap <Leader>p "*p
 
-                vnoremap <Leader><S-p> "*P
+                xnoremap <Leader><S-p> "*P
                 nnoremap <Leader><S-p> "*P
             else
-                vnoremap <Leader>y "+y
+                xnoremap <Leader>y "+y
 
-                vnoremap <Leader>p "+p
+                xnoremap <Leader>p "+p
                 nnoremap <Leader>p "+p
 
-                vnoremap <Leader><S-p> "+P
+                xnoremap <Leader><S-p> "+P
                 nnoremap <Leader><S-p> "+P
             endif
         endif
@@ -172,7 +172,7 @@
         nnoremap <Leader>O O<Esc>0"_D
     "}}}
     " Use T in visual mode to start Tabular function {{{
-        vnoremap T :Tabular / 
+        xnoremap T :Tabular / 
     "}}}
     " Use gp to select last pasted text {{{
         nnoremap gp '[v']
@@ -214,12 +214,12 @@
         nnoremap <leader>g :GitGutter<CR>
     " }}}
     " Search for selected text, forwards or backwards {{{
-        vnoremap <silent> # :<C-U>
+        xnoremap <silent> # :<C-U>
           \let saveReg=[getreg('"'), getregtype('"')]<CR>
           \gvy?<C-R><C-R>=substitute(escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
           \gV:call setreg('"', saveReg[0], saveReg[1])<CR>
 
-        vnoremap <silent> * :<C-U>
+        xnoremap <silent> * :<C-U>
           \let saveReg=[getreg('"'), getregtype('"')]<CR>
           \gvy/<C-R><C-R>=substitute(escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
           \gV:call setreg('"', saveReg[0], saveReg[1])<CR>
