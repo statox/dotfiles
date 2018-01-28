@@ -41,7 +41,7 @@
     set notimeout ttimeout ttimeoutlen=200
 
     " set some mapping to work with an azerty keyboard
-    set langmap+=à@,ù%
+    set langmap+=à@,ù%,([,)]
 
     " automatically reload file when its modified outside vim 
     set autoread
@@ -62,9 +62,6 @@
     " Show unseeing characters
     set list
     set listchars=eol:$,tab:>-,trail:.
-
-    " Better color handling
-    set t_Co=256
 
     " Show tab line only if there are at least two tab pages
     set showtabline=1
@@ -96,26 +93,8 @@
     " nanotech/jellybeans.vim: Cool colorscheme{{{
         Plug 'nanotech/jellybeans.vim'
     "}}}
-    " Snippets pluggins: Group dependencies, vim-snippets depends on ultisnips{{{
-        if has('python') || has('python3')
-            Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-
-            " Trigger snippets with jj
-            inoremap jj <C-R>=UltiSnips#ExpandSnippetOrJump()<CR>
-            " Switch between the place holder with arrow keys
-            let g:UltiSnipsJumpForwardTrigger="<Right>"
-            let g:UltiSnipsJumpBackwardTrigger="<Left>"
-            " Make :UltiSnipsEdit split window vertically
-            let g:UltiSnipsEditSplit="vertical"
-            " Define where the customs plugins are stored
-            let g:UltiSnipsSnippetsDir="~/.vim/my-snippets/UltiSnips"
-
-            " Add directory containing my custom plugins
-            set runtimepath +=~/.vim/my-snippets
-        endif
-    "}}}
-    " justinmk/vim-dirvish: Directory viewer for vim {{{
-        Plug 'justinmk/vim-dirvish'
+    " fcpg/vim-fahrenheit: clean colorscheme {{{
+        Plug 'fcpg/vim-fahrenheit'
     " }}}
     " tpope/vim-fugitive: Git wrapper {{{
         Plug 'tpope/vim-fugitive'
@@ -131,16 +110,16 @@
         let g:ctrlp_switch_buffer = 0
         " Be smart with the root directory
         let g:ctrlp_working_path_mode = 'r'
-        let g:ctrlp_root_markers = ['pom.xml', '.eslintrc']
+        let g:ctrlp_root_markers = ['pom.xml', '.eslintrc', '.git']
     " }}}
     " statox/GOD.vim: Get online doc links {{{
         Plug 'statox/GOD.vim'
     " }}}
     " airblade/vim-gitgutter: show git diff in number gutter {{{
         Plug 'airblade/vim-gitgutter'
-    " }}}
-    " fcpg/vim-fahrenheit: clean colorscheme {{{
-        Plug 'fcpg/vim-fahrenheit'
+
+        " I use my own mappings
+        let g:gitgutter_map_keys = 0
     " }}}
     " romainl/vim-editorconfig: yet another plugin for EditorConfig {{{
         Plug 'romainl/vim-editorconfig'
@@ -153,10 +132,9 @@
 "}}}
 " Mappings {{{
     " <C-L> turn off search highlighting until the next search {{{
-        nnoremap <C-L> :nohl<CR><C-L>
+        nnoremap <C-L> :nohlsearch<CR><C-L>
     "}}}
     " Fast save and quit {{{
-        nnoremap <Leader>x     :x<CR>
         nnoremap <Leader><S-Q> :qa!<CR>
     "}}}
     " Go to 80column {{{
@@ -165,25 +143,26 @@
     " Easier clipboard access {{{
         if has('clipboard')
             if has('win32') || has('win64')
-                vnoremap <Leader>y "*y
+                xnoremap <Leader>y "*y
 
-                vnoremap <Leader>p "*p
+                xnoremap <Leader>p "*p
                 nnoremap <Leader>p "*p
 
-                vnoremap <Leader><S-p> "*P
+                xnoremap <Leader><S-p> "*P
                 nnoremap <Leader><S-p> "*P
             else
-                vnoremap <Leader>y "+y
+                xnoremap <Leader>y "+y
 
-                vnoremap <Leader>p "+p
+                xnoremap <Leader>p "+p
                 nnoremap <Leader>p "+p
 
-                vnoremap <Leader><S-p> "+P
+                xnoremap <Leader><S-p> "+P
                 nnoremap <Leader><S-p> "+P
             endif
         endif
     "}}}
     " Quickly escape insert mode with jk {{{
+        inoremap jj <Esc>
         inoremap jk <Esc>:w<CR>
         " Let's try it in normal mode too
         nnoremap  <Leader>jk <Esc>:w<cr>:echo "saving"<CR>
@@ -193,7 +172,7 @@
         nnoremap <Leader>O O<Esc>0"_D
     "}}}
     " Use T in visual mode to start Tabular function {{{
-        vnoremap T :Tabular / 
+        xnoremap T :Tabular / 
     "}}}
     " Use gp to select last pasted text {{{
         nnoremap gp '[v']
@@ -218,7 +197,6 @@
     " CtrlP mappings {{{
         nnoremap <Leader><CR> :CtrlP<CR>
         nnoremap <Leader>bb :CtrlPBuffer<CR>
-        "nnoremap <C-m> :CtrlPMRUFiles<CR>
     " }}}
     " Diff mode mapping {{{
         " Use <C-J> and <C-K> for ]c and [c in diff mode
@@ -228,26 +206,56 @@
     " Center next match with <leader>n {{{
         nnoremap <leader>n nzz
     " }}}
+    " Use ]g and [g to navigate through git hunk thanks to gitgutter {{{
+        nnoremap ]g :GitGutterNextHunk<CR>
+        nnoremap [g :GitGutterPrevHunk<CR>
+    " }}}
+    " Update GitGutter signs with <leader>g{{{
+        nnoremap <leader>g :GitGutter<CR>
+    " }}}
+    " Search for selected text, forwards or backwards {{{
+        xnoremap <silent> # :<C-U>
+          \let saveReg=[getreg('"'), getregtype('"')]<CR>
+          \gvy?<C-R><C-R>=substitute(escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+          \gV:call setreg('"', saveReg[0], saveReg[1])<CR>
+
+        xnoremap <silent> * :<C-U>
+          \let saveReg=[getreg('"'), getregtype('"')]<CR>
+          \gvy/<C-R><C-R>=substitute(escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+          \gV:call setreg('"', saveReg[0], saveReg[1])<CR>
+    "}}}
+    " Easily navigate quickfix with ]q and [q {{{
+        nnoremap ]q :cnext<CR>
+        nnoremap [q :cprevious<CR>
+    " }}}
+    " Make * and # dont navigate to the next occurence {{{
+        nnoremap * *N
+        nnoremap # #N
+    "}}}
+    " make h and l skip indentation white spaces {{{
+        nnoremap <silent> h :call motion#MyHMotion()<CR>
+        nnoremap <silent> l :call motion#MyLMotion()<CR>
+    "}}}
 "}}}
 " Manage tabs {{{
     " move to new/previous tabs
-    noremap <Leader><Leader>l  :tabn<CR>
-    noremap <Leader><Leader>h  :tabp<CR>
+    nnoremap <Leader><Leader>l  :tabnext<CR>
+    nnoremap <Leader><Leader>h  :tabprevious<CR>
     " open/close tab
-    noremap <Leader><Leader>t  :tabnew<CR>
-    noremap <Leader>tc         :tabclose<CR>
+    nnoremap <Leader><Leader>t  :tabnew<CR>
+    nnoremap <Leader>tc         :tabclose<CR>
     " move current tab to left/right
-    noremap <Leader><Leader><Left>  :execute 'silent! tabmove -1'<CR>
-    noremap <Leader><Leader><Right> :execute 'silent! tabmove +1'<CR>
+    nnoremap <Leader><Leader><Left>  :execute 'silent! tabmove -1'<CR>
+    nnoremap <Leader><Leader><Right> :execute 'silent! tabmove +1'<CR>
 "}}}
 " Manage buffers {{{
     " show buffer list and allow to type the buffer name to use with <Leader>bb
-    noremap <Leader>bb :ls<CR>:b
+    nnoremap gb :ls<CR>:b<space>
     " change buffer with <Leader>bh and <Leader>bl
-    noremap <Leader>l :bn<CR>
-    noremap <Leader>h :bN<CR>
+    nnoremap <Leader>l :bnext<CR>
+    nnoremap <Leader>h :bNext<CR>
     " close a buffer with <Leader>bc
-    noremap <Leader>bd :bd<CR>
+    nnoremap <Leader>bd :bdelete<CR>
     " open buffer with <Leader><Leader>b
     nnoremap <Leader><Leader>b :enew<CR>
 "}}}
@@ -291,11 +299,48 @@
     command! DP diffput
 "}}}
 " status line configuration {{{
-    " Display the cursor position in the status line
-    set noruler
-
     " Always display the status line, even if only one window is displayed
-    set laststatus=0
+    set laststatus=2
+
+    " Set the buffer variable g:gitbranch to the current git branch as a string
+    function! CurrentGitStatus()
+        let gitoutput = systemlist('git branch 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/(\1)/" -e "s/[()]//g";')[0]
+
+        if len(gitoutput) > 0
+            let b:gitbranch = gitoutput
+        else
+            let b:gitbranch = ''
+        endif
+    endfunc
+    augroup git
+        autocmd!
+        autocmd BufEnter,BufWritePost * call CurrentGitStatus()
+    augroup end
+
+    set statusline=
+    " Count current line/total lines
+    set statusline+=%l/%L
+    set statusline+=%*
+    " Flags modified buffer and help file
+    set statusline+=\ %m%h
+    set statusline+=%*
+    " Short name of the file
+    set statusline+=\ %t
+    set statusline+=%*
+    " Git branch
+    set statusline+=\ [%{b:gitbranch}]
+    set statusline+=%*
+    " Separator right-aligned left-aligned
+    set statusline+=%=
+    " Path of the file without the filename
+    set statusline+=\‹%{expand('%:h')}>
+    " Modification time :: buffer number
+    set statusline+=\ [
+    set statusline+=%{strftime('%R',getftime(expand('%')))}
+    set statusline+=\ ::
+    set statusline+=\ %n
+    set statusline+=]
+    set statusline+=%*
 "}}}
 " Text, tab and indent related configuration {{{
     " Use spaces instead of tabs
@@ -308,8 +353,8 @@
     set tabstop=4
 
     " Linebreak on 500 characters
-    set lbr
-    set tw=500
+    set linebreak
+    set textwidth=500
     set autoindent   " Auto indent
     set smartindent  " Smart indent
     set nowrap         " Wrap lines
@@ -324,7 +369,10 @@
 "}}}
 "Configuration specific to gvim {{{
     " Maximize window when starting gVim (works on MS windows only)
+    augroup GUI
+        autocmd!
     autocmd GUIEnter * simalt ~n
+    augroup END
 
     " Remove useless graphical stuff
     set guioptions-=m  "menu bar
@@ -339,7 +387,7 @@
         autocmd VimLeave * call system("tmux rename-window $(basename $PWD)")
     augroup end
 " }}}
-" Custom functions and commands {{{
+" Custom commands {{{
     " Easily quote from the doc {{{
         vnoremap <leader>dy :call QuoteDoc()<CR>
         function! QuoteDoc() range
@@ -369,60 +417,35 @@
             endif
         endfunction
     "}}}
-    " make h and l skip indentation white spaces {{{
-        function! MyLMotion()
-            let cursorPosition=getpos(".")
-            normal ^
-            let firstChar=getpos(".")
-
-            if cursorPosition[2] < firstChar[2]
-                normal ^
-            else
-                call setpos('.', cursorPosition)
-                normal! l
-            endif
-        endfunction
-
-        function! MyHMotion()
-            let cursorPosition=getpos(".")
-            normal ^
-            let firstChar=getpos(".")
-
-            if cursorPosition[2] <= firstChar[2]
-                normal 0
-            else
-                call setpos('.', cursorPosition)
-                normal! h
-            endif
-        endfunction
-
-        nnoremap <silent> h :call MyHMotion()<CR>
-        nnoremap <silent> l :call MyLMotion()<CR>
-    "}}}
-    " Get a random number using system function {{{
-    " http://vi.stackexchange.com/a/819/1821
-        function! GetRandomInteger()
-            if has('win32')
-                return system("echo %RANDOM%")
-            else
-                return system("echo $RANDOM")
-            endif
-        endfunction
-    " }}}
-    " Open help vertically with H {{{
-        command! -complete=help -nargs=1 H call VerticalHelp(<f-args>)
-        function! VerticalHelp(topic)
-            execute "vertical botright help " . a:topic
-            execute "vertical resize 78"
-        endfunction
+    " :H Open help vertically with H {{{
+        command! -complete=help -nargs=1 H call help#VerticalHelp(<f-args>)
     "}}}
     " :W save file with sudo permissions {{{
         command! W w !sudo tee % > /dev/null
     "}}}
-    " :PrettyJson prettify json with python {{{
-        command! -range PrettyJson <line1>,<line2>!python -m json.tool
-    " }}}
+    " :Ctoggle Toggle quickfix window {{{
+        function! s:qf_toggle()
+            for i in range(1, winnr('$'))
+                let bnum = winbufnr(i)
+                if getbufvar(bnum, '&buftype') == 'quickfix'
+                    cclose
+                    return
+                endif
+            endfor
+
+            copen
+        endfunction
+        command! Ctoggle call s:qf_toggle()
+        nnoremap q :Ctoggle<CR>
+    "}}}
 "}}}
+" Automatically open QuickFix window {{{
+    augroup QuickFixCmd
+        autocmd!
+        autocmd QuickFixCmdPost [^l]* cwindow
+        autocmd QuickFixCmdPost    l* lwindow
+    augroup END
+" }}}
 " Source a local vimrc {{{
     if has('win32')
         let $MYLOCALVIMRC = $HOME . "/_local.vim"
