@@ -9,3 +9,4 @@ scripts/files_list
 
 # Vim plugins directory
 vim/plugged
+vim/viminfo
