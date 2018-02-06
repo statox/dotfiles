@@ -3,9 +3,6 @@
     -- REMEMBER TO USE mkdir ~/.psql_history
     \set HISTFILE ~/.psql_history/ :DBNAME
 
-    -- Remove the help message at startup
-    \set QUIET 1
-
 -- Input settings
     -- Change prompt
     \set PROMPT1 '%M:%> %n@%/%R%#%x '
