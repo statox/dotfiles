@@ -53,7 +53,7 @@
     set noswapfile nobackup
 
     " make autocomplete case sensitive even if 'ignorecase' is on
-    set infercase
+    set noinfercase
     set completeopt=longest,menuone,preview
 
     " Reset path to default and add subdirectories to path
@@ -93,9 +93,6 @@
     " nanotech/jellybeans.vim: Cool colorscheme{{{
         Plug 'nanotech/jellybeans.vim'
     "}}}
-    " fcpg/vim-fahrenheit: clean colorscheme {{{
-        Plug 'fcpg/vim-fahrenheit'
-    " }}}
     " tpope/vim-fugitive: Git wrapper {{{
         Plug 'tpope/vim-fugitive'
     " }}}
@@ -123,6 +120,13 @@
     " }}}
     " romainl/vim-editorconfig: yet another plugin for EditorConfig {{{
         Plug 'romainl/vim-editorconfig'
+    " }}}
+    " statox/gutterline.vim: Show the current lien in the gutter {{{
+        set updatetime=50
+        let g:GutterLineSign='=>'
+        let g:GutterLineIgnore=['help']
+        let g:GutterlineHighlightinggroup="DiffAdd"
+        Plug 'statox/gutterline.vim'
     " }}}
     call plug#end()
 
@@ -188,7 +192,6 @@
         nnoremap s <C-w>
     " }}}
     " Make command line navigation easier {{{
-        cnoremap <C-a> USE CTRL - B
         cnoremap <C-l> <Right>
         cnoremap <C-h> <Left>
         cnoremap <C-k> <S-Up>
@@ -261,8 +264,7 @@
 "}}}
 " Color configuration {{{
     try
-        set background=dark
-        let g:colorsDefault  = 'fahrenheit'
+        let g:colorsDefault  = 'jellybeans'
         let g:colorsDiff     = 'jellybeans'
 
         execute "colorscheme " . g:colorsDefault
@@ -304,10 +306,10 @@
 
     " Set the buffer variable g:gitbranch to the current git branch as a string
     function! CurrentGitStatus()
-        let gitoutput = systemlist('git branch 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/(\1)/" -e "s/[()]//g";')[0]
+        let gitoutput = systemlist('git branch 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/(\1)/" -e "s/[()]//g";')
 
         if len(gitoutput) > 0
-            let b:gitbranch = gitoutput
+            let b:gitbranch = gitoutput[0]
         else
             let b:gitbranch = ''
         endif
@@ -318,14 +320,12 @@
     augroup end
 
     set statusline=
-    " Count current line/total lines
-    set statusline+=%l/%L
-    set statusline+=%*
     " Flags modified buffer and help file
-    set statusline+=\ %m%h
+    set statusline+=\ %#Error#
+    set statusline+=%m%h
     set statusline+=%*
-    " Short name of the file
-    set statusline+=\ %t
+    " Buffer number :: Short name of the file
+    set statusline+=\ [\%n\ ::\ \%t]
     set statusline+=%*
     " Git branch
     set statusline+=\ [%{b:gitbranch}]
@@ -334,11 +334,9 @@
     set statusline+=%=
     " Path of the file without the filename
     set statusline+=\‹%{expand('%:h')}>
-    " Modification time :: buffer number
+    " Modification time
     set statusline+=\ [
     set statusline+=%{strftime('%R',getftime(expand('%')))}
-    set statusline+=\ ::
-    set statusline+=\ %n
     set statusline+=]
     set statusline+=%*
 "}}}
@@ -365,7 +363,6 @@
     set smartcase   " unless uppercase letters used
     set hlsearch    " Highlight all matches
                     " use <C-L> to temporarily turn off highlighting
-    set nowrapscan  " Do not go back to first match when searching
 "}}}
 "Configuration specific to gvim {{{
     " Maximize window when starting gVim (works on MS windows only)
@@ -422,6 +419,9 @@
     "}}}
     " :W save file with sudo permissions {{{
         command! W w !sudo tee % > /dev/null
+    "}}}
+    " :QA close all buffers without leaving vim {{{
+        command! QA bufdo bd
     "}}}
     " :Ctoggle Toggle quickfix window {{{
         function! s:qf_toggle()
