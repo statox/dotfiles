@@ -304,41 +304,38 @@
     " Always display the status line, even if only one window is displayed
     set laststatus=2
 
-    " Set the buffer variable g:gitbranch to the current git branch as a string
-    function! CurrentGitStatus()
-        let gitoutput = systemlist('git branch 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/(\1)/" -e "s/[()]//g";')
-
-        if len(gitoutput) > 0
-            let b:gitbranch = gitoutput[0]
-        else
-            let b:gitbranch = ''
-        endif
-    endfunc
     augroup git
         autocmd!
-        autocmd BufEnter,BufWritePost * call CurrentGitStatus()
+        " Get the current git branch
+        autocmd BufEnter,BufWritePost * call statusline#CurrentGitBranch()
+        " Get the git status of the current file
+        autocmd BufEnter,BufWritePost * call statusline#CurrentFileGitStatus()
+        " Get a formatting of the modification time
+        autocmd BufEnter,BufWritePost * call statusline#TimeSinceLastUpdate()
     augroup end
+
 
     set statusline=
     " Flags modified buffer and help file
-    set statusline+=\ %#Error#
+    set statusline+=%#Error#
     set statusline+=%m%h
     set statusline+=%*
-    " Buffer number :: Short name of the file
-    set statusline+=\ [\%n\ ::\ \%t]
-    set statusline+=%*
-    " Git branch
-    set statusline+=\ [%{b:gitbranch}]
-    set statusline+=%*
+    " current row/total rows current column
+    set statusline+=[R%l/%L\ C%c]
+    " Path of the file without the filename
+    set statusline+=[%{expand('%:h')}]
+    " Short name of the file :: Buffer number
+    set statusline+=[\%t\ ::\ \%n]
     " Separator right-aligned left-aligned
     set statusline+=%=
-    " Path of the file without the filename
-    set statusline+=\‹%{expand('%:h')}>
-    " Modification time
-    set statusline+=\ [
-    set statusline+=%{strftime('%R',getftime(expand('%')))}
-    set statusline+=]
+    " Git status for current file
+    set statusline+=%#DiffAdd#
+    set statusline+=%{b:statusLineGitStatus}
     set statusline+=%*
+    " Git branch
+    set statusline+=[%{b:statusLineGitBranch}]
+    " Last modification time - time since last modification
+    set statusline+=[%{b:statusLineTime}]
 "}}}
 " Text, tab and indent related configuration {{{
     " Use spaces instead of tabs
