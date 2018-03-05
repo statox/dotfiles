@@ -47,7 +47,7 @@
     set autoread
 
     " Allows vim to record more lines in history
-    set history=500
+    set history=5000
 
     " Swap and backup files are pretty annoying: get rid of them
     set noswapfile nobackup
@@ -359,10 +359,8 @@
 "}}}
 " Set up smarter search behaviour {{{
     set incsearch   " Lookahead as search pattern is specified
-    set ignorecase  " Ignore case in all searches...
+    set ignorecase  " Ignore case in all searches
     set smartcase   " unless uppercase letters used
-    set hlsearch    " Highlight all matches
-                    " use <C-L> to temporarily turn off highlighting
 "}}}
 "Configuration specific to gvim {{{
     " Maximize window when starting gVim (works on MS windows only)
