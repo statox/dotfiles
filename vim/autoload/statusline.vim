@@ -6,7 +6,7 @@ function! statusline#CurrentGitBranch()
     let gitoutput = systemlist('git branch 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/(\1)/" -e "s/[()]//g";')
 
     if len(gitoutput) > 0
-        let b:statusLineGitBranch = gitoutput[0]
+        let b:statusLineGitBranch = '[' . gitoutput[0] . ']'
     else
         let b:statusLineGitBranch = ''
     endif
@@ -42,8 +42,43 @@ function! statusline#TimeSinceLastUpdate()
         let timeSinceLastUpdate .= (minutes > 0 || hours > 0) ? minutes . 'm' : ''
         let timeSinceLastUpdate .= seconds . 's'
 
-        let b:statusLineTime = strftime('%R',getftime(expand('%'))) . ' '
+        let b:statusLineTime = strftime('%R',getftime(expand('%'))) . ' - '
     endif
 
-    let b:statusLineTime .= timeSinceLastUpdate
+    let b:statusLineTime = '[' . b:statusLineTime . timeSinceLastUpdate . ']'
+endfunction
+
+" Return the expression of the statusline option
+function! statusline#StatusLine()
+    let statusline=""
+
+    " Flags modified buffer and help file
+    let statusline.="%#Error#"
+    let statusline.="%m%h"
+    let statusline.="%*"
+
+    " current row/total rows current column
+    let statusline.="[R%l/%L\ C%c]"
+
+    " Path of the file without the filename
+    let statusline.="[%{expand('%:h')}]"
+
+    " Short name of the file :: Buffer number
+    let statusline.="[\%t\ ::\ \%n]"
+
+    " Separator right-aligned left-aligned
+    let statusline.="%="
+
+    " Git status for current file
+    let statusline.="%#DiffAdd#"
+    let statusline.="%{b:statusLineGitStatus}"
+    let statusline.="%*"
+
+    " Git branch
+    let statusline.="%{b:statusLineGitBranch}"
+
+    " Last modification time - time since last modification
+    let statusline.="%{b:statusLineTime}"
+
+    return statusline
 endfunction

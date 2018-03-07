@@ -304,7 +304,8 @@
     " Always display the status line, even if only one window is displayed
     set laststatus=2
 
-    augroup git
+    " Call functions which define buffer variables used in status line
+    augroup statusLineVariables
         autocmd!
         " Get the current git branch
         autocmd BufEnter,BufWritePost * call statusline#CurrentGitBranch()
@@ -314,28 +315,7 @@
         autocmd BufEnter,BufWritePost * call statusline#TimeSinceLastUpdate()
     augroup end
 
-
-    set statusline=
-    " Flags modified buffer and help file
-    set statusline+=%#Error#
-    set statusline+=%m%h
-    set statusline+=%*
-    " current row/total rows current column
-    set statusline+=[R%l/%L\ C%c]
-    " Path of the file without the filename
-    set statusline+=[%{expand('%:h')}]
-    " Short name of the file :: Buffer number
-    set statusline+=[\%t\ ::\ \%n]
-    " Separator right-aligned left-aligned
-    set statusline+=%=
-    " Git status for current file
-    set statusline+=%#DiffAdd#
-    set statusline+=%{b:statusLineGitStatus}
-    set statusline+=%*
-    " Git branch
-    set statusline+=[%{b:statusLineGitBranch}]
-    " Last modification time - time since last modification
-    set statusline+=[%{b:statusLineTime}]
+    set statusline=%!statusline#StatusLine()
 "}}}
 " Text, tab and indent related configuration {{{
     " Use spaces instead of tabs
