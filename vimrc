@@ -387,6 +387,9 @@
         command! Ctoggle call quickfix#qf_toggle()
         nnoremap q :Ctoggle<CR>
     "}}}
+    " :GitFilesToStage: Open git changes in the quickfix {{{
+        command! GitFTS call git#GetChangesToQF()
+    "}}}
 "}}}
 " Automatically open QuickFix window {{{
     augroup QuickFixCmd
