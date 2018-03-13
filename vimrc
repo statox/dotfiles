@@ -396,11 +396,7 @@
     augroup END
 " }}}
 " Source a local vimrc {{{
-    if has('win32')
-        let $MYLOCALVIMRC = $HOME . "/_local.vim"
-    else
-        let $MYLOCALVIMRC = $HOME . "/.local.vim"
-    endif
+    let $MYLOCALVIMRC = $HOME . "/" . (has('win32') ? "_" : ".") . "local.vim"
 
     if filereadable($MYLOCALVIMRC)
         source $MYLOCALVIMRC
