@@ -220,12 +220,12 @@
         xnoremap <silent> # :<C-U>
           \let saveReg=[getreg('"'), getregtype('"')]<CR>
           \gvy?<C-R><C-R>=substitute(escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-          \gV:call setreg('"', saveReg[0], saveReg[1])<CR>
+          \gV:call setreg('"', saveReg[0], saveReg[1])<CR>N
 
         xnoremap <silent> * :<C-U>
           \let saveReg=[getreg('"'), getregtype('"')]<CR>
           \gvy/<C-R><C-R>=substitute(escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-          \gV:call setreg('"', saveReg[0], saveReg[1])<CR>
+          \gV:call setreg('"', saveReg[0], saveReg[1])<CR>N
     "}}}
     " Easily navigate quickfix with ]q and [q {{{
         nnoremap ]q :cnext<CR>
