@@ -9,6 +9,7 @@ gitconfig
 gitignore_global
 i3
 i3status.conf
+inputrc
 motd
 pentadactylrc
 psqlrc
