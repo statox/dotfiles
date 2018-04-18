@@ -298,7 +298,7 @@
         autocmd BufEnter,BufWritePost * call statusline#CurrentFileGitStatus()
         " Get a formatting of the modification time
         autocmd BufEnter,BufWritePost * call statusline#TimeSinceLastUpdate()
-    augroup end
+    augroup END
 
     set statusline=%!statusline#StatusLine()
 "}}}
@@ -340,9 +340,9 @@
 " Rename TMUX tab vim name of edited file {{{
     augroup tmux
         autocmd!
-    autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window '" . expand("%:t") . "'")
+        autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window '" . expand("%:t") . "'")
         autocmd VimLeave * call system("tmux rename-window $(basename $PWD)")
-    augroup end
+    augroup END
 " }}}
 " Custom commands {{{
     " Easily quote from the doc {{{
