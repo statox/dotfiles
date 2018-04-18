@@ -413,3 +413,10 @@
         let &t_te.="\e[0 q"
     endif
 " }}}
+" Startup autocommands {{{
+    augroup startup
+        autocmd!
+        " Open CtrlP when we are in a project directory
+        autocmd VimEnter * if (utils#IsProjectDirectory()) | execute "CtrlP" | endif
+    augroup END
+" }}}
