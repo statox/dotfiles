@@ -417,6 +417,6 @@
     augroup startup
         autocmd!
         " Open CtrlP when we are in a project directory
-        autocmd VimEnter * if (utils#IsProjectDirectory()) | execute "CtrlP" | endif
+        autocmd VimEnter * if (utils#IsProjectDirectory() && argc() == 0) | execute "CtrlP" | endif
     augroup END
 " }}}
