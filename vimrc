@@ -128,6 +128,12 @@
         let g:GutterlineHighlightinggroup="DiffAdd"
         Plug 'statox/gutterline.vim'
     " }}}
+    " vim-syntastic/syntastic: linter wrapper {{{
+        Plug 'vim-syntastic/syntastic'
+        let g:syntastic_javascript_checkers=['eslint']
+        let g:syntastic_always_populate_loc_list = 1
+        let g:syntastic_auto_loc_list = 1
+    "}}}
     call plug#end()
 
     " matchit: expand matching text objects{{{
@@ -238,6 +244,9 @@
     " make h and l skip indentation white spaces {{{
         nnoremap <silent> h :call motion#MyHMotion()<CR>
         nnoremap <silent> l :call motion#MyLMotion()<CR>
+    "}}}
+    " Syntastic mappings {{{
+        nnoremap <leader>s ::SyntasticToggleMode<CR>
     "}}}
 "}}}
 " Manage tabs {{{
@@ -384,8 +393,10 @@
         command! QA bufdo bd
     "}}}
     " :Ctoggle Toggle quickfix window {{{
+        command! Ltoggle call quickfix#ll_toggle()
         command! Ctoggle call quickfix#qf_toggle()
         nnoremap q :Ctoggle<CR>
+        nnoremap <S-S> :Ltoggle<CR>
     "}}}
     " :GitFilesToStage: Open git changes in the quickfix {{{
         command! GitFTS call git#GetChangesToQF()
