@@ -187,10 +187,6 @@
     " Use gp to select last pasted text {{{
         nnoremap gp '[v']
     "}}}
-    " Record macros with Q instead of q {{{
-        nnoremap Q q
-        nnoremap q <Nop>
-    "}}}
     " Delete the current word in insert mode with <C-backspace> {{{
         inoremap  <C-w>
     " }}}
@@ -246,7 +242,7 @@
         nnoremap <silent> l :call motion#MyLMotion()<CR>
     "}}}
     " Syntastic mappings {{{
-        nnoremap <leader>s ::SyntasticToggleMode<CR>
+        nnoremap <leader>s :SyntasticToggleMode<CR>
     "}}}
 "}}}
 " Manage tabs {{{
@@ -395,7 +391,7 @@
     " :Ctoggle Toggle quickfix window {{{
         command! Ltoggle call quickfix#ll_toggle()
         command! Ctoggle call quickfix#qf_toggle()
-        nnoremap q :Ctoggle<CR>
+        nnoremap <S-Q> :Ctoggle<CR>
         nnoremap <S-S> :Ltoggle<CR>
     "}}}
     " :GitFilesToStage: Open git changes in the quickfix {{{
