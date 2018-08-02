@@ -65,6 +65,11 @@
 
     " Show tab line only if there are at least two tab pages
     set showtabline=1
+    " Set up undo dir
+    if has("persistent_undo")
+        set undodir=~/.undodir/
+        set undofile
+    endif
 "}}}
 " Plugins {{{
     " Manage plugins with vim-plug (https://github.com/junegunn/vim-plug)
@@ -133,6 +138,9 @@
         let g:syntastic_javascript_checkers=['eslint']
         let g:syntastic_always_populate_loc_list = 1
         let g:syntastic_auto_loc_list = 1
+    "}}}
+    " markonm/traces.vim: Range, pattern and substitute preview for Vim  {{{
+        Plug 'markonm/traces.vim'
     "}}}
     call plug#end()
 
@@ -310,7 +318,6 @@
 " Text, tab and indent related configuration {{{
     " Use spaces instead of tabs
     set expandtab
-    " Be smart when using tabs ;)
     set smarttab
 
     " 1 tab == 4 spaces
@@ -320,9 +327,9 @@
     " Linebreak on 500 characters
     set linebreak
     set textwidth=500
-    set autoindent   " Auto indent
-    set smartindent  " Smart indent
-    set nowrap         " Wrap lines
+    set autoindent
+    set smartindent
+    set nowrap
 "}}}
 " Set up smarter search behaviour {{{
     set incsearch   " Lookahead as search pattern is specified
@@ -397,13 +404,9 @@
     " :GitFilesToStage: Open git changes in the quickfix {{{
         command! GitFTS call git#GetChangesToQF()
     "}}}
-"}}}
-" Automatically open QuickFix window {{{
-    augroup QuickFixCmd
-        autocmd!
-        autocmd QuickFixCmdPost [^l]* cwindow
-        autocmd QuickFixCmdPost    l* lwindow
-    augroup END
+    " :QFClosestEntry: Select the entry of the quickfix the closest from the cursor {{{
+        command! QFClosestEntry call quickfix#SelectClosestEntry()
+    "}}}
 " }}}
 " Source a local vimrc {{{
     let $MYLOCALVIMRC = $HOME . "/" . (has('win32') ? "_" : ".") . "local.vim"
