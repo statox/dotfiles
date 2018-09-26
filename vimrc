@@ -57,7 +57,7 @@
     set completeopt=longest,menuone,preview
 
     " Reset path to default and add subdirectories to path
-    set path+=**
+    set path& | let &path .= "**"
 
     " Show unseeing characters
     set list
