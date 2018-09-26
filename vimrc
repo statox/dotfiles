@@ -180,7 +180,6 @@
         endif
     "}}}
     " Quickly escape insert mode with jk {{{
-        inoremap jj <Esc>
         inoremap jk <Esc>:w<CR>
         " Let's try it in normal mode too
         nnoremap  <Leader>jk <Esc>:w<cr>:echo "saving"<CR>
@@ -237,10 +236,6 @@
           \gvy/<C-R><C-R>=substitute(escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
           \gV:call setreg('"', saveReg[0], saveReg[1])<CR>N
     "}}}
-    " Easily navigate quickfix with ]q and [q {{{
-        nnoremap ]q :cnext<CR>
-        nnoremap [q :cprevious<CR>
-    " }}}
     " Make * and # dont navigate to the next occurence {{{
         nnoremap * *N
         nnoremap # #N
