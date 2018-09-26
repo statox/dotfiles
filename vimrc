@@ -256,8 +256,8 @@
     nnoremap <Leader><Leader>t  :tabnew<CR>
     nnoremap <Leader>tc         :tabclose<CR>
     " move current tab to left/right
-    nnoremap <Leader><Leader><Left>  :execute 'silent! tabmove -1'<CR>
-    nnoremap <Leader><Leader><Right> :execute 'silent! tabmove +1'<CR>
+    nnoremap <Leader><Leader><Left>  :tabmove -1<CR>
+    nnoremap <Leader><Leader><Right> :tabmove +1<CR>
 "}}}
 " Manage buffers {{{
     " show buffer list and allow to type the buffer name to use with <Leader>bb
