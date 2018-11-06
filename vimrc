@@ -57,7 +57,7 @@
     set completeopt=longest,menuone,preview
 
     " Reset path to default and add subdirectories to path
-    set path+=**
+    set path& | let &path .= "**"
 
     " Show unseeing characters
     set list
@@ -180,7 +180,6 @@
         endif
     "}}}
     " Quickly escape insert mode with jk {{{
-        inoremap jj <Esc>
         inoremap jk <Esc>:w<CR>
         " Let's try it in normal mode too
         nnoremap  <Leader>jk <Esc>:w<cr>:echo "saving"<CR>
@@ -237,10 +236,6 @@
           \gvy/<C-R><C-R>=substitute(escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
           \gV:call setreg('"', saveReg[0], saveReg[1])<CR>N
     "}}}
-    " Easily navigate quickfix with ]q and [q {{{
-        nnoremap ]q :cnext<CR>
-        nnoremap [q :cprevious<CR>
-    " }}}
     " Make * and # dont navigate to the next occurence {{{
         nnoremap * *N
         nnoremap # #N
@@ -261,8 +256,8 @@
     nnoremap <Leader><Leader>t  :tabnew<CR>
     nnoremap <Leader>tc         :tabclose<CR>
     " move current tab to left/right
-    nnoremap <Leader><Leader><Left>  :execute 'silent! tabmove -1'<CR>
-    nnoremap <Leader><Leader><Right> :execute 'silent! tabmove +1'<CR>
+    nnoremap <Leader><Leader><Left>  :tabmove -1<CR>
+    nnoremap <Leader><Leader><Right> :tabmove +1<CR>
 "}}}
 " Manage buffers {{{
     " show buffer list and allow to type the buffer name to use with <Leader>bb
