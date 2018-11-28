@@ -63,6 +63,9 @@
     set list
     set listchars=eol:$,tab:>-,trail:.
 
+    " Use the modelines (potentially a security concern)
+    set modeline
+
     " Show tab line only if there are at least two tab pages
     set showtabline=1
     " Set up undo dir
