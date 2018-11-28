@@ -1,0 +1,51 @@
+"~/.ideavimrc
+" List of IDE actions can be found here
+" https://gist.github.com/statox/bb910e7077236a1eccc47291097a1e0d
+
+" Set up smarter search behaviour {{{
+    set incsearch   " Lookahead as search pattern is specified
+    set ignorecase  " Ignore case in all searches
+    set smartcase   " unless uppercase letters used
+    set hlsearch
+"}}}
+" Mappings {{{
+    " <C-L> turn off search highlighting until the next search {{{
+        nnoremap <C-L> :nohlsearch<CR><C-L>
+    "}}}
+    " Fast quit {{{
+        nnoremap <Space><S-Q> :qa!<CR>
+    "}}}
+    " Quickly escape insert mode with jk {{{
+        inoremap jk <Esc>:w<CR>
+        nnoremap <Space>jk :w<CR>
+    "}}}
+    " Quickly insert an empty new line without entering insert mode {{{
+        nnoremap <Space>o o<Esc>0"_D
+        nnoremap <Space>O O<Esc>0"_D
+    "}}}
+    " Use gp to select last pasted text {{{
+        nnoremap gp '[v']
+    "}}}
+    " Use s instead of <C-w> to handle windows {{{
+        nnoremap s <C-w>
+    " }}}
+    " Search files {{{
+        nnoremap <Space><CR> :action GotoFile<CR>
+    " }}}
+    " Center next match with <leader>n {{{
+        nnoremap <Space>n nzz
+    " }}}
+    " Make * and # dont navigate to the next occurence {{{
+        nnoremap * *N
+        nnoremap # #N
+    "}}}
+"}}}
+" Manage buffers {{{
+    " change buffer with <Leader>bh and <Leader>bl {{{
+        nnoremap <Space>l :action VimMotionNextTab<CR>
+        nnoremap <Space>h :action VimMotionPreviousTab<CR>
+    "}}}
+    " Close buffer with <Space>bd {{{
+        nnoremap <Space>bd :q<CR>
+    "}}}
+"}}}
