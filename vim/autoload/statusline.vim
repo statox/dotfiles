@@ -71,14 +71,20 @@ function! statusline#StatusLine()
 
     " Git status for current file
     let statusline.="%#DiffAdd#"
-    let statusline.="%{b:statusLineGitStatus}"
+    if exists("b:statusLineGitStatus")
+        let statusline.="%{b:statusLineGitStatus}"
+    endif
     let statusline.="%*"
 
     " Git branch
-    let statusline.="%{b:statusLineGitBranch}"
+    if exists("b:statusLineGitBranch")
+        let statusline.="%{b:statusLineGitBranch}"
+    endif
 
     " Last modification time - time since last modification
-    let statusline.="%{b:statusLineTime}"
+    if exists("b:statusLineTime")
+        let statusline.="%{b:statusLineTime}"
+    endif
 
     return statusline
 endfunction
