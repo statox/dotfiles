@@ -145,6 +145,12 @@
     " markonm/traces.vim: Range, pattern and substitute preview for Vim  {{{
         Plug 'markonm/traces.vim'
     "}}}
+    " RRethy/vim-illuminate: Highlight the word under the cursor {{{
+        Plug 'RRethy/vim-illuminate'
+        let g:Illuminate_delay = 500
+        let g:Illuminate_ftblacklist = ['help']
+        hi link illuminatedWord Visual
+    "}}}
     call plug#end()
 
     " matchit: expand matching text objects{{{
