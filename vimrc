@@ -346,15 +346,11 @@
     " Define an autocmd to call the HighLightSearch function when we enter the
     " search command line. And a second one to stop the function when we are
     " done searching
-    "
-    " +timers is required and CmdlineEnter comes with patch1206
-    if (has('timers') && has('patch1206'))
-        augroup betterSeachHighlighting
-            autocmd!
-            autocmd CmdlineEnter * if (index(['?', '/'], getcmdtype()) >= 0) | let g:HLSsearching = 1 | call timer_start(1, function('statusline#HighlightSearch', [1])) | endif
-            autocmd CmdlineLeave * let g:HLSsearching = 0
-        augroup END
-    endif
+    augroup betterSeachHighlighting
+        autocmd!
+        autocmd CmdlineEnter * call search#StartStatuslineHighlighting()
+        autocmd CmdlineLeave * call search#StopStatuslineHighlighting()
+    augroup END
 "}}}
 "Configuration specific to gvim {{{
     " Maximize window when starting gVim (works on MS windows only)

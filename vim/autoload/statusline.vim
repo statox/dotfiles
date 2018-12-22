@@ -1,34 +1,6 @@
 " ~/.vim/autoload/statusline.vim
 " Functions used in the customization of the status line
 
-" While we are searching something change the background of the statusline
-function! statusline#HighlightSearch(firstCall, timer)
-    " When it is the first call to the function we save the current status of
-    " the StatusLine HL group so that we can restore it when we are done searching
-    if (a:firstCall)
-        let s:HLSoriginalStatusLineHLGroup = execute("hi StatusLine")
-        let g:HLSfirstCall = 0
-    endif
-
-    if (exists("g:HLSsearching") && g:HLSsearching)
-        " The variable g:HLSsearching is set to 1, we are in the search command line
-        " make the highlighting and call the function again after a delay
-        let searchString = escape(getcmdline(), ' \')
-        let newBG = search(searchString) != 0 ? "green" : "red"
-        execute("hi StatusLine ctermbg=" . newBG)
-        let g:HLShighlightTimer = timer_start(300, function('statusline#HighlightSearch', [0]))
-    else
-        " The variable g:HLSsearching is either not set or set to 0, we stopped searching
-        " restore the hightlighting and stop calling the function
-        let originalBG = matchstr(s:HLSoriginalStatusLineHLGroup, 'ctermbg=\zs[^ ]\+')
-        execute("hi StatusLine ctermbg=" . originalBG)
-
-        if exists("g:HLShighlightTimer")
-            call timer_stop(g:HLShighlightTimer)
-        endif
-    endif
-endfunction
-
 " Set the buffer variable b:gitbranch to the current git branch as a string
 function! statusline#CurrentGitBranch()
     let gitoutput = systemlist('git branch 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/(\1)/" -e "s/[()]//g";')
