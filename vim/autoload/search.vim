@@ -25,7 +25,11 @@ function! search#HighlightSearch(firstCall, searching, timer)
         " Checking the results of the search and updating the StatusLine HL
         " TODO make that more generic: There should be a better way than using search()
         let searchString = escape(getcmdline(), ' \')
-        let newBG = search(searchString) != 0 ? "green" : "red"
+        try
+            let newBG = search(searchString) != 0 ? "green" : "red"
+        catch /E35/
+            let newBG = "green"
+        endtry
 
         " TODO make that configurable so that it also works with GUI
         " Maybe we could let the user define a dictionnary with the items they want to change
