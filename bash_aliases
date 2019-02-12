@@ -24,6 +24,8 @@ alias reloadbashrc='source ~/.bashrc'
 alias reloadzshrc='source ~/.zshrc'
 
 #ls
+alias sl='ls'
+alias ms='ls'
 alias ldot='ls -d .*'
 alias ll='ls -AlFh'
 alias la='ls -ACF'
@@ -40,8 +42,9 @@ alias gc='git commit'
 alias gl='git log'
 alias gco='git checkout'
 
-# Add git completion to aliases
-if [ -f ~/.git-completion.bash ]; then
+# Add git completion to aliases if we are in bash
+# (zsh already have that by default)
+if [ $TEST =~ 'bash' && -f ~/.git-completion.bash ]; then
     source ~/.git-completion.bash
 
     __git_complete g __git_main
@@ -87,12 +90,6 @@ alias restnow='sudo shutdown -r now'
 alias v='vim'
 alias vi='vim'
 
-# apt
-alias install='sudo apt-get install'
-alias search='apt-cache search'
-alias update='sudo apt-get update'
-alias upgrade='sudo apt-get upgrade'
-
 # directories navigation
 alias back='cd $OLDPWD'
 alias ..='cd ../'
@@ -107,9 +104,6 @@ alias ..........='cd ../../../../../../../../../'
 
 # quickly output iptables rules
 alias ipt='sudo iptables -L'
-
-# show hubic client status
-alias hubicstatus='watch -n 0,1 hubic status'
 
 # make df human readable
 alias df='df -h'
@@ -130,6 +124,11 @@ alias lvim='vim -S ~/Session.vim'
 
 # Get debian version codename
 alias debianversion='lsb_release -a'
+
+# Node
+# Start node with debugging
+alias noded='node --inspect-brk'
+
 ####################################################
 #                   functions                      #
 ####################################################
