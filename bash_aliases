@@ -44,7 +44,7 @@ alias gco='git checkout'
 
 # Add git completion to aliases if we are in bash
 # (zsh already have that by default)
-if [ $TEST =~ 'bash' && -f ~/.git-completion.bash ]; then
+if [[ $SHELL =~ 'bash' && -f ~/.git-completion.bash ]]; then
     source ~/.git-completion.bash
 
     __git_complete g __git_main
