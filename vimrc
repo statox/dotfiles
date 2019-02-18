@@ -91,6 +91,9 @@
     "}}}
     " scrooloose/nerdcommenter: Vim plugin for intensely orgasmic commenting{{{
         Plug 'scrooloose/nerdcommenter'
+
+        " Add whitespace between the comment character and the commented code
+        let NERDSpaceDelims = 1
     "}}}
     " godlygeek/tabular: Vim script for text filtering and alignment{{{
         Plug 'godlygeek/tabular'
@@ -108,7 +111,7 @@
         Plug 'ctrlpvim/ctrlp.vim'
         " Ignore some files/directories
         let g:ctrlp_custom_ignore = {
-          \ 'dir':  '\v[\/](platforms|plugins|assets|bin|target|test|lib|font|WEB-INF|svn|node_modules|out|dist)$',
+          \ 'dir':  '\v[\/](platforms|plugins|assets|bin|target|test|lib|font|WEB-INF|svn|node_modules|out|dist|build)$',
           \ 'file': '\v\.(exe|so|dll)$',
           \ }
         " Dont jump to a buffer when it is already open, instead open another instance
@@ -139,6 +142,8 @@
     " vim-syntastic/syntastic: linter wrapper {{{
         Plug 'vim-syntastic/syntastic'
         let g:syntastic_javascript_checkers=['eslint']
+        let g:syntastic_typescript_checkers=['tslint']
+        let g:syntastic_coffee_checkers=['coffeelint']
         let g:syntastic_always_populate_loc_list = 1
         let g:syntastic_auto_loc_list = 1
     "}}}
@@ -149,8 +154,34 @@
         Plug 'RRethy/vim-illuminate'
         let g:Illuminate_delay = 500
         let g:Illuminate_ftblacklist = ['help']
-        hi link illuminatedWord Visual
+        hi link illuminatedWord VisualNOS
     "}}}
+    " WEB: syntax highlighting {{{
+        " leafgarland/typescript-vim: Typescript syntax highlighting {{{
+            Plug 'leafgarland/typescript-vim'
+        "}}}
+        " kchmck/vim-coffee-script: Cofeescript plugin {{{
+            Plug 'kchmck/vim-coffee-script'
+        " }}}
+    " }}}
+    " WEB: LSP {{{
+        Plug 'prabirshrestha/async.vim'
+        Plug 'prabirshrestha/vim-lsp'
+
+        Plug 'ryanolsonx/vim-lsp-typescript'
+
+        let g:lsp_signs_enabled = 1
+        let g:lsp_signs_error = {'text': '✗'}
+        let g:lsp_signs_warning = {'text': '‼'} " icons require GUI
+        let g:lsp_signs_hint = {'test': '!'} " icons require GUI
+        let g:lsp_diagnostics_echo_cursor = 1
+    " }}}
+    " vimwiki/vimwiki {{{
+        Plug 'vimwiki/vimwiki'
+        let defaultWiki = {}
+        let defaultWiki.path = '~/notes'
+        let g:vimwiki_list = [defaultWiki]
+    " }}}
     call plug#end()
 
     " matchit: expand matching text objects{{{
