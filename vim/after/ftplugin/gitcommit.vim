@@ -5,3 +5,6 @@ augroup insertModeInGitCommit
     autocmd!
     autocmd BufReadPost if &modifiable | execute "normal! gg0" | startinsert | endif
 augroup END
+
+" Limit the lines to 60 chars max
+set colorcolumn=50,60
