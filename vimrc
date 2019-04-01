@@ -61,7 +61,7 @@
 
     " Show unseeing characters
     set list
-    set listchars=eol:$,tab:>-,trail:.
+    set listchars=tab:>-,trail:.
 
     " Use the modelines (potentially a security concern)
     set modeline
@@ -74,6 +74,11 @@
         set undofile
     endif
 "}}}
+" General configuration - nvim specific {{{
+    if (has('nvim'))
+        set inccommand=nosplit
+    endif
+" }}}
 " Plugins {{{
     " Manage plugins with vim-plug (https://github.com/junegunn/vim-plug)
     " to install execute:
@@ -132,13 +137,6 @@
     " romainl/vim-editorconfig: yet another plugin for EditorConfig {{{
         Plug 'romainl/vim-editorconfig'
     " }}}
-    " statox/gutterline.vim: Show the current lien in the gutter {{{
-        set updatetime=50
-        let g:GutterLineSign='=>'
-        let g:GutterLineIgnore=['help']
-        let g:GutterlineHighlightinggroup="DiffAdd"
-        Plug 'statox/gutterline.vim'
-    " }}}
     " vim-syntastic/syntastic: linter wrapper {{{
         Plug 'vim-syntastic/syntastic'
         let g:syntastic_javascript_checkers=['eslint']
@@ -148,39 +146,68 @@
         let g:syntastic_auto_loc_list = 1
     "}}}
     " markonm/traces.vim: Range, pattern and substitute preview for Vim  {{{
-        Plug 'markonm/traces.vim'
+        if (!has('nvim'))
+            Plug 'markonm/traces.vim'
+        endif
     "}}}
     " RRethy/vim-illuminate: Highlight the word under the cursor {{{
         Plug 'RRethy/vim-illuminate'
         let g:Illuminate_delay = 500
         let g:Illuminate_ftblacklist = ['help']
-        hi link illuminatedWord VisualNOS
+        hi link illuminatedWord Visual
     "}}}
-    " WEB: syntax highlighting {{{
-        " leafgarland/typescript-vim: Typescript syntax highlighting {{{
-            Plug 'leafgarland/typescript-vim'
-        "}}}
-        " kchmck/vim-coffee-script: Cofeescript plugin {{{
-            Plug 'kchmck/vim-coffee-script'
-        " }}}
+    " coc.nvim {{{
+        Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
     " }}}
-    " WEB: LSP {{{
-        Plug 'prabirshrestha/async.vim'
-        Plug 'prabirshrestha/vim-lsp'
-
-        Plug 'ryanolsonx/vim-lsp-typescript'
-
-        let g:lsp_signs_enabled = 1
-        let g:lsp_signs_error = {'text': '✗'}
-        let g:lsp_signs_warning = {'text': '‼'} " icons require GUI
-        let g:lsp_signs_hint = {'test': '!'} " icons require GUI
-        let g:lsp_diagnostics_echo_cursor = 1
+    " HerringtonDarkholme/yats.vim: TS syntax file (better than typescript-vim) {{{
+        Plug 'HerringtonDarkholme/yats.vim'
+    " }}}
+    " kchmck/vim-coffee-script: Coffee scrupt syntax file {{{
+        Plug 'kchmck/vim-coffee-script'
     " }}}
     " vimwiki/vimwiki {{{
         Plug 'vimwiki/vimwiki'
         let defaultWiki = {}
         let defaultWiki.path = '~/notes'
         let g:vimwiki_list = [defaultWiki]
+    " }}}
+    " mbbill/undotree: Visual undo tree {{{
+        Plug 'mbbill/undotree'
+    " }}}
+    " romainl/vim-devdocs: Access devdocs.io from vim {{{
+        Plug 'romainl/vim-devdocs'
+    " }}}
+    " FZF : fuzzy finder {{{
+        Plug 'junegunn/fzf', { 'dir': '~/.bin/fzf', 'do': './install --all' }
+        Plug 'junegunn/fzf.vim'
+
+        " Create a command Agw to match exact word
+        command! -bang -nargs=* Agw call fzf#vim#ag(<q-args>, '--word-regexp', <bang>0)
+
+        " Override the command Ag to have a preview window toggled with ?
+        command! -bang -nargs=* Ag
+          \ call fzf#vim#ag(<q-args>,
+          \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+          \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+          \                 <bang>0)
+
+        " Override the command File to show a preview window
+        command! -bang -nargs=? -complete=dir Files
+          \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+    " }}}
+    " liuchengxu/vista.vim - LSP symbol viewer {{{
+        Plug 'liuchengxu/vista.vim'
+        " Setup how the Vista window opens
+        let g:vista_sidebar_position = 'vertical topleft'
+        " That defeats the purpose of g:vista_executive_for but without it seems that the
+        " autocmd for vista#RunForNearestMethodOrFunction() doesn't work properly without ctags installed
+        let g:vista_default_executive = 'coc'
+        " Use coc.vim for typescript
+        let g:vista_executive_for = {
+                    \ 'typescript': 'coc'
+                    \ }
+        " Set up the fzf preview window for Vista finder
+        let g:vista_fzf_preview = ['right:50%']
     " }}}
     call plug#end()
 
@@ -191,6 +218,9 @@
 " Mappings {{{
     " <C-L> turn off search highlighting until the next search {{{
         nnoremap <C-L> :nohlsearch<CR><C-L>
+        if (exists(':GitGutter'))
+            nnoremap <C-L> :nohlsearch\|GitGutter<CR><C-L>
+        endif
     "}}}
     " Fast save and quit {{{
         nnoremap <Leader><S-Q> :qa!<CR>
@@ -220,9 +250,9 @@
         endif
     "}}}
     " Quickly escape insert mode with jk {{{
-        inoremap jk <Esc>:w<CR>
+        inoremap <silent> jk <Esc>:w<CR>
         " Let's try it in normal mode too
-        nnoremap  <Leader>jk <Esc>:w<cr>:echo "saving"<CR>
+        nnoremap <silent> <Leader>jk <Esc>:w<cr>
     "}}}
     " Quickly insert an empty new line without entering insert mode {{{
         nnoremap <Leader>o o<Esc>0"_D
@@ -247,8 +277,18 @@
         cnoremap <C-j> <S-Down>
     "}}}
     " CtrlP mappings {{{
-        nnoremap <Leader><CR> :CtrlP<CR>
-        nnoremap <Leader>bb :CtrlPBuffer<CR>
+        " nnoremap <Leader><CR> :CtrlP<CR>
+        " nnoremap <Leader>bb :CtrlPBuffer<CR>
+        " nnoremap <Leader>br :CtrlPMRUFiles<CR>
+    " }}}
+    " FZF mappings {{{
+        nnoremap <Leader><CR> :Files<CR>
+        nnoremap <Leader>bb :Buffers<CR>
+        " TODO find how to FZF MRU files
+        " nnoremap <Leader>br :CtrlPMRUFiles<CR>
+        " Start a search with the Ag search with ga
+        nnoremap ga :Ag<Space>
+        " xnoremap ga :<C-u>execute ':Ag ' . getline(getpos("'<")[1])[getpos("'<")[2]: getpos("'>")[2]]<CR>
     " }}}
     " Diff mode mapping {{{
         " Use <C-J> and <C-K> for ]c and [c in diff mode
@@ -263,7 +303,7 @@
         nnoremap [g :GitGutterPrevHunk<CR>
     " }}}
     " Update GitGutter signs with <leader>g{{{
-        nnoremap <leader>g :GitGutter<CR>
+        nnoremap <leader>gg :GitGutter<CR>
     " }}}
     " Search for selected text, forwards or backwards {{{
         xnoremap <silent> # :<C-U>
@@ -287,7 +327,49 @@
     " Syntastic mappings {{{
         nnoremap <leader>s :SyntasticToggleMode<CR>
     "}}}
+    " Explore with - {{{
+        nnoremap - :Explore<CR>
+    " }}}
+    " Scroll the window with Shift + Arrow keys {{{
+        nnoremap <S-DOWN> <C-e>
+        nnoremap <S-UP> <C-y>
+    " }}}
+    " Vista mappings {{{
+        nnoremap <Leader>vc :Vista<CR>
+        nnoremap <Leader>vf :Vista finder<CR>
+        nnoremap <F2> :Vista!!<CR>
+    " }}}
 "}}}
+" Mapping for terminal mode {{{
+    if has('nvim')
+        " Switch to normal mode with <Esc> or jk
+        tnoremap <Esc> <C-\><C-n>
+
+        " Simulate <C-r> in terminal
+        tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
+
+        " Mappings in normal mode only in terminal buffers
+        augroup TerminalNormalModeMappings
+            autocmd!
+            autocmd TermOpen * call CreateTerminalNormalModeMappings()
+        augroup END
+
+        function! CreateTerminalNormalModeMappings()
+            " Open the filename under the cursor in a new tab
+            nnoremap <buffer> <Leader>t% :execute 'tabnew ' . expand('<cfile>')<CR>
+
+            " Use o to start insert mode again
+            nnoremap <buffer> o A
+
+            " Keys to send to the command from normal mode {{{
+                nnoremap <buffer> <C-c> i<C-c>
+                nnoremap <buffer> <CR> i<CR>
+                nnoremap <buffer> <C-l> i<C-l>
+                nnoremap <buffer> q iq
+            " }}}
+        endfunction
+    endif
+" }}}
 " Manage tabs {{{
     " move to new/previous tabs
     nnoremap <Leader><Leader>l  :tabnext<CR>
@@ -298,6 +380,8 @@
     " move current tab to left/right
     nnoremap <Leader><Leader><Left>  :tabmove -1<CR>
     nnoremap <Leader><Leader><Right> :tabmove +1<CR>
+    " open a new tab with the current file
+    nnoremap <Leader>t% :execute 'tabnew +' . line('.') . ' %'<CR>zz
 "}}}
 " Manage buffers {{{
     " show buffer list and allow to type the buffer name to use with <Leader>bb
@@ -400,7 +484,7 @@
     augroup tmux
         autocmd!
         autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window '" . expand("%:t") . "'")
-        autocmd VimLeave * call system("tmux rename-window $(basename $PWD)")
+        autocmd VimLeave * call system('tmux set-window automatic-rename on')
     augroup END
 " }}}
 " Custom commands {{{
@@ -448,9 +532,6 @@
         nnoremap <S-Q> :Ctoggle<CR>
         nnoremap <S-S> :Ltoggle<CR>
     "}}}
-    " :GitFilesToStage: Open git changes in the quickfix {{{
-        command! GitFTS call git#GetChangesToQF()
-    "}}}
     " :QFClosestEntry: Select the entry of the quickfix the closest from the cursor {{{
         command! QFClosestEntry call quickfix#SelectClosestEntry()
     "}}}
@@ -474,6 +555,8 @@
     augroup startup
         autocmd!
         " Open CtrlP when we are in a project directory
-        autocmd VimEnter * if (utils#IsProjectDirectory() && argc() == 0) | execute "CtrlP" | endif
+        " autocmd VimEnter * if (utils#IsProjectDirectory() && argc() == 0) | execute "CtrlP" | endif
+        " autocmd VimEnter * if (utils#IsProjectDirectory() && argc() == 0 && filereadable('./Session.vim')) | source ./Session.vim | endif
+        autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
     augroup END
 " }}}

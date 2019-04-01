@@ -27,6 +27,15 @@
         nnoremap ]q :cnext<CR>zz
         nnoremap [q :cprevious<CR>zz
     "}}}
+    " Quick qf window resize {{{
+        nnoremap <buffer><silent> - :10wincmd -<CR>
+        nnoremap <buffer><silent> + :10wincmd +<CR>
+    " }}}
+    if (b:qf_isLoc)
+        nnoremap <buffer> <F1> :lclose<CR>
+    else
+        nnoremap <buffer> <F1> :cclose<CR>
+    endif
 "}}}
 " autocommands {{{
     augroup quickfix

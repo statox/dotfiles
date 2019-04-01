@@ -28,7 +28,8 @@ function! search#HighlightSearch(firstCall, searching, timer)
         try
             let newBG = search(searchString) != 0 ? "green" : "red"
         catch /E35/
-            let newBG = "green"
+            " let newBG = "green"
+            let newBG = matchstr(s:originalStatusLineHLGroup, 'ctermbg=\zs[^ ]\+')
         endtry
 
         " TODO make that configurable so that it also works with GUI
@@ -41,8 +42,7 @@ function! search#HighlightSearch(firstCall, searching, timer)
         let s:highlightTimer = timer_start(delay, function('search#HighlightSearch', [0, 1]))
     else
         " If we are not in the command line ? or / or we got the searching argument to false
-        " then we restore the hightlighting and stop calling the function
-
+        " then we restore the highlighting and stop calling the function
         if exists('s:originalStatusLineHLGroup')
             let originalBG = matchstr(s:originalStatusLineHLGroup, 'ctermbg=\zs[^ ]\+')
             execute("hi StatusLine ctermbg=" . originalBG)
