@@ -126,3 +126,9 @@ RPROMPT=$RPROMPT"\
         # eval `dircolors ~/.dircolors`
     # fi
 # }}}
+# FZF configuration {{{
+    # FZF can be installed from a `:PlugInstall` in vim
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+    # Set FZF to use ag if it is installed
+    command -v ag >/dev/null 2>&1 && export FZF_DEFAULT_COMMAND='ag --nocolor -f --hidden --ignore .git -g ""'
+# }}}
