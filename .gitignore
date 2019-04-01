@@ -10,3 +10,6 @@ scripts/files_list
 # Vim plugins directory
 vim/plugged
 vim/viminfo
+
+# Vim custom dictionaries
+vim/spell/*.add*
