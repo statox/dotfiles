@@ -288,7 +288,7 @@
         " nnoremap <Leader>br :CtrlPMRUFiles<CR>
         " Start a search with the Ag search with ga
         nnoremap ga :Ag<Space>
-        " xnoremap ga :<C-u>execute ':Ag ' . getline(getpos("'<")[1])[getpos("'<")[2]: getpos("'>")[2]]<CR>
+        xnoremap ga :<C-u>execute ':Ag ' . getline(getpos("'<")[1])[getpos("'<")[2]-1: getpos("'>")[2]-1]<CR>
     " }}}
     " Diff mode mapping {{{
         " Use <C-J> and <C-K> for ]c and [c in diff mode
