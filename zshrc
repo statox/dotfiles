@@ -3,7 +3,15 @@
 
 # Plugins {{{
     # IMPORTANT: zsh-syntax-highlighting MUST be placed in last position
-    plugins=(bgnotify colored-man cp docker docker-compose extract git git-prompt npm tmux z zsh-syntax-highlighting)
+    plugins=(bgnotify colored-man-pages cp docker docker-compose extract git git-prompt npm tmux z zsh-syntax-highlighting)
+
+    # zsh-syntax-highlighting configuration {{{
+        # Remember to git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins
+        # to get the plugin working
+
+        # Add additional highlighters
+        ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+    # }}}
 # }}}
 # Miscelanious zsh configuration {{{
     # perform cd when something which is not a command is entered
