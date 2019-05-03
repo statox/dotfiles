@@ -7,6 +7,7 @@ bashrc
 dircolors
 gitconfig
 gitignore_global
+hyper.js
 i3
 i3status.conf
 ideavimrc
