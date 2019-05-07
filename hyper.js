@@ -7,7 +7,7 @@ module.exports = {
         updateChannel: 'stable',
 
         // Font configurations (Some overrided by verminal) {{{
-        fontSize: 14,
+        fontSize: 13,
         fontFamily: 'PowerlineSymbols, Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
         // Font weight: 'normal' or 'bold'
         fontWeight: 'normal',
@@ -113,30 +113,13 @@ module.exports = {
         // selection is present (`true` by default on Windows and disables the context menu feature)
         // quickEdit: true,
         // }}}
-        // Plugins confs {{{
-        // for advanced config flags please refer to https://hyper.is/#cfg
-        opacity: 0.85,
-
-        verminal: {
-            fontFamily: 'PowerlineSymbols, Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
-            fontSize: 15
-        },
-        // }}}
     }, // }}}
     plugins: [ //{{{
         // Colorscheme {{{
-        //"verminal",
-        // "dracula",
         "hyper-chesterish",
         // }}}
-        // hyper-opacity: Reduce the opacity of the window (doesn't seem to be working) {{{
-        "hyper-opacity",
-        // }}}
-        // hyperfullscreen; Start the terminal in fullscreen (can be toggled with F11) (doesn't seem to be working) {{{
+        // hyperfullscreen; Start the terminal in fullscreen (can be toggled with F11) {{{
         "hyperfullscreen",
-        // }}}
-        // hyper-spotify: Control spotify from the bottom of the terminal {{{
-        "hyper-spotify",
         // }}}
     ], //}}}
     localPlugins: [ //{{{
