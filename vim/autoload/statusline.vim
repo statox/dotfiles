@@ -1,15 +1,23 @@
 " ~/.vim/autoload/statusline.vim
 " Functions used in the customization of the status line
 
-" Set the buffer variable b:gitbranch to the current git branch as a string
+" Return the nearest function using coc
+function! statusline#CurrentFunction()
+    let currentFunctionSymbol = get(b:, 'coc_current_function', 'X')
+    " return currentFunctionSymbol !=# '' ? '[' . currentFunctionSymbol . ']' : '[X]'
+    return '[' . currentFunctionSymbol . ']'
+endfunction
+
+" Return the current git branch as a string
+" function! SLCurrentGitBranch()
 function! statusline#CurrentGitBranch()
     let gitoutput = systemlist('git branch 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/(\1)/" -e "s/[()]//g";')
 
     if len(gitoutput) > 0
-        let b:statusLineGitBranch = '[' . gitoutput[0] . ']'
-    else
-        let b:statusLineGitBranch = ''
+        let gitoutput = strcharpart(gitoutput[0], 0, 25)
+        return '[' . gitoutput . ']'
     endif
+    return ''
 endfunc
 
 " Return the git status of a file
@@ -17,17 +25,20 @@ function! statusline#CurrentFileGitStatus()
     let gitStatus = systemlist('git status --porcelain ' . shellescape(expand('%')) . ' 2> /dev/null | sed -E "s/\s*(\w+).*/\1/"')
 
     if len(gitStatus) > 0
-        let b:statusLineGitStatus = '[' . gitStatus[0] . ']'
-    else
-        let b:statusLineGitStatus = ''
+        return '[' . gitStatus[0] . ']'
     endif
+    return ''
 endfunction
 
 " Return the time of last modification (HH:MM) and the time in
 " since last modification ([xh:][xm:][xs])
 function! statusline#TimeSinceLastUpdate()
+    if (expand('%') == '')
+        return ''
+    endif
+
     let secondsSinceLastUpdate = localtime() - getftime(expand('%'))
-    let b:statusLineTime = ''
+    let statusLineTime = ''
 
     if (secondsSinceLastUpdate >= 86400)
         " If the modification was more than 24 hours ago only show the number of days
@@ -42,49 +53,45 @@ function! statusline#TimeSinceLastUpdate()
         let timeSinceLastUpdate .= (minutes > 0 || hours > 0) ? minutes . 'm' : ''
         let timeSinceLastUpdate .= seconds . 's'
 
-        let b:statusLineTime = strftime('%R',getftime(expand('%'))) . ' - '
+        let statusLineTime = strftime('%R',getftime(expand('%'))) . ' - '
     endif
 
-    let b:statusLineTime = '[' . b:statusLineTime . timeSinceLastUpdate . ']'
+    return '[' . statusLineTime . timeSinceLastUpdate . ']'
 endfunction
 
-" Return the expression of the statusline option
-function! statusline#StatusLine()
-    let statusline=""
+function! statusline#SetStatusLine()
+    set statusline=
 
     " Flags modified buffer and help file
-    let statusline.="%#Error#"
-    let statusline.="%m%h"
-    let statusline.="%*"
+    set statusline+=%#Error#
+    set statusline+=%m%h
+    set statusline+=%*
+
+    " Quick/Location List
+    set statusline+=%#DiffAdd#
+    set statusline+=%q
+    set statusline+=%*
 
     " current row/total rows current column
-    let statusline.="[R%l/%L\ C%c]"
+    set statusline+=[%l/%L-%c]
 
-    " Path of the file without the filename
-    let statusline.="[%{expand('%:h')}]"
+    " Short name of the file
+    set statusline+=[\%t\]
 
-    " Short name of the file :: Buffer number
-    let statusline.="[\%t\ ::\ \%n]"
+    " Nearest function if it exists
+    set statusline+=%{statusline#CurrentFunction()}
 
     " Separator right-aligned left-aligned
-    let statusline.="%="
+    set statusline+=%=
 
     " Git status for current file
-    let statusline.="%#DiffAdd#"
-    if exists("b:statusLineGitStatus")
-        let statusline.="%{b:statusLineGitStatus}"
-    endif
-    let statusline.="%*"
+    set statusline+=%#DiffAdd#
+    set statusline+=%{statusline#CurrentFileGitStatus()}
+    set statusline+=%*
 
     " Git branch
-    if exists("b:statusLineGitBranch")
-        let statusline.="%{b:statusLineGitBranch}"
-    endif
+    set statusline+=%{statusline#CurrentGitBranch()}
 
     " Last modification time - time since last modification
-    if exists("b:statusLineTime")
-        let statusline.="%{b:statusLineTime}"
-    endif
-
-    return statusline
+    set statusline+=%{statusline#TimeSinceLastUpdate()}
 endfunction

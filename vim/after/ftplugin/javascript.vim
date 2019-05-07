@@ -7,36 +7,32 @@
     endif
     let b:did_ftplugin_custom = 1
 " }}}
-" Setting elint to check the file {{{
-    setlocal errorformat=%f:\ line\ %l\\,\ col\ %c\\,\ %m,%-G%.%#
-    setlocal makeprg=eslint\ --format\ compact
-" }}}
-" Augroup javascript_folding {{{
-    augroup javascript_folding
-        au!
-        " Should use if pangloss/vim-javascript is installed
-        au FileType javascript setlocal foldmethod=syntax
-    augroup END
-" }}}
 " JS snippets {{{
     call common_web_settings#createMappings()
 " }}}
-" " Make gf works with serviceName.functionName {{{
-"     set isfname-=.
-" " }}}
-" " Find a function typed by the user {{{
-"     " Open the result either in the current window or in a new tab
-"     nnoremap <buffer> <Leader>ff :FF<CR>
-"     nnoremap <buffer> <Leader>FF :FFT<CR>
-"
-"     command! FF call javascript#FindFunctionInput(0)
-"     command! FFT call javascript#FindFunctionInput(1)
-" " }}}
-" " Find the function under the cursor {{{
-"     " Open the result either in the current window or in a new tab
-"     nnoremap <buffer> <Leader>fd :FD<CR>
-"     nnoremap <buffer> <Leader>FD :FDT<CR>
-"
-"     command! FD call javascript#FindFunctionUnderCursor(0)
-"     command! FDT call javascript#FindFunctionUnderCursor(1)
-" " }}}
+" Configs {{{
+    setlocal colorcolumn=100,120
+" }}}
+" Grep {{{
+    set grepprg=grep\ -nr\ $*\ /dev/null
+" }}}
+" Mappings {{{
+    nmap <buffer><silent> <F1>  :<C-u>CocList diagnostics<cr>
+
+    " Use `[c` and `]c` for navigate diagnostics
+    nmap <buffer><silent> [c <Plug>(coc-diagnostic-prev)
+    nmap <buffer><silent> ]c <Plug>(coc-diagnostic-next)
+
+    " Remap keys for gotos
+    nmap <buffer><silent> gd <Plug>(coc-definition)
+    nmap <buffer><silent> gy <Plug>(coc-type-definition)
+    nmap <buffer><silent> gi <Plug>(coc-implementation)
+    nmap <buffer><silent> gr <Plug>(coc-references)
+
+    " Documentation
+    nmap <buffer><silent> K :call CocAction('doHover')<CR>
+
+    " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+    vmap <leader>a  <Plug>(coc-codeaction-selected)
+    nmap <leader>a  <Plug>(coc-codeaction-selected)
+" }}}

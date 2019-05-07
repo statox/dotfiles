@@ -46,7 +46,9 @@
         autocmd!
         autocmd FileType typescript if !exists('g:ts_clean_on_write') | let g:ts_clean_on_write = 1 | endif
         autocmd BufWritePre *.ts,*.tsx if get(g:, 'ts_clean_on_write', 1) | :%s/"/'/ge | endif
-        autocmd BufWritePre *.ts,*.tsx if get(g:, 'ts_clean_on_write', 1) | :%s/"/'/ge | endif
         autocmd BufWritePre *.ts,*.tsx if get(g:, 'ts_clean_on_write', 1) | :%s/\s\+$//e | endif
     augroup END
+" }}}
+" Commands {{{
+    command! -buffer ReformatImport :s/\([,{]\) /\1\r    /g | s/ }/\r}
 " }}}

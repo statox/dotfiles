@@ -1,4 +1,4 @@
 " markdown.vim ftplugin
 
-setlocal tw=80
+setlocal tw=200
 setlocal wrap
