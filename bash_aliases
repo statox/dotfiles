@@ -35,11 +35,12 @@ alias l='ls -CF'
 alias g='git'
 alias gs='git status'
 alias gd='git diff'
+alias gdc='git diff --cached'
 alias ga='git add'
-alias gp='git pull'
-alias gP='git push'
+alias gp='git push'
 alias gc='git commit'
-alias gl='git log'
+alias gl='git pull'
+alias glg='git log'
 alias gco='git checkout'
 
 # Add git completion to aliases if we are in bash
@@ -128,6 +129,14 @@ alias debianversion='lsb_release -a'
 # Node
 # Start node with debugging
 alias noded='node --inspect-brk'
+
+# Sudo
+# Use sode with the current $PATH (useful when using docker)
+alias sudop='sudo env PATH=$PATH'
+
+# Docker
+# Use docker with sudo and $PATH set
+alias sdocker='sudo env PATH=$PATH docker'
 
 ####################################################
 #                   functions                      #
