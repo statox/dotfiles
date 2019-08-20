@@ -41,7 +41,64 @@ alias gp='git push'
 alias gc='git commit'
 alias gl='git pull'
 alias glg='git log'
+alias glgp='git log -p'
 alias gco='git checkout'
+
+alias gcoi='git checkout $(git branch | fzf)'
+alias gdi='git diff $(git status --porcelain | sed "s/\w //" | fzf)'
+# if command -v fzf > /dev/null 2>&1; then
+    # alias gcoi='git checkout $(git branch | fzf)'
+    # alias gdi='git diff $(git status --porcelain | sed "s/\w //" | fzf)'
+# else
+    # alias gcoi='echo "fzf not found no aliases"'
+    # alias gdi='echo "fzf not found no aliases"'
+# fi
+
+function gitDiffBranch {
+    if [ -n "$1" ]; then
+        DIFF_BRANCH="$1"
+    else
+        DIFF_BRANCH="HEAD"
+    fi
+    if [ -n "$2" ]; then
+        BASE_BRANCH="$2"
+    else
+        BASE_BRANCH="master"
+    fi
+
+    echo -n "Commits in $DIFF_BRANCH but not in $BASE_BRANCH" && read
+    git log $BASE_BRANCH..$DIFF_BRANCH
+
+    echo -n "Commits in $BASE_BRANCH but not in $DIFF_BRANCH" && read
+    git log $DIFF_BRANCH..$BASE_BRANCH
+}
+
+function gsetBranch {
+    if [ -z "$1" ]; then
+        echo 'Please specify which branch you want to set as tracking'
+        return 1
+    fi
+    if [[ "$1" =~ (-h|--help) ]]; then
+        echo 'gsetBranch <remoteBranch>'
+        echo ''
+        echo 'Set the branch given as argument as the remote tracking branch'
+        echo 'This will execute:'
+        echo ''
+        echo '    git branch --set-upstream-to=origin/<remoteBranch> currentLocalBranch'
+        return 0
+    fi
+
+    CURRENT_BRANCH=$(git branch | grep \* | cut -d ' ' -f2)
+
+    if [ -z "$CURRENT_BRANCH" ]; then
+        echo 'Could not determine the current branch'
+        return 2
+    fi
+
+    CMD="git branch --set-upstream-to=origin/$1 $CURRENT_BRANCH"
+    $($CMD)
+
+}
 
 # Add git completion to aliases if we are in bash
 # (zsh already have that by default)
@@ -88,8 +145,9 @@ alias shutnow='sudo shutdown -h now'
 alias restnow='sudo shutdown -r now'
 
 #vim
-alias v='vim'
+alias v='nvim'
 alias vi='vim'
+alias n='nvim'
 
 # directories navigation
 alias back='cd $OLDPWD'
@@ -102,6 +160,10 @@ alias .......='cd ../../../../../../'
 alias ........='cd ../../../../../../../'
 alias .........='cd ../../../../../../../../'
 alias ..........='cd ../../../../../../../../../'
+
+# directories navigation with z + fzf
+# TODO add check for existance of the commands
+alias zf='z $(z | fzf)'
 
 # quickly output iptables rules
 alias ipt='sudo iptables -L'
@@ -296,4 +358,12 @@ loopd() {
         eval $(printf "%q " "$CMD")
         sleep $DELAY;
     done
+}
+
+# List process using swap memory
+# Not working, the original code is here https://www.cyberciti.biz/faq/linux-which-process-is-using-swap/
+function listswapingproc {
+    for file in /proc/*/status ;
+        do awk '/VmSwap|Name/{printf $2 " " $3}END{ print ""}' $file;
+    done | sort -k 2 -n -r
 }
