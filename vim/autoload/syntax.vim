@@ -1,4 +1,4 @@
-function! syntax#SynStack()
+function! syntax#GetGroup()
   if !exists("*synstack")
     return
   endif

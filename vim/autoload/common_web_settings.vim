@@ -5,6 +5,8 @@ function! common_web_settings#createMappings()
     " Helper code snippets {{{
         inoremap <buffer> debug debugger; // AFA
         inoremap <buffer> clog console.log();<Left><Left>
+        inoremap <buffer> clo' console.log('');<Left><Left><Left>
+        inoremap <buffer> c=== console.log('=========================================================');
         inoremap <buffer> qlog console.log("", );
         inoremap <buffer> stdout process.stdout.write( + '\n');<Left><Left><Left><Left><Left><Left><Left><Left><Left>
         inoremap <buffer> isundef typeof === 'undefined'<Esc>2F<space>a
