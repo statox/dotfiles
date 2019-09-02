@@ -41,7 +41,8 @@
     set notimeout ttimeout ttimeoutlen=200
 
     " set some mapping to work with an azerty keyboard
-    set langmap+=à@,ù%,([,)]
+    " set langmap+=à@,ù%,([,)]
+    set langmap+=à@
 
     " automatically reload file when its modified outside vim 
     set autoread
@@ -68,15 +69,23 @@
 
     " Show tab line only if there are at least two tab pages
     set showtabline=1
+
     " Set up undo dir
     if has("persistent_undo")
         set undodir=~/.undodir/
         set undofile
     endif
+
+    " Reduce update time (useful for GitGutter and COC.nvim)
+    set updatetime=300
 "}}}
 " General configuration - nvim specific {{{
     if (has('nvim'))
         set inccommand=nosplit
+
+        " wildmode=list prevents wildoptions=pum to work
+        set wildmode-=list
+        set wildoptions=pum
     endif
 " }}}
 " Plugins {{{
@@ -106,24 +115,14 @@
     " tpope/vim-surround: Surround text with matching caracters{{{
         Plug 'tpope/vim-surround'
     "}}}
-    " nanotech/jellybeans.vim: Cool colorscheme{{{
+    " nanotech/jellybeans.vim: Cool colorscheme (keeping it for the diff mode){{{
         Plug 'nanotech/jellybeans.vim'
     "}}}
+    " AlessandroYorba/Alduin: Another cool colorscheme {{{
+        Plug 'AlessandroYorba/Alduin'
+    " }}}
     " tpope/vim-fugitive: Git wrapper {{{
         Plug 'tpope/vim-fugitive'
-    " }}}
-    " ctrlpvim/ctrlp.vim: Fuzzy finder {{{
-        Plug 'ctrlpvim/ctrlp.vim'
-        " Ignore some files/directories
-        let g:ctrlp_custom_ignore = {
-          \ 'dir':  '\v[\/](platforms|plugins|assets|bin|target|test|lib|font|WEB-INF|svn|node_modules|out|dist|build)$',
-          \ 'file': '\v\.(exe|so|dll)$',
-          \ }
-        " Dont jump to a buffer when it is already open, instead open another instance
-        let g:ctrlp_switch_buffer = 0
-        " Be smart with the root directory
-        let g:ctrlp_working_path_mode = 'r'
-        let g:ctrlp_root_markers = ['pom.xml', '.eslintrc', '.git']
     " }}}
     " statox/GOD.vim: Get online doc links {{{
         Plug 'statox/GOD.vim'
@@ -137,14 +136,6 @@
     " romainl/vim-editorconfig: yet another plugin for EditorConfig {{{
         Plug 'romainl/vim-editorconfig'
     " }}}
-    " vim-syntastic/syntastic: linter wrapper {{{
-        Plug 'vim-syntastic/syntastic'
-        let g:syntastic_javascript_checkers=['eslint']
-        let g:syntastic_typescript_checkers=['tslint']
-        let g:syntastic_coffee_checkers=['coffeelint']
-        let g:syntastic_always_populate_loc_list = 1
-        let g:syntastic_auto_loc_list = 1
-    "}}}
     " markonm/traces.vim: Range, pattern and substitute preview for Vim  {{{
         if (!has('nvim'))
             Plug 'markonm/traces.vim'
@@ -156,23 +147,14 @@
         let g:Illuminate_ftblacklist = ['help']
         hi link illuminatedWord Visual
     "}}}
-    " coc.nvim {{{
+    " neoclide/coc.nvim {{{
         Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
     " }}}
     " HerringtonDarkholme/yats.vim: TS syntax file (better than typescript-vim) {{{
-        Plug 'HerringtonDarkholme/yats.vim'
+        " Plug 'HerringtonDarkholme/yats.vim'
     " }}}
     " kchmck/vim-coffee-script: Coffee scrupt syntax file {{{
         Plug 'kchmck/vim-coffee-script'
-    " }}}
-    " vimwiki/vimwiki {{{
-        Plug 'vimwiki/vimwiki'
-        let defaultWiki = {}
-        let defaultWiki.path = '~/notes'
-        let g:vimwiki_list = [defaultWiki]
-    " }}}
-    " mbbill/undotree: Visual undo tree {{{
-        Plug 'mbbill/undotree'
     " }}}
     " romainl/vim-devdocs: Access devdocs.io from vim {{{
         Plug 'romainl/vim-devdocs'
@@ -195,19 +177,18 @@
         command! -bang -nargs=? -complete=dir Files
           \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
     " }}}
-    " liuchengxu/vista.vim - LSP symbol viewer {{{
-        Plug 'liuchengxu/vista.vim'
-        " Setup how the Vista window opens
-        let g:vista_sidebar_position = 'vertical topleft'
-        " That defeats the purpose of g:vista_executive_for but without it seems that the
-        " autocmd for vista#RunForNearestMethodOrFunction() doesn't work properly without ctags installed
-        let g:vista_default_executive = 'coc'
-        " Use coc.vim for typescript
-        let g:vista_executive_for = {
-                    \ 'typescript': 'coc'
-                    \ }
-        " Set up the fzf preview window for Vista finder
-        let g:vista_fzf_preview = ['right:50%']
+    " Extempore and rust related plugins {{{
+        Plug 'timburgess/extempore.vim'
+        " Plug 'eraserhd/parinfer-rust'
+    " }}}
+    " neovimhaskell/haskell-vim {{{
+        Plug 'neovimhaskell/haskell-vim'
+    " }}}
+    " christoomey/vim-conflicted: Improve the git conflict resolution with vim {{{
+        Plug 'christoomey/vim-conflicted'
+    " }}}
+    " rhysd/git-messenger.vim: Show the git commit for the code under the cursor {{{
+        Plug 'rhysd/git-messenger.vim'
     " }}}
     call plug#end()
 
@@ -265,7 +246,7 @@
         nnoremap gp '[v']
     "}}}
     " Delete the current word in insert mode with <C-backspace> {{{
-        inoremap  <C-w>
+        inoremap  <C-w>
     " }}}
     " Use s instead of <C-w> to handle windows {{{
         nnoremap s <C-w>
@@ -276,11 +257,6 @@
         cnoremap <C-k> <S-Up>
         cnoremap <C-j> <S-Down>
     "}}}
-    " CtrlP mappings {{{
-        " nnoremap <Leader><CR> :CtrlP<CR>
-        " nnoremap <Leader>bb :CtrlPBuffer<CR>
-        " nnoremap <Leader>br :CtrlPMRUFiles<CR>
-    " }}}
     " FZF mappings {{{
         nnoremap <Leader><CR> :Files<CR>
         nnoremap <Leader>bb :Buffers<CR>
@@ -288,7 +264,10 @@
         " nnoremap <Leader>br :CtrlPMRUFiles<CR>
         " Start a search with the Ag search with ga
         nnoremap ga :Ag<Space>
-        xnoremap ga :<C-u>execute ':Ag ' . getline(getpos("'<")[1])[getpos("'<")[2]-1: getpos("'>")[2]-1]<CR>
+        xnoremap ga :<C-u>execute 'Ag ' . expand('<cword>')<CR>
+
+        " :GFS: Shortcut for :GFiles? provided by fzf.vim to get unstaged git files
+        command! GFS GFiles?
     " }}}
     " Diff mode mapping {{{
         " Use <C-J> and <C-K> for ]c and [c in diff mode
@@ -297,6 +276,7 @@
     "}}}
     " Center next match with <leader>n {{{
         nnoremap <leader>n nzz
+        nnoremap <leader>N Nzz
     " }}}
     " Use ]g and [g to navigate through git hunk thanks to gitgutter {{{
         nnoremap ]g :GitGutterNextHunk<CR>
@@ -339,6 +319,17 @@
         nnoremap <Leader>vf :Vista finder<CR>
         nnoremap <F2> :Vista!!<CR>
     " }}}
+    " Use <Leader>$ to open a new terminal buffer {{{
+        nnoremap <silent> <Leader>$ :terminal<CR>
+    " }}}
+    " Disable Q to toggle ex mode {{{
+        nnoremap Q <nop>
+    " }}}
+    " Quick substitute mappings
+        nnoremap <Leader>zq :s/"//g<CR>
+        xnoremap <Leader>zq :s/"//g<CR>
+        nnoremap <Leader>zw :s/"/'/g<CR>
+        xnoremap <Leader>zw :s/"/'/g<CR>
 "}}}
 " Mapping for terminal mode {{{
     if has('nvim')
@@ -351,29 +342,33 @@
         " Mappings in normal mode only in terminal buffers
         augroup TerminalNormalModeMappings
             autocmd!
-            autocmd TermOpen * call CreateTerminalNormalModeMappings()
+            autocmd TermOpen * call SetupTerminalBuffer()
         augroup END
+
+        function! SetupTerminalBuffer()
+            call CreateTerminalNormalModeMappings()
+
+            setlocal nonumber norelativenumber
+        endfunction
 
         function! CreateTerminalNormalModeMappings()
             " Open the filename under the cursor in a new tab
             nnoremap <buffer> <Leader>t% :execute 'tabnew ' . expand('<cfile>')<CR>
 
-            " Use o to start insert mode again
-            nnoremap <buffer> o A
-
             " Keys to send to the command from normal mode {{{
-                nnoremap <buffer> <C-c> i<C-c>
-                nnoremap <buffer> <CR> i<CR>
-                nnoremap <buffer> <C-l> i<C-l>
-                nnoremap <buffer> q iq
+            nnoremap <buffer> <C-c> i<C-c>
+            nnoremap <buffer> <CR> i<CR>
+            nnoremap <buffer> <C-l> i<C-l>
+            nnoremap <buffer> <Up> i<Up>
+            nnoremap <buffer> q iq
             " }}}
         endfunction
     endif
 " }}}
 " Manage tabs {{{
-    " move to new/previous tabs
-    nnoremap <Leader><Leader>l  :tabnext<CR>
-    nnoremap <Leader><Leader>h  :tabprevious<CR>
+    " move to new/previous tabs (Disabled, remove when I removed it from my muscle memory in favor of gt and gT)
+    nnoremap <Leader><Leader>l  <nop>
+    nnoremap <Leader><Leader>h  <nop>
     " open/close tab
     nnoremap <Leader><Leader>t  :tabnew<CR>
     nnoremap <Leader>tc         :tabclose<CR>
@@ -386,17 +381,17 @@
 " Manage buffers {{{
     " show buffer list and allow to type the buffer name to use with <Leader>bb
     nnoremap gb :ls<CR>:b<space>
-    " change buffer with <Leader>bh and <Leader>bl
+    " change buffer with <Leader>h and <Leader>l
     nnoremap <Leader>l :bnext<CR>
     nnoremap <Leader>h :bNext<CR>
-    " close a buffer with <Leader>bc
+    " close a buffer with <Leader>bd
     nnoremap <Leader>bd :bdelete<CR>
     " open buffer with <Leader><Leader>b
     nnoremap <Leader><Leader>b :enew<CR>
 "}}}
 " Color configuration {{{
     try
-        let g:colorsDefault  = 'jellybeans'
+        let g:colorsDefault  = 'alduin'
         let g:colorsDiff     = 'jellybeans'
 
         execute "colorscheme " . g:colorsDefault
@@ -420,19 +415,8 @@
 " status line configuration {{{
     " Always display the status line, even if only one window is displayed
     set laststatus=2
-
-    " Call functions which define buffer variables used in status line
-    augroup statusLineVariables
-        autocmd!
-        " Get the current git branch
-        autocmd BufEnter,BufWritePost * call statusline#CurrentGitBranch()
-        " Get the git status of the current file
-        autocmd BufEnter,BufWritePost * call statusline#CurrentFileGitStatus()
-        " Get a formatting of the modification time
-        autocmd BufEnter,BufWritePost * call statusline#TimeSinceLastUpdate()
-    augroup END
-
-    set statusline=%!statusline#StatusLine()
+    " Use our custom status line
+    call statusline#SetStatusLine()
 "}}}
 " Text, tab and indent related configuration {{{
     " Use spaces instead of tabs
@@ -471,7 +455,7 @@
     " Maximize window when starting gVim (works on MS windows only)
     augroup GUI
         autocmd!
-    autocmd GUIEnter * simalt ~n
+        autocmd GUIEnter * simalt ~n
     augroup END
 
     " Remove useless graphical stuff
@@ -523,18 +507,23 @@
     " :W save file with sudo permissions {{{
         command! W w !sudo tee % > /dev/null
     "}}}
+    " :E equivalent to :e% {{{
+        command! E e%
+    "}}}
     " :QA close all buffers without leaving vim {{{
         command! QA bufdo bd
     "}}}
-    " :Ctoggle Toggle quickfix window {{{
-        command! Ltoggle call quickfix#ll_toggle()
-        command! Ctoggle call quickfix#qf_toggle()
-        nnoremap <S-Q> :Ctoggle<CR>
-        nnoremap <S-S> :Ltoggle<CR>
-    "}}}
-    " :QFClosestEntry: Select the entry of the quickfix the closest from the cursor {{{
-        command! QFClosestEntry call quickfix#SelectClosestEntry()
-    "}}}
+    " :GGUK: Shortcut for :GitGutterUndoHunk {{{
+        command! GGUH GitGutterUndoHunk
+    " }}}
+    " :GG: Shortcut for :GitGutter {{{
+        command! GG GitGutter
+    " }}}
+    " :Fold, FoldSyn and Unfold shortcut to folding {{{
+        command! Fold setlocal foldnestmax=1 | setlocal foldmethod=indent | normal! zM
+        command! FoldSyn setlocal foldnestmax=1 | setlocal foldmethod=syntax | normal! zM
+        command! Unfold setlocal foldmethod& foldnestmax& | normal! zR
+    " }}}
 " }}}
 " Source a local vimrc {{{
     let $MYLOCALVIMRC = $HOME . "/" . (has('win32') ? "_" : ".") . "local.vim"
@@ -551,12 +540,11 @@
         let &t_te.="\e[0 q"
     endif
 " }}}
-" Startup autocommands {{{
-    augroup startup
-        autocmd!
-        " Open CtrlP when we are in a project directory
-        " autocmd VimEnter * if (utils#IsProjectDirectory() && argc() == 0) | execute "CtrlP" | endif
-        " autocmd VimEnter * if (utils#IsProjectDirectory() && argc() == 0 && filereadable('./Session.vim')) | source ./Session.vim | endif
-        autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
-    augroup END
+" Abbreviations for common mispelling {{{
+    inoreabbrev syncrho synchro
+    inoreabbrev syncrhonize synchronize
+    inoreabbrev syncrhonisation synchronisation
 " }}}
+
+" TODO Check its the beginning of the line
+cnoreabbrev Set set

@@ -1,23 +1,44 @@
 " ~/.vim/autoload/statusline.vim
 " Functions used in the customization of the status line
 
+function! statusline#StatusDiagnostic() abort
+    let info = get(b:, 'coc_diagnostic_info', {})
+    if empty(info) | return '' | endif
+
+    let msgs = []
+    if get(info, 'error', 0)
+        call add(msgs, 'E' . info['error'])
+    endif
+
+    if get(info, 'warning', 0)
+        call add(msgs, 'W' . info['warning'])
+    endif
+
+    return '[' . join(msgs, ' ') . ' ' . get(g:, 'coc_status', '') . ']'
+endfunction
+
 " Return the nearest function using coc
 function! statusline#CurrentFunction()
+    if (exists('b:term_title'))
+        return ''
+    endif
+
     let currentFunctionSymbol = get(b:, 'coc_current_function', 'X')
-    " return currentFunctionSymbol !=# '' ? '[' . currentFunctionSymbol . ']' : '[X]'
     return '[' . currentFunctionSymbol . ']'
 endfunction
 
 " Return the current git branch as a string
 " function! SLCurrentGitBranch()
 function! statusline#CurrentGitBranch()
-    let gitoutput = systemlist('git branch 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/(\1)/" -e "s/[()]//g";')
+    "let gitoutput = systemlist('git branch 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/(\1)/" -e "s/[()]//g";')
 
-    if len(gitoutput) > 0
-        let gitoutput = strcharpart(gitoutput[0], 0, 25)
-        return '[' . gitoutput . ']'
-    endif
-    return ''
+    "if len(gitoutput) > 0
+    "    let gitoutput = strcharpart(gitoutput[0], 0, 25)
+    "    return '[' . gitoutput . ']'
+    "endif
+    "return ''
+
+    return exists('*FugitiveHead') ? '[' . FugitiveHead() . ']' : ''
 endfunc
 
 " Return the git status of a file
@@ -34,6 +55,10 @@ endfunction
 " since last modification ([xh:][xm:][xs])
 function! statusline#TimeSinceLastUpdate()
     if (expand('%') == '')
+        return ''
+    endif
+
+    if (exists('b:term_title'))
         return ''
     endif
 
@@ -63,17 +88,19 @@ function! statusline#SetStatusLine()
     set statusline=
 
     " Flags modified buffer and help file
-    set statusline+=%#Error#
-    set statusline+=%m%h
-    set statusline+=%*
+    if (exists('b:term_title'))
+        set statusline+=%#Error#
+        set statusline+=%m%h
+        set statusline+=%*
 
-    " Quick/Location List
-    set statusline+=%#DiffAdd#
-    set statusline+=%q
-    set statusline+=%*
+        " Quick/Location List
+        set statusline+=%#DiffAdd#
+        set statusline+=%q
+        set statusline+=%*
 
-    " current row/total rows current column
-    set statusline+=[%l/%L-%c]
+        " current row/total rows current column
+        set statusline+=[%l/%L-%c]
+    endif
 
     " Short name of the file
     set statusline+=[\%t\]
@@ -85,12 +112,16 @@ function! statusline#SetStatusLine()
     set statusline+=%=
 
     " Git status for current file
-    set statusline+=%#DiffAdd#
-    set statusline+=%{statusline#CurrentFileGitStatus()}
-    set statusline+=%*
+    " It causes cursor to flicker I don't know why yet
+    "set statusline+=%#DiffAdd#
+    "set statusline+=%{statusline#CurrentFileGitStatus()}
+    "set statusline+=%*
 
     " Git branch
-    set statusline+=%{statusline#CurrentGitBranch()}
+    " set statusline+=%{statusline#CurrentGitBranch()}
+
+    " Coc.nvim diagnostics
+    set statusline+=%{statusline#StatusDiagnostic()}
 
     " Last modification time - time since last modification
     set statusline+=%{statusline#TimeSinceLastUpdate()}

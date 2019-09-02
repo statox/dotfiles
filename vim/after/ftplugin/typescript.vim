@@ -32,8 +32,12 @@
     " Documentation
     nmap <buffer><silent> K :call CocAction('doHover')<CR>
 
+    " Remap for format selected region
+    xmap <leader>f  <Plug>(coc-format-selected)
+    nmap <leader>f  <Plug>(coc-format-selected)
+
     " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-    vmap <leader>a  <Plug>(coc-codeaction-selected)<CR>
+    xmap <leader>a  <Plug>(coc-codeaction-selected)<CR>
     nmap <leader>a  <Plug>(coc-codeaction-selected)<CR>
 
     " Rename variable under cursor
@@ -45,10 +49,14 @@
     augroup typescriptCleanUp
         autocmd!
         autocmd FileType typescript if !exists('g:ts_clean_on_write') | let g:ts_clean_on_write = 1 | endif
-        autocmd BufWritePre *.ts,*.tsx if get(g:, 'ts_clean_on_write', 1) | :%s/"/'/ge | endif
+        " Testing a pattern to prevent changing lines with a mix of " and '
+        " TODO Expend the pattern to prevent changing commented lines
+        " autocmd BufWritePre *.ts,*.tsx if get(g:, 'ts_clean_on_write', 1) | :g/[^']\+"[^']*$/s/"/'/ge | endif
+        " autocmd BufWritePre *.ts,*.tsx if get(g:, 'ts_clean_on_write', 1) | :%s/"/'/ge | endif
         autocmd BufWritePre *.ts,*.tsx if get(g:, 'ts_clean_on_write', 1) | :%s/\s\+$//e | endif
     augroup END
 " }}}
 " Commands {{{
     command! -buffer ReformatImport :s/\([,{]\) /\1\r    /g | s/ }/\r}
+    command! -buffer ReformatParams :s/\([,(]\) /\1\r    /g | s/ )/\r}
 " }}}
