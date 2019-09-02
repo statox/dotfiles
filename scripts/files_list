@@ -4,6 +4,8 @@
 bash_aliases
 bash_logout
 bashrc
+config/kitty/kitty.conf
+config/nvim/coc-settings.json
 dircolors
 gitconfig
 gitignore_global

@@ -1,0 +1,13 @@
+{
+    "suggest.noselect": true,
+    "suggest.timeout": 500,
+    "suggest.enablePreview": true,
+    "diagnostic.level": "warning",
+    "diagnostic.checkCurrentLine": true,
+    "diagnostic.virtualText": true,
+    "diagnostic.virtualTextPrefix": " ▶ ", 
+    "diagnostic.signOffset": 9999999,
+    "diagnostic.refreshAfterSave": true,
+    "tsserver.log": "verbose",
+    "tsserver.trace.server": "verbose"
+}
