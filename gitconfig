@@ -22,16 +22,16 @@
 [color "branch"]
     current    = yellow reverse
     local      = yellow
-    remote     = green
+    remote     = 70 # green
 [color "diff"]
     meta       = yellow bold
     frag       = magenta bold
-    old        = red bold
-    new        = green bold
+    old        = 124 bold   # red bold
+    new        = 70 bold    # green bold
 [color "status"]
     added      = yellow
-    changed    = green
-    untracked  = cyan
+    changed    = 70     # green
+    untracked  = 68     # blue
 
 # Pretty print log
 [alias]
