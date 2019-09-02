@@ -11,6 +11,12 @@
 
         # Add additional highlighters
         ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+
+        # Configure highlighters colors
+        typeset -A ZSH_HIGHLIGHT_STYLES
+        ZSH_HIGHLIGHT_STYLES[command]='fg=71'   # Green
+        ZSH_HIGHLIGHT_STYLES[path]='fg=yellow'
+        ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=124,bold' # Red
     # }}}
 # }}}
 # Miscelanious zsh configuration {{{
@@ -153,6 +159,9 @@
 # One can use the shell command spectrum_ls to know which color to
 # use in the variable $FG
 
+# Customize git-prompt colors
+export ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[yellow]%}"
+
 # Don't try to indent these lines, it messes up the prompt
 PROMPT="\
 %{$FG[025]%}%n\
@@ -162,7 +171,6 @@ PROMPT="\
 
 # the plugin git-prompt already set the first part of RPROMPT
 RPROMPT=$RPROMPT"\
-%{$fg[green]%}%(?..[%?])\
 %{$FG[202]%}%3~\
 %{$reset_color%}"
 # }}}
