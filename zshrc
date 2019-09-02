@@ -94,7 +94,7 @@
 
     # allow autocomplet on zshrc aliases and selection of suggestions
     zstyle ':completion:*' menu select
-    setopt completealiases
+    # setopt completealiases
 
     # pick item but stay in the menu
     bindkey -M menuselect "+" accept-and-menu-complete
@@ -104,6 +104,12 @@
 
     # display red dots whilst waiting for completion.
     COMPLETION_WAITING_DOTS="true"
+
+    # That's weird but it allows aliases like 'gco' to get proper completion
+    setopt no_complete_aliases
+
+    # File generated with npm completion > ~/.npm_completion.sh
+    source ~/.npm_completion.sh
 # }}}
 # History {{{
     # append entries in history files instead of deleting the existing file
@@ -144,24 +150,21 @@
     autoload -U colors && colors
     promptinit
 
+# One can use the shell command spectrum_ls to know which color to
+# use in the variable $FG
+
 # Don't try to indent these lines, it messes up the prompt
 PROMPT="\
-%{$fg[blue]%}%n\
+%{$FG[025]%}%n\
 %{$reset_color%}@\
-%{$fg[green]%}%m\
+%{$FG[100]%}%m\
 %{$reset_color%} "
 
 # the plugin git-prompt already set the first part of RPROMPT
 RPROMPT=$RPROMPT"\
 %{$fg[green]%}%(?..[%?])\
-%{$fg_no_bold[yellow]%}%3~\
+%{$FG[202]%}%3~\
 %{$reset_color%}"
-
-    # set dircolors to follow solarized colors
-    # if [ -f ~/.dircolors ]
-    # then
-        # eval `dircolors ~/.dircolors`
-    # fi
 # }}}
 # FZF configuration {{{
     # FZF can be installed from a `:PlugInstall` in vim
@@ -169,3 +172,6 @@ RPROMPT=$RPROMPT"\
     # Set FZF to use ag if it is installed
     command -v ag >/dev/null 2>&1 && export FZF_DEFAULT_COMMAND='ag --nocolor -f --hidden --ignore .git -g ""'
 # }}}
+
+# Necessary to make kitty work
+export TERM=screen-256color
