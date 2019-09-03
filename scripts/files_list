@@ -4,6 +4,7 @@
 bash_aliases
 bash_logout
 bashrc
+config/i3/config
 config/kitty/kitty.conf
 config/nvim/coc-settings.json
 dircolors
