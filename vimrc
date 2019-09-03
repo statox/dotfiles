@@ -544,7 +544,6 @@
     inoreabbrev syncrho synchro
     inoreabbrev syncrhonize synchronize
     inoreabbrev syncrhonisation synchronisation
-" }}}
 
-" TODO Check its the beginning of the line
-cnoreabbrev Set set
+    cnoreabbrev <expr> Set (getcmdtype() == ':' && getcmdline() =~ '^Set$')? 'set' : 'Set'
+" }}}
