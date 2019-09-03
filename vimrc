@@ -133,9 +133,6 @@
         " I use my own mappings
         let g:gitgutter_map_keys = 0
     " }}}
-    " romainl/vim-editorconfig: yet another plugin for EditorConfig {{{
-        Plug 'romainl/vim-editorconfig'
-    " }}}
     " markonm/traces.vim: Range, pattern and substitute preview for Vim  {{{
         if (!has('nvim'))
             Plug 'markonm/traces.vim'
@@ -325,15 +322,16 @@
     " Disable Q to toggle ex mode {{{
         nnoremap Q <nop>
     " }}}
-    " Quick substitute mappings
+    " Quick substitute mappings {{{
         nnoremap <Leader>zq :s/"//g<CR>
         xnoremap <Leader>zq :s/"//g<CR>
         nnoremap <Leader>zw :s/"/'/g<CR>
         xnoremap <Leader>zw :s/"/'/g<CR>
+    " }}}
 "}}}
 " Mapping for terminal mode {{{
     if has('nvim')
-        " Switch to normal mode with <Esc> or jk
+        " Switch to normal mode with <Esc>
         tnoremap <Esc> <C-\><C-n>
 
         " Simulate <C-r> in terminal
