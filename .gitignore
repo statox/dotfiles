@@ -13,3 +13,6 @@ vim/viminfo
 
 # Vim custom dictionaries
 vim/spell/*.add*
+
+# These are my versionned executables ignored in gitignore_global
+!bin/
