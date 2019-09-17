@@ -31,16 +31,24 @@ _die() {
 }
 
 _i3_get_app_tree() {
+    # i3-msg -t get_tree | \
+        # egrep -o "(class\":\".[^\"]+\"|title\":\"[^\"]+)" | \
+        # sed 's/"//g;s/class://g;s/title://g' | \
+        # while read -r line; read -r line2; do  \
+            # printf "%s\\n" "${line} :: ${line2}"; \
+        # done | sed '/i3bar for/d'
+
     i3-msg -t get_tree | \
         egrep -o "(class\":\".[^\"]+\"|title\":\"[^\"]+)" | \
         sed 's/"//g;s/class://g;s/title://g' | \
         while read -r line; read -r line2; do  \
-            printf "%s\\n" "═ ${line} :: ${line2}"; \
-        done | sed '/i3bar for/d'
+            printf "%s\\n" "${line}"; \
+        done | sed '/i3bar/d'
+
     #alternative
-    #i3-msg -t get_tree | python -mjson.tool | \
-        #sed -n -e 's/^ \{35\}[ ]\+\"name\": \"\(.*\)\", $/\1/p' | \
-        #sed '/^#[a-F0-9]\{6\}$/d'
+    # i3-msg -t get_tree | python -mjson.tool | \
+        # sed -n -e 's/^ \{35\}[ ]\+\"name\": \"\(.*\)\", $/\1/p' | \
+        # sed '/^#[a-F0-9]\{6\}$/d'
 }
 
 if [ ! -t 0 ]; then
