@@ -120,6 +120,10 @@
     "}}}
     " AlessandroYorba/Alduin: Another cool colorscheme {{{
         Plug 'AlessandroYorba/Alduin'
+        " Make the parens and matched parens more readable
+        let g:alduin_Shout_Aura_Whisper = 1
+        " Make strings more readable
+        let g:alduin_Shout_Animal_Allegiance = 1
     " }}}
     " tpope/vim-fugitive: Git wrapper {{{
         Plug 'tpope/vim-fugitive'
@@ -142,7 +146,8 @@
         Plug 'RRethy/vim-illuminate'
         let g:Illuminate_delay = 500
         let g:Illuminate_ftblacklist = ['help']
-        hi link illuminatedWord Visual
+
+        hi illuminatedWord cterm=underline gui=underline
     "}}}
     " neoclide/coc.nvim {{{
         Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
@@ -229,8 +234,10 @@
     "}}}
     " Quickly escape insert mode with jk {{{
         inoremap <silent> jk <Esc>:w<CR>
+        inoremap <silent> kl <Esc>:w<CR>
         " Let's try it in normal mode too
         nnoremap <silent> <Leader>jk <Esc>:w<cr>
+        nnoremap <silent> <Leader>kl <Esc>:w<cr>
     "}}}
     " Quickly insert an empty new line without entering insert mode {{{
         nnoremap <Leader>o o<Esc>0"_D
