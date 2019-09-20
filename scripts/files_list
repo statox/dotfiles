@@ -6,8 +6,10 @@ bash_logout
 bashrc
 bin/dmenu-i3-window-jumper.sh
 config/i3/config
+config/i3status/config
 config/kitty/kitty.conf
 config/nvim/coc-settings.json
+config/rofi/config
 dircolors
 gitconfig
 gitignore_global

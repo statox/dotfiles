@@ -31,19 +31,12 @@ _die() {
 }
 
 _i3_get_app_tree() {
-    # i3-msg -t get_tree | \
-        # egrep -o "(class\":\".[^\"]+\"|title\":\"[^\"]+)" | \
-        # sed 's/"//g;s/class://g;s/title://g' | \
-        # while read -r line; read -r line2; do  \
-            # printf "%s\\n" "${line} :: ${line2}"; \
-        # done | sed '/i3bar for/d'
-
     i3-msg -t get_tree | \
         egrep -o "(class\":\".[^\"]+\"|title\":\"[^\"]+)" | \
         sed 's/"//g;s/class://g;s/title://g' | \
         while read -r line; read -r line2; do  \
-            printf "%s\\n" "${line}"; \
-        done | sed '/i3bar/d'
+            printf "%s\\n" "${line} :: ${line2}"; \
+        done | sed '/i3bar for/d'
 
     #alternative
     # i3-msg -t get_tree | python -mjson.tool | \

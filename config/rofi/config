@@ -1,0 +1,31 @@
+! $XDG_CONFIG_HOME/rofi/config
+! To get the available options use the command
+!   rofi -dump-xresources
+
+! Appearance {{{
+    ! Number of lines
+    rofi.lines: 5
+
+    ! Window width
+    rofi.width: 25
+
+    ! Font to use
+    rofi.font: pango 16
+
+    ! Window Format. w (desktop name), t (title), n (name), r (role), c (class) *DEPRECATED*
+    rofi.window-format: {c}
+
+    ! New style theme file
+    rofi.theme: gruvbox-dark-soft
+! }}}
+! Behavior {{{
+    ! Enable auto select mode
+    rofi.auto-select: true
+}}}
+! Content {{{
+    ! Set the modi to combine in combi mode
+    rofi.combi-modi: window,drun
+
+    ! Enabled modi
+    rofi.modi: combi
+! }}}
