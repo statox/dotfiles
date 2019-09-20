@@ -332,6 +332,8 @@
     " Quick substitute mappings {{{
         nnoremap <Leader>zq :s/"//g<CR>
         xnoremap <Leader>zq :s/"//g<CR>
+        nnoremap <Leader>ze :s/"\([^"]\+\)"/\1/<CR>
+        xnoremap <Leader>ze :s/"\([^"]\+\)"/\1/<CR>
         nnoremap <Leader>zw :s/"/'/g<CR>
         xnoremap <Leader>zw :s/"/'/g<CR>
     " }}}
