@@ -25,6 +25,7 @@
 
     " Remap keys for gotos
     nmap <buffer><silent> gd <Plug>(coc-definition)
+    nmap <buffer><silent> gD :call CocAction('jumpDefinition', 'tab drop')<CR>zz
     nmap <buffer><silent> gy <Plug>(coc-type-definition)
     nmap <buffer><silent> gi <Plug>(coc-implementation)
     nmap <buffer><silent> gr <Plug>(coc-references)

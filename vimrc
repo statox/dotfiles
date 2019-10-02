@@ -308,20 +308,12 @@
         nnoremap <silent> h :call motion#MyHMotion()<CR>
         nnoremap <silent> l :call motion#MyLMotion()<CR>
     "}}}
-    " Syntastic mappings {{{
-        nnoremap <leader>s :SyntasticToggleMode<CR>
-    "}}}
     " Explore with - {{{
         nnoremap - :Explore<CR>
     " }}}
     " Scroll the window with Shift + Arrow keys {{{
         nnoremap <S-DOWN> <C-e>
         nnoremap <S-UP> <C-y>
-    " }}}
-    " Vista mappings {{{
-        nnoremap <Leader>vc :Vista<CR>
-        nnoremap <Leader>vf :Vista finder<CR>
-        nnoremap <F2> :Vista!!<CR>
     " }}}
     " Use <Leader>$ to open a new terminal buffer {{{
         nnoremap <silent> <Leader>$ :terminal<CR>
@@ -384,6 +376,11 @@
     nnoremap <Leader><Leader><Right> :tabmove +1<CR>
     " open a new tab with the current file
     nnoremap <Leader>t% :execute 'tabnew +' . line('.') . ' %'<CR>zz
+
+    " easily access tabs my index in normal mode with g[number]
+    for tabIndex in range(1,9)
+        execute 'nnoremap g' . tabIndex . ' ' . tabIndex . 'gt'
+    endfor
 "}}}
 " Manage buffers {{{
     " show buffer list and allow to type the buffer name to use with <Leader>bb
@@ -515,7 +512,7 @@
         command! W w !sudo tee % > /dev/null
     "}}}
     " :E equivalent to :e% {{{
-        command! E e%
+        command! -nargs=? -complete=file E call utils#ReloadOrEdit(<q-args>)
     "}}}
     " :QA close all buffers without leaving vim {{{
         command! QA bufdo bd
