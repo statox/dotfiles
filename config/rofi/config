@@ -20,7 +20,7 @@
 ! }}}
 ! Behavior {{{
     ! Enable auto select mode
-    rofi.auto-select: true
+    rofi.auto-select: false
 }}}
 ! Content {{{
     ! Set the modi to combine in combi mode
