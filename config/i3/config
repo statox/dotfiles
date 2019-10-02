@@ -174,7 +174,7 @@ exec --no-startup-id gnome-flashback
     bar {
             status_command i3status
             position top
-            font pango:monospace 10
+            font pango:monospace 10, Awesome 10
 
             colors {
                 background          $bg
