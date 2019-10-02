@@ -9,5 +9,6 @@
     "diagnostic.signOffset": 9999999,
     "diagnostic.refreshAfterSave": true,
     "tsserver.log": "verbose",
-    "tsserver.trace.server": "verbose"
+    "tsserver.trace.server": "verbose",
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true
 }
