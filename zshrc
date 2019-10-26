@@ -1,6 +1,10 @@
 #~/.zshrc
 # vim:fdm=marker
 
+# tmux plugin configuration {{{
+    export ZSH_TMUX_AUTOQUIT='false'
+    export ZSH_TMUX_AUTOCONNECT='false'
+# }}}
 # Plugins {{{
     # IMPORTANT: zsh-syntax-highlighting MUST be placed in last position
     plugins=(bgnotify colored-man-pages cp docker docker-compose extract git git-prompt npm tmux z zsh-syntax-highlighting)
