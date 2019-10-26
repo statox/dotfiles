@@ -9,6 +9,9 @@ config/i3/config
 config/i3status/config
 config/kitty/kitty.conf
 config/nvim/coc-settings.json
+config/polybar/config
+config/polybar/launch.sh
+config/polybar/stop.sh
 config/rofi/config
 dircolors
 gitconfig
