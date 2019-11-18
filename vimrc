@@ -305,8 +305,8 @@
         nnoremap # #N
     "}}}
     " make h and l skip indentation white spaces {{{
-        nnoremap <silent> h :call motion#MyHMotion()<CR>
-        nnoremap <silent> l :call motion#MyLMotion()<CR>
+        nnoremap <silent> h :call motion#SkipOrH()<CR>
+        nnoremap <silent> l :call motion#SkipOrL()<CR>
     "}}}
     " Explore with - {{{
         nnoremap - :Explore<CR>

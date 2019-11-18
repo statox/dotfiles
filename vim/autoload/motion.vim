@@ -1,5 +1,5 @@
 " make h and l skip indentation white spaces
-function! motion#MyLMotion()
+function! motion#SkipOrL()
     let cursorPosition=getpos(".")
     normal ^
     let firstChar=getpos(".")
@@ -12,7 +12,7 @@ function! motion#MyLMotion()
     endif
 endfunction
 
-function! motion#MyHMotion()
+function! motion#SkipOrH()
     let cursorPosition=getpos(".")
     normal ^
     let firstChar=getpos(".")
