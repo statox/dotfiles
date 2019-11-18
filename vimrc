@@ -131,11 +131,11 @@
     " statox/GOD.vim: Get online doc links {{{
         Plug 'statox/GOD.vim'
     " }}}
-    " airblade/vim-gitgutter: show git diff in number gutter {{{
-        Plug 'airblade/vim-gitgutter'
+    " mhinz/vim-signify: show git diff in gutter {{{
+        Plug 'mhinz/vim-signify'
 
-        " I use my own mappings
-        let g:gitgutter_map_keys = 0
+        nmap ]g <plug>(signify-next-hunk)
+        nmap [g <plug>(signify-prev-hunk)
     " }}}
     " markonm/traces.vim: Range, pattern and substitute preview for Vim  {{{
         if (!has('nvim'))
@@ -518,7 +518,7 @@
         command! QA bufdo bd
     "}}}
     " :GGUK: Shortcut for :GitGutterUndoHunk {{{
-        command! GGUH GitGutterUndoHunk
+        command! GGUH SignifyHunkUndo
     " }}}
     " :GG: Shortcut for :GitGutter {{{
         command! GG GitGutter
