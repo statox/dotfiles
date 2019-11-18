@@ -73,10 +73,24 @@ fu! s:SearchForMatchingTag(tagname, forwards)
     let timeout = 300
 
     " The searchpairpos() timeout parameter was added in 7.2
+    " For a reason I don't really understand the arguments to searchpairpos are incorrect when a tag
+    " contains some string like e.g.
+    "       <script src="p5/p5.min.js"></script>
+    " I should have try to find a fix but for now I simply use a try...catch and simple stop highlighting
     if v:version >= 702
-        return searchpairpos(starttag, midtag, endtag, flags, skip, stopline, timeout)
+        try
+            return searchpairpos(starttag, midtag, endtag, flags, skip, stopline, timeout)
+        catch /.*/
+            return [0, 0]
+        endtry
+        return res
     else
-        return searchpairpos(starttag, midtag, endtag, flags, skip, stopline)
+        try
+            return searchpairpos(starttag, midtag, endtag, flags, skip, stopline)
+        catch /.*/
+            return [0, 0]
+        endtry
+        return res
     endif
 endfu
 
