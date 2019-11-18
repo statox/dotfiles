@@ -4,6 +4,8 @@
 # tmux plugin configuration {{{
     export ZSH_TMUX_AUTOQUIT='false'
     export ZSH_TMUX_AUTOCONNECT='false'
+    # If in tmux and fzf is installed, CTRL-R, CTRL-T and ALT-C open in a tmux pane
+    export FZF_TMUX=1
 # }}}
 # Plugins {{{
     # IMPORTANT: zsh-syntax-highlighting MUST be placed in last position
