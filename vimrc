@@ -133,9 +133,6 @@
     " }}}
     " mhinz/vim-signify: show git diff in gutter {{{
         Plug 'mhinz/vim-signify'
-
-        nmap ]g <plug>(signify-next-hunk)
-        nmap [g <plug>(signify-prev-hunk)
     " }}}
     " markonm/traces.vim: Range, pattern and substitute preview for Vim  {{{
         if (!has('nvim'))
@@ -201,9 +198,6 @@
 " Mappings {{{
     " <C-L> turn off search highlighting until the next search {{{
         nnoremap <C-L> :nohlsearch<CR><C-L>
-        if (exists(':GitGutter'))
-            nnoremap <C-L> :nohlsearch\|GitGutter<CR><C-L>
-        endif
     "}}}
     " Fast save and quit {{{
         nnoremap <Leader><S-Q> :qa!<CR>
@@ -282,12 +276,9 @@
         nnoremap <leader>n nzz
         nnoremap <leader>N Nzz
     " }}}
-    " Use ]g and [g to navigate through git hunk thanks to gitgutter {{{
-        nnoremap ]g :GitGutterNextHunk<CR>
-        nnoremap [g :GitGutterPrevHunk<CR>
-    " }}}
-    " Update GitGutter signs with <leader>g{{{
-        nnoremap <leader>gg :GitGutter<CR>
+    " Use ]g and [g to navigate through git hunk thanks to a plugin {{{
+        nmap ]g <plug>(signify-next-hunk)
+        nmap [g <plug>(signify-prev-hunk)
     " }}}
     " Search for selected text, forwards or backwards {{{
         xnoremap <silent> # :<C-U>
@@ -517,11 +508,8 @@
     " :QA close all buffers without leaving vim {{{
         command! QA bufdo bd
     "}}}
-    " :GGUK: Shortcut for :GitGutterUndoHunk {{{
+    " :GGUK: Shortcut for a plugin command undoing the current git hunk {{{
         command! GGUH SignifyHunkUndo
-    " }}}
-    " :GG: Shortcut for :GitGutter {{{
-        command! GG GitGutter
     " }}}
     " :Fold, FoldSyn and Unfold shortcut to folding {{{
         command! Fold setlocal foldnestmax=1 | setlocal foldmethod=indent | normal! zM
