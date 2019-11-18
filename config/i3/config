@@ -12,6 +12,17 @@
     # https://askubuntu.com/questions/763994/screen-times-out-in-i3-wm/764844
     exec xset s off
     exec xset -dpms
+
+    # Hide window borders when there is only one window
+    hide_edge_borders smart
+
+    # Hide window title bar for specific applications
+    for_window [class="Gnome-terminal"] border pixel
+    for_window [class="Chromium" window_role="browser"] border pixel
+    for_window [class="Spotify"] border pixel
+
+    # Make yad calendar floating window
+    for_window [class="Yad" title="yad-calendar"] floating enable
 # }}}
 # Gnome integration {{{
     # Taken from https://github.com/i3-gnome/i3-gnome/wiki/Tips-&-Tricks
@@ -86,11 +97,11 @@
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
 
-    # split in horizontal orientation
-    # bindsym $mod+h split h
-
     # split in vertical orientation
     bindsym $mod+v split v
+
+    # split in horizontal orientation
+    bindsym $mod+shift+v split h
 
     # enter fullscreen mode for the focused container
     bindsym $mod+f fullscreen toggle
@@ -133,7 +144,6 @@
     bindsym $mod+7 workspace 7
     bindsym $mod+8 workspace 8
     bindsym $mod+9 workspace 9
-    # bindsym $mod+0 workspace 10
 
     # move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace 1
@@ -145,7 +155,6 @@
     bindsym $mod+Shift+7 move container to workspace 7
     bindsym $mod+Shift+8 move container to workspace 8
     bindsym $mod+Shift+9 move container to workspace 9
-    bindsym $mod+Shift+0 move container to workspace 10
 
     # lock the screen with mod + escape
     # bindsym $mod+Escape exec "i3lock --show-failed-attempts --ignore-empty-password -c 2c2c2e"
@@ -159,31 +168,22 @@
     # exit i3 (logs you out of your X session)
     bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-    # resize window (you can also use the mouse for that)
-    mode "resize" {
-            # These bindings trigger as soon as you enter the resize mode
+    # Move and resize windows
+    bindsym $mod+r mode "moveAndResize"
+    mode "moveAndResize" {
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
-            # Pressing left will shrink the window’s width.
-            # Pressing right will grow the window’s width.
-            # Pressing up will shrink the window’s height.
-            # Pressing down will grow the window’s height.
-            bindsym j resize shrink width 10 px or 10 ppt
-            bindsym k resize grow height 10 px or 10 ppt
-            bindsym l resize shrink height 10 px or 10 ppt
-            bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym shift+h move left
+        bindsym shift+j move down
+        bindsym shift+k move up
+        bindsym shift+l move right
 
-            # same bindings, but for the arrow keys
-            bindsym Left resize shrink width 10 px or 10 ppt
-            bindsym Down resize grow height 10 px or 10 ppt
-            bindsym Up resize shrink height 10 px or 10 ppt
-            bindsym Right resize grow width 10 px or 10 ppt
-
-            # back to normal: Enter or Escape
-            bindsym Return mode "default"
-            bindsym Escape mode "default"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
     }
-
-    bindsym $mod+r mode "resize"
 # }}}
 # colors {{{
     # Taken from https://faq.i3wm.org/question/2071/how-can-i-change-look-of-windows.1.html
