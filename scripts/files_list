@@ -3,12 +3,14 @@
 
 bash_aliases
 bash_logout
+bash_profile
 bashrc
 bin/dmenu-i3-window-jumper.sh
 config/i3/config
 config/i3status/config
 config/kitty/kitty.conf
 config/nvim/coc-settings.json
+config/nvim/init.vim
 config/polybar/config
 config/polybar/launch.sh
 config/polybar/stop.sh
@@ -21,5 +23,6 @@ tmux.conf
 vim
 vimrc
 xdefaults
+Xmodmap
 Xresources
 zshrc
