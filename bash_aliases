@@ -54,6 +54,9 @@ alias gdi='git diff $(git status --porcelain | sed "s/\w //" | fzf)'
     # alias gdi='echo "fzf not found no aliases"'
 # fi
 
+# Ag the silver searcher
+alias agw='ag --word-regex'
+
 function gitDiffBranch {
     if [ -n "$1" ]; then
         DIFF_BRANCH="$1"
@@ -181,6 +184,8 @@ function p {
         fi
     done
 }
+
+alias p1='ping 1.1.1.1'
 
 # restore vim with a session file
 alias lvim='vim -S ~/Session.vim'
