@@ -62,7 +62,7 @@
 
     " Show unseeing characters
     set list
-    set listchars=tab:>-,trail:.
+    set listchars=tab:>-,trail:.,eol:¶
 
     " Use the modelines (potentially a security concern)
     set modeline
@@ -133,24 +133,20 @@
     " }}}
     " mhinz/vim-signify: show git diff in gutter {{{
         Plug 'mhinz/vim-signify'
+
+        " Customize the appearence of the added lines
+        highlight SignifySignAdd ctermbg=darkgreen ctermfg=white cterm=NONE
     " }}}
     " markonm/traces.vim: Range, pattern and substitute preview for Vim  {{{
         if (!has('nvim'))
             Plug 'markonm/traces.vim'
         endif
     "}}}
-    " RRethy/vim-illuminate: Highlight the word under the cursor {{{
-        Plug 'RRethy/vim-illuminate'
-        let g:Illuminate_delay = 500
-        let g:Illuminate_ftblacklist = ['help']
-
-        hi illuminatedWord cterm=underline gui=underline
-    "}}}
     " neoclide/coc.nvim {{{
         Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
     " }}}
-    " HerringtonDarkholme/yats.vim: TS syntax file (better than typescript-vim) {{{
-        " Plug 'HerringtonDarkholme/yats.vim'
+    " HerringtonDarkholme/yats.vim: TS syntax file (useful for tsx files) {{{
+        Plug 'HerringtonDarkholme/yats.vim'
     " }}}
     " kchmck/vim-coffee-script: Coffee scrupt syntax file {{{
         Plug 'kchmck/vim-coffee-script'
@@ -176,19 +172,12 @@
         command! -bang -nargs=? -complete=dir Files
           \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
     " }}}
-    " Extempore and rust related plugins {{{
-        Plug 'timburgess/extempore.vim'
-        " Plug 'eraserhd/parinfer-rust'
-    " }}}
-    " neovimhaskell/haskell-vim {{{
-        Plug 'neovimhaskell/haskell-vim'
-    " }}}
     " christoomey/vim-conflicted: Improve the git conflict resolution with vim {{{
         Plug 'christoomey/vim-conflicted'
     " }}}
-    " rhysd/git-messenger.vim: Show the git commit for the code under the cursor {{{
-        Plug 'rhysd/git-messenger.vim'
-    " }}}
+    " svermeulen/vim-subversive: Operator motions to perform quick substitutions {{{
+        Plug 'svermeulen/vim-subversive'
+    "}}}
     call plug#end()
 
     " matchit: expand matching text objects{{{
@@ -228,10 +217,8 @@
     "}}}
     " Quickly escape insert mode with jk {{{
         inoremap <silent> jk <Esc>:w<CR>
-        inoremap <silent> kl <Esc>:w<CR>
         " Let's try it in normal mode too
         nnoremap <silent> <Leader>jk <Esc>:w<cr>
-        nnoremap <silent> <Leader>kl <Esc>:w<cr>
     "}}}
     " Quickly insert an empty new line without entering insert mode {{{
         nnoremap <Leader>o o<Esc>0"_D
@@ -306,9 +293,6 @@
         nnoremap <S-DOWN> <C-e>
         nnoremap <S-UP> <C-y>
     " }}}
-    " Use <Leader>$ to open a new terminal buffer {{{
-        nnoremap <silent> <Leader>$ :terminal<CR>
-    " }}}
     " Disable Q to toggle ex mode {{{
         nnoremap Q <nop>
     " }}}
@@ -319,6 +303,16 @@
         xnoremap <Leader>ze :s/"\([^"]\+\)"/\1/<CR>
         nnoremap <Leader>zw :s/"/'/g<CR>
         xnoremap <Leader>zw :s/"/'/g<CR>
+    " }}}
+    " vim-subversive mappings {{{
+        " Use gc as a word to replace a text object with the content of the unmaned register
+        nmap gc  <plug>(SubversiveSubstitute)
+        nmap gcc <plug>(SubversiveSubstituteLine)
+        nmap Gc  <plug>(SubversiveSubstituteToEndOfLine)
+
+        nmap <leader>gc  <plug>(SubversiveSubstituteRange)
+        xmap <leader>gcc <plug>(SubversiveSubstituteRange)
+        nmap <leader>Gc  <plug>(SubversiveSubstituteWordRange)
     " }}}
 "}}}
 " Mapping for terminal mode {{{
@@ -510,11 +504,15 @@
     "}}}
     " :GGUK: Shortcut for a plugin command undoing the current git hunk {{{
         command! GGUH SignifyHunkUndo
+        command! GGDH SignifyHunkDiff
     " }}}
     " :Fold, FoldSyn and Unfold shortcut to folding {{{
         command! Fold setlocal foldnestmax=1 | setlocal foldmethod=indent | normal! zM
         command! FoldSyn setlocal foldnestmax=1 | setlocal foldmethod=syntax | normal! zM
         command! Unfold setlocal foldmethod& foldnestmax& | normal! zR
+    " }}}
+    " Quick alias for :%s {{{
+        cnoreabbrev <expr> ss (getcmdtype() == ':' && getcmdline() =~ '^ss$')? '%s//<Left>' : 'ss'
     " }}}
 " }}}
 " Source a local vimrc {{{
