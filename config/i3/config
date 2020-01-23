@@ -1,9 +1,15 @@
 # Start up {{{
-    exec --no-startup-id i3-msg 'workspace 2; exec chromium-browser; exec slack; exec gnome-terminal'
+    exec --no-startup-id i3-msg 'workspace 2; exec brave-browser; exec slack; exec gnome-terminal'
     # Make sure the package network-manager is installed for this to work
-    exec --no-startup-id nm-applet
+    exec_always --no-startup-id nm-applet
     # Polybar
     exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+    # Night shift
+    exec_always --no-startup-id redshift-gtk
+    # Flameshot
+    exec --no-startup-id flameshot
+    # Start a terminal which will go to scrathpad
+    exec --no-startup-id gnome-terminal -name __scratchpad
 # }}}
 # Appearance {{{
     font pango:monospace 8
@@ -19,17 +25,25 @@
     # Hide window title bar for specific applications
     for_window [class="Gnome-terminal"] border pixel
     for_window [class="Chromium" window_role="browser"] border pixel
+    for_window [class="Brave" window_role="browser"] border pixel
     for_window [class="Spotify"] border pixel
 
     # Make yad calendar floating window
     for_window [class="Yad" title="yad-calendar"] floating enable
+
+    # Used in the startup commands to create a terminal which will go to scratchpad
+    for_window [instance="__scratchpad"] move scratchpad
 # }}}
 # Gnome integration {{{
     # Taken from https://github.com/i3-gnome/i3-gnome/wiki/Tips-&-Tricks
 
-    # Power management and settings deamon
+    # gsd-xsettings seems to be related to themes integration
+    # TODO check if it's really necessary to keep it
     exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
-    exec_always --no-startup-id gnome-power-manager
+
+    # gnome-power-manager (not an actual command anymore - trying to replace by the power manager of xfce4
+    # exec_always --no-startup-id gnome-power-manager
+    exec_always --no-startup-id xfce4-power-manager
 
     # Starts authentication-agent needed to get sudo password check aviable for GUIs needing it.
     # exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -51,6 +65,9 @@
     bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
     bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
     bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute 1 toggle
+
+    # Take a screenshot with the PrintScreen key
+    bindsym Print exec "flameshot gui"
 # }}}
 # bindings {{{
     set $mod Mod4
