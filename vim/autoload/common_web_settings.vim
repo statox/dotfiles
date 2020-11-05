@@ -24,4 +24,7 @@ function! common_web_settings#createMappings()
         nnoremap <buffer> <F5> :silent make! % \| silent redraw!<CR>
         nnoremap <buffer> <Leader>. :LspCodeAction<CR>
     " }}}
+    " Refactor {{{
+        nnoremap <leader>rn <Plug>(coc-rename)
+    " }}}
 endfunction
