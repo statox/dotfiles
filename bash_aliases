@@ -39,8 +39,9 @@ alias gdc='git diff --cached'
 alias ga='git add'
 alias gp='git push'
 alias gc='git commit'
-alias gl='git pull'
+alias gl='git pull --rebase'
 alias glg='git log'
+alias glgs='git log --show-signature'
 alias glgp='git log -p'
 alias gco='git checkout'
 
@@ -56,6 +57,29 @@ alias gdi='git diff $(git status --porcelain | sed "s/\w //" | fzf)'
 
 # Ag the silver searcher
 alias agw='ag --word-regex'
+
+# node repl
+alias ni='node -i'
+# npm
+alias npmr='npm run'
+
+# better pgrep
+alias pg='ps aux | grep -i'
+
+alias ts2date='timestamp2date'
+function timestamp2date {
+    echo $(date -d @$1)
+}
+
+# Restart polybar
+if [ -f ~/.config/polybar/launch.sh ]; then
+    alias polystart='source ~/.config/polybar/launch.sh &'
+fi
+
+# Convert a timestamp to a date
+function epoch {
+    echo $(date --date="@$1")
+}
 
 function gitDiffBranch {
     if [ -n "$1" ]; then
@@ -204,6 +228,7 @@ alias sudop='sudo env PATH=$PATH'
 # Docker
 # Use docker with sudo and $PATH set
 alias sdocker='sudo env PATH=$PATH docker'
+alias sdocker-compose='sudo env PATH=$PATH docker-compose'
 
 ####################################################
 #                   functions                      #
