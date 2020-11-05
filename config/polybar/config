@@ -59,9 +59,9 @@ font-1 = OpenSymbol:style=Regular:pixelsize:10;1
 font-2 = Font Awesome 5 Free Regular:style=Regular
 font-3 = Font Awesome 5 Brands Regular:style=Regular
 
-modules-left = i3
+modules-left = i3 memory temperature cpu
 modules-center = popup-calendar
-modules-right = filesystem pulseaudio memory cpu wlan eth battery temperature powermenu
+modules-right = filesystem pulseaudio battery wlan eth powermenu
 
 tray-position = right
 tray-padding = 2
