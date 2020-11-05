@@ -85,6 +85,9 @@
     # yarn
     export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
+    # snaps
+    export PATH="$PATH:/snap/bin/"
+
     # Tmux plugin need it to start Tmux at connexion
     export ZSH_TMUX_AUTOSTART=true
 
