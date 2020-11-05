@@ -1,4 +1,3 @@
-"~/.vimrc
 " vim:fdm=marker
 
 " General configuration {{{
@@ -51,7 +50,7 @@
     set history=5000
 
     " Swap and backup files are pretty annoying: get rid of them
-    set noswapfile nobackup
+    set noswapfile nobackup nowritebackup
 
     " make autocomplete case sensitive even if 'ignorecase' is on
     set noinfercase
@@ -81,7 +80,7 @@
 "}}}
 " General configuration - nvim specific {{{
     if (has('nvim'))
-        set inccommand=nosplit
+        set inccommand=split
 
         " wildmode=list prevents wildoptions=pum to work
         set wildmode-=list
@@ -125,6 +124,9 @@
         " Make strings more readable
         let g:alduin_Shout_Animal_Allegiance = 1
     " }}}
+    " A colorscheme I'm currently testing {{{
+        Plug 'sainnhe/forest-night'
+    " }}}
     " tpope/vim-fugitive: Git wrapper {{{
         Plug 'tpope/vim-fugitive'
     " }}}
@@ -144,6 +146,9 @@
     "}}}
     " neoclide/coc.nvim {{{
         Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+        if !has('nvim')
+            let g:coc_disable_startup_warning = 1
+        endif
     " }}}
     " HerringtonDarkholme/yats.vim: TS syntax file (useful for tsx files) {{{
         Plug 'HerringtonDarkholme/yats.vim'
@@ -308,12 +313,27 @@
         " Use gc as a word to replace a text object with the content of the unmaned register
         nmap gc  <plug>(SubversiveSubstitute)
         nmap gcc <plug>(SubversiveSubstituteLine)
-        nmap Gc  <plug>(SubversiveSubstituteToEndOfLine)
 
         nmap <leader>gc  <plug>(SubversiveSubstituteRange)
         xmap <leader>gcc <plug>(SubversiveSubstituteRange)
         nmap <leader>Gc  <plug>(SubversiveSubstituteWordRange)
     " }}}
+    " Make the section mappings work with any curvy bracket {{{
+        " map [[ ?{<CR>w99[{
+        " map ][ /}<CR>b99]}
+        " map ]] j0[[%/{<CR>
+        " map [] k$][%?}<CR>
+    "}}}
+    " Switch j and k with gj and gk respectively to improve wrapped lines navigation {{{
+        nnoremap j gj
+        nnoremap k gk
+        nnoremap gj j
+        nnoremap gk k
+    "}}}
+    " Open definition in split {{{
+        nmap vgd <C-w>v<C-w>lgd
+        nmap sgd <C-w>s<C-w>jgd
+    "}}}
 "}}}
 " Mapping for terminal mode {{{
     if has('nvim')
@@ -361,11 +381,15 @@
     nnoremap <Leader><Leader><Right> :tabmove +1<CR>
     " open a new tab with the current file
     nnoremap <Leader>t% :execute 'tabnew +' . line('.') . ' %'<CR>zz
+    " open a new tab with the current file directory in netrw
+    nnoremap <Leader>t- :tabnew %'<CR>:Explore<CR>
 
-    " easily access tabs my index in normal mode with g[number]
-    for tabIndex in range(1,9)
+    " Easily access tabs by index in normal mode with g[number]
+    for tabIndex in range(1,8)
         execute 'nnoremap g' . tabIndex . ' ' . tabIndex . 'gt'
     endfor
+    " Access the last tab with g9
+    nnoremap g9 :tablast<CR>
 "}}}
 " Manage buffers {{{
     " show buffer list and allow to type the buffer name to use with <Leader>bb
@@ -380,7 +404,8 @@
 "}}}
 " Color configuration {{{
     try
-        let g:colorsDefault  = 'alduin'
+        " let g:colorsDefault  = 'alduin'
+        let g:colorsDefault  = 'forest-night'
         let g:colorsDiff     = 'jellybeans'
 
         execute "colorscheme " . g:colorsDefault
@@ -389,7 +414,7 @@
     endtry
 "}}}
 " Diff configurations {{{
-    " Show fille lines, ignore whitespaces in diff
+    " Show file lines, ignore whitespaces in diff
     set diffopt=filler,iwhite
 
     " Use custom command to create the diff
