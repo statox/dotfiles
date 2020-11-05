@@ -1,14 +1,27 @@
 {
+    "coc.preferences.formatOnSaveFiletypes": ["typescript", "javascript", "html", "vim"],
+    "coc.preferences.formatOnType": true,
+
     "suggest.noselect": true,
-    "suggest.timeout": 500,
+    "suggest.timeout": 800,
     "suggest.enablePreview": true,
+    "suggest.triggerAfterInsertEnter": true,
+
     "diagnostic.level": "warning",
     "diagnostic.checkCurrentLine": true,
     "diagnostic.virtualText": true,
     "diagnostic.virtualTextPrefix": " ▶ ", 
     "diagnostic.signOffset": 9999999,
     "diagnostic.refreshAfterSave": true,
-    "tsserver.log": "verbose",
-    "tsserver.trace.server": "verbose",
-    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true
+
+    "coc.source.emoji.filetypes": ["markdown", "html"],
+
+    "tsserver.log": "off",
+    "tsserver.trace.server": "off",
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+
+    "html.autoClosingTags": true,
+    "html.format.wrapLineLength": 120,
+
+    "prettier.disableLanguages": ["html"]
 }
