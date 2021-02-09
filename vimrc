@@ -26,9 +26,6 @@
     " Use visual bell instead of beeping when doing something wrong
     set visualbell
 
-    " Enable use of the mouse for all modes
-    set mouse=a
-
     " Set the command window height to 2 lines, to avoid many cases of having to
     " "press <Enter> to continue"
     set cmdheight=2
@@ -183,8 +180,29 @@
     " svermeulen/vim-subversive: Operator motions to perform quick substitutions {{{
         Plug 'svermeulen/vim-subversive'
     "}}}
-    call plug#end()
+    " hashivim/vim-terraform: Syntax support for terraform files {{{
+        Plug 'hashivim/vim-terraform'
 
+        " Align settings automatically with Tabularize
+        let g:terraform_align=1
+        " Automatically format *.tf and *.tfvars on save with `terraform fmt`
+        let g:terraform_fmt_on_save=1
+    "}}}
+    " statox/FYT.vim: highlight text on yank {{{
+        Plug 'statox/FYT.vim'
+    " }}}
+    " statox/vim-compare-lines: Compare lines easily {{{
+        Plug 'statox/vim-compare-lines'
+    " }}}
+    " posva/vim-vue: syntax file for vuejs {{{
+        Plug 'posva/vim-vue'
+        let g:vue_pre_processors = ['typescript']
+    " }}}
+    " Glench/Vim-Jinja2-Syntax: .njk syntax files {{{
+        Plug 'Glench/Vim-Jinja2-Syntax'
+    " }}}
+    Plug 'robbles/logstash.vim'
+    call plug#end()
     " matchit: expand matching text objects{{{
         runtime macros/matchit.vim
     "}}}
@@ -334,6 +352,9 @@
         nmap vgd <C-w>v<C-w>lgd
         nmap sgd <C-w>s<C-w>jgd
     "}}}
+    " Sexy comment + yank {{{
+        vmap <leader>cY Ygv<leader>cs
+    " }}}
 "}}}
 " Mapping for terminal mode {{{
     if has('nvim')

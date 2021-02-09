@@ -4,9 +4,8 @@
 
 [core]
     excludesfile = ~/.gitignore_global
-    editor       = vim
-    # convert windows end of line (CRLF) to unix format(LF)
-    autocrlf     = input
+    editor       = nvim
+    ; autocrlf     = input
     pager = less -+F
 
 [push]
@@ -39,7 +38,6 @@
     lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
     lg = !"git lg1"
     l5 = log -n 5
-    conflicted = !vim +Conflicted
 
 [credential]
     # When not using an ssh key, cache the credentials for about 8 hours

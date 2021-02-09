@@ -4,6 +4,7 @@
 function! common_web_settings#createMappings()
     " Helper code snippets {{{
         inoremap <buffer> debug debugger; // AFA
+        inoremap <buffer> cerr console.error();<Left><Left>
         inoremap <buffer> clog console.log();<Left><Left>
         inoremap <buffer> clo' console.log('');<Left><Left><Left>
         inoremap <buffer> c=== console.log('=========================================================');

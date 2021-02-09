@@ -1,5 +1,7 @@
+# vim:fdm=marker
 # Start up {{{
-    exec --no-startup-id i3-msg 'workspace 2; exec brave-browser; exec slack; exec gnome-terminal'
+    # exec --no-startup-id i3-msg 'workspace 2; exec brave-browser; exec slack; exec gnome-terminal'
+    exec --no-startup-id i3-msg 'workspace 2; exec firefox; exec slack; exec gnome-terminal'
     # Make sure the package network-manager is installed for this to work
     exec_always --no-startup-id nm-applet
     # Polybar
@@ -23,10 +25,9 @@
     hide_edge_borders smart
 
     # Hide window title bar for specific applications
-    for_window [class="Gnome-terminal"] border pixel
-    for_window [class="Chromium" window_role="browser"] border pixel
-    for_window [class="Brave" window_role="browser"] border pixel
-    for_window [class="Spotify"] border pixel
+    for_window [class="Gnome-terminal"] border pixel 1
+    for_window [class="(?i)chromium|firefox|brave" window_role="browser"] border pixel 1
+    for_window [class="(?i)spotify|zoom|slack"] border pixel 1
 
     # Make yad calendar floating window
     for_window [class="Yad" title="yad-calendar"] floating enable
