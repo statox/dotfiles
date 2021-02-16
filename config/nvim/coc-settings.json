@@ -1,27 +1,46 @@
 {
-    "coc.preferences.formatOnSaveFiletypes": ["typescript", "javascript", "html", "vim"],
+    "coc.preferences.formatOnSaveFiletypes": [
+        "typescript",
+        "javascript",
+        "html",
+        "vim",
+        "rust",
+        "terraform"
+    ],
     "coc.preferences.formatOnType": true,
-
-    "suggest.noselect": true,
-    "suggest.timeout": 800,
-    "suggest.enablePreview": true,
-    "suggest.triggerAfterInsertEnter": true,
-
-    "diagnostic.level": "warning",
+    "coc.source.emoji.filetypes": [
+        "markdown",
+        "html"
+    ],
     "diagnostic.checkCurrentLine": true,
-    "diagnostic.virtualText": true,
-    "diagnostic.virtualTextPrefix": " ▶ ", 
-    "diagnostic.signOffset": 9999999,
+    "diagnostic.level": "warning",
     "diagnostic.refreshAfterSave": true,
-
-    "coc.source.emoji.filetypes": ["markdown", "html"],
-
-    "tsserver.log": "off",
-    "tsserver.trace.server": "off",
-    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
-
+    "diagnostic.signOffset": 9999999,
+    "diagnostic.virtualText": true,
+    "diagnostic.virtualTextPrefix": " \u25b6 ",
     "html.autoClosingTags": true,
     "html.format.wrapLineLength": 120,
-
-    "prettier.disableLanguages": ["html"]
+    "languageserver": {
+         "terraform": {
+              "command": "/home/afabre/.bin/lsp_servers/terraform-ls",
+              "args": ["serve"],
+              "trace.server": "verbose",
+              "filetypes": [
+                  "terraform",
+                  "tf"
+              ],
+              "initializationOptions": {},
+              "settings": {}
+          }
+    },
+    "prettier.disableLanguages": [
+        "html"
+    ],
+    "suggest.enablePreview": true,
+    "suggest.noselect": true,
+    "suggest.timeout": 800,
+    "suggest.triggerAfterInsertEnter": true,
+    "tsserver.log": "off",
+    "tsserver.trace.server": "off",
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true
 }
