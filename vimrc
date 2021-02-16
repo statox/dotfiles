@@ -211,7 +211,7 @@
     " <C-L> turn off search highlighting until the next search {{{
         nnoremap <C-L> :nohlsearch<CR><C-L>
     "}}}
-    " Fast save and quit {{{
+    " Fast quit {{{
         nnoremap <Leader><S-Q> :qa!<CR>
     "}}}
     " Go to 80column {{{
@@ -312,10 +312,6 @@
     " Explore with - {{{
         nnoremap - :Explore<CR>
     " }}}
-    " Scroll the window with Shift + Arrow keys {{{
-        nnoremap <S-DOWN> <C-e>
-        nnoremap <S-UP> <C-y>
-    " }}}
     " Disable Q to toggle ex mode {{{
         nnoremap Q <nop>
     " }}}
@@ -336,12 +332,6 @@
         xmap <leader>gcc <plug>(SubversiveSubstituteRange)
         nmap <leader>Gc  <plug>(SubversiveSubstituteWordRange)
     " }}}
-    " Make the section mappings work with any curvy bracket {{{
-        " map [[ ?{<CR>w99[{
-        " map ][ /}<CR>b99]}
-        " map ]] j0[[%/{<CR>
-        " map [] k$][%?}<CR>
-    "}}}
     " Switch j and k with gj and gk respectively to improve wrapped lines navigation {{{
         nnoremap j gj
         nnoremap k gk
