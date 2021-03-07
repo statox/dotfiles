@@ -257,7 +257,10 @@
         inoremap  <C-w>
     " }}}
     " Use s instead of <C-w> to handle windows {{{
-        nnoremap s <C-w>
+        " nnoremap s <C-w>
+        let windowHabitsKeys = ["s=", "sv", "ss", "so", "sw", "sh", "sj", "sk", "sl", "s<S-h>", "s<S-j>", "s<S-k>", "s<S-l>", "s<", "s>", "sc"]
+        let windowHabitsMessage = ["USE < C-W > INSTEAD", "BREAK BAD HABITS"]
+        call breakhabits#createmappings(windowHabitsKeys, windowHabitsMessage)
     " }}}
     " Make command line navigation easier {{{
         cnoremap <C-l> <Right>
