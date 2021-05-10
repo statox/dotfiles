@@ -59,7 +59,7 @@ font-1 = OpenSymbol:style=Regular:pixelsize:10;1
 font-2 = Font Awesome 5 Free Regular:style=Regular
 font-3 = Font Awesome 5 Brands Regular:style=Regular
 
-modules-left = i3 memory temperature cpu
+modules-left = i3 memory temperature cpu clocks
 modules-center = popup-calendar
 modules-right = filesystem pulseaudio battery wlan eth powermenu
 
@@ -437,6 +437,10 @@ menu-2-0 = power off
 menu-2-0-exec = sudo poweroff
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
+
+[module/clocks]
+type= custom/script
+exec = ~/.config/polybar/scripts/clocks.sh
 
 [module/popup-calendar]
 type = custom/script
