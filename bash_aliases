@@ -66,6 +66,7 @@ alias npmr='npm run'
 # better pgrep
 alias pg='ps aux | grep -i'
 
+alias ts='date +"%s"'
 alias ts2date='timestamp2date'
 function timestamp2date {
     echo $(date -d @$1)
@@ -229,6 +230,14 @@ alias sudop='sudo env PATH=$PATH'
 # Use docker with sudo and $PATH set
 alias sdocker='sudo env PATH=$PATH docker'
 alias sdocker-compose='sudo env PATH=$PATH docker-compose'
+
+alias ansible-playbook='ansiblePlaybookDebug'
+function ansiblePlaybookDebug {
+    export ANSIBLE_STDOUT_CALLBACK=default
+    echo -n "$@" | grep -q -- "-v" && export ANSIBLE_STDOUT_CALLBACK=yaml
+
+    'ansible-playbook' "$@"
+}
 
 ####################################################
 #                   functions                      #
