@@ -160,6 +160,9 @@
         Plug 'junegunn/fzf', { 'dir': '~/.bin/fzf', 'do': './install --all' }
         Plug 'junegunn/fzf.vim'
 
+        " Change the size of the pop up window used by fzf
+        let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
+
         " Create a command Agw to match exact word
         command! -bang -nargs=* Agw call fzf#vim#ag(<q-args>, '--word-regexp', <bang>0)
 
@@ -170,9 +173,8 @@
           \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
           \                 <bang>0)
 
-        " Override the command File to show a preview window
-        command! -bang -nargs=? -complete=dir Files
-          \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+        " Override the command File to show a preview window using the preview script shipped with fzf
+        command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
     " }}}
     " christoomey/vim-conflicted: Improve the git conflict resolution with vim {{{
         Plug 'christoomey/vim-conflicted'
@@ -239,9 +241,8 @@
         endif
     "}}}
     " Quickly escape insert mode with jk {{{
-        inoremap <silent> jk <Esc>:w<CR>
-        " Let's try it in normal mode too
-        nnoremap <silent> <Leader>jk <Esc>:w<cr>
+        inoremap <silent> jk <Esc>:update<CR>
+        nnoremap <silent> <Leader>jk <Esc>:update<cr>
     "}}}
     " Quickly insert an empty new line without entering insert mode {{{
         nnoremap <Leader>o o<Esc>0"_D
@@ -417,10 +418,18 @@
     nnoremap <Leader><Leader>b :enew<CR>
 "}}}
 " Color configuration {{{
+    if has('termguicolors')
+        set termguicolors
+    endif
     try
-        " let g:colorsDefault  = 'alduin'
-        let g:colorsDefault  = 'forest-night'
+        let g:colorsDefault  = 'everforest'
         let g:colorsDiff     = 'jellybeans'
+
+        " everforest colorscheme configurations {{{
+        let g:everforest_background = 'hard'
+        let g:everforest_sign_column_background = 'none'
+        let g:everforest_better_performance = 1
+        " }}}
 
         execute "colorscheme " . g:colorsDefault
     catch
@@ -552,6 +561,14 @@
     " }}}
     " Quick alias for :%s {{{
         cnoreabbrev <expr> ss (getcmdtype() == ':' && getcmdline() =~ '^ss$')? '%s//<Left>' : 'ss'
+    " }}}
+    " Disambiguate fugitive commands {{{
+        command! Gl Git pull
+        command! Gp Git push
+        command! Gc Git commit
+        command! Gs Gstatus
+        cnoreabbrev <expr> GS (getcmdtype() == ':' && getcmdline() =~ '^GS$')? 'Gs' : 'GS'
+        cnoreabbrev <expr> G (getcmdtype() == ':' && getcmdline() =~ '^G$')? 'vertical Git' : 'G'
     " }}}
 " }}}
 " Source a local vimrc {{{
