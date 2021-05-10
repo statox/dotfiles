@@ -4,7 +4,7 @@
 
 ! Appearance {{{
     ! Number of lines
-    rofi.lines: 5
+    rofi.lines: 7
 
     ! Window width
     rofi.width: 25
@@ -16,7 +16,8 @@
     rofi.window-format: {c}
 
     ! New style theme file
-    rofi.theme: gruvbox-dark-soft
+    ! rofi.theme: gruvbox-dark-soft
+    rofi.theme: slate
 ! }}}
 ! Behavior {{{
     ! Enable auto select mode
@@ -24,7 +25,20 @@
 }}}
 ! Content {{{
     ! Set the modi to combine in combi mode
-    rofi.combi-modi: window,drun
+    ! Added the alacritty part by myself
+    rofi.combi-modi: window,drun,ssh,alacritty:~/.bin/rofi-alacritty
+
+    ! content of ~/.bin/rofi-alacritty:
+    ! #!/usr/bin/env sh
+    ! 
+    ! # Script used by rofi to start alacritty
+    ! 
+    ! # List projects if no arguments given
+    ! if [ -z "$1" ]; then
+    !     echo "alacritty"
+    ! else
+    !     ~/.bin/alacritty > /dev/null 2>&1 &
+    ! fi
 
     ! Enabled modi
     rofi.modi: combi

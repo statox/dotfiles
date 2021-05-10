@@ -16,6 +16,7 @@ config/polybar/config
 config/polybar/launch.sh
 config/polybar/stop.sh
 config/rofi/config
+config/rofi/slate.rasi
 dircolors
 gitconfig
 gitignore_global
