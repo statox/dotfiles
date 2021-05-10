@@ -1,3 +1,7 @@
+if !has('nvim')
+    finish
+endif
+
 function! breakhabits#createmappings(keys, message) abort
     for key in a:keys
         call nvim_set_keymap('n', key, ':call BreakHabitsWindow(' . string(a:message). ')<CR>', {'silent': v:true, 'nowait': v:true, 'noremap': v:true})
