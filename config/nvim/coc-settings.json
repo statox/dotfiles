@@ -21,17 +21,40 @@
     "html.autoClosingTags": true,
     "html.format.wrapLineLength": 120,
     "languageserver": {
-         "terraform": {
-              "command": "/home/afabre/.bin/lsp_servers/terraform-ls",
-              "args": ["serve"],
-              "trace.server": "verbose",
-              "filetypes": [
-                  "terraform",
-                  "tf"
-              ],
-              "initializationOptions": {},
-              "settings": {}
-          }
+        "ccls": {
+            "command": "ccls",
+            "filetypes": [
+                "c",
+                "cpp",
+                "objc",
+                "objcpp"
+            ],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/ccls"
+                }
+            },
+            "rootPatterns": [
+                ".ccls",
+                "compile_commands.json",
+                ".vim/",
+                ".git/",
+                ".hg/"
+            ]
+        },
+        "terraform": {
+            "args": [
+                "serve"
+            ],
+            "command": "/home/afabre/.bin/lsp_servers/terraform-ls",
+            "filetypes": [
+                "terraform",
+                "tf"
+            ],
+            "initializationOptions": {},
+            "settings": {},
+            "trace.server": "verbose"
+        }
     },
     "prettier.disableLanguages": [
         "html"
