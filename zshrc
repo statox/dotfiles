@@ -189,6 +189,21 @@ RPROMPT=$RPROMPT"\
     # Set FZF to use ag if it is installed
     command -v ag >/dev/null 2>&1 && export FZF_DEFAULT_COMMAND='ag --nocolor -f --hidden --ignore .git -g ""'
 # }}}
-
+# NPM global install configuration {{{
+export PATH="$PATH:$HOME/.npm-global/bin"
+export NPM_CONFIG_PREFIX=~/.npm-global
+if [ ! -d "$NPM_CONFIG_PREFIX" ]; then
+    mkdir -p "$NPM_CONFIG_PREFIX"
+fi
+# }}}
+# Cargo {{{
+[ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
+# }}}
+# LSP servers {{{
+export PATH="$PATH:$HOME/.bin/lsp_servers"
+# }}}
 # Necessary to make kitty work
 export TERM=screen-256color
+
+# Completion for local command isp
+# compdef -a _custom-iam-switch-profile custom-iam-switch-profile
