@@ -104,21 +104,11 @@ function! statusline#SetStatusLine()
 
     " Short name of the file
     set statusline+=[\%t\]
-
     " Nearest function if it exists
     set statusline+=%{statusline#CurrentFunction()}
 
     " Separator right-aligned left-aligned
     set statusline+=%=
-
-    " Git status for current file
-    " It causes cursor to flicker I don't know why yet
-    "set statusline+=%#DiffAdd#
-    "set statusline+=%{statusline#CurrentFileGitStatus()}
-    "set statusline+=%*
-
-    " Git branch
-    " set statusline+=%{statusline#CurrentGitBranch()}
 
     " Coc.nvim diagnostics
     set statusline+=%{statusline#StatusDiagnostic()}
