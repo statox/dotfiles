@@ -14,8 +14,6 @@
     ],
     "diagnostic.checkCurrentLine": true,
     "diagnostic.level": "warning",
-    "diagnostic.refreshAfterSave": true,
-    "diagnostic.signOffset": 9999999,
     "diagnostic.virtualText": true,
     "diagnostic.virtualTextPrefix": " \u25b6 ",
     "html.autoClosingTags": true,
