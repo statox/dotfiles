@@ -140,7 +140,7 @@
 
     #command execution timestamp shown in the history command output.
     # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-    HIST_STAMPS="dd/mm/yyyy"
+    HIST_STAMPS="%d/%m/%y %T"
 
     # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
     HISTSIZE=100000
