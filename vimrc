@@ -152,12 +152,6 @@
             let g:coc_disable_startup_warning = 1
         endif
     " }}}
-    " HerringtonDarkholme/yats.vim: TS syntax file (useful for tsx files) {{{
-        Plug 'HerringtonDarkholme/yats.vim'
-    " }}}
-    " kchmck/vim-coffee-script: Coffee scrupt syntax file {{{
-        Plug 'kchmck/vim-coffee-script'
-    " }}}
     " romainl/vim-devdocs: Access devdocs.io from vim {{{
         Plug 'romainl/vim-devdocs'
     " }}}
@@ -187,14 +181,6 @@
     " svermeulen/vim-subversive: Operator motions to perform quick substitutions {{{
         Plug 'svermeulen/vim-subversive'
     "}}}
-    " hashivim/vim-terraform: Syntax support for terraform files {{{
-        Plug 'hashivim/vim-terraform'
-
-        " Align settings automatically with Tabularize
-        let g:terraform_align=1
-        " Automatically format *.tf and *.tfvars on save with `terraform fmt`
-        let g:terraform_fmt_on_save=1
-    "}}}
     " statox/FYT.vim: highlight text on yank {{{
         if !has('nvim')
         Plug 'statox/FYT.vim'
@@ -208,15 +194,35 @@
     " statox/vim-compare-lines: Compare lines easily {{{
         Plug 'statox/vim-compare-lines'
     " }}}
-    " posva/vim-vue: syntax file for vuejs {{{
-        Plug 'posva/vim-vue'
-        let g:vue_pre_processors = ['typescript']
-    " }}}
-    " Glench/Vim-Jinja2-Syntax: .njk syntax files {{{
-        Plug 'Glench/Vim-Jinja2-Syntax'
-    " }}}
-    Plug 'beyondmarc/glsl.vim'
-    Plug 'robbles/logstash.vim'
+    " Syntax file plugins {{{
+        " posva/vim-vue: syntax file for vuejs {{{
+            Plug 'posva/vim-vue'
+            let g:vue_pre_processors = ['typescript']
+        " }}}
+        " Glench/Vim-Jinja2-Syntax: .njk syntax files {{{
+            Plug 'Glench/Vim-Jinja2-Syntax'
+        " }}}
+        " kchmck/vim-coffee-script: Coffee scrupt syntax file {{{
+            Plug 'kchmck/vim-coffee-script'
+        " }}}
+        " HerringtonDarkholme/yats.vim: TS syntax file (useful for tsx files) {{{
+            Plug 'HerringtonDarkholme/yats.vim'
+        " }}}
+        " beyondmarc/glsl.vim: glsl syntax file {{{
+            Plug 'beyondmarc/glsl.vim'
+        " }}}
+        " robbles/logstash.vim: logstash.conf syntax file {{{
+            Plug 'robbles/logstash.vim'
+        " }}}
+        " hashivim/vim-terraform: Syntax support for terraform files {{{
+            Plug 'hashivim/vim-terraform'
+
+            " Align settings automatically with Tabularize
+            let g:terraform_align=1
+            " Automatically format *.tf and *.tfvars on save with `terraform fmt`
+            let g:terraform_fmt_on_save=1
+        "}}}
+    "}}}
     call plug#end()
     " matchit: expand matching text objects{{{
         runtime macros/matchit.vim
