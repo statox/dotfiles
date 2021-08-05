@@ -589,6 +589,10 @@ endif
         command! Fold setlocal foldnestmax=1 | setlocal foldmethod=indent | normal! zM
         command! FoldSyn setlocal foldnestmax=1 | setlocal foldmethod=syntax | normal! zM
         command! Unfold setlocal foldmethod& foldnestmax& | normal! zR
+
+    " }}}
+    " :CountBytes: Count bytes in the buffer
+        command! CountBytes echo line2byte(line('$') + 1)
     " }}}
     " Quick alias for :%s {{{
         cnoreabbrev <expr> ss (getcmdtype() == ':' && getcmdline() =~ '^ss$')? '%s//<Left>' : 'ss'
