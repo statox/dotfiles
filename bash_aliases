@@ -55,6 +55,19 @@ alias gdi='git diff $(git status --porcelain | sed "s/\w //" | fzf)'
     # alias gdi='echo "fzf not found no aliases"'
 # fi
 
+alias glgi='fzf-show-commits'
+# Taken from fshow - git commit browser on https://github.com/junegunn/fzf/wiki/examples#git
+fzf-show-commits() {
+  git log --graph --color=always \
+      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      --bind "ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                {}
+FZF-EOF"
+}
+
 # Ag the silver searcher
 alias agw='ag --word-regex'
 
