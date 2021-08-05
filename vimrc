@@ -279,6 +279,8 @@
     " FZF mappings {{{
         nnoremap <Leader><CR> :Files<CR>
         nnoremap <Leader>bb :Buffers<CR>
+        nnoremap <Leader>/ :Lines<CR>
+        nnoremap <Leader>? :Ag<CR>
         " TODO find how to FZF MRU files
         " nnoremap <Leader>br :CtrlPMRUFiles<CR>
         " Start a search with the Ag search with ga
