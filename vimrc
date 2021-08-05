@@ -600,7 +600,7 @@ endif
         command! Unfold setlocal foldmethod& foldnestmax& | normal! zR
 
     " }}}
-    " :CountBytes: Count bytes in the buffer
+    " :CountBytes: Count bytes in the buffer {{{
         command! CountBytes echo line2byte(line('$') + 1)
     " }}}
     " Quick alias for :%s {{{
