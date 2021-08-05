@@ -194,6 +194,11 @@
     " statox/vim-compare-lines: Compare lines easily {{{
         Plug 'statox/vim-compare-lines'
     " }}}
+    " gelguy/wilder.nvim: Improved wild menu {{{
+        " On neovim requires to install pynvim with
+        " python3 -m pip install --user --upgrade pynvim
+        Plug 'gelguy/wilder.nvim', { 'do': ':UpdateRemotePlugins' }
+    " }}}
     " Syntax file plugins {{{
         " posva/vim-vue: syntax file for vuejs {{{
             Plug 'posva/vim-vue'
@@ -463,6 +468,51 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 endif
+" }}}
+" Wilder.nvim configuation {{{
+    " Enable the plugin
+    call wilder#enable_cmdline_enter()
+    " Use both <c-n>/<c-p> and <tab>/<s-tab> to navigate the suggestions
+    set wildcharm=<C-n>
+    cmap <expr> <C-n> wilder#in_context() ? wilder#next() : "\<c-n>"
+    cmap <expr> <C-p> wilder#in_context() ? wilder#previous() : "\<c-p>"
+    cmap <expr> <Tab> wilder#in_context() ? wilder#next() : "\<c-n>"
+    cmap <expr> <S-Tab> wilder#in_context() ? wilder#previous() : "\<c-p>"
+    " Enable wilder in all interesting modes
+    call wilder#set_option('modes', ['/', '?', ':'])
+    " Enabe fuzzy finding
+    call wilder#set_option('pipeline', [
+          \   wilder#branch(
+          \     wilder#cmdline_pipeline({
+          \       'language': 'python',
+          \       'fuzzy': 1,
+          \     }),
+          \     wilder#python_search_pipeline({
+          \       'pattern': wilder#python_fuzzy_pattern(),
+          \       'sorter': wilder#python_difflib_sorter(),
+          \       'engine': 're',
+          \     }),
+          \   ),
+          \ ])
+    " When the cmdline is empty, provide suggestions based on the cmdline history
+    call wilder#set_option('pipeline', [
+          \   wilder#branch(
+          \     [
+          \       wilder#check({_, x -> empty(x)}),
+          \       wilder#history(),
+          \     ],
+          \     wilder#cmdline_pipeline(),
+          \     wilder#search_pipeline(),
+          \   ),
+          \ ])
+    " Change the rendered to show a spinner and the current number of items
+    " And use a popupmenu
+    call wilder#set_option('renderer', wilder#popupmenu_renderer({
+          \ 'highlighter': wilder#basic_highlighter(),
+          \ 'separator': ' · ',
+          \ 'left': [' ', wilder#wildmenu_spinner(), ' '],
+          \ 'right': [' ', wilder#wildmenu_index()],
+          \ }))
 " }}}
 " Color configuration {{{
     if has('termguicolors')
