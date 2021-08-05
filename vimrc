@@ -215,6 +215,7 @@
     " Glench/Vim-Jinja2-Syntax: .njk syntax files {{{
         Plug 'Glench/Vim-Jinja2-Syntax'
     " }}}
+    Plug 'beyondmarc/glsl.vim'
     Plug 'robbles/logstash.vim'
     call plug#end()
     " matchit: expand matching text objects{{{
