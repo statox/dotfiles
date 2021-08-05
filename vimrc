@@ -504,12 +504,14 @@ endif
           \ ])
     " Change the rendered to show a spinner and the current number of items
     " And use a popupmenu
-    call wilder#set_option('renderer', wilder#popupmenu_renderer({
-          \ 'highlighter': wilder#basic_highlighter(),
-          \ 'separator': ' · ',
-          \ 'left': [' ', wilder#wildmenu_spinner(), ' '],
-          \ 'right': [' ', wilder#wildmenu_index()],
-          \ }))
+    if has('nvim')
+        call wilder#set_option('renderer', wilder#popupmenu_renderer({
+              \ 'highlighter': wilder#basic_highlighter(),
+              \ 'separator': ' · ',
+              \ 'left': [' ', wilder#wildmenu_spinner(), ' '],
+              \ 'right': [' ', wilder#wildmenu_index()],
+              \ }))
+    endif
 " }}}
 " Color configuration {{{
     if has('termguicolors')
