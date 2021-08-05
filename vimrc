@@ -196,7 +196,14 @@
         let g:terraform_fmt_on_save=1
     "}}}
     " statox/FYT.vim: highlight text on yank {{{
+        if !has('nvim')
         Plug 'statox/FYT.vim'
+        else
+            augroup YankHighlight
+                autocmd!
+                autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
+            augroup END
+        endif
     " }}}
     " statox/vim-compare-lines: Compare lines easily {{{
         Plug 'statox/vim-compare-lines'
