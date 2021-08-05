@@ -94,11 +94,6 @@
     # Path to oh-my-zsh installation.
     export ZSH=~/.oh-my-zsh
 # }}}
-# Aliases {{{
-    if [ -f ~/.bash_aliases ]; then
-        . ~/.bash_aliases
-    fi
-# }}}
 # Completion {{{
     # enable completion
     autoload -Uz compinit && compinit
@@ -159,6 +154,11 @@
 # }}}
 # Sourcing oh my zsh {{{
     source $ZSH/oh-my-zsh.sh
+# }}}
+# Aliases {{{
+    if [ -f ~/.bash_aliases ]; then
+        . ~/.bash_aliases
+    fi
 # }}}
 # Fancy prompt {{{
     autoload -U promptinit
