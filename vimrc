@@ -120,6 +120,9 @@
     " svermeulen/vim-subversive: Operator motions to perform quick substitutions {{{
         Plug 'svermeulen/vim-subversive'
     "}}}
+    " machakann/vim-swap: Easily swap delimited items {{{
+        Plug 'machakann/vim-swap'
+    " }}}
     " tpope/vim-fugitive: Git wrapper {{{
         Plug 'tpope/vim-fugitive'
     " }}}
