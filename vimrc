@@ -99,6 +99,12 @@
             source $MYLOCALPLUG
         endif
     "}}}
+    " nanotech/jellybeans.vim: Cool colorscheme (keeping it for the diff mode){{{
+        Plug 'nanotech/jellybeans.vim'
+    "}}}
+    " sainnhe/forest-night: Main colorscheme {{{
+        Plug 'sainnhe/forest-night'
+    " }}}
     " scrooloose/nerdcommenter: Vim plugin for intensely orgasmic commenting{{{
         Plug 'scrooloose/nerdcommenter'
 
@@ -111,24 +117,11 @@
     " tpope/vim-surround: Surround text with matching caracters{{{
         Plug 'tpope/vim-surround'
     "}}}
-    " nanotech/jellybeans.vim: Cool colorscheme (keeping it for the diff mode){{{
-        Plug 'nanotech/jellybeans.vim'
+    " svermeulen/vim-subversive: Operator motions to perform quick substitutions {{{
+        Plug 'svermeulen/vim-subversive'
     "}}}
-    " AlessandroYorba/Alduin: Another cool colorscheme {{{
-        Plug 'AlessandroYorba/Alduin'
-        " Make the parens and matched parens more readable
-        let g:alduin_Shout_Aura_Whisper = 1
-        " Make strings more readable
-        let g:alduin_Shout_Animal_Allegiance = 1
-    " }}}
-    " A colorscheme I'm currently testing {{{
-        Plug 'sainnhe/forest-night'
-    " }}}
     " tpope/vim-fugitive: Git wrapper {{{
         Plug 'tpope/vim-fugitive'
-    " }}}
-    " statox/GOD.vim: Get online doc links {{{
-        Plug 'statox/GOD.vim'
     " }}}
     " mhinz/vim-signify: show git diff in gutter {{{
         Plug 'mhinz/vim-signify'
@@ -152,9 +145,6 @@
             let g:coc_disable_startup_warning = 1
         endif
     " }}}
-    " romainl/vim-devdocs: Access devdocs.io from vim {{{
-        Plug 'romainl/vim-devdocs'
-    " }}}
     " FZF : fuzzy finder {{{
         Plug 'junegunn/fzf', { 'dir': '~/.bin/fzf', 'do': './install --all' }
         Plug 'junegunn/fzf.vim'
@@ -175,12 +165,15 @@
         " Override the command File to show a preview window using the preview script shipped with fzf
         command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
     " }}}
+    " romainl/vim-devdocs: Access devdocs.io from vim {{{
+        Plug 'romainl/vim-devdocs'
+    " }}}
     " christoomey/vim-conflicted: Improve the git conflict resolution with vim {{{
         Plug 'christoomey/vim-conflicted'
     " }}}
-    " svermeulen/vim-subversive: Operator motions to perform quick substitutions {{{
-        Plug 'svermeulen/vim-subversive'
-    "}}}
+    " statox/GOD.vim: Get online doc links {{{
+        Plug 'statox/GOD.vim'
+    " }}}
     " statox/FYT.vim: highlight text on yank {{{
         if !has('nvim')
         Plug 'statox/FYT.vim'
