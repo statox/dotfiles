@@ -141,6 +141,11 @@
             Plug 'markonm/traces.vim'
         endif
     "}}}
+    " nvim-treesitter/nvim-treesitter {{{
+        if (has('nvim'))
+            Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+        endif
+    " }}}
     " neoclide/coc.nvim {{{
         Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
         if !has('nvim')
@@ -419,6 +424,30 @@
     " open buffer with <Leader><Leader>b
     nnoremap <Leader><Leader>b :enew<CR>
 "}}}
+" Treesitter configuration {{{
+if has('nvim')
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+    ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+    highlight = {
+        enable = true
+    },
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+            init_selection = "gnn",
+            node_incremental = "grn",
+            scope_incremental = "grc",
+            node_decremental = "grm"
+        }
+    },
+    indent = {
+        enable = true
+    }
+}
+EOF
+endif
+" }}}
 " Color configuration {{{
     if has('termguicolors')
         set termguicolors
