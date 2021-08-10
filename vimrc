@@ -230,9 +230,6 @@
     " Fast quit {{{
         nnoremap <Leader><S-Q> :qa!<CR>
     "}}}
-    " Go to 80column {{{
-        nnoremap <Leader><tab> 80\|
-    "}}}
     " Easier clipboard access {{{
         if has('clipboard')
             if has('win32') || has('win64')
@@ -337,14 +334,6 @@
     " Disable Q to toggle ex mode {{{
         nnoremap Q <nop>
     " }}}
-    " Quick substitute mappings {{{
-        nnoremap <Leader>zq :s/"//g<CR>
-        xnoremap <Leader>zq :s/"//g<CR>
-        nnoremap <Leader>ze :s/"\([^"]\+\)"/\1/<CR>
-        xnoremap <Leader>ze :s/"\([^"]\+\)"/\1/<CR>
-        nnoremap <Leader>zw :s/"/'/g<CR>
-        xnoremap <Leader>zw :s/"/'/g<CR>
-    " }}}
     " vim-subversive mappings {{{
         " Use gc as a word to replace a text object with the content of the unmaned register
         nmap gc  <plug>(SubversiveSubstitute)
@@ -359,10 +348,6 @@
         nnoremap k gk
         nnoremap gj j
         nnoremap gk k
-    "}}}
-    " Open definition in split {{{
-        nmap vgd <C-w>v<C-w>lgd
-        nmap sgd <C-w>s<C-w>jgd
     "}}}
     " Sexy comment + yank {{{
         vmap <leader>cY Ygv<leader>cs
@@ -407,9 +392,6 @@
     endif
 " }}}
 " Manage tabs {{{
-    " move to new/previous tabs (Disabled, remove when I removed it from my muscle memory in favor of gt and gT)
-    nnoremap <Leader><Leader>l  <nop>
-    nnoremap <Leader><Leader>h  <nop>
     " open/close tab
     nnoremap <Leader><Leader>t  :tabnew<CR>
     nnoremap <Leader>tc         :tabclose<CR>
@@ -568,31 +550,6 @@ endif
     set incsearch   " Lookahead as search pattern is specified
     set ignorecase  " Ignore case in all searches
     set smartcase   " unless uppercase letters used
-
-    " Change the background color of the status line to show if what is being
-    " searched has a match or not
-    "
-    " Define an autocmd to call the HighLightSearch function when we enter the
-    " search command line. And a second one to stop the function when we are
-    " done searching
-    augroup betterSeachHighlighting
-        autocmd!
-        autocmd CmdlineEnter * call search#StartStatuslineHighlighting()
-        autocmd CmdlineLeave * call search#StopStatuslineHighlighting()
-    augroup END
-"}}}
-"Configuration specific to gvim {{{
-    " Maximize window when starting gVim (works on MS windows only)
-    augroup GUI
-        autocmd!
-        autocmd GUIEnter * simalt ~n
-    augroup END
-
-    " Remove useless graphical stuff
-    set guioptions-=m  "menu bar
-    set guioptions-=T  "toolbar
-    set guioptions-=r  "right-hand scroll bar
-    set guioptions-=L  "left-hand scroll bar
 "}}}
 " Rename TMUX tab vim name of edited file {{{
     augroup tmux
@@ -640,18 +597,9 @@ endif
     " :E equivalent to :e% {{{
         command! -nargs=? -complete=file E call utils#ReloadOrEdit(<q-args>)
     "}}}
-    " :QA close all buffers without leaving vim {{{
-        command! QA bufdo bd
-    "}}}
-    " :GGUK: Shortcut for a plugin command undoing the current git hunk {{{
+    " :GGUK Shortcut for a plugin command undoing the current git hunk {{{
         command! GGUH SignifyHunkUndo
         command! GGDH SignifyHunkDiff
-    " }}}
-    " :Fold, FoldSyn and Unfold shortcut to folding {{{
-        command! Fold setlocal foldnestmax=1 | setlocal foldmethod=indent | normal! zM
-        command! FoldSyn setlocal foldnestmax=1 | setlocal foldmethod=syntax | normal! zM
-        command! Unfold setlocal foldmethod& foldnestmax& | normal! zR
-
     " }}}
     " :CountBytes: Count bytes in the buffer {{{
         command! CountBytes echo line2byte(line('$') + 1)
@@ -681,14 +629,6 @@ endif
         source $MYLOCALVIMRC
     endif
 " }}} 
-" Fix cursor shape on cygwin {{{
-    if has('win32unix')
-        let &t_ti.="\e[1 q"
-        let &t_SI.="\e[5 q"
-        let &t_EI.="\e[1 q"
-        let &t_te.="\e[0 q"
-    endif
-" }}}
 " Abbreviations for common mispelling {{{
     inoreabbrev syncrho synchro
     inoreabbrev syncrhonize synchronize
