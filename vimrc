@@ -168,12 +168,6 @@
         " Override the command File to show a preview window using the preview script shipped with fzf
         command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
     " }}}
-    " romainl/vim-devdocs: Access devdocs.io from vim {{{
-        Plug 'romainl/vim-devdocs'
-    " }}}
-    " christoomey/vim-conflicted: Improve the git conflict resolution with vim {{{
-        Plug 'christoomey/vim-conflicted'
-    " }}}
     " statox/GOD.vim: Get online doc links {{{
         Plug 'statox/GOD.vim'
     " }}}
