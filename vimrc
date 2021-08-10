@@ -356,6 +356,9 @@
         nnoremap <silent> <leader><C-o> :call jumps#fileCO(v:true)<CR>
         nnoremap <silent> <leader><C-i> :call jumps#fileCO(v:false)<CR>
     " }}}
+    " <leader>cd to change the local current directory to the current file {{{
+        nnoremap <silent> <leader>cd :lcd %:h<CR>:pwd<CR>
+    " }}}
 "}}}
 " Mapping for terminal mode {{{
     if has('nvim')
