@@ -189,12 +189,10 @@ RPROMPT=$RPROMPT"\
     # Set FZF to use ag if it is installed
     command -v ag >/dev/null 2>&1 && export FZF_DEFAULT_COMMAND='ag --nocolor -f --hidden --ignore .git -g ""'
 # }}}
-# NPM global install configuration {{{
-export PATH="$PATH:$HOME/.npm-global/bin"
-export NPM_CONFIG_PREFIX=~/.npm-global
-if [ ! -d "$NPM_CONFIG_PREFIX" ]; then
-    mkdir -p "$NPM_CONFIG_PREFIX"
-fi
+# NVM configuration {{{
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 # }}}
 # Cargo {{{
 [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
