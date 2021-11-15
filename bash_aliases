@@ -24,8 +24,6 @@ alias reloadbashrc='source ~/.bashrc'
 alias reloadzshrc='source ~/.zshrc'
 
 #ls
-alias sl='ls'
-alias ms='ls'
 alias ldot='ls -d .*'
 alias ll='ls -AlFh'
 alias la='ls -ACF'
@@ -76,9 +74,6 @@ alias ni='node -i'
 # npm
 alias npmr='npm run'
 
-# better pgrep
-alias pg='ps aux | grep -i'
-
 alias ts='date +"%s"'
 alias ts2date='timestamp2date'
 function timestamp2date {
@@ -90,59 +85,8 @@ if [ -f ~/.config/polybar/launch.sh ]; then
     alias polystart='source ~/.config/polybar/launch.sh &'
 fi
 
-# Convert a timestamp to a date
-function epoch {
-    echo $(date --date="@$1")
-}
-
-function gitDiffBranch {
-    if [ -n "$1" ]; then
-        DIFF_BRANCH="$1"
-    else
-        DIFF_BRANCH="HEAD"
-    fi
-    if [ -n "$2" ]; then
-        BASE_BRANCH="$2"
-    else
-        BASE_BRANCH="master"
-    fi
-
-    echo -n "Commits in $DIFF_BRANCH but not in $BASE_BRANCH" && read
-    git log $BASE_BRANCH..$DIFF_BRANCH
-
-    echo -n "Commits in $BASE_BRANCH but not in $DIFF_BRANCH" && read
-    git log $DIFF_BRANCH..$BASE_BRANCH
-}
-
-function gsetBranch {
-    if [ -z "$1" ]; then
-        echo 'Please specify which branch you want to set as tracking'
-        return 1
-    fi
-    if [[ "$1" =~ (-h|--help) ]]; then
-        echo 'gsetBranch <remoteBranch>'
-        echo ''
-        echo 'Set the branch given as argument as the remote tracking branch'
-        echo 'This will execute:'
-        echo ''
-        echo '    git branch --set-upstream-to=origin/<remoteBranch> currentLocalBranch'
-        return 0
-    fi
-
-    CURRENT_BRANCH=$(git branch | grep \* | cut -d ' ' -f2)
-
-    if [ -z "$CURRENT_BRANCH" ]; then
-        echo 'Could not determine the current branch'
-        return 2
-    fi
-
-    CMD="git branch --set-upstream-to=origin/$1 $CURRENT_BRANCH"
-    $($CMD)
-
-}
-
 # Add git completion to aliases if we are in bash
-# (zsh already have that by default)
+# (zsh already has that by default)
 if [[ $SHELL =~ 'bash' && -f ~/.git-completion.bash ]]; then
     source ~/.git-completion.bash
 
@@ -156,25 +100,6 @@ if [[ $SHELL =~ 'bash' && -f ~/.git-completion.bash ]]; then
     __git_complete gl _git_log
     __git_complete gco _git_checkout
 fi
-
-#clear screen
-alias c='clear'
-
-#fast acces to history
-alias h='hg'
-#grep several words in the history
-function hg {
-    cmd="history"
-
-    # append as many grep as needed
-    for arg in $@
-    do
-        cmd=$cmd" | grep "$arg
-    done
-
-    echo $cmd
-    eval "$cmd"
-}
 
 #mkdir: create parents directories + verbose
 alias mkdir='mkdir -p -v'
@@ -205,12 +130,6 @@ alias ..........='cd ../../../../../../../../../'
 # directories navigation with z + fzf
 # TODO add check for existance of the commands
 alias zf='z $(z | fzf)'
-
-# quickly output iptables rules
-alias ipt='sudo iptables -L'
-
-# make df human readable
-alias df='df -h'
 
 # quickping with human readable timestamp
 function p {
@@ -255,41 +174,6 @@ function ansiblePlaybookDebug {
 ####################################################
 #                   functions                      #
 ####################################################
-#magnifying the cat utility
-#/!\ python-pygments needed: sudo apt-get install python-pygments
-
-function ccat {
-  for file in "$@"
-  do
-    if [ -f $file ];then
-      pygmentize -g $file
-    else
-      echo $file "isn't a file can't display it"
-    fi
-
-  done
-}
-
-# exectute last command with root privileges
-function resudo {
-    # get the last command
-    # the behavior of sed seems not to be the same in bash and zsh
-    # so we adapt with $DELIM
-    if [[ $SHELL == *"zsh"* ]]; then
-        DELIM=2p
-    else
-        DELIM=1p
-    fi
-
-    LAST=$(fc -ln | tail -n 2 | sed -n $DELIM)
-    # put "sudo " behind it
-    CMD="sudo "$LAST
-    # prompt what is going to be executed
-    echo "$CMD"
-    # execution
-    eval $CMD
-}
-
 # Open files or directory in GUI application
 # (xdg-open is better than gnome-open because it is desktop agnostic)
 function o {
@@ -299,24 +183,6 @@ function o {
     else
         xdg-open $@ 
     fi
-}
-
-# prompt files after cd
-function cl {
-  cd $1;
-  ls;
-}
-
-# prompt all files after cd
-function cla {
-  cd $1;
-  la;
-}
-
-# opens graphical explorer after cd
-function co {
-  cd $1;
-  o $1;
 }
 
 # function Extract for common file formats
@@ -410,12 +276,4 @@ loopd() {
         eval $(printf "%q " "$CMD")
         sleep $DELAY;
     done
-}
-
-# List process using swap memory
-# Not working, the original code is here https://www.cyberciti.biz/faq/linux-which-process-is-using-swap/
-function listswapingproc {
-    for file in /proc/*/status ;
-        do awk '/VmSwap|Name/{printf $2 " " $3}END{ print ""}' $file;
-    done | sort -k 2 -n -r
 }
