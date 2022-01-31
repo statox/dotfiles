@@ -143,10 +143,12 @@
         endif
     " }}}
     " neoclide/coc.nvim {{{
-        Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+        Plug 'neoclide/coc.nvim', {'branch': 'release'}
         if !has('nvim')
             let g:coc_disable_startup_warning = 1
         endif
+        let g:coc_disable_transparent_cursor = 1
+        let g:coc_global_extensions = ['coc-marketplace', 'coc-json', 'coc-git', 'coc-css', 'coc-prettier', 'coc-tsserver', 'coc-tslint', 'coc-sql', 'coc-html']
     " }}}
     " FZF : fuzzy finder {{{
         Plug 'junegunn/fzf', { 'dir': '~/.bin/fzf', 'do': './install --all' }
