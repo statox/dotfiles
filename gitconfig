@@ -18,8 +18,6 @@
 # Automatically use SSH instead of HTTPS
 [url "git@gitlab.dashlane.com:"]
     insteadOf = https://gitlab.dashlane.com
-[url "ssh://git@github.com/"]
-    insteadOf = https://github.com/
 
 # Messages coloring
 [color]
