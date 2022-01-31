@@ -114,6 +114,7 @@ alias restnow='sudo shutdown -r now'
 alias v='nvim'
 alias vi='vim'
 alias n='nvim'
+alias vim='nvim'
 
 # directories navigation
 alias back='cd $OLDPWD'
@@ -155,6 +156,8 @@ alias debianversion='lsb_release -a'
 alias noded='node --inspect-brk'
 
 # Sudo
+# https://askubuntu.com/a/22043
+# alias sudo='sudo '
 # Use sode with the current $PATH (useful when using docker)
 alias sudop='sudo env PATH=$PATH'
 
