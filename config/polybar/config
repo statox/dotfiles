@@ -54,14 +54,17 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
+; To get the name of a font to use
+; $ fc-list | grep -i font-name
+; Then take what is after the path
 font-0 = pango:monospace:pixelsize=10;1
-font-1 = OpenSymbol:style=Regular:pixelsize:10;1
-font-2 = Font Awesome 5 Free Regular:style=Regular
-font-3 = Font Awesome 5 Brands Regular:style=Regular
+font-1 = OpenSymbol:style=Regular
+; For some emoji fonts one needs to change the scale instead of the size/pixelsize
+font-2 = Noto Color Emoji:style=Regular:scale=10;0
 
 modules-left = i3 memory temperature cpu clocks
 modules-center = popup-calendar
-modules-right = filesystem pulseaudio battery wlan eth powermenu
+modules-right = filesystem pulseaudio dunst battery wlan eth powermenu
 
 tray-position = right
 tray-padding = 2
@@ -249,7 +252,7 @@ label = %percentage_used%%
 
 [module/wlan]
 type = internal/network
-interface = wlp2s0
+interface = wlp0s20f3
 interval = 3.0
 
 ; format-connected = <ramp-signal> <label-connected>
@@ -276,7 +279,7 @@ interface = tun0
 interval = 3.0
 
 format-connected-underline = #55aa55
-format-connected-prefix = " "
+format-connected-prefix = "🔒 "
 format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected = %local_ip%
 
@@ -441,6 +444,11 @@ menu-2-1-exec = menu-open-0
 [module/clocks]
 type= custom/script
 exec = ~/.config/polybar/scripts/clocks.sh
+
+[module/dunst]
+type = custom/script
+exec = ~/.config/polybar/scripts/dunst/status.sh
+click-left = ~/.config/polybar/scripts/dunst/toggle.sh
 
 [module/popup-calendar]
 type = custom/script
