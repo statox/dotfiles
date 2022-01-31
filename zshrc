@@ -82,6 +82,10 @@
     export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games"
     export MANPATH="/usr/local/man:$MANPATH"
 
+    # local bin
+    export PATH="$HOME/.bin:$PATH"
+    export PATH="$HOME/.local/bin:$PATH"
+
     # yarn
     export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
