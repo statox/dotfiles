@@ -361,6 +361,9 @@
     " <leader>cd to change the local current directory to the current file {{{
         nnoremap <silent> <leader>cd :lcd %:h<CR>:pwd<CR>
     " }}}
+    " Get back the original Y mapping in neovim {{{
+        map Y yy
+    " }}}
 "}}}
 " Mapping for terminal mode {{{
     if has('nvim')
@@ -613,6 +616,7 @@ endif
         cnoreabbrev <expr> ss (getcmdtype() == ':' && getcmdline() =~ '^ss$')? '%s//<Left>' : 'ss'
     " }}}
     " Disambiguate fugitive commands {{{
+        command! Gblame Git blame
         command! Gl Git pull
         command! Gp Git push
         command! Gc Git commit
