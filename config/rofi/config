@@ -26,7 +26,8 @@
 ! Content {{{
     ! Set the modi to combine in combi mode
     ! Added the alacritty part by myself
-    rofi.combi-modi: window,drun,ssh,alacritty:~/.bin/rofi-alacritty
+    !rofi.combi-modi: window,drun,ssh,alacritty:~/.bin/rofi-alacritty
+    !rofi.combi-modi: window,drun,ssh
 
     ! content of ~/.bin/rofi-alacritty:
     ! #!/usr/bin/env sh

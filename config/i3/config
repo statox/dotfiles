@@ -2,7 +2,7 @@
 # Start up {{{
     # exec --no-startup-id i3-msg 'workspace 2; exec brave-browser; exec slack; exec gnome-terminal'
     # exec --no-startup-id i3-msg 'workspace 2; exec firefox; exec slack; exec gnome-terminal'
-    exec --no-startup-id i3-msg 'workspace 3; exec ~/.bin/alacritty; workspace 2; exec firefox; exec slack;'
+    exec --no-startup-id i3-msg 'workspace 3; exec gnome-terminal; workspace 2; exec firefox; workspace 1; exec slack;'
 
     # Make sure the package network-manager is installed for this to work
     exec_always --no-startup-id nm-applet
@@ -10,11 +10,13 @@
     exec_always --no-startup-id $HOME/.config/polybar/launch.sh
     # Night shift
     exec_always --no-startup-id redshift-gtk
+    # Wallpaper
+    exec always --no-startup-id node $HOME/dev/NWotD/index.js &
     # Flameshot
     exec --no-startup-id flameshot
     # Start a terminal which will go to scrathpad
-    # exec --no-startup-id gnome-terminal -name __scratchpad
-    exec --no-startup-id alacritty -name __scratchpad
+    exec --no-startup-id gnome-terminal -name __scratchpad
+    #exec --no-startup-id alacritty -name __scratchpad
 # }}}
 # Appearance {{{
     font pango:monospace 8
@@ -81,7 +83,8 @@
 
     # start a terminal
     # bindsym $mod+Return exec i3-sensible-terminal
-    bindsym $mod+Return exec ~/.bin/alacritty
+    #bindsym $mod+Return exec ~/.bin/alacritty
+    bindsym $mod+Return exec gnome-terminal
 
     # kill focused window
     bindsym $mod+Shift+q kill
