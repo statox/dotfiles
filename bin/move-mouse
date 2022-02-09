@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+while true; do
+xdotool mousemove_relative --sync 0 1
+xdotool mousemove_relative --sync 0 -1 sleep 5
+done
