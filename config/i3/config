@@ -142,6 +142,9 @@
     # change focus between tiling / floating windows
     bindsym $mod+space focus mode_toggle
 
+    # Close dunst messages with $mod+tab (/!\ Tab must have a capital T)
+    bindsym $mod+Tab exec dunstctl close
+
     # focus the parent container
     bindsym $mod+a focus parent
 
