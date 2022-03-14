@@ -9,7 +9,7 @@
     # Polybar
     exec_always --no-startup-id $HOME/.config/polybar/launch.sh
     # Night shift
-    exec_always --no-startup-id redshift-gtk
+    exec i3-msg 'exec redshift-gtk'
     # Wallpaper
     exec always --no-startup-id node $HOME/dev/NWotD/index.js &
     # Flameshot
@@ -32,7 +32,7 @@
     # Hide window title bar for specific applications
     for_window [class="Gnome-terminal"] border pixel 1
     for_window [class="(?i)chromium|firefox|brave" window_role="browser"] border pixel 1
-    for_window [class="(?i)spotify|zoom|slack"] border pixel 1
+    for_window [class="(?i)spotify|zoom|Slack"] border pixel 1
 
     # Make yad calendar floating window
     for_window [class="Yad" title="yad-calendar"] floating enable
