@@ -6,6 +6,7 @@ bash_logout
 bash_profile
 bashrc
 bin/dmenu-i3-window-jumper.sh
+bin/mm
 config/alacritty/alacritty.yml
 config/dunst/dunstrc
 config/htop/htoprc
