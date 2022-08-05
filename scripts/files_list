@@ -19,7 +19,7 @@ config/polybar/config
 config/polybar/launch.sh
 config/polybar/stop.sh
 config/polybar/scripts
-config/rofi/config
+config/rofi/config.rasi
 config/rofi/slate.rasi
 dircolors
 gitconfig
