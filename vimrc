@@ -236,14 +236,6 @@ EOF
     " Delete the current word in insert mode with <C-backspace> {{{
         inoremap  <C-w>
     " }}}
-    " Use s instead of <C-w> to handle windows {{{
-        " nnoremap s <C-w>
-        if has('nvim')
-            let windowHabitsKeys = ["s=", "sv", "ss", "so", "sw", "sh", "sj", "sk", "sl", "s<S-h>", "s<S-j>", "s<S-k>", "s<S-l>", "s<", "s>", "sc"]
-            let windowHabitsMessage = ["USE < C-W > INSTEAD", "BREAK BAD HABITS"]
-            call breakhabits#createmappings(windowHabitsKeys, windowHabitsMessage)
-        endif
-    " }}}
     " Make command line navigation easier {{{
         cnoremap <C-l> <Right>
         cnoremap <C-h> <Left>
