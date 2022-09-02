@@ -548,13 +548,6 @@ endif
         cnoreabbrev <expr> G (getcmdtype() == ':' && getcmdline() =~ '^G$')? 'vertical Git' : 'G'
     " }}}
 " }}}
-" Source a local vimrc {{{
-    let $MYLOCALVIMRC = $HOME . "/" . (has('win32') ? "_" : ".") . "local.vim"
-
-    if filereadable($MYLOCALVIMRC)
-        source $MYLOCALVIMRC
-    endif
-" }}} 
 " Abbreviations for common mispelling {{{
     inoreabbrev syncrho synchro
     inoreabbrev syncrhonize synchronize
