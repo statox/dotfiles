@@ -170,6 +170,26 @@
         " Override the command File to show a preview window using the preview script shipped with fzf
         command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
     " }}}
+    " sunjon/Shade.nvim: Dim inactive windows {{{
+        Plug 'sunjon/Shade.nvim'
+        function SetupShadeSettings()
+lua <<EOF
+require'shade'.setup({
+  overlay_opacity = 50,
+  opacity_step = 1,
+  keys = {
+    brightness_up    = '<C-Up>',
+    brightness_down  = '<C-Down>',
+    toggle           = '<Leader>s',
+  }
+})
+EOF
+        endfunction
+            augroup ShadeConfig
+                autocmd!
+                au VimEnter * call SetupShadeSettings()
+            augroup END
+    " }}}
     " nvim-neo-tree/neo-tree.nvim: Filesystem viewer {{{
         if has('nvim')
             " Dependencies
