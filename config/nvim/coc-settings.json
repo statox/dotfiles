@@ -1,6 +1,7 @@
 {
     "coc.preferences.formatOnSaveFiletypes": [
         "typescript",
+        "typescriptreact",
         "javascript",
         "html",
         "vim",
@@ -63,5 +64,6 @@
     "suggest.triggerAfterInsertEnter": true,
     "tsserver.log": "off",
     "tsserver.trace.server": "off",
-    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+    "svelte.enable-ts-plugin": true
 }
