@@ -4,6 +4,7 @@ vim.api.nvim_command("let &packpath = &runtimepath")
 
 -- Custom settings in lua
 require 'options'
+require 'mappings'
 
 -- Remainder of vimscript vimrc
 vim.api.nvim_command("source ~/.vimrc")

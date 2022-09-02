@@ -68,3 +68,6 @@ opt.updatetime = 300
 -- wildmode = list prevents wildoptions=pum to work
 opt.inccommand = 'split'
 opt.wildoptions = 'pum'
+
+-- remap mapleader to space
+vim.g.mapleader = ' '

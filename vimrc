@@ -7,8 +7,6 @@
     filetype plugin indent on  " Detect the type of a file automatically
                                " and use the ftplugin and indent plugin for this ft
     syntax on                  " Enable syntax highlighting
-
-    let mapleader="\<Space>"    " remap mapleader to space
 "}}}
 " Plugins {{{
     " Manage plugins with vim-plug (https://github.com/junegunn/vim-plug)
@@ -201,74 +199,7 @@ EOF
         runtime macros/matchit.vim
     "}}}
 "}}}
-" Mappings {{{
-    " <C-L> turn off search highlighting until the next search {{{
-        nnoremap <C-L> :nohlsearch<CR><C-L>
-    "}}}
-    " Fast quit {{{
-        nnoremap <Leader><S-Q> :qa!<CR>
-    "}}}
-    " Easier clipboard access {{{
-        if has('clipboard')
-            xnoremap <Leader>y "+y
-
-            xnoremap <Leader>p "+p
-            nnoremap <Leader>p "+p
-
-            xnoremap <Leader><S-p> "+P
-            nnoremap <Leader><S-p> "+P
-        endif
-    "}}}
-    " Quickly escape insert mode with jk {{{
-        inoremap <silent> jk <Esc>:update<CR>
-        nnoremap <silent> <Leader>jk <Esc>:update<cr>
-    "}}}
-    " Quickly insert an empty new line without entering insert mode {{{
-        nnoremap <Leader>o o<Esc>0"_D
-        nnoremap <Leader>O O<Esc>0"_D
-    "}}}
-    " Use T in visual mode to start Tabular function {{{
-        xnoremap T :Tabular / 
-    "}}}
-    " Use gp to select last pasted text {{{
-        nnoremap gp '[v']
-    "}}}
-    " Delete the current word in insert mode with <C-backspace> {{{
-        inoremap  <C-w>
-    " }}}
-    " Make command line navigation easier {{{
-        cnoremap <C-l> <Right>
-        cnoremap <C-h> <Left>
-        cnoremap <C-k> <S-Up>
-        cnoremap <C-j> <S-Down>
-    "}}}
-    " FZF mappings {{{
-        nnoremap <Leader><CR> :Files<CR>
-        " nnoremap <Leader>bb :Buffers<CR>
-        nnoremap <silent> <Leader>bb :Neotree toggle show buffers right<cr>
-        " TODO find how to FZF MRU files
-        " nnoremap <Leader>br :CtrlPMRUFiles<CR>
-        " Start a search with the Ag search with ga
-        nnoremap ga :Ag<Space>
-        xnoremap ga :<C-u>execute 'Ag ' . expand('<cword>')<CR>
-
-        " :GFS: Shortcut for :GFiles? provided by fzf.vim to get unstaged git files
-        " command! GFS GFiles?
-        command! GFS Neotree float git_status
-    " }}}
-    " Diff mode mapping {{{
-        " Use <C-J> and <C-K> for ]c and [c in diff mode
-        nnoremap <expr> <C-J> &diff ? ']c' : '<C-J>'
-        nnoremap <expr> <C-K> &diff ? '[c' : '<C-K>'
-    "}}}
-    " Center next match with <leader>n {{{
-        nnoremap <leader>n nzz
-        nnoremap <leader>N Nzz
-    " }}}
-    " Use ]g and [g to navigate through git hunk thanks to a plugin {{{
-        nmap ]g <plug>(signify-next-hunk)
-        nmap [g <plug>(signify-prev-hunk)
-    " }}}
+" Vimscript mappings to be migrated {{{
     " Search for selected text, forwards or backwards {{{
         xnoremap <silent> # :<C-U>
           \let saveReg=[getreg('"'), getregtype('"')]<CR>
@@ -280,79 +211,7 @@ EOF
           \gvy/<C-R><C-R>=substitute(escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
           \gV:call setreg('"', saveReg[0], saveReg[1])<CR>N
     "}}}
-    " Make * and # dont navigate to the next occurence {{{
-        nnoremap * *N
-        nnoremap # #N
-    "}}}
-    " make h and l skip indentation white spaces {{{
-        nnoremap <silent> h :call motion#SkipOrH()<CR>
-        nnoremap <silent> l :call motion#SkipOrL()<CR>
-    "}}}
-    " Explore with - {{{
-        nnoremap <silent> - :Neotree toggle focus filesystem %:p<cr>
-    " }}}
-    " Disable Q to toggle ex mode {{{
-        nnoremap Q <nop>
-    " }}}
-    " vim-subversive mappings {{{
-        " Use gc as a word to replace a text object with the content of the unmaned register
-        nmap gc  <plug>(SubversiveSubstitute)
-        nmap gcc <plug>(SubversiveSubstituteLine)
-
-        nmap <leader>gc  <plug>(SubversiveSubstituteRange)
-        xmap <leader>gcc <plug>(SubversiveSubstituteRange)
-        nmap <leader>Gc  <plug>(SubversiveSubstituteWordRange)
-    " }}}
-    " Switch j and k with gj and gk respectively to improve wrapped lines navigation {{{
-        nnoremap j gj
-        nnoremap k gk
-        nnoremap gj j
-        nnoremap gk k
-    "}}}
-    " Sexy comment + yank {{{
-        vmap <leader>cY Ygv<leader>cs
-    " }}}
-    " <leader>cd to change the local current directory to the current file {{{
-        nnoremap <silent> <leader>cd :lcd %:h<CR>:pwd<CR>
-    " }}}
-    " Get back the original Y mapping in neovim {{{
-        map Y yy
-    " }}}
-"}}}
-" Mapping for terminal mode {{{
-    if has('nvim')
-        " Switch to normal mode with <Esc>
-        tnoremap <Esc> <C-\><C-n>
-    endif
 " }}}
-" Manage tabs {{{
-    " open/close tab
-    nnoremap <Leader><Leader>t  :tabnew<CR>
-    nnoremap <Leader>tc         :tabclose<CR>
-    " move current tab to left/right
-    nnoremap <Leader><Leader><Left>  :tabmove -1<CR>
-    nnoremap <Leader><Leader><Right> :tabmove +1<CR>
-    " open a new tab with the current file
-    nnoremap <Leader>t% :execute 'tabnew +' . line('.') . ' %'<CR>zz
-
-    " Easily access tabs by index in normal mode with g[number]
-    for tabIndex in range(1,8)
-        execute 'nnoremap g' . tabIndex . ' ' . tabIndex . 'gt'
-    endfor
-    " Access the last tab with g9
-    nnoremap g9 :tablast<CR>
-"}}}
-" Manage buffers {{{
-    " show buffer list and allow to type the buffer name to use with <Leader>bb
-    nnoremap gb :ls<CR>:b<space>
-    " change buffer with <Leader>h and <Leader>l
-    nnoremap <Leader>l :bnext<CR>
-    nnoremap <Leader>h :bNext<CR>
-    " close a buffer with <Leader>bd
-    nnoremap <Leader>bd :bdelete<CR>
-    " open buffer with <Leader><Leader>b
-    nnoremap <Leader><Leader>b :enew<CR>
-"}}}
 " Treesitter configuration {{{
 if has('nvim')
 lua <<EOF
@@ -537,6 +396,10 @@ endif
     " }}}
     " Quick alias for :%s {{{
         cnoreabbrev <expr> ss (getcmdtype() == ':' && getcmdline() =~ '^ss$')? '%s//<Left>' : 'ss'
+    " }}}
+    " :GFS Show git modified files {{{
+    " command! GFS GFiles?
+    command! GFS Neotree float git_status
     " }}}
     " Disambiguate fugitive commands {{{
         command! Gblame Git blame
