@@ -1,6 +1,11 @@
 #~/.zshrc
 # vim:fdm=marker
 
+# Hacky hack
+# `python` is not available but `python3` is.
+# The `python` command is needed by git-prompt plugin
+# TODO find a way to fix that properly
+alias python='python3'
 # tmux plugin configuration {{{
     export ZSH_TMUX_AUTOQUIT='false'
     export ZSH_TMUX_AUTOCONNECT='false'
