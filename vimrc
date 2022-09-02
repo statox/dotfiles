@@ -36,10 +36,6 @@
     " Quickly time out on keycodes, but never time out on mappings
     set notimeout ttimeout ttimeoutlen=200
 
-    " set some mapping to work with an azerty keyboard
-    " set langmap+=à@,ù%,([,)]
-    set langmap+=à@
-
     " automatically reload file when its modified outside vim 
     set autoread
 
@@ -120,9 +116,6 @@
     " svermeulen/vim-subversive: Operator motions to perform quick substitutions {{{
         Plug 'svermeulen/vim-subversive'
     "}}}
-    " machakann/vim-swap: Easily swap delimited items {{{
-        Plug 'machakann/vim-swap'
-    " }}}
     " tpope/vim-fugitive: Git wrapper {{{
         Plug 'tpope/vim-fugitive'
     " }}}
@@ -132,11 +125,6 @@
         " Customize the appearence of the added lines
         highlight SignifySignAdd ctermbg=darkgreen ctermfg=white cterm=NONE
     " }}}
-    " markonm/traces.vim: Range, pattern and substitute preview for Vim  {{{
-        if (!has('nvim'))
-            Plug 'markonm/traces.vim'
-        endif
-    "}}}
     " nvim-treesitter/nvim-treesitter {{{
         if (has('nvim'))
             Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -292,23 +280,13 @@ EOF
     "}}}
     " Easier clipboard access {{{
         if has('clipboard')
-            if has('win32') || has('win64')
-                xnoremap <Leader>y "*y
+            xnoremap <Leader>y "+y
 
-                xnoremap <Leader>p "*p
-                nnoremap <Leader>p "*p
+            xnoremap <Leader>p "+p
+            nnoremap <Leader>p "+p
 
-                xnoremap <Leader><S-p> "*P
-                nnoremap <Leader><S-p> "*P
-            else
-                xnoremap <Leader>y "+y
-
-                xnoremap <Leader>p "+p
-                nnoremap <Leader>p "+p
-
-                xnoremap <Leader><S-p> "+P
-                nnoremap <Leader><S-p> "+P
-            endif
+            xnoremap <Leader><S-p> "+P
+            nnoremap <Leader><S-p> "+P
         endif
     "}}}
     " Quickly escape insert mode with jk {{{
@@ -346,8 +324,6 @@ EOF
         nnoremap <Leader><CR> :Files<CR>
         " nnoremap <Leader>bb :Buffers<CR>
         nnoremap <silent> <Leader>bb :Neotree toggle show buffers right<cr>
-        nnoremap <Leader>/ :Lines<CR>
-        nnoremap <Leader>? :Ag<CR>
         " TODO find how to FZF MRU files
         " nnoremap <Leader>br :CtrlPMRUFiles<CR>
         " Start a search with the Ag search with ga
@@ -391,8 +367,6 @@ EOF
         nnoremap <silent> l :call motion#SkipOrL()<CR>
     "}}}
     " Explore with - {{{
-        nnoremap _ :Explore<CR>
-        " nnoremap - :Neotree<CR>
         nnoremap <silent> - :Neotree toggle focus filesystem %:p<cr>
     " }}}
     " Disable Q to toggle ex mode {{{
@@ -431,34 +405,6 @@ EOF
     if has('nvim')
         " Switch to normal mode with <Esc>
         tnoremap <Esc> <C-\><C-n>
-
-        " Simulate <C-r> in terminal
-        tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
-
-        " Mappings in normal mode only in terminal buffers
-        augroup TerminalNormalModeMappings
-            autocmd!
-            autocmd TermOpen * call SetupTerminalBuffer()
-        augroup END
-
-        function! SetupTerminalBuffer()
-            call CreateTerminalNormalModeMappings()
-
-            setlocal nonumber norelativenumber
-        endfunction
-
-        function! CreateTerminalNormalModeMappings()
-            " Open the filename under the cursor in a new tab
-            nnoremap <buffer> <Leader>t% :execute 'tabnew ' . expand('<cfile>')<CR>
-
-            " Keys to send to the command from normal mode {{{
-            nnoremap <buffer> <C-c> i<C-c>
-            nnoremap <buffer> <CR> i<CR>
-            nnoremap <buffer> <C-l> i<C-l>
-            nnoremap <buffer> <Up> i<Up>
-            nnoremap <buffer> q iq
-            " }}}
-        endfunction
     endif
 " }}}
 " Manage tabs {{{
@@ -470,8 +416,6 @@ EOF
     nnoremap <Leader><Leader><Right> :tabmove +1<CR>
     " open a new tab with the current file
     nnoremap <Leader>t% :execute 'tabnew +' . line('.') . ' %'<CR>zz
-    " open a new tab with the current file directory in netrw
-    nnoremap <Leader>t- :tabnew %'<CR>:Explore<CR>
 
     " Easily access tabs by index in normal mode with g[number]
     for tabIndex in range(1,8)
@@ -657,35 +601,6 @@ endif
     augroup END
 " }}}
 " Custom commands {{{
-    " Easily quote from the doc {{{
-        vnoremap <leader>dy :call QuoteDoc()<CR>
-        function! QuoteDoc() range
-            " Get lines from the buffer
-            let lines=getbufline('%', getpos("'<")[1], getpos("'>")[1])
-
-            " remove the unwanted parts
-            let lines[0] = strpart(lines[0], getpos("'<")[2]-1)
-            let lines[len(lines)-1] = strpart(lines[len(lines)-1], 0, getpos("'>")[2])
-
-            " For each line
-            "   - Replace the leading space by a markdown quotation string
-            "   - Escape the unwanted characters
-            for i in range(0, len(lines) - 1)
-                let lines[i] = substitute(lines[i], '\v\|', '` ', 'g')
-                let lines[i] = substitute(lines[i], '\v\*', '` ', 'g')
-                let lines[i] = substitute(lines[i], '>$', '\r', 'g')
-                let lines[i] = substitute(lines[i], '^<', '\r', 'g')
-                let lines[i] = substitute(lines[i], '^\s*', '> ', 'g')
-            endfor
-
-            " Put the quoted doc in the clipboard register
-            if has('win32')
-                let @* = join(lines, "\n")
-            else
-                let @+ = join(lines, "\n")
-            endif
-        endfunction
-    "}}}
     " :H Open help vertically with H {{{
         command! -complete=help -nargs=1 H call help#VerticalHelp(<f-args>)
     "}}}
