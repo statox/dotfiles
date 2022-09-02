@@ -170,6 +170,44 @@
         " Override the command File to show a preview window using the preview script shipped with fzf
         command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
     " }}}
+    " nvim-neo-tree/neo-tree.nvim: Filesystem viewer {{{
+        if has('nvim')
+            " Dependencies
+            Plug 'nvim-lua/plenary.nvim'
+            Plug 'kyazdani42/nvim-web-devicons'
+            Plug 'MunifTanjim/nui.nvim'
+            let g:neo_tree_remove_legacy_commands = 1
+            Plug 'nvim-neo-tree/neo-tree.nvim'
+
+            function SetupNeoTreeMappings()
+lua <<EOF
+require("neo-tree").setup({
+window = {
+    position = "current",
+    mappings = {
+        ["-"] = "close_window"
+        }
+    },
+filesystem = {
+    window = {
+        mappings = {
+            ["%"] = "add",
+            ["d"] = "add_directory",
+            ["D"] = "delete",
+            }
+        }
+    }
+})
+EOF
+            endfunction
+
+            " This is a trick to execute the mappings once the plugin is loaded
+            augroup NeoTreeConfig
+                autocmd!
+                au VimEnter * call SetupNeoTreeMappings()
+            augroup END
+        endif
+    " }}}
     " statox/GOD.vim: Get online doc links {{{
         Plug 'statox/GOD.vim'
     " }}}
@@ -286,7 +324,8 @@
     "}}}
     " FZF mappings {{{
         nnoremap <Leader><CR> :Files<CR>
-        nnoremap <Leader>bb :Buffers<CR>
+        " nnoremap <Leader>bb :Buffers<CR>
+        nnoremap <silent> <Leader>bb :Neotree toggle show buffers right<cr>
         nnoremap <Leader>/ :Lines<CR>
         nnoremap <Leader>? :Ag<CR>
         " TODO find how to FZF MRU files
@@ -296,7 +335,8 @@
         xnoremap ga :<C-u>execute 'Ag ' . expand('<cword>')<CR>
 
         " :GFS: Shortcut for :GFiles? provided by fzf.vim to get unstaged git files
-        command! GFS GFiles?
+        " command! GFS GFiles?
+        command! GFS Neotree float git_status
     " }}}
     " Diff mode mapping {{{
         " Use <C-J> and <C-K> for ]c and [c in diff mode
@@ -331,7 +371,9 @@
         nnoremap <silent> l :call motion#SkipOrL()<CR>
     "}}}
     " Explore with - {{{
-        nnoremap - :Explore<CR>
+        nnoremap _ :Explore<CR>
+        " nnoremap - :Neotree<CR>
+        nnoremap <silent> - :Neotree toggle focus filesystem %:p<cr>
     " }}}
     " Disable Q to toggle ex mode {{{
         nnoremap Q <nop>
