@@ -311,25 +311,6 @@ endif
               \ }))
     endif
 " }}}
-" Color configuration {{{
-    if has('termguicolors')
-        set termguicolors
-    endif
-    try
-        let g:colorsDefault  = 'everforest'
-        let g:colorsDiff     = 'jellybeans'
-
-        " everforest colorscheme configurations {{{
-        let g:everforest_background = 'hard'
-        let g:everforest_sign_column_background = 'none'
-        let g:everforest_better_performance = 1
-        " }}}
-
-        execute "colorscheme " . g:colorsDefault
-    catch
-        echo "Colorscheme not found"
-    endtry
-"}}}
 " Diff configurations {{{
     " Show file lines, ignore whitespaces in diff
     set diffopt=filler,iwhite
