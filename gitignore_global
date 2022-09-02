@@ -17,7 +17,7 @@
 *.class
 
 # Generated files
-bin/
+# bin/
 gen/
 
 # Gradle files
@@ -247,7 +247,6 @@ develop-eggs/
 dist/
 downloads/
 eggs/
-lib/
 lib64/
 parts/
 sdist/
