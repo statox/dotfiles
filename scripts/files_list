@@ -14,7 +14,8 @@ config/i3/config
 config/i3status/config
 config/kitty/kitty.conf
 config/nvim/coc-settings.json
-config/nvim/init.vim
+config/nvim/init.lua
+config/nvim/lua
 config/polybar/config
 config/polybar/launch.sh
 config/polybar/stop.sh

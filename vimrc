@@ -1,85 +1,15 @@
 " vim:fdm=marker
 
 " General configuration {{{
+    " Reset path to default and add subdirectories to path
+    set path& | let &path .= "**"
+
     filetype plugin indent on  " Detect the type of a file automatically
                                " and use the ftplugin and indent plugin for this ft
     syntax on                  " Enable syntax highlighting
 
     let mapleader="\<Space>"    " remap mapleader to space
-
-    " Allow to change buffer even if the current one is not written
-    set hidden
-
-    " Better command-line completion
-    set wildmenu
-    set wildmode=longest,list,full
-
-    " Do not show partial commands in the last line of the screen
-    set noshowcmd
-
-    " Allow backspacing over autoindent, line breaks and start of insert action
-    set backspace=indent,eol,start
-
-    " Raise dialog instead of failing a command because of unsaved changes
-    set confirm
-
-    " Use visual bell instead of beeping when doing something wrong
-    set visualbell
-
-    " Set the command window height to 2 lines, to avoid many cases of having to
-    " "press <Enter> to continue"
-    set cmdheight=2
-
-    " Display line numbers on the left
-    set number norelativenumber
-
-    " Quickly time out on keycodes, but never time out on mappings
-    set notimeout ttimeout ttimeoutlen=200
-
-    " automatically reload file when its modified outside vim 
-    set autoread
-
-    " Allows vim to record more lines in history
-    set history=5000
-
-    " Swap and backup files are pretty annoying: get rid of them
-    set noswapfile nobackup nowritebackup
-
-    " make autocomplete case sensitive even if 'ignorecase' is on
-    set noinfercase
-    set completeopt=longest,menuone,preview
-
-    " Reset path to default and add subdirectories to path
-    set path& | let &path .= "**"
-
-    " Show unseeing characters
-    set list
-    set listchars=tab:>-,trail:.,eol:¶
-
-    " Use the modelines (potentially a security concern)
-    set modeline
-
-    " Show tab line only if there are at least two tab pages
-    set showtabline=1
-
-    " Set up undo dir
-    if has("persistent_undo")
-        set undodir=~/.undodir/
-        set undofile
-    endif
-
-    " Reduce update time (useful for GitGutter and COC.nvim)
-    set updatetime=300
 "}}}
-" General configuration - nvim specific {{{
-    if (has('nvim'))
-        set inccommand=split
-
-        " wildmode=list prevents wildoptions=pum to work
-        set wildmode-=list
-        set wildoptions=pum
-    endif
-" }}}
 " Plugins {{{
     " Manage plugins with vim-plug (https://github.com/junegunn/vim-plug)
     " to install execute:
