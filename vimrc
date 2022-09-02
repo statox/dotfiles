@@ -547,12 +547,6 @@ endif
         cnoreabbrev <expr> GS (getcmdtype() == ':' && getcmdline() =~ '^GS$')? 'Gs' : 'GS'
         cnoreabbrev <expr> G (getcmdtype() == ':' && getcmdline() =~ '^G$')? 'vertical Git' : 'G'
     " }}}
-    " Peek and gp Open the current file in a floating window {{{
-    if has('nvim')
-    command! P call peek#floating()
-    nnoremap gp :P<CR>
-    endif
-"}}}
 " }}}
 " Source a local vimrc {{{
     let $MYLOCALVIMRC = $HOME . "/" . (has('win32') ? "_" : ".") . "local.vim"
