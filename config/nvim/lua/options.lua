@@ -1,5 +1,8 @@
+ -- vim:fdm=marker
+
 local opt = vim.opt
 
+-- General configuration {{{
 -- Allow to change buffer even if the current one is not written
 opt.hidden = true
 
@@ -24,8 +27,8 @@ opt.visualbell = true
 opt.cmdheight = 2
 
 -- Display line numbers on the left
-opt.number = true
-opt.relativenumber = false
+opt.number          = true
+opt.relativenumber  = false
 
 -- automatically reload file when its modified outside vim
 opt.autoread = true
@@ -34,9 +37,9 @@ opt.autoread = true
 opt.history = 5000
 
 -- Swap and backup files are pretty annoying: get rid of them
-opt.swapfile = false
-opt.backup = false
-opt.writebackup = false
+opt.swapfile     = false
+opt.backup       = false
+opt.writebackup  = false
 
 -- make autocomplete case sensitive even if 'ignorecase' is on
 opt.infercase = true
@@ -58,16 +61,38 @@ opt.showtabline = 1
 
  -- Set up undo dir
 if vim.fn.has("persistent_undo") == 1 then
-    opt.undodir = '~/.undodir/'
-    opt.undofile = true
+    opt.undodir   = '~/.undodir/'
+    opt.undofile  = true
 end
 
  -- Reduce update time (useful for GitGutter and COC.nvim)
 opt.updatetime = 300
 
 -- wildmode = list prevents wildoptions=pum to work
-opt.inccommand = 'split'
-opt.wildoptions = 'pum'
+opt.inccommand   = 'split'
+opt.wildoptions  = 'pum'
 
 -- remap mapleader to space
 vim.g.mapleader = ' '
+-- }}}
+-- Text, tab and indent related configuration {{{
+-- Use spaces instead of tabs
+opt.expandtab  = true
+opt.smarttab   = true
+
+-- Linebreak on 500 characters
+opt.linebreak    = true
+opt.autoindent   = true
+opt.smartindent  = true
+opt.wrap         = false
+opt.textwidth    = 500
+
+-- 1 tab == 4 spaces
+opt.shiftwidth  = 4
+opt.tabstop     = 4
+-- }}}
+-- Set up smarter search behaviour {{{
+opt.incsearch  = true -- Lookahead as search pattern is specified
+opt.ignorecase = true -- Ignore case in all searches
+opt.smartcase  = true -- unless uppercase letters used
+-- }}}

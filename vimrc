@@ -349,27 +349,6 @@ endif
     " Use our custom status line
     call statusline#SetStatusLine()
 "}}}
-" Text, tab and indent related configuration {{{
-    " Use spaces instead of tabs
-    set expandtab
-    set smarttab
-
-    " 1 tab == 4 spaces
-    set shiftwidth=4
-    set tabstop=4
-
-    " Linebreak on 500 characters
-    set linebreak
-    set textwidth=500
-    set autoindent
-    set smartindent
-    set nowrap
-"}}}
-" Set up smarter search behaviour {{{
-    set incsearch   " Lookahead as search pattern is specified
-    set ignorecase  " Ignore case in all searches
-    set smartcase   " unless uppercase letters used
-"}}}
 " Rename TMUX tab vim name of edited file {{{
     augroup tmux
         autocmd!
