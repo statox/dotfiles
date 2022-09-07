@@ -61,7 +61,7 @@ opt.showtabline = 1
 
  -- Set up undo dir
 if vim.fn.has("persistent_undo") == 1 then
-    opt.undodir   = '~/.undodir/'
+    opt.undodir   = vim.fn.expand('~/.undodir/')
     opt.undofile  = true
 end
 
