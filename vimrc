@@ -311,12 +311,6 @@ endif
               \ }))
     endif
 " }}}
-" status line configuration {{{
-    " Always display the status line, even if only one window is displayed
-    set laststatus=2
-    " Use our custom status line
-    call statusline#SetStatusLine()
-"}}}
 " Rename TMUX tab vim name of edited file {{{
     augroup tmux
         autocmd!
