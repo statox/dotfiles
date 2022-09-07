@@ -311,19 +311,6 @@ endif
               \ }))
     endif
 " }}}
-" Diff configurations {{{
-    " Show file lines, ignore whitespaces in diff
-    set diffopt=filler,iwhite
-
-    " Use custom command to create the diff
-    set diffexpr=diff#DiffW()
-
-    " Easier diff commands
-    command! DT execute "colorscheme " . g:colorsDiff | windo diffthis
-    command! DO execute "colorscheme " . g:colorsDefault | windo diffoff
-    command! DG diffget
-    command! DP diffput
-"}}}
 " status line configuration {{{
     " Always display the status line, even if only one window is displayed
     set laststatus=2

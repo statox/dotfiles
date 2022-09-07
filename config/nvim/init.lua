@@ -11,3 +11,4 @@ require 'abbreviations'
 -- Remainder of vimscript vimrc
 vim.api.nvim_command("source ~/.vimrc")
 require 'custom_colorscheme'
+require 'diffsettings'
