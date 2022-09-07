@@ -337,40 +337,6 @@ endif
         autocmd VimLeave * call system('tmux set-window automatic-rename on')
     augroup END
 " }}}
-" Custom commands {{{
-    " :H Open help vertically with H {{{
-        command! -complete=help -nargs=1 H call help#VerticalHelp(<f-args>)
-    "}}}
-    " :W save file with sudo permissions {{{
-        command! W w !sudo tee % > /dev/null
-    "}}}
-    " :E equivalent to :e% {{{
-        command! -nargs=? -complete=file E call utils#ReloadOrEdit(<q-args>)
-    "}}}
-    " :GGUK Shortcut for a plugin command undoing the current git hunk {{{
-        command! GGUH SignifyHunkUndo
-        command! GGDH SignifyHunkDiff
-    " }}}
-    " :CountBytes: Count bytes in the buffer {{{
-        command! CountBytes echo line2byte(line('$') + 1)
-    " }}}
-    " Quick alias for :%s {{{
-        cnoreabbrev <expr> ss (getcmdtype() == ':' && getcmdline() =~ '^ss$')? '%s//<Left>' : 'ss'
-    " }}}
-    " :GFS Show git modified files {{{
-    " command! GFS GFiles?
-    command! GFS Neotree float git_status
-    " }}}
-    " Disambiguate fugitive commands {{{
-        command! Gblame Git blame
-        command! Gl Git pull
-        command! Gp Git push
-        command! Gc Git commit
-        command! Gs Gstatus
-        cnoreabbrev <expr> GS (getcmdtype() == ':' && getcmdline() =~ '^GS$')? 'Gs' : 'GS'
-        cnoreabbrev <expr> G (getcmdtype() == ':' && getcmdline() =~ '^G$')? 'vertical Git' : 'G'
-    " }}}
-" }}}
 " Abbreviations for common mispelling {{{
     inoreabbrev syncrho synchro
     inoreabbrev syncrhonize synchronize
