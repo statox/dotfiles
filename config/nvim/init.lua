@@ -19,7 +19,8 @@ require 'abbreviations'
 require 'statusline'
 require 'autocommands'
 
+require 'plugins'
 -- Remainder of vimscript vimrc
-vim.api.nvim_command("source ~/.vimrc")
+-- vim.api.nvim_command("source ~/.vimrc")
 require 'custom_colorscheme'
 require 'diffsettings'

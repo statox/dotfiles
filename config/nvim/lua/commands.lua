@@ -14,7 +14,7 @@ command('GGUH', 'SignifyHunkUndo', {force=true})
 command('GGDH', 'SignifyHunkDiff', {force=true})
 
  -- :GFS Show git modified files
-command('GFS', 'Neotree float git_status', {force=true})
+command('GFS', 'Neotree toggle show git_status left', {force=true})
 
  -- Disambiguate fugitive commands {{{
 command('Gblame', 'Git blame', {force=true})

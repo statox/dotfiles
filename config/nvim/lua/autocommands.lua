@@ -7,3 +7,12 @@ vim.api.nvim_exec(
         autocmd VimLeave * call system('tmux set-window automatic-rename on')
     augroup END
 ]], false)
+
+-- Highlight text on yank
+vim.api.nvim_exec(
+[[
+    augroup YankHighlight
+        autocmd!
+        autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
+    augroup END
+]], false)
