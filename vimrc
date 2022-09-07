@@ -1,13 +1,5 @@
 " vim:fdm=marker
 
-" General configuration {{{
-    " Reset path to default and add subdirectories to path
-    set path& | let &path .= "**"
-
-    filetype plugin indent on  " Detect the type of a file automatically
-                               " and use the ftplugin and indent plugin for this ft
-    syntax on                  " Enable syntax highlighting
-"}}}
 " Plugins {{{
     " Manage plugins with vim-plug (https://github.com/junegunn/vim-plug)
     " to install execute:
