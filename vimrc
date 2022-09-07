@@ -337,10 +337,3 @@ endif
         autocmd VimLeave * call system('tmux set-window automatic-rename on')
     augroup END
 " }}}
-" Abbreviations for common mispelling {{{
-    inoreabbrev syncrho synchro
-    inoreabbrev syncrhonize synchronize
-    inoreabbrev syncrhonisation synchronisation
-
-    cnoreabbrev <expr> Set (getcmdtype() == ':' && getcmdline() =~ '^Set$')? 'set' : 'Set'
-" }}}

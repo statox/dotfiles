@@ -6,6 +6,7 @@ vim.api.nvim_command("let &packpath = &runtimepath")
 require 'options'
 require 'mappings'
 require 'commands'
+require 'abbreviations'
 
 -- Remainder of vimscript vimrc
 vim.api.nvim_command("source ~/.vimrc")
