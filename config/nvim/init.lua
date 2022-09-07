@@ -8,6 +8,7 @@ require 'mappings'
 require 'commands'
 require 'abbreviations'
 require 'statusline'
+require 'autocommands'
 
 -- Remainder of vimscript vimrc
 vim.api.nvim_command("source ~/.vimrc")
