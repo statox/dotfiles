@@ -46,15 +46,11 @@
         highlight SignifySignAdd ctermbg=darkgreen ctermfg=white cterm=NONE
     " }}}
     " nvim-treesitter/nvim-treesitter {{{
-        if (has('nvim'))
-            Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-        endif
+        Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     " }}}
     " neoclide/coc.nvim {{{
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
-        if !has('nvim')
-            let g:coc_disable_startup_warning = 1
-        endif
+        let g:coc_disable_startup_warning = 1
         let g:coc_disable_transparent_cursor = 1
         let g:coc_global_extensions = ['coc-marketplace', 'coc-json', 'coc-git', 'coc-css', 'coc-prettier', 'coc-tsserver', 'coc-eslint', 'coc-sql', 'coc-html']
     " }}}
@@ -99,15 +95,14 @@ EOF
             augroup END
     " }}}
     " nvim-neo-tree/neo-tree.nvim: Filesystem viewer {{{
-        if has('nvim')
-            " Dependencies
-            Plug 'nvim-lua/plenary.nvim'
-            Plug 'kyazdani42/nvim-web-devicons'
-            Plug 'MunifTanjim/nui.nvim'
-            let g:neo_tree_remove_legacy_commands = 1
-            Plug 'nvim-neo-tree/neo-tree.nvim'
+        " Dependencies
+        Plug 'nvim-lua/plenary.nvim'
+        Plug 'kyazdani42/nvim-web-devicons'
+        Plug 'MunifTanjim/nui.nvim'
+        let g:neo_tree_remove_legacy_commands = 1
+        Plug 'nvim-neo-tree/neo-tree.nvim'
 
-            function SetupNeoTreeMappings()
+        function SetupNeoTreeMappings()
 lua <<EOF
 require("neo-tree").setup({
 window = {
@@ -127,14 +122,13 @@ filesystem = {
     }
 })
 EOF
-            endfunction
+        endfunction
 
-            " This is a trick to execute the mappings once the plugin is loaded
-            augroup NeoTreeConfig
-                autocmd!
-                au VimEnter * call SetupNeoTreeMappings()
-            augroup END
-        endif
+        " This is a trick to execute the mappings once the plugin is loaded
+        augroup NeoTreeConfig
+            autocmd!
+            au VimEnter * call SetupNeoTreeMappings()
+        augroup END
     " }}}
     " statox/GOD.vim: Get online doc links {{{
         Plug 'statox/GOD.vim'
@@ -192,7 +186,6 @@ EOF
     "}}}
 "}}}
 " Treesitter configuration {{{
-if has('nvim')
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
     ensure_installed = { -- one of "all", "maintained" (parsers with maintainers), or a list of languages
@@ -241,7 +234,6 @@ require'nvim-treesitter.configs'.setup {
     }
 }
 EOF
-endif
 " }}}
 " Wilder.nvim configuation {{{
     " Enable the plugin
@@ -281,12 +273,10 @@ endif
           \ ])
     " Change the rendered to show a spinner and the current number of items
     " And use a popupmenu
-    if has('nvim')
-        call wilder#set_option('renderer', wilder#popupmenu_renderer({
-              \ 'highlighter': wilder#basic_highlighter(),
-              \ 'separator': ' · ',
-              \ 'left': [' ', wilder#wildmenu_spinner(), ' '],
-              \ 'right': [' ', wilder#wildmenu_index()],
-              \ }))
-    endif
+    call wilder#set_option('renderer', wilder#popupmenu_renderer({
+          \ 'highlighter': wilder#basic_highlighter(),
+          \ 'separator': ' · ',
+          \ 'left': [' ', wilder#wildmenu_spinner(), ' '],
+          \ 'right': [' ', wilder#wildmenu_index()],
+          \ }))
 " }}}
