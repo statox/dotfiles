@@ -74,7 +74,9 @@ nnoremap('*', '*N')
 nnoremap('#', '#N')
 -- }}}
 -- Ag mappings {{{
-nnoremap('ga', ':Ag<Space>')
+-- nnoremap('ga', ':Ag<Space>')
+nnoremap('ga', '<cmd>Telescope live_grep<cr>')
+nnoremap('vga', '<cmd>Telescope grep_string<cr>')
 vim.keymap.set('x', 'ga',":<C-u>execute 'Ag ' . expand('<cword>')<CR>")
 -- }}}
 -- make h and l skip indentation white spaces {{{
@@ -120,7 +122,7 @@ xnoremap <silent> * :<C-U>
 -- }}}
 
 -- Buffer mappings {{{
-nnoremap('<Leader><CR>', ':Files<CR>')
+nnoremap('<Leader><CR>', '<cmd>Telescope find_files<cr>')
 nnoremap('<Leader>l', ':bnext<CR>')
 nnoremap('<Leader>h', ':bNext<CR>')
 nnoremap('<Leader>bd', ':bdelete<CR>')

@@ -74,32 +74,19 @@ require('packer').startup(function(use)
     }
     vim.g.neo_tree_remove_legacy_commands = 1
 
-    -- FZF : fuzzy finder
-    use { 'junegunn/fzf',  run = 'cd ~/.bin/fzf && ./install --all'}
-    use 'junegunn/fzf.vim'
-vim.api.nvim_exec([[
-        " Change the size of the pop up window used by fzf
-        let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
-
-        " Create a command Agw to match exact word
-        command! -bang -nargs=* Agw call fzf#vim#ag(<q-args>, '--word-regexp', <bang>0)
-
-        " Override the command Ag to have a preview window toggled with ?
-        command! -bang -nargs=* Ag
-          \ call fzf#vim#ag(<q-args>,
-          \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-          \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
-          \                 <bang>0)
-
-        " Override the command File to show a preview window using the preview script shipped with fzf
-        command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-]],false)
+    -- nvim-telescope/telescope.nvim: Fuzzy finder
+    use {
+        'nvim-telescope/telescope.nvim', branch = '0.1.x',
+        requires = {
+            'nvim-lua/plenary.nvim',
+        }
+    }
 
     -- coc.nvim
-        use { 'neoclide/coc.nvim', branch = 'release'}
-        vim.g.coc_disable_startup_warning = 1
-        vim.g.coc_disable_transparent_cursor = 1
-        vim.g.coc_global_extensions = {'coc-marketplace', 'coc-json', 'coc-git', 'coc-css', 'coc-prettier', 'coc-tsserver', 'coc-eslint', 'coc-sql', 'coc-html'}
+    use { 'neoclide/coc.nvim', branch = 'release'}
+    vim.g.coc_disable_startup_warning = 1
+    vim.g.coc_disable_transparent_cursor = 1
+    vim.g.coc_global_extensions = {'coc-marketplace', 'coc-json', 'coc-git', 'coc-css', 'coc-prettier', 'coc-tsserver', 'coc-eslint', 'coc-sql', 'coc-html'}
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
@@ -186,3 +173,33 @@ require("neo-tree").setup({
         }
     }
 })
+
+local actions = require("telescope.actions")
+local action_layout = require("telescope.actions.layout")
+require("telescope").setup{
+    defaults = {
+        mappings = {
+            n = {
+                ["?"] = action_layout.toggle_preview,
+                ["<C-j>"] = {
+                    actions.move_selection_next, type = "action",
+                    opts = { nowait = true, silent = true }
+                },
+                ["<C-k>"] = {
+                    actions.move_selection_previous, type = "action",
+                    opts = { nowait = true, silent = true }
+                },
+            },
+            i = {
+                ["<C-j>"] = {
+                    actions.move_selection_next, type = "action",
+                    opts = { nowait = true, silent = true }
+                },
+                ["<C-k>"] = {
+                    actions.move_selection_previous, type = "action",
+                    opts = { nowait = true, silent = true }
+                },
+            },
+        },
+    }
+}
