@@ -21,11 +21,4 @@ function! common_web_settings#createMappings()
 
         inoremap <buffer> callmodule if (require.main === module) {appelDeTest();}
     " }}}
-    " Linter {{{
-        nnoremap <buffer> <F5> :silent make! % \| silent redraw!<CR>
-        nnoremap <buffer> <Leader>. :LspCodeAction<CR>
-    " }}}
-    " Refactor {{{
-        nnoremap <leader>rn <Plug>(coc-rename)
-    " }}}
 endfunction
