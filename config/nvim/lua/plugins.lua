@@ -52,10 +52,12 @@ require('packer').startup(function(use)
     -- On neovim requires to install pynvim with
     -- python3 -m pip install --user --upgrade pynvim
     -- TODO configure this plugin (For now it shouldn't be enabled)
-    use {
-        'gelguy/wilder.nvim',
-        run = ':UpdateRemotePlugins',
-    }
+    --[[
+       [ use {
+       [     'gelguy/wilder.nvim',
+       [     run = ':UpdateRemotePlugins',
+       [ }
+       ]]
 
     -- modern replacement for matchit
     use 'andymass/vim-matchup'
@@ -80,6 +82,11 @@ require('packer').startup(function(use)
         requires = {
             'nvim-lua/plenary.nvim',
         }
+    }
+
+    use {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        run = 'make'
     }
 
     -- neovim/nvim-lspconfig: Configurations for Nvim LSP
@@ -123,3 +130,4 @@ require 'plugins/shade'
 require 'plugins/neo-tree'
 require 'plugins/telescope'
 require 'plugins/lsp'
+-- require 'plugins/wilder'
