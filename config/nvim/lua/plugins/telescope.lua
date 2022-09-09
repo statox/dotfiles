@@ -1,5 +1,6 @@
 local actions = require("telescope.actions")
 local action_layout = require("telescope.actions.layout")
+
 require("telescope").setup{
     defaults = {
         mappings = {
@@ -25,7 +26,17 @@ require("telescope").setup{
                 },
             },
         },
-    }
+    },
 }
 
 require('telescope').load_extension('fzf')
+
+local M = {}
+
+function M.grep_prompt()
+    require('telescope.builtin').grep_string {
+        search = vim.fn.input('Rg> ')
+    }
+end
+
+return M

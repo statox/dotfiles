@@ -75,8 +75,9 @@ nnoremap('#', '#N')
 -- }}}
 -- Ag mappings {{{
 -- nnoremap('ga', ':Ag<Space>')
-nnoremap('ga', '<cmd>Telescope live_grep<cr>')
+nnoremap('ga', "<cmd>lua require'plugins/telescope'.grep_prompt()<cr>")
 nnoremap('vga', '<cmd>Telescope grep_string<cr>')
+nnoremap('lga', '<cmd>Telescope live_grep<cr>')
 vim.keymap.set('x', 'ga',":<C-u>execute 'Ag ' . expand('<cword>')<CR>")
 -- }}}
 -- make h and l skip indentation white spaces {{{
