@@ -19,10 +19,8 @@ require('packer').startup(function(use)
     -- sainnhe/forest-night: Main colorscheme
     use 'sainnhe/forest-night'
 
-    -- scrooloose/nerdcommenter: Vim plugin for intensely orgasmic commenting
-    use 'scrooloose/nerdcommenter'
-    -- Add whitespace between the comment character and the commented code
-    vim.g.NERDSpaceDelims = 1
+    -- numToStr/Comment.nvim: Smart and powerful comment plugin for
+    use 'numToStr/Comment.nvim'
 
     -- godlygeek/tabular: Vim script for text filtering and alignment{{{
     use 'godlygeek/tabular'
@@ -130,4 +128,5 @@ require 'plugins/shade'
 require 'plugins/neo-tree'
 require 'plugins/telescope'
 require 'plugins/lsp'
+require 'plugins/comment'
 -- require 'plugins/wilder'
