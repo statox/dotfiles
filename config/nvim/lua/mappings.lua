@@ -123,7 +123,7 @@ xnoremap <silent> * :<C-U>
 -- }}}
 
 -- Buffer mappings {{{
-nnoremap('<Leader><CR>', '<cmd>Telescope find_files prompt_prefix=🔍<cr>')
+nnoremap('<Leader><CR>', '<cmd>Telescope find_files<cr>')
 nnoremap('<Leader>l', ':bnext<CR>')
 nnoremap('<Leader>h', ':bNext<CR>')
 nnoremap('<Leader>bd', ':bdelete<CR>')

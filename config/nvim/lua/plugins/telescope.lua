@@ -3,6 +3,7 @@ local action_layout = require("telescope.actions.layout")
 
 require("telescope").setup{
     defaults = {
+        prompt_prefix = "🔍",
         mappings = {
             n = {
                 ["?"] = action_layout.toggle_preview,
@@ -36,6 +37,12 @@ local M = {}
 function M.grep_prompt()
     require('telescope.builtin').grep_string {
         search = vim.fn.input('Rg> ')
+    }
+end
+
+function M.my_find_files()
+    require('telescope.builtin').grep_string {
+        search = vim.fn.input('🔍> ')
     }
 end
 
