@@ -46,6 +46,9 @@ require('packer').startup(function(use)
     -- sunjon/Shade.nvim: Dim inactive windows
     use 'sunjon/Shade.nvim'
 
+    -- lukas-reineke/indent-blankline.nvim: Indent guides
+    use 'lukas-reineke/indent-blankline.nvim'
+
     -- gelguy/wilder.nvim: Improved wild menu
     -- On neovim requires to install pynvim with
     -- python3 -m pip install --user --upgrade pynvim
