@@ -19,6 +19,8 @@ require('packer').startup(function(use)
     -- sainnhe/forest-night: Main colorscheme
     use 'sainnhe/forest-night'
 
+    use "EdenEast/nightfox.nvim"
+
     -- numToStr/Comment.nvim: Smart and powerful comment plugin for
     use 'numToStr/Comment.nvim'
 
