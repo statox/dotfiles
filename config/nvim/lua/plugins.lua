@@ -45,9 +45,6 @@ require('packer').startup(function(use)
     -- statox/vim-compare-lines: Compare lines easily
     use 'statox/vim-compare-lines'
 
-    -- sunjon/Shade.nvim: Dim inactive windows
-    use 'sunjon/Shade.nvim'
-
     -- lukas-reineke/indent-blankline.nvim: Indent guides
     use 'lukas-reineke/indent-blankline.nvim'
 
