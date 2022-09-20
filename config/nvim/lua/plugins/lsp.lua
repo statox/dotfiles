@@ -38,7 +38,7 @@ local on_attach = function(client, bufnr)
         close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
         border = 'rounded',
         source = 'if_many',
-        prefix = function(diagnostic, i, total)
+        prefix = function(_, i, total)
             if (total > 1) then
                 return i .. '/' .. total .. ' '
             end
@@ -49,6 +49,8 @@ local on_attach = function(client, bufnr)
       vim.diagnostic.open_float(nil, opts)
     end
   })
+
+  print('on_attach executed on buffer' .. bufnr)
 end
 
 local lsp_flags = {
@@ -107,21 +109,52 @@ cmp.setup.cmdline(':', {
         })
 })
 
--- Set up lspconfig.
+local serversToInstall = {
+    'ansiblels',
+    'bashls',
+    'cssls',
+    'dockerls',
+    'html',
+    'prosemd_lsp', -- markdown
+    'svelte',
+    'terraformls',
+    'tsserver',
+    'sumneko_lua',
+    'sqlls',
+    'vimls'
+}
+
+-- IMPORTANT TO LOAD BEFORE lspconfig
+require("mason").setup()
+require("mason-lspconfig").setup({
+    automatic_installation = true, -- Look like it still requires to run :Mason to install a new server after it is added to the list
+    ensure_installed = serversToInstall
+})
+
+-- Set up cpm_nvim_lsp as a completion source for lsp servers
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-require('lspconfig')['tsserver'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
-    capabilities = capabilities
-}
+-- Set up the different lsp server installed by mason with lspconfig
+for _, server in ipairs(serversToInstall) do
+    local opts = {
+        on_attach = on_attach,
+        flags = lsp_flags,
+        capabilities = capabilities
+    };
 
-require('lspconfig')['svelte'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
-    capabilities = capabilities
-}
+    if server == 'sumneko_lua' then
+        opts.settings = {
+            Lua = {
+                diagnostics = {
+                    -- Avoid "undefined global" warnings for vim in neovim config
+                    globals = { 'vim' }
+                }
+            }
+        }
+    end
 
+    require('lspconfig')[server].setup(opts)
+end
 
 -- Disable virtual_text since it's redundant with the autocmd showing them in the floating window
 vim.diagnostic.config({

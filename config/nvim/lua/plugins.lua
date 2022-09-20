@@ -90,7 +90,15 @@ require('packer').startup(function(use)
     }
 
     -- neovim/nvim-lspconfig: Configurations for Nvim LSP
-    use 'neovim/nvim-lspconfig'
+    use {
+        'neovim/nvim-lspconfig',
+        requires = {
+            -- manage external editor tooling such as LSP servers, DAP servers, linters, and formatters
+            "williamboman/mason.nvim",
+            -- bridge mason.nvim and nvim-lspconfig
+            "williamboman/mason-lspconfig.nvim"
+        }
+    }
 
     -- coc.nvim
     -- use { 'neoclide/coc.nvim', branch = 'release'}
@@ -126,7 +134,6 @@ end)
 
 -- Plugins configuration
 require 'plugins/nvim-treesitter'
-require 'plugins/shade'
 require 'plugins/neo-tree'
 require 'plugins/telescope'
 require 'plugins/lsp'
