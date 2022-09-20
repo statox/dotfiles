@@ -16,7 +16,7 @@ local on_attach = function(client, bufnr)
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set('n', 'gD', ':execute "tabnew +" . line(".") . " %"<CR>:Telescope lsp_definitions<CR>', bufopts)
   -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'gd',  '<cmd>Telescope lsp_definitions<CR>', bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
@@ -28,6 +28,27 @@ local on_attach = function(client, bufnr)
   -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', 'gr', '<cmd>Telescope lsp_references<CR>', bufopts)
   vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+
+  -- Show line diagnostics automatically in hover window
+  vim.api.nvim_create_autocmd({"CursorHold"}, {
+    buffer = bufnr,
+    callback = function()
+      local opts = {
+        focusable = false,
+        close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+        border = 'rounded',
+        source = 'if_many',
+        prefix = function(diagnostic, i, total)
+            if (total > 1) then
+                return i .. '/' .. total .. ' '
+            end
+            return ' '
+        end,
+        scope = 'line',
+      }
+      vim.diagnostic.open_float(nil, opts)
+    end
+  })
 end
 
 local lsp_flags = {
@@ -94,3 +115,15 @@ require('lspconfig')['tsserver'].setup{
     flags = lsp_flags,
     capabilities = capabilities
 }
+
+require('lspconfig')['svelte'].setup{
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities
+}
+
+
+-- Disable virtual_text since it's redundant with the autocmd showing them in the floating window
+vim.diagnostic.config({
+  virtual_text = false,
+})
