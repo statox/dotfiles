@@ -1,8 +1,7 @@
 # vim:fdm=marker
 # Start up {{{
-    # exec --no-startup-id i3-msg 'workspace 2; exec brave-browser; exec slack; exec gnome-terminal'
-    # exec --no-startup-id i3-msg 'workspace 2; exec firefox; exec slack; exec gnome-terminal'
-    exec --no-startup-id i3-msg 'workspace 3; exec gnome-terminal; workspace 2; exec firefox; workspace 1; exec slack;'
+    exec i3-msg 'workspace 3; exec gnome-terminal; workspace 2; exec firefox; workspace 1; exec slack;'
+    exec --no-startup-id warpd
 
     # Make sure the package network-manager is installed for this to work
     exec_always --no-startup-id nm-applet
