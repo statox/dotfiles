@@ -23,6 +23,7 @@ nnoremap('<C-L>', ':nohlsearch<CR><C-L>')
 -- }}}
 -- Fast quit {{{
 nnoremap('<Leader><S-Q>', ':qa!<CR>')
+nnoremap('<Leader><S-A>', ':bufdo bd<CR>')
 -- }}}
 -- Easier clipboard access {{{
 xnoremap('<Leader>y', '"+y')
@@ -77,7 +78,7 @@ nnoremap('#', '#N')
 -- nnoremap('ga', ':Ag<Space>')
 nnoremap('ga', "<cmd>lua require'plugins/telescope'.grep_prompt()<cr>")
 nnoremap('vga', '<cmd>Telescope grep_string<cr>')
-nnoremap('lga', '<cmd>Telescope live_grep<cr>')
+nnoremap('<leader>ga', '<cmd>Telescope live_grep<cr>')
 vim.keymap.set('x', 'ga',":<C-u>execute 'Ag ' . expand('<cword>')<CR>")
 -- }}}
 -- make h and l skip indentation white spaces {{{
