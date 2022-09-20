@@ -139,6 +139,8 @@ nnoremap('gb', ':ls<CR>:b<space>')
 -- open/close tab
 nnoremap('<Leader><Leader>t', ':tabnew<CR>')
 nnoremap('<Leader>tc', ':tabclose<CR>')
+-- open a new tab with the current file
+nnoremap('<Leader>t%', ":execute 'tabnew +' . line('.') . ' %'<CR>zz")
 -- move current tab to left/right
 nnoremap('<Leader><Leader><Left>', ':tabmove -1<CR>')
 nnoremap('<Leader><Leader><Right>', ':tabmove +1<CR>')
@@ -151,10 +153,3 @@ end
 -- Access the last tab with g9
 nnoremap('g9', ':tablast<CR>')
 --}}}
-
--- break bad habits
-vim.api.nvim_exec([[
-    let windowHabitsKeys = ["<leader>t%"]
-    let windowHabitsMessage = ["USE <C-W>T INSTEAD", "BREAK BAD HABITS"]
-    call breakhabits#createmappings(windowHabitsKeys, windowHabitsMessage)
-]], false)

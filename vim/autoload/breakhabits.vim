@@ -1,3 +1,13 @@
+" break bad habits
+" See https://www.statox.fr/posts/2021/03/breaking_habits_floating_window/
+" To use the file add this to your config
+" vim.api.nvim_exec([[
+"     let windowHabitsKeys = ["<leader>t%"]
+"     let windowHabitsMessage = ["USE <C-W>T INSTEAD", "BREAK BAD HABITS"]
+"     call breakhabits#createmappings(windowHabitsKeys, windowHabitsMessage)
+" ]], false)
+
+
 if !has('nvim')
     finish
 endif
