@@ -1,4 +1,4 @@
- -- Abbreviations for common mispelling
+-- Abbreviations for common mispelling
 
 vim.cmd("inoreabbrev syncrho synchro")
 vim.cmd("inoreabbrev syncrhonize synchronize")

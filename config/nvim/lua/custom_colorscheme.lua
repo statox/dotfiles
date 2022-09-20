@@ -2,8 +2,8 @@ if vim.fn.has('termguicolors') then
     vim.opt.termguicolors = true
 end
 
-vim.g.colorsDefault  = 'nordfox'
-vim.g.colorsDiff     = 'nordfox'
+vim.g.colorsDefault = 'nordfox'
+vim.g.colorsDiff    = 'nordfox'
 
 -- everforest colorscheme configurations
 vim.g.everforest_background = 'hard'

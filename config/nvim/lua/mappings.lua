@@ -1,21 +1,22 @@
 -- vim:fdm=marker
 
 -- Helper functions {{{
-function nnoremap (lhs, rhs)
-    vim.keymap.set('n', lhs, rhs, {noremap = true})
+local function nnoremap(lhs, rhs)
+    vim.keymap.set('n', lhs, rhs, { noremap = true })
 end
 
-function xnoremap (lhs, rhs)
-    vim.keymap.set('x', lhs, rhs, {noremap = true})
+local function xnoremap(lhs, rhs)
+    vim.keymap.set('x', lhs, rhs, { noremap = true })
 end
 
-function cnoremap (lhs, rhs)
-    vim.keymap.set('c', lhs, rhs, {noremap = true})
+local function cnoremap(lhs, rhs)
+    vim.keymap.set('c', lhs, rhs, { noremap = true })
 end
 
-function inoremap (lhs, rhs)
-    vim.keymap.set('x', lhs, rhs, {noremap = true})
+local function inoremap(lhs, rhs)
+    vim.keymap.set('x', lhs, rhs, { noremap = true })
 end
+
 -- }}}
 
 -- <C-L> turn off search highlighting until the next search {{{
@@ -35,32 +36,32 @@ xnoremap('<Leader><S-p>', '"+P')
 nnoremap('<Leader><S-p>', '"+P')
 -- }}}
 -- Quickly escape insert mode with jk {{{
-vim.keymap.set('i', 'jk', '<Esc>:update<CR>', {noremap = true, silent = true})
-vim.keymap.set('n', '<Leader>jk', '<Esc>:update<CR>', {noremap = true, silent = true})
+vim.keymap.set('i', 'jk', '<Esc>:update<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<Leader>jk', '<Esc>:update<CR>', { noremap = true, silent = true })
 -- }}}
 -- Quickly insert an empty new line without entering insert mode {{{
 nnoremap('<Leader>o', 'o<Esc>0"_D')
 nnoremap('<Leader>O', 'O<Esc>0"_D')
 -- }}}
 -- Use T in visual mode to start Tabular function {{{
-vim.keymap.set('x', 'T', ':Tabular / ', {noremap = true})
+vim.keymap.set('x', 'T', ':Tabular / ', { noremap = true })
 -- }}}
- -- Use gp to select last pasted text {{{
-nnoremap('gp' ,"'[v']")
+-- Use gp to select last pasted text {{{
+nnoremap('gp', "'[v']")
 -- }}}
 -- Delete the current word in insert mode with <C-backspace> {{{
 inoremap(' ', '<C-w>')
 -- }}}
- -- Make command line navigation easier {{{
+-- Make command line navigation easier {{{
 cnoremap('<C-l>', '<Right>')
 cnoremap('<C-h>', '<Left>')
 cnoremap('<C-k>', '<S-Up>')
 cnoremap('<C-j>', '<S-Down>')
 -- }}}
- -- Diff mode mapping {{{
- -- Use <C-J> and <C-K> for ]c and [c in diff mode
-vim.keymap.set('n', '<C-J>', "&diff ? ']c' : '<C-J>'", {noremap = true, silent = true, expr = true})
-vim.keymap.set('n', '<C-K>', "&diff ? '[c' : '<C-K>'", {noremap = true, silent = true, expr = true})
+-- Diff mode mapping {{{
+-- Use <C-J> and <C-K> for ]c and [c in diff mode
+vim.keymap.set('n', '<C-J>', "&diff ? ']c' : '<C-J>'", { noremap = true, silent = true, expr = true })
+vim.keymap.set('n', '<C-K>', "&diff ? '[c' : '<C-K>'", { noremap = true, silent = true, expr = true })
 -- }}}
 -- Use ]g and [g to navigate through git hunk thanks to a plugin {{{
 vim.keymap.set('n', ']g', '<plug>(signify-next-hunk)')
@@ -79,11 +80,11 @@ nnoremap('#', '#N')
 nnoremap('ga', "<cmd>lua require'plugins/telescope'.grep_prompt()<cr>")
 nnoremap('vga', '<cmd>Telescope grep_string<cr>')
 nnoremap('<leader>ga', '<cmd>Telescope live_grep<cr>')
-vim.keymap.set('x', 'ga',":<C-u>execute 'Ag ' . expand('<cword>')<CR>")
+vim.keymap.set('x', 'ga', ":<C-u>execute 'Ag ' . expand('<cword>')<CR>")
 -- }}}
 -- make h and l skip indentation white spaces {{{
-vim.keymap.set('n', 'h', ':call motion#SkipOrH()<CR>', {noremap = true, silent = true})
-vim.keymap.set('n', 'l', ':call motion#SkipOrL()<CR>', {noremap = true, silent = true})
+vim.keymap.set('n', 'h', ':call motion#SkipOrH()<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', 'l', ':call motion#SkipOrL()<CR>', { noremap = true, silent = true })
 -- }}}
 -- Explore with - {{{
 nnoremap('-', ':Neotree toggle focus filesystem %:p<cr>')
@@ -109,8 +110,7 @@ nnoremap('Y', 'yy')
 vim.keymap.set('t', '<Esc>', "<C-\\><C-n>")
 -- }}}
 -- Search for selected text, forwards or backwards {{{
-vim.api.nvim_exec(
-[[
+vim.api.nvim_exec([[
 xnoremap <silent> # :<C-U>
   \let saveReg=[getreg('"'), getregtype('"')]<CR>
   \gvy?<C-R><C-R>=substitute(escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
@@ -138,9 +138,9 @@ nnoremap('gb', ':ls<CR>:b<space>')
 -- Manage tabs {{{
 -- open/close tab
 nnoremap('<Leader><Leader>t', ':tabnew<CR>')
-nnoremap('<Leader>tc',        ':tabclose<CR>')
+nnoremap('<Leader>tc', ':tabclose<CR>')
 -- move current tab to left/right
-nnoremap('<Leader><Leader><Left>',  ':tabmove -1<CR>')
+nnoremap('<Leader><Leader><Left>', ':tabmove -1<CR>')
 nnoremap('<Leader><Leader><Right>', ':tabmove +1<CR>')
 -- open a new tab with the current file
 nnoremap('<Leader>t%', ":execute 'tabnew +' . line('.') . ' %'<CR>zz")
@@ -148,7 +148,7 @@ nnoremap('<Leader>t%', ":execute 'tabnew +' . line('.') . ' %'<CR>zz")
 -- Easily access tabs by index in normal mode with g[number]
 for tabIndex = 1, 8 do
     --execute 'nnoremap g' . tabIndex . ' ' . tabIndex . 'gt'
-    nnoremap('g'..tabIndex, tabIndex..'gt')
+    nnoremap('g' .. tabIndex, tabIndex .. 'gt')
 end
 -- Access the last tab with g9
 nnoremap('g9', ':tablast<CR>')

@@ -1,6 +1,5 @@
 -- Rename TMUX tab vim name of edited file {{{
-vim.api.nvim_exec(
-[[
+vim.api.nvim_exec([[
     augroup tmux
         autocmd!
         autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window '" . expand("%:t") . "'")
@@ -9,8 +8,7 @@ vim.api.nvim_exec(
 ]], false)
 
 -- Highlight text on yank
-vim.api.nvim_exec(
-[[
+vim.api.nvim_exec([[
     augroup YankHighlight
         autocmd!
         autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}

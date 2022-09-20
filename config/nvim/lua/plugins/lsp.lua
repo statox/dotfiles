@@ -2,56 +2,56 @@
 
 -- on_attach function used after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    -- Enable completion triggered by <c-x><c-o>
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  vim.keymap.set('n', 'gd',  '<cmd>Telescope lsp_definitions<CR>', bufopts)
-  vim.keymap.set('n', 'gD', ':execute "tabnew +" . line(".") . " %"<CR>:Telescope lsp_definitions<CR>', bufopts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', 'gr', '<cmd>Telescope lsp_references<CR>', bufopts)
-  vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, bufopts)
+    -- Mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local bufopts = { noremap = true, silent = true, buffer = bufnr }
+    vim.keymap.set('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', bufopts)
+    vim.keymap.set('n', 'gD', ':execute "tabnew +" . line(".") . " %"<CR>:Telescope lsp_definitions<CR>', bufopts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+    vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
+    vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, bufopts)
+    vim.keymap.set('n', 'gr', '<cmd>Telescope lsp_references<CR>', bufopts)
+    vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, bufopts)
 
-  vim.keymap.set('n', '[c', vim.diagnostic.goto_prev, bufopts)
-  vim.keymap.set('n', ']c', vim.diagnostic.goto_next, bufopts)
-  vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, bufopts)
+    vim.keymap.set('n', '[c', vim.diagnostic.goto_prev, bufopts)
+    vim.keymap.set('n', ']c', vim.diagnostic.goto_next, bufopts)
+    vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, bufopts)
 
-  -- Show line diagnostics automatically in hover window
-  vim.api.nvim_create_autocmd({"CursorHold"}, {
-    buffer = bufnr,
-    callback = function()
-      local opts = {
-        focusable = false,
-        close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-        border = 'rounded',
-        source = 'if_many',
-        prefix = function(_, i, total)
-            if (total > 1) then
-                return i .. '/' .. total .. ' '
-            end
-            return ' '
-        end,
-        scope = 'line',
-      }
-      vim.diagnostic.open_float(nil, opts)
-    end
-  })
+    -- Show line diagnostics automatically in hover window
+    vim.api.nvim_create_autocmd({ "CursorHold" }, {
+        buffer = bufnr,
+        callback = function()
+            local opts = {
+                focusable = false,
+                close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+                border = 'rounded',
+                source = 'if_many',
+                prefix = function(_, i, total)
+                    if (total > 1) then
+                        return i .. '/' .. total .. ' '
+                    end
+                    return ' '
+                end,
+                scope = 'line',
+            }
+            vim.diagnostic.open_float(nil, opts)
+        end
+    })
 end
 
 local lsp_flags = {
-  -- This is the default in Nvim 0.7+
-  debounce_text_changes = 150,
+    -- This is the default in Nvim 0.7+
+    debounce_text_changes = 150,
 }
 
 -- Set up nvim-cmp.
-local cmp = require'cmp'
+local cmp = require 'cmp'
 
 cmp.setup({
     snippet = {
@@ -77,8 +77,8 @@ cmp.setup({
         { name = 'calc' },
         { name = 'nvim_lsp_signature_help' }
     }, {
-            { name = 'buffer' },
-        })
+        { name = 'buffer' },
+    })
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
@@ -87,8 +87,8 @@ cmp.setup.cmdline('/', {
     sources = cmp.config.sources({
         { name = 'nvim_lsp_document_symbol' }
     }, {
-            { name = 'buffer' }
-        })
+        { name = 'buffer' }
+    })
 })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
@@ -97,8 +97,8 @@ cmp.setup.cmdline(':', {
     sources = cmp.config.sources({
         { name = 'path' }
     }, {
-            { name = 'cmdline' }
-        })
+        { name = 'cmdline' }
+    })
 })
 
 local serversToInstall = {
@@ -150,5 +150,5 @@ end
 
 -- Disable virtual_text since it's redundant with the autocmd showing them in the floating window
 vim.diagnostic.config({
-  virtual_text = false,
+    virtual_text = false,
 })

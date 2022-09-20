@@ -15,4 +15,3 @@ require("neo-tree").setup({
         }
     }
 })
-
