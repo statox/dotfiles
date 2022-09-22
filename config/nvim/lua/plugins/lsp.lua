@@ -9,7 +9,7 @@ local on_attach = function(client, bufnr)
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
     vim.keymap.set('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', bufopts)
-    vim.keymap.set('n', 'gD', ':execute "tabnew +" . line(".") . " %"<CR>:Telescope lsp_definitions<CR>', bufopts)
+    vim.keymap.set('n', 'gD', ":vsplit <CR>: lua vim.lsp.buf.definition() <CR>: wincmd T<CR>", { silent = true, buffer = bufnr })
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
     vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)

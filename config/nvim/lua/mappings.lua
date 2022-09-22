@@ -80,7 +80,7 @@ nnoremap('#', '#N')
 nnoremap('ga', "<cmd>lua require'plugins/telescope'.grep_prompt()<cr>")
 nnoremap('vga', '<cmd>Telescope grep_string<cr>')
 nnoremap('<leader>ga', '<cmd>Telescope live_grep<cr>')
-vim.keymap.set('x', 'ga', ":<C-u>execute 'Ag ' . expand('<cword>')<CR>")
+xnoremap('ga', "y<cmd>lua require'plugins/telescope'.grep_prompt()<cr><C-r>\"<CR>")
 -- }}}
 -- make h and l skip indentation white spaces {{{
 vim.keymap.set('n', 'h', ':call motion#SkipOrH()<CR>', { noremap = true, silent = true })

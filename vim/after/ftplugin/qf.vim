@@ -32,9 +32,9 @@
         nnoremap <buffer><silent> + :10wincmd +<CR>
     " }}}
     if (b:qf_isLoc)
-        nnoremap <buffer> <F1> :lclose<CR>
+        nnoremap <buffer> <leader>d :bd<CR>
     else
-        nnoremap <buffer> <F1> :cclose<CR>
+        nnoremap <buffer> <leader>d :bd<CR>
     endif
 "}}}
 " autocommands {{{
