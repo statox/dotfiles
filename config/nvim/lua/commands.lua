@@ -22,4 +22,5 @@ command('Gl', 'Git pull', { force = true })
 command('Gp', 'Git push', { force = true })
 command('Gc', 'Git commit', { force = true })
 command('Gs', 'Git status', { force = true })
+command('Gco', 'execute input("Checkout current file? [yY] ") ==? "y" ? "Git checkout %" : ""', { force = true })
 -- }}}
