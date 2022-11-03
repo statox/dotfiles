@@ -56,13 +56,11 @@
     keepTemporaries = false
 
 [merge]
-    tool = winmerge
-    stat = true
+    tool = nvimdiff
+    ; stat = true
 
-[mergetool "winmerge"]
-    name = WinMerge
-    trustExitCode = true
-    cmd = winmergeportable.exe -u -e -dl \"Local\" -dr \"Remote\" $LOCAL $REMOTE $MERGED
+[mergetool "nvimdiff"]
+    cmd = nvim -d
 
 [diff]
     tool = winmerge
