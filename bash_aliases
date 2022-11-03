@@ -31,9 +31,10 @@ alias l='ls -CF'
 
 #git
 alias g='git'
-alias gs='git status'
+alias gs='git status -s'
 alias gd='git diff'
 alias gdc='git diff --cached'
+alias gdw='git diff -w'
 alias ga='git add'
 alias gp='git push'
 alias gc='git commit'
@@ -73,6 +74,7 @@ alias agw='ag --word-regex'
 alias ni='node -i'
 # npm
 alias npmr='npm run'
+alias pnpmr='pnpm run'
 
 alias ts='date +"%s"'
 alias ts2date='timestamp2date'
