@@ -15,6 +15,8 @@ require("telescope").setup {
                     actions.move_selection_previous, type = "action",
                     opts = { nowait = true, silent = true }
                 },
+                ["<C-q>"] = actions.send_selected_to_qflist,
+                ["<C-w>"] = actions.send_to_qflist,
             },
             i = {
                 ["<C-j>"] = {
@@ -25,6 +27,17 @@ require("telescope").setup {
                     actions.move_selection_previous, type = "action",
                     opts = { nowait = true, silent = true }
                 },
+                ["<C-q>"] = actions.send_selected_to_qflist,
+                ["<C-w>"] = actions.send_to_qflist,
+            },
+        },
+    },
+    pickers = {
+        live_grep = {
+            mappings = {
+                -- After searching for a word with live_grep use <C-f> to
+                -- fuzzy find the files with a result
+                i = { ["<C-f>"] = actions.to_fuzzy_refine },
             },
         },
     },
