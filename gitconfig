@@ -69,3 +69,5 @@
     name = WinMerge
     trustExitCode = true
     cmd = winmergeportable.exe -u -e $LOCAL $REMOTE
+[init]
+	defaultBranch = main
