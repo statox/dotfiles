@@ -64,7 +64,7 @@ font-2 = Noto Color Emoji:style=Regular:scale=10;0
 
 modules-left = i3 memory temperature cpu clocks
 modules-center = popup-calendar
-modules-right = filesystem pulseaudio dunst battery wlan eth powermenu
+modules-right = filesystem pulseaudio dunst battery wlan warp eth powermenu
 
 tray-position = right
 tray-padding = 2
@@ -288,6 +288,20 @@ format-disconnected =
 ;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/warp]
+type = internal/network
+interface = CloudflareWARP
+interval = 3.0
+
+format-connected-underline = #55aa55
+format-connected-prefix = 🔒
+format-connected-prefix-foreground = ${colors.foreground-alt}
+label-connected = %local_ip%
+
+format-disconnected-underline = #aa5555
+format-disconnected-prefix-foreground = ${colors.foreground-alt}
+label-disconnected = 🔒❌
 
 [module/date]
 type = internal/date
