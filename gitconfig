@@ -1,6 +1,7 @@
 [user]
-    name  = statox
-    email = adrienfabre@protonmail.com
+    signingkey = 851D85DAB3AA98A5
+    name  = Adrien Fabre
+    email = adrien.fabre@dashlane.com
 
 [core]
     excludesfile = ~/.gitignore_global
