@@ -222,4 +222,4 @@ export WORKSPACES='/home/adrien/projects'
 export DOCKER_TOOLS_RUNNER='podman'
 
 export MOCHA_COLORS=true
-source /home/adrien/projects/server-shell-utils/activate
+source $HOME/projects/server-shell-utils/activate
