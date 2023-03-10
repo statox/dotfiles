@@ -11,6 +11,9 @@ require("neo-tree").setup({
                 ["%"] = "add",
                 ["d"] = "add_directory",
                 ["D"] = "delete",
+                ["P"] = { "toggle_preview" },
+                -- Temporary disable v to force myself to use s and S for splits
+                ["v"] = "noop",
             }
         }
     }

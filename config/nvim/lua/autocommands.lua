@@ -14,3 +14,11 @@ vim.api.nvim_exec([[
         autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
     augroup END
 ]], false)
+
+vim.api.nvim_exec([[
+    augroup Neoformat
+        autocmd!
+        autocmd BufWritePre *.js Neoformat
+        autocmd BufWritePre *.ts Neoformat
+    augroup END
+]], false)

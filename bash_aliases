@@ -76,6 +76,10 @@ alias ni='node -i'
 alias npmr='npm run'
 alias pnpmr='pnpm run'
 
+# terraform
+alias tf="terraform"
+
+
 alias ts='date +"%s"'
 alias ts2date='timestamp2date'
 function timestamp2date {

@@ -5,7 +5,7 @@ require('Comment').setup(
         ---Whether the cursor should stay at its position
         sticky = true,
         ---Lines to be ignored while (un)comment
-        ignore = nil,
+        ignore = '^$',
         ---LHS of toggle mappings in NORMAL mode
         toggler = {
             ---Line-comment toggle keymap
@@ -46,3 +46,5 @@ require('Comment').setup(
         post_hook = nil,
     }
 )
+
+vim.keymap.set('n', '<leader>cy', 'Y<leader>c<space>', { noremap = false })

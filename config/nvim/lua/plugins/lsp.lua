@@ -1,6 +1,16 @@
 -- NVIM LSP config
 
+local function organize_imports()
+    local params = {
+        command = "_typescript.organizeImports",
+        arguments = { vim.api.nvim_buf_get_name(0) },
+        title = ""
+    }
+    vim.lsp.buf.execute_command(params)
+end
+
 -- on_attach function used after the language server attaches to the current buffer
+---@diagnostic disable-next-line: unused-local
 local on_attach = function(client, bufnr)
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -9,7 +19,8 @@ local on_attach = function(client, bufnr)
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
     vim.keymap.set('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', bufopts)
-    vim.keymap.set('n', 'gD', ":vsplit <CR>: lua vim.lsp.buf.definition() <CR>: wincmd T<CR>", { silent = true, buffer = bufnr })
+    vim.keymap.set('n', 'gD', ":vsplit <CR>: lua vim.lsp.buf.definition() <CR>: wincmd T<CR>",
+        { silent = true, buffer = bufnr })
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
     vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
@@ -17,11 +28,14 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', '<cmd>Telescope lsp_references<CR>', bufopts)
-    vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, bufopts)
+    -- vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, bufopts)
+    vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, bufopts)
 
     vim.keymap.set('n', '[c', vim.diagnostic.goto_prev, bufopts)
     vim.keymap.set('n', ']c', vim.diagnostic.goto_next, bufopts)
     vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, bufopts)
+
+    require("lsp-format").on_attach(client)
 
     -- Show line diagnostics automatically in hover window
     vim.api.nvim_create_autocmd({ "CursorHold" }, {
@@ -106,8 +120,10 @@ local serversToInstall = {
     'bashls',
     'cssls',
     'dockerls',
+    'eslint',
     'html',
     'prosemd_lsp', -- markdown
+    -- 'prettier',
     'svelte',
     'terraformls',
     'tsserver',
@@ -124,7 +140,8 @@ require("mason-lspconfig").setup({
 })
 
 -- Set up cpm_nvim_lsp as a completion source for lsp servers
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Set up the different lsp server installed by mason with lspconfig
 for _, server in ipairs(serversToInstall) do
@@ -132,7 +149,16 @@ for _, server in ipairs(serversToInstall) do
         on_attach = on_attach,
         flags = lsp_flags,
         capabilities = capabilities
-    };
+    }
+
+    if server == 'tsserver' then
+        opts.commands = {
+            OrganizeImports = {
+                organize_imports,
+                description = "Organize Imports"
+            }
+        }
+    end
 
     if server == 'sumneko_lua' then
         opts.settings = {

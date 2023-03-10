@@ -100,6 +100,12 @@ require('packer').startup(function(use)
         }
     }
 
+    -- For prettier formating
+    use 'sbdchd/neoformat'
+
+    -- lukas-reineke/lsp-format.nvim: Autoformating from lsp
+    use "lukas-reineke/lsp-format.nvim"
+
     -- coc.nvim
     -- use { 'neoclide/coc.nvim', branch = 'release'}
     -- vim.g.coc_disable_startup_warning = 1
