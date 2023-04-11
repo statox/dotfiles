@@ -127,7 +127,7 @@ local serversToInstall = {
     'svelte',
     'terraformls',
     'tsserver',
-    'sumneko_lua',
+    --'sumneko_lua',
     'sqlls',
     'vimls'
 }
@@ -160,16 +160,16 @@ for _, server in ipairs(serversToInstall) do
         }
     end
 
-    if server == 'sumneko_lua' then
-        opts.settings = {
-            Lua = {
-                diagnostics = {
-                    -- Avoid "undefined global" warnings for vim in neovim config
-                    globals = { 'vim' }
-                }
-            }
-        }
-    end
+    --if server == 'sumneko_lua' then
+    --    opts.settings = {
+    --        Lua = {
+    --            diagnostics = {
+    --                -- Avoid "undefined global" warnings for vim in neovim config
+    --                globals = { 'vim' }
+    --            }
+    --        }
+    --    }
+    --end
 
     require('lspconfig')[server].setup(opts)
 end
