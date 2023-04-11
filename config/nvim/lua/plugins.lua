@@ -62,6 +62,15 @@ require('packer').startup(function(use)
     -- modern replacement for matchit
     use 'andymass/vim-matchup'
 
+    -- Markdown preview with :MarkdownPreview
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = function() vim.fn["mkdp#util#install"]() end,
+    })
+
+    -- nunjucks templates syntax plugin
+    use 'Glench/Vim-Jinja2-Syntax'
+
     -- Nvim Treesitter configurations and abstraction layer
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
