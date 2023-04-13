@@ -16,7 +16,7 @@ require("telescope").setup {
                     opts = { nowait = true, silent = true }
                 },
                 ["<C-q>"] = actions.send_selected_to_qflist,
-                ["<C-w>"] = actions.send_to_qflist,
+                ["<C-a>"] = actions.send_to_qflist
             },
             i = {
                 ["<C-j>"] = {
@@ -28,7 +28,7 @@ require("telescope").setup {
                     opts = { nowait = true, silent = true }
                 },
                 ["<C-q>"] = actions.send_selected_to_qflist,
-                ["<C-w>"] = actions.send_to_qflist,
+                ["<C-a>"] = actions.send_to_qflist
             },
         },
     },
