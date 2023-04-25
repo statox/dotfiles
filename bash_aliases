@@ -161,6 +161,10 @@ alias debianversion='lsb_release -a'
 # Start node with debugging
 alias noded='node --inspect-brk'
 
+# Podman
+alias pp='podman ps'
+alias ppa='podman ps -a'
+
 # Sudo
 # https://askubuntu.com/a/22043
 # alias sudo='sudo '
@@ -258,7 +262,7 @@ loop() {
     echo Starting: "$@"
     while true; do
         eval $(printf "%q " "$@")
-        sleep 1;
+        sleep 5;
     done
 }
 
