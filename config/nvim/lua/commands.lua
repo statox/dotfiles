@@ -13,6 +13,9 @@ command('E', 'call utils#ReloadOrEdit(<q-args>)', { nargs = '?', complete = 'fil
 command('GGUH', 'SignifyHunkUndo', { force = true })
 command('GGDH', 'SignifyHunkDiff', { force = true })
 
+-- Show buffer commit history
+command('Gbcommits', 'Telescope git_bcommits', { force = true })
+
 -- :GFS Show git modified files
 command('GFS', 'Neotree toggle show git_status left', { force = true })
 

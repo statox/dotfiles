@@ -22,18 +22,16 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', 'gD', ":vsplit <CR>: lua vim.lsp.buf.definition() <CR>: wincmd T<CR>",
         { silent = true, buffer = bufnr })
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
     vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-    vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', '<cmd>Telescope lsp_references<CR>', bufopts)
-    -- vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, bufopts)
+    vim.keymap.set('n', 'gR', '<cmd>Telescope lsp_incoming_calls<CR>', bufopts)
     vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, bufopts)
 
     vim.keymap.set('n', '[c', vim.diagnostic.goto_prev, bufopts)
     vim.keymap.set('n', ']c', vim.diagnostic.goto_next, bufopts)
-    vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, bufopts)
+    vim.keymap.set('n', '<leader>d', '<cmd>Telescope diagnostics<CR>', bufopts)
 
     require("lsp-format").on_attach(client)
 

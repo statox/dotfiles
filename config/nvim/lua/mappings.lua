@@ -75,12 +75,9 @@ nnoremap('<leader>N', 'Nzz')
 nnoremap('*', '*N')
 nnoremap('#', '#N')
 -- }}}
--- Ag mappings {{{
--- nnoremap('ga', ':Ag<Space>')
-nnoremap('ga', "<cmd>lua require'plugins/telescope'.grep_prompt()<cr>")
-nnoremap('vga', '<cmd>Telescope grep_string<cr>')
-nnoremap('<leader>ga', '<cmd>Telescope live_grep<cr>')
-xnoremap('ga', "y<cmd>lua require'plugins/telescope'.grep_prompt()<cr><C-r>\"<CR>")
+-- Telescope mappings {{{
+nnoremap('ga', "<cmd>lua require('telescope.builtin').live_grep()<cr>")
+xnoremap('ga', "y<cmd>lua require('telescope.builtin').grep_string({word_match = '-w', search = vim.fn.getreg('\"')})<CR>")
 -- }}}
 -- make h and l skip indentation white spaces {{{
 vim.keymap.set('n', 'h', ':call motion#SkipOrH()<CR>', { noremap = true, silent = true })
@@ -122,7 +119,6 @@ xnoremap <silent> * :<C-U>
   \gV:call setreg('"', saveReg[0], saveReg[1])<CR>N
 ]], false)
 -- }}}
-
 -- Buffer mappings {{{
 nnoremap('<Leader><CR>', '<cmd>Telescope find_files<cr>')
 nnoremap('<Leader>l', ':bnext<CR>')
@@ -134,7 +130,6 @@ nnoremap('<Leader>bb', ':Neotree toggle show buffers right<cr>')
 -- show buffer list and allow to type the buffer name to use with <Leader>bb
 nnoremap('gb', ':ls<CR>:b<space>')
 -- }}}
-
 -- Manage tabs {{{
 -- open/close tab
 nnoremap('<Leader><Leader>t', ':tabnew<CR>')
