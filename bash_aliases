@@ -162,8 +162,8 @@ alias debianversion='lsb_release -a'
 alias noded='node --inspect-brk'
 
 # Podman
-alias pp='podman ps'
-alias ppa='podman ps -a'
+alias pps='podman ps'
+alias ppsa='podman ps -a'
 
 # Sudo
 # https://askubuntu.com/a/22043
