@@ -193,8 +193,9 @@ RPROMPT=$RPROMPT"\
 %{$reset_color%}"
 # }}}
 # FZF configuration {{{
-    # FZF can be installed from a `:PlugInstall` in vim
-    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+    # For some reason it works only if I source the files twice
+    [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh  && source /usr/share/doc/fzf/examples/key-bindings.zsh
+    [ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh && source /usr/share/doc/fzf/examples/completion.zsh
     # Set FZF to use ag if it is installed
     command -v ag >/dev/null 2>&1 && export FZF_DEFAULT_COMMAND='ag --nocolor -f --hidden --ignore .git -g ""'
 # }}}
