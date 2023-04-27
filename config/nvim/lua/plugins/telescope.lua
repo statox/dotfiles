@@ -32,8 +32,7 @@ require("telescope").setup {
                     actions.move_selection_previous, type = "action",
                     opts = { nowait = true, silent = true }
                 },
-                ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-                ["<Backspace>"] = actions.drop_all
+                ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist
             },
         },
     },
