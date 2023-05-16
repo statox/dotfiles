@@ -42,6 +42,7 @@ alias gl='git pull --rebase'
 alias glg='git log'
 alias glgs='git log --show-signature'
 alias glgp='git log -p'
+alias glgn='git log --name-only'
 alias gco='git checkout'
 
 alias gcoi='git checkout $(git branch | fzf)'
