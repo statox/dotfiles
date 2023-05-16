@@ -25,6 +25,7 @@ nnoremap('<C-L>', ':nohlsearch<CR><C-L>')
 -- Fast quit {{{
 nnoremap('<Leader><S-Q>', ':qa!<CR>')
 nnoremap('<Leader><S-A>', ':%bdelete<CR>')
+nnoremap('<Leader><S-S>', ':%bdelete<CR><C-o>') -- Go back to previous buffer once all others are closed
 -- }}}
 -- Easier clipboard access {{{
 xnoremap('<Leader>y', '"+y')
