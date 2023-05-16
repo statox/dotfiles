@@ -16,6 +16,9 @@ command('GGDH', 'SignifyHunkDiff', { force = true })
 -- Show buffer commit history
 command('Gbcommits', 'Telescope git_bcommits', { force = true })
 
+-- Show LSP diagnostics with Telescope
+command('Diag', 'Telescope diagnostics', { force = true })
+
 -- :GFS Show git modified files
 command('GFS', 'Neotree toggle show git_status left', { force = true })
 
