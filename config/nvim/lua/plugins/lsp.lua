@@ -25,7 +25,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, bufopts)
-    vim.keymap.set('n', 'gr', '<cmd>Telescope lsp_references<CR>', bufopts)
+    vim.keymap.set('n', 'gr', '<cmd>lua require("telescope.builtin").lsp_references({trim_text = true})<CR>', bufopts)
     vim.keymap.set('n', 'gR', '<cmd>Telescope lsp_incoming_calls<CR>', bufopts)
     vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, bufopts)
 
