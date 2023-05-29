@@ -32,7 +32,7 @@ alias l='ls -CF'
 #git
 alias g='git'
 alias gs='git status -s'
-alias gd='git diff'
+alias gd='improvedGitDiff'
 alias gdc='git diff --cached'
 alias gdw='git diff -w'
 alias ga='git add'
@@ -46,7 +46,20 @@ alias glgn='git log --name-only'
 alias gco='git checkout'
 
 alias gcoi='git checkout $(git branch | fzf)'
-alias gdi='git diff $(git status --porcelain | sed "s/\w //" | fzf)'
+
+improvedGitDiff() {
+    # If any argument is passed behave like git diff
+    if [ "$#" -gt 0 ]; then
+        git diff "$@"
+        return 0
+    fi
+
+    # Open fzf with currently modified files as choices
+    # The preview window shows the diff for the file. Scroll in preview with ctrl+up and ctrl+down
+    preview="git diff $@ --color=always -- {-1}"
+    git diff $@ --name-only | fzf -m --ansi --preview $preview --preview-window top,80%,wrap
+}
+
 # if command -v fzf > /dev/null 2>&1; then
     # alias gcoi='git checkout $(git branch | fzf)'
     # alias gdi='git diff $(git status --porcelain | sed "s/\w //" | fzf)'
