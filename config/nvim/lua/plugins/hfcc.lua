@@ -5,7 +5,7 @@ hfcc.setup({
     -- Api token is found on this page https://huggingface.co/settings/tokens
     -- it should be stored in ~/.huggingface/token with HF_HOME=~/.huggingface exported
     -- but I couldn't make it work so for now I'll try not to commit that by mistake
-    api_token = "",
+    api_token = "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",
     model = "bigcode/starcoder", -- can be a model ID or an http(s) endpoint
     -- parameters that are added to the request body
     query_params = {

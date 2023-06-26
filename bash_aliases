@@ -44,6 +44,8 @@ alias glgs='git log --show-signature'
 alias glgp='git log -p'
 alias glgn='git log --name-only'
 alias gco='git checkout'
+alias glgme='git log --author "$(git config user.name)"'
+alias glgpme='git log -p --author "$(git config user.name)"'
 
 alias gcoi='git checkout $(git branch | fzf)'
 
