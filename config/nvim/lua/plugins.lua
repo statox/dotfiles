@@ -154,6 +154,8 @@ require('packer').startup(function(use)
         }
     }
 
+    use "huggingface/hfcc.nvim"
+
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if packer_bootstrap then
@@ -167,4 +169,5 @@ require 'plugins/neo-tree'
 require 'plugins/telescope'
 require 'plugins/lsp'
 require 'plugins/comment'
+require 'plugins/hfcc'
 -- require 'plugins/wilder'
