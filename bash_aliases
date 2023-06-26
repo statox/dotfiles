@@ -57,7 +57,9 @@ improvedGitDiff() {
     # Open fzf with currently modified files as choices
     # The preview window shows the diff for the file. Scroll in preview with ctrl+up and ctrl+down
     preview="git diff $@ --color=always -- {-1}"
-    git diff "$@" --name-only | fzf -m --ansi --reverse --preview "$preview" --preview-window top,80%,wrap
+    # bind options: Use ctrl-y to yank the current file name in the tmux buffer
+    bind='ctrl-y:execute-silent(tmux set-buffer $(echo -n {-1}))+abort'
+    git diff "$@" --name-only | fzf -m --ansi --reverse --preview "$preview" --bind "$bind" --preview-window top,80%,wrap
 }
 
 # if command -v fzf > /dev/null 2>&1; then
