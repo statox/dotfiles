@@ -135,6 +135,8 @@ require('packer').startup(function(use)
     -- vim.g.coc_disable_transparent_cursor = 1
     -- vim.g.coc_global_extensions = {'coc-marketplace', 'coc-json', 'coc-git', 'coc-css', 'coc-prettier', 'coc-tsserver', 'coc-eslint', 'coc-sql', 'coc-html'}
 
+    use 'vim-test/vim-test'
+
     -- hrsh7th/nvim-cmp: LSP completion
     use {
         'hrsh7th/nvim-cmp',
@@ -154,7 +156,7 @@ require('packer').startup(function(use)
         }
     }
 
-    use "huggingface/hfcc.nvim"
+    -- use "huggingface/hfcc.nvim"
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
@@ -169,5 +171,6 @@ require 'plugins/neo-tree'
 require 'plugins/telescope'
 require 'plugins/lsp'
 require 'plugins/comment'
-require 'plugins/hfcc'
+require 'plugins/vim-test'
+-- require 'plugins/hfcc'
 -- require 'plugins/wilder'
