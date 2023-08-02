@@ -128,7 +128,7 @@ alias python='python3'
     setopt no_complete_aliases
 
     # File generated with npm completion > ~/.npm_completion.sh
-    source ~/.npm_completion.sh
+    [ -f ~/.npm_completion.sh ] && source ~/.npm_completion.sh
 # }}}
 # History {{{
     # append entries in history files instead of deleting the existing file
