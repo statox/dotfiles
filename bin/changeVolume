@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+if [ $# -ne 1 ]; then
+    echo 'Invalid argument number. Valid values: up, down, mute-toggle'
+fi
+
+sinkId=$(pactl list short sinks | cut -d$'\t' -f 1)
+echo "sinkId $sinkId"
+
+case "$1" in
+    up)
+        currentVolume=$(pactl get-sink-volume "$sinkId" | grep -o '[0-9]\+\%' | uniq | tr -d '%')
+        if [[ "$currentVolume" -lt 120 ]]; then
+            pactl set-sink-volume "$sinkId" +5%
+        fi
+        ;;
+    down)
+        # pavu seems to limit volume to 0 so no need to check like for up
+        pactl set-sink-volume "$sinkId" -5%
+        ;;
+    mute-toggle) pactl set-sink-mute "$sinkId" toggle;;
+    *) echo 'Invalid argument. Valid values: up, down, mute-toggle';
+esac

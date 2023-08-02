@@ -5,6 +5,7 @@ bash_aliases
 bash_logout
 bash_profile
 bashrc
+bin/changeVolume
 bin/dmenu-i3-window-jumper.sh
 bin/mm
 config/alacritty/alacritty.yml
