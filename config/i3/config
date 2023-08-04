@@ -193,9 +193,9 @@
     bindsym $mod+Shift+9 move container to workspace 9
 
     # lock the screen with mod + escape
-    # bindsym $mod+Escape exec "i3lock --show-failed-attempts --ignore-empty-password -c 2c2c2e"
     # must install i3lock-fancy package for this to work
-    bindsym $mod+Escape exec "i3lock-fancy -gp -- scrot -z -q 100"
+    bindsym $mod+Escape exec "i3lock-fancy -gp -- scrot -z -q 1"
+    bindsym $mod+Shift+Escape exec "~/.bin/i3-lock-suspend"
 
     # reload the configuration file
     bindsym $mod+Shift+c reload

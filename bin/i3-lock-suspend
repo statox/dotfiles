@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# We need to start i3lock-fancy in background because the command finishes when we unlock the screen
+# So if not start in background suspend will happen only after the screen is unlocked
+# And we need the sleep because i3lock-fance has a delay before it is triggered. Without the sleep suspend
+# is triggered before the screen is lock and there are a few seconds restore before the screen is locked
+
+
+i3lock-fancy -gp -- scrot -z -q 1 &
+sleep 3
+systemctl suspend

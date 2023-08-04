@@ -461,7 +461,7 @@ menu-2-1 = power off
 menu-2-1-exec = sudo poweroff
 
 menu-3-0 = suspend
-menu-3-0-exec = (i3lock-fancy -gp -- scrot -z -q 100 &) && sleep 7 && systemctl suspend
+menu-3-0-exec = ~/.bin/i3-lock-suspend
 menu-3-1 = cancel
 menu-3-1-exec = menu-open-0
 
