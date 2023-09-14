@@ -18,7 +18,16 @@ vim.api.nvim_exec([[
 vim.api.nvim_exec([[
     augroup Neoformat
         autocmd!
-        autocmd BufWritePre *.js Neoformat
-        autocmd BufWritePre *.ts Neoformat
+        " The undojoin command will put changes made by Neoformat into the same
+        " undo-bloc with the latest preceding change. See neoformat-managing-undo-history.
+        autocmd BufWritePre *.js undojoin | Neoformat
+        autocmd BufWritePre *.ts undojoin | Neoformat
+    augroup END
+]], false)
+
+vim.api.nvim_exec([[
+    augroup Term
+        autocmd!
+        autocmd BufNew term* setlocal nonumber
     augroup END
 ]], false)
