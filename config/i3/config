@@ -70,8 +70,8 @@
 # }}}
 # Media keys {{{
     # Sreen brightness controls
-    bindsym XF86MonBrightnessUp exec --no-startup-id sudo brightnessctl set +10%
-    bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightnessctl set 10%-
+    bindsym XF86MonBrightnessUp exec --no-startup-id sudo brightnessctl set +5%
+    bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightnessctl set 5%-
 
     # Pulse Audio controls
     # The sink id used after set-sink-* commands can be found with pactl list sinks
