@@ -58,7 +58,10 @@ improvedGitDiff() {
 
     # Open fzf with currently modified files as choices
     # The preview window shows the diff for the file
-    preview="git diff $@ --color=always -- {-1}"
+    # $(git rev-parse --show-toplevel) returns the root of the git directory
+    # and {-1} is the file path from the root directory
+    # We need that otherwise then calling the function from a subdirectory in the project won't work
+    preview="git diff $@ --color=always -- $(git rev-parse --show-toplevel)/{-1}"
     # bind options: Use
     # ctrl-j/ctrl-k to scroll the preview
     # ctrl-y to yank the current file name in the tmux buffer
