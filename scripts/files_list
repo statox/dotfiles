@@ -13,6 +13,7 @@ bin/open-terminal
 bin/rofi-calc
 config/alacritty/alacritty.yml
 config/dunst/dunstrc
+config/espanso
 config/htop/htoprc
 config/i3/config
 config/i3status/config

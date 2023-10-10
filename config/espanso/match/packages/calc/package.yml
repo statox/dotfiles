@@ -1,0 +1,30 @@
+# Calculator
+# Largely inspired from https://github.com/UyCode/espanso-calc-new
+
+matches:
+  # Insert only the result of the input expression
+  - trigger: ":calc"
+    replace: "{{solved}}"
+    vars:
+      - name: "input"
+        type: "form"
+        params: 
+          layout: |
+            [[val]]
+      - name: "solved"
+        type: "shell"
+        params: 
+          cmd: "bc <<< {{input.val}}"
+  # Insert the input expression and its result
+  - trigger: ":ecalc"
+    replace: "{{input.val}} = {{solved}}"
+    vars:
+      - name: "input"
+        type: "form"
+        params: 
+          layout: |
+            [[val]]
+      - name: "solved"
+        type: "shell"
+        params: 
+          cmd: "bc <<< {{input.val}}"

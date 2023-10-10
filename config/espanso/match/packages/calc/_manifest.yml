@@ -1,0 +1,7 @@
+author: statox
+description: Matches to do basic arithmetic using the shell util bc
+homepage: https://github.com/statox/espanso-calc-bc
+name: calc-bc
+title: Calc bc
+version: 1.0.0
+tags: ["math", "utility", "calculator"]
