@@ -50,6 +50,10 @@
     # Alternatively if the popups are annoying
     # for_window [title="^zoom\s?$"] kill
     # for_window [title="^join\?action=join.*$"] kill
+
+    # Resize gnome-terminal window when set to floating
+    for_window [class="^Gnome-terminal$" floating] resize set width 90 ppt height 90 ppt
+    for_window [class="^Gnome-terminal$" floating] move position 5 ppt 5 ppt
 # }}}
 # Gnome integration {{{
     # Taken from https://github.com/i3-gnome/i3-gnome/wiki/Tips-&-Tricks
