@@ -1,3 +1,4 @@
+vim.g.neo_tree_remove_legacy_commands = 1
 require("neo-tree").setup({
     window = {
         position = "current",
@@ -6,6 +7,7 @@ require("neo-tree").setup({
         }
     },
     filesystem = {
+        -- bind_to_cwd = false, -- true creates a 2-way binding between vim's cwd and neo-tree's root
         window = {
             mappings = {
                 ["%"] = "add",
