@@ -34,9 +34,6 @@ matches:
   - trigger: ":u^"
     replace: "û"
 
-  - trigger: ":ae"
-    replace: "æ"
-
   - trigger: ":c,"
     replace: "ç"
 
@@ -72,18 +69,6 @@ matches:
 
   - trigger: ":U^"
     replace: "Û"
-
-  - trigger: ":U:"
-    replace: "Ü"
-
-  - trigger: ":OE"
-    replace: "Œ"
-
-  - trigger: ":AE"
-    replace: "Æ"
-
-  - trigger: ":Y:"
-    replace: "Ÿ"
 
   - trigger: ":C,"
     replace: "Ç"
