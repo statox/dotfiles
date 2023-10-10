@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# Open a new gnome-terminal initialized with a tmux session
+# in the current pane directory
+#
+# This script is made to be called with a tmux binding e.g.
+#
+#   bind-key Enter run-shell "$HOME/.bin/open-terminal"
+#
+# Tested with
+#  tmux 3.2a
+#  gnome terminal 3.44.0
+#  i3 4.20.1
+
+pane_current_path=$(tmux display-message -p "#{pane_current_path}")
+gnome-terminal -- tmux new -c "$pane_current_path"
