@@ -10,6 +10,7 @@ bin/dmenu-i3-window-jumper.sh
 bin/i3-lock-suspend
 bin/mm
 bin/open-terminal
+bin/rofi-calc
 config/alacritty/alacritty.yml
 config/dunst/dunstrc
 config/htop/htoprc

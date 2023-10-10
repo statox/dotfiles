@@ -220,6 +220,9 @@
         bindsym Return mode "default"
         bindsym Escape mode "default"
     }
+
+    # Calculator menu with rofi
+    bindsym $mod+equal exec "~/.bin/rofi-calc"
 # }}}
 # colors {{{
     # Taken from https://faq.i3wm.org/question/2071/how-can-i-change-look-of-windows.1.html
