@@ -8,7 +8,7 @@ copy_to_clipboard() {
 	if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
 		wl-copy "$1"
 	else
-		xclip -selection clipboard "$1"
+		echo -n "$1" | xclip -selection clipboard
 	fi
 }
 
@@ -80,12 +80,11 @@ while [[ $# -gt 0 && $1 != "--" ]]; do
 done
 [[ $1 == "--" ]] && shift
 
-action=$(echo -e "Copy to clipboard\nClear\nClose" | $menu "$@" -p "= $answer")
+action=$(echo -e "Copy to clipboard\nClear" | $menu "$@" -p "= $answer")
 
 case $action in
     "Clear") $0 "--dmenu=$menu" "--" "$@" ;;
     "Copy to clipboard") copy_to_clipboard "$answer" ;;
-    "Close") ;;
     "") ;;
     *) $0 "$answer $action" "--dmenu=$menu" "--" "$@" ;;
 esac
