@@ -21,11 +21,6 @@ configuration {
 }
 
 @theme "rounded-nord"
-listview {
-    lines: 7;
-    columns: 1;
-}
-
 window {
     width: 50%;
 }
