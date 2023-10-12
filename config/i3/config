@@ -15,7 +15,8 @@
     exec --no-startup-id flameshot
     # Start a terminal which will go to scrathpad
     exec --no-startup-id gnome-terminal -name __scratchpad
-    #exec --no-startup-id alacritty -name __scratchpad
+    # Picom: Compositor for transparency
+    exec --no-startup-id picom -b
 # }}}
 # Appearance {{{
     font pango:monospace 8

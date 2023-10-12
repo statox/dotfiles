@@ -21,6 +21,7 @@ config/kitty/kitty.conf
 config/nvim/coc-settings.json
 config/nvim/init.lua
 config/nvim/lua
+config/picom
 config/polybar/config
 config/polybar/launch.sh
 config/polybar/stop.sh
