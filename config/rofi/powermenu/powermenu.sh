@@ -3,9 +3,8 @@
 # Power Menu using rofi
 # Inspired by https://github.com/adi1090x/rofi
 
-# Current Theme
-dir="/home/afabre/.dotfiles/config/rofi/powermenu"
-theme='style-5'
+BASEDIR=$(dirname "$0")
+theme="$BASEDIR/powermenu.rasi"
 
 # Options (Glyphs from nerd front AurulentSansMono)
 lock=''
@@ -17,7 +16,7 @@ yes=''
 no=''
 
 rofi_cmd() {
-    rofi -dmenu -theme ${dir}/${theme}.rasi
+    rofi -dmenu -theme "$theme"
 }
 
 # Confirmation CMD
@@ -31,7 +30,7 @@ confirm_cmd() {
         -dmenu \
         -p 'Confirmation' \
         -mesg "$message" \
-        -theme ${dir}/${theme}.rasi
+        -theme "$theme"
     }
 
 # Pass variables to rofi dmenu
