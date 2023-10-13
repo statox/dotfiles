@@ -2,8 +2,10 @@ configuration {
     modi: "combi";
     fixed-num-lines: true;
     show-icons: true;
-    combi-modi: "window,drun,ssh";
+    combi-modi: "window,drun";
     window-format: "{c}";
+
+    matching: "fuzzy";
 
     kb-remove-to-eol: "Control+D";
     kb-accept-entry: "Return,KP_Enter";
