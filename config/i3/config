@@ -7,6 +7,8 @@
     exec_always --no-startup-id nm-applet
     # Polybar
     exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+    # Picom: Compositor for transparency
+    exec_always --no-startup-id picom -b
     # Night shift
     exec i3-msg 'exec redshift-gtk'
     # Wallpaper
@@ -15,8 +17,6 @@
     exec --no-startup-id flameshot
     # Start a terminal which will go to scrathpad
     exec --no-startup-id gnome-terminal -name __scratchpad
-    # Picom: Compositor for transparency
-    exec --no-startup-id picom -b
 # }}}
 # Appearance {{{
     font pango:monospace 8
