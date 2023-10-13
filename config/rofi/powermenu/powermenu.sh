@@ -1,21 +1,11 @@
 #!/usr/bin/env bash
 
-## Author : Aditya Shakya (adi1090x)
-## Github : @adi1090x
-#
-## Rofi   : Power Menu
-#
-## Available Styles
-#
-## style-1   style-2   style-3   style-4   style-5
-## style-6   style-7   style-8   style-9   style-10
+# Power Menu using rofi
+# Inspired by https://github.com/adi1090x/rofi
 
 # Current Theme
 dir="/home/afabre/.dotfiles/config/rofi/powermenu"
 theme='style-5'
-
-# CMDs
-uptime=$(uptime -p | sed -e 's/up //g')
 
 # Options (Glyphs from nerd front AurulentSansMono)
 lock=''
@@ -26,16 +16,14 @@ shutdown=''
 yes=''
 no=''
 
-# Rofi CMD
 rofi_cmd() {
 	rofi -dmenu \
-		-p "Uptime: $uptime" \
-		-mesg "Uptime: $uptime" \
 		-theme ${dir}/${theme}.rasi
 }
 
 # Confirmation CMD
 confirm_cmd() {
+    local message="$1"
 	rofi -theme-str 'window {location: center; anchor: center; fullscreen: false; width: 350px;}' \
 		-theme-str 'mainbox {children: [ "message", "listview" ];}' \
 		-theme-str 'listview {columns: 2; lines: 1;}' \
@@ -43,13 +31,8 @@ confirm_cmd() {
 		-theme-str 'textbox {horizontal-align: 0.5;}' \
 		-dmenu \
 		-p 'Confirmation' \
-		-mesg 'Are you Sure?' \
+		-mesg "$message" \
 		-theme ${dir}/${theme}.rasi
-}
-
-# Ask for confirmation
-confirm_exit() {
-	echo -e "$yes\n$no" | confirm_cmd
 }
 
 # Pass variables to rofi dmenu
@@ -59,7 +42,7 @@ run_rofi() {
 
 # Execute Command
 run_cmd() {
-    selected="$(confirm_exit)"
+    selected="$(echo -e "$yes\n$no" | confirm_cmd "$1")"
     if [[ "$selected" != "$yes" ]]; then
         exit 0
     fi
