@@ -70,6 +70,26 @@ improvedGitDiff() {
     git diff "$@" --name-only | fzf -m --ansi --reverse --preview "$preview" --bind "$bind_yank" --bind "$bind_scroll" --preview-window top,90%,wrap
 }
 
+alias man='improvedMan'
+improvedMan() {
+    # If any argument is passed behave like man
+    if [ "$#" -gt 0 ]; then
+        'man' "$@"
+        return 0
+    fi
+
+    # bind options: Use
+    # ctrl-j/ctrl-k to scroll the preview
+    # ctrl-y to yank the current file name in the tmux buffer
+    bind_yank='ctrl-y:execute-silent(tmux set-buffer $(echo -n {-1}))+abort'
+    bind_scroll='ctrl-j:preview-down,ctrl-k:preview-up'
+    preview="MANWIDTH=80 man {1}"
+    man_page=$(man -k . | fzf -m --ansi --reverse --preview "$preview" --bind "$bind_yank" --bind "$bind_scroll" --preview-window right,50%,wrap)
+    man_entry=$(cut -d ' ' -f1 <<< "$man_page")
+
+    man "$man_entry"
+}
+
 # if command -v fzf > /dev/null 2>&1; then
     # alias gcoi='git checkout $(git branch | fzf)'
     # alias gdi='git diff $(git status --porcelain | sed "s/\w //" | fzf)'
