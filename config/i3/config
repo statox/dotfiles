@@ -192,7 +192,7 @@
     # lock the screen with mod + escape
     # must install i3lock-fancy package for this to work
     bindsym $mod+Escape exec "i3lock-fancy -gp -- scrot -z -q 1"
-    bindsym $mod+Shift+Escape exec "~/.bin/i3-lock-suspend"
+    bindsym $mod+Shift+Escape exec "~/.config/rofi/powermenu/powermenu.sh"
 
     # reload the configuration file
     bindsym $mod+Shift+c reload
