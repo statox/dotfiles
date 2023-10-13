@@ -17,27 +17,26 @@ yes=''
 no=''
 
 rofi_cmd() {
-	rofi -dmenu \
-		-theme ${dir}/${theme}.rasi
+    rofi -dmenu -theme ${dir}/${theme}.rasi
 }
 
 # Confirmation CMD
 confirm_cmd() {
     local message="$1"
-	rofi -theme-str 'window {location: center; anchor: center; fullscreen: false; width: 350px;}' \
-		-theme-str 'mainbox {children: [ "message", "listview" ];}' \
-		-theme-str 'listview {columns: 2; lines: 1;}' \
-		-theme-str 'element-text {horizontal-align: 0.5;}' \
-		-theme-str 'textbox {horizontal-align: 0.5;}' \
-		-dmenu \
-		-p 'Confirmation' \
-		-mesg "$message" \
-		-theme ${dir}/${theme}.rasi
-}
+    rofi -theme-str 'window {location: center; anchor: center; fullscreen: false; width: 350px;}' \
+        -theme-str 'mainbox {children: [ "message", "listview" ];}' \
+        -theme-str 'listview {columns: 2; lines: 1;}' \
+        -theme-str 'element-text {horizontal-align: 0.5;}' \
+        -theme-str 'textbox {horizontal-align: 0.5;}' \
+        -dmenu \
+        -p 'Confirmation' \
+        -mesg "$message" \
+        -theme ${dir}/${theme}.rasi
+    }
 
 # Pass variables to rofi dmenu
 run_rofi() {
-	echo -e "$lock\n$suspend\n$logout\n$reboot\n$shutdown" | rofi_cmd
+    echo -e "$lock\n$suspend\n$logout\n$reboot\n$shutdown" | rofi_cmd
 }
 
 # Execute Command
@@ -62,18 +61,18 @@ run_cmd() {
 chosen="$(run_rofi)"
 case ${chosen} in
     "$shutdown")
-		run_cmd --shutdown
+        run_cmd --shutdown
         ;;
     "$reboot")
-		run_cmd --reboot
+        run_cmd --reboot
         ;;
     "$lock")
         i3lock-fancy -gp -- scrot -z -q 1
         ;;
     "$suspend")
-		run_cmd --suspend
+        run_cmd --suspend
         ;;
     "$logout")
-		run_cmd --logout
+        run_cmd --logout
         ;;
 esac
