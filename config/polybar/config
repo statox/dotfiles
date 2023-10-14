@@ -51,6 +51,7 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
+
 ; To get the name of a font to use
 ; $ fc-list | grep -i font-name
 ; Then take what is after the path
@@ -58,10 +59,11 @@ font-0 = pango:monospace:pixelsize=10;1
 font-1 = OpenSymbol:style=Regular
 ; For some emoji fonts one needs to change the scale instead of the size/pixelsize
 font-2 = Noto Color Emoji:style=Regular:scale=10;0
+font-3 = AurulentSansMono Nerd Font:style=Regular:monospace:pixelsize=10;1
 
 modules-left = i3 memory temperature cpu clocks
 modules-center = popup-calendar
-modules-right = filesystem pulseaudio dunst battery wlan warp eth powermenu
+modules-right = filesystem pulseaudio battery wlan warp eth dunst powermenu
 
 tray-position = right
 tray-padding = 2
@@ -425,47 +427,13 @@ ramp-2 = 
 ramp-foreground = ${colors.foreground-alt}
 
 [module/powermenu]
-type = custom/menu
+type = custom/text
+content = 
 
-expand-right = true
+content-background = #000
+content-foreground = #f00
 
-format-spacing = 1
-
-label-open =  POWER
-label-open-foreground = ${colors.secondary}
-label-close = cancel
-label-close-foreground = ${colors.secondary}
-label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
-
-menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
-menu-0-1 = power off
-menu-0-1-exec = menu-open-2
-menu-0-2 = suspend
-menu-0-2-exec = menu-open-3
-menu-0-3 = logout
-menu-0-3-exec = menu-open-4
-
-menu-1-0 = cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
-
-menu-2-0 = cancel
-menu-2-0-exec = menu-open-0
-menu-2-1 = power off
-menu-2-1-exec = sudo poweroff
-
-menu-3-0 = suspend
-menu-3-0-exec = ~/.bin/i3-lock-suspend
-menu-3-1 = cancel
-menu-3-1-exec = menu-open-0
-
-menu-4-0 = logout
-menu-4-0-exec = i3-msg exit
-menu-4-1 = cancel
-menu-4-1-exec = menu-open-0
+click-left = ~/.config/rofi/powermenu/powermenu.sh
 
 [module/clocks]
 type= custom/script
