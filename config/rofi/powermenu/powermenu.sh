@@ -40,7 +40,7 @@ run_rofi() {
 
 # Execute Command
 run_cmd() {
-    selected="$(echo -e "$yes\n$no" | confirm_cmd "$1")"
+    selected="$(echo -e "$no\n$yes" | confirm_cmd "$1")"
     if [[ "$selected" != "$yes" ]]; then
         exit 0
     fi
