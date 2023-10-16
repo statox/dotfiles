@@ -44,9 +44,9 @@ font-0 = pango:monospace:pixelsize=10;1
 font-1 = OpenSymbol:style=Regular
 font-2 = AurulentSansMono Nerd Font:style=Regular:monospace:pixelsize=10;1
 
-modules-left = i3 memory temperature cpu clocks
+modules-left = i3 memory temperature cpu filesystem clocks
 modules-center = popup-calendar
-modules-right = filesystem pulseaudio battery wlan warp eth dunst powermenu
+modules-right = dunst pulseaudio battery wlan warp eth powermenu
 
 tray-position = right
 tray-padding = 2
@@ -68,10 +68,10 @@ interval = 25
 
 mount-0 = /
 
-format-mounted =   <label-mounted>
-label-mounted =  %{F#0a81f5}%mountpoint%%{F-} %free% %percentage_free%%
-label-unmounted = %mountpoint% not mounted
-label-unmounted-foreground = ${colors.alert}
+format-mounted = <label-mounted>
+format-mounted-prefix = "  "
+format-mounted-prefix-foreground = ${colors.primary}
+label-mounted =  %{F#0a81f5}%mountpoint%%{F-} %free% %{F#93969b}(%percentage_free%%)%{F-}
 
 [module/i3]
 type = internal/i3
@@ -110,9 +110,9 @@ label-urgent-padding = 2
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
+format-prefix = "  "
 format-prefix-foreground = ${colors.primary}
-label = %percentage:2%%
+label = %percentage%%
 
 [module/memory]
 type = internal/memory
@@ -122,8 +122,10 @@ format-prefix-foreground = ${colors.primary}
 label = %percentage_used%%
 
 [module/temperature]
+; See for i in /sys/class/thermal/thermal_zone*; do echo "$i: $(<$i/type)"; done for the available thermal zones on the machine
+; On my current machine zone 9 is the one named x86_pkg_temp which is supposed to be the zone of the CPU itself
 type = internal/temperature
-thermal-zone = 0
+thermal-zone = 9
 warn-temperature = 60
 
 format = <ramp> <label>
@@ -192,7 +194,7 @@ type = internal/pulseaudio
 
 format-volume = <label-volume> <bar-volume>
 
-label-volume =   %percentage%%
+label-volume =   %percentage%
 label-volume-foreground = ${root.foreground}
 label-muted =   muted
 label-muted-foreground = ${colors.foreground-alt}
