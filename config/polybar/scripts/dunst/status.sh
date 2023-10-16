@@ -2,9 +2,7 @@
 
 status=$(dunstctl is-paused)
 if [ "$status" == "false" ]; then
-    # U+1F514
-    echo '🔔'
+    echo ''
 else
-    # U+1F515
-    echo '🔕'
+    echo ''
 fi
