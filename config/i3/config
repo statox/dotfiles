@@ -223,6 +223,9 @@
 
     # Calculator menu with rofi
     bindsym $mod+equal exec "~/.bin/rofi-calc"
+
+    # Monitors screen layout with rofi
+    bindsym $mod+m exec "rofi -show m -modi 'm:~/.config/rofi/monitors/monitors.sh'"
 # }}}
 # colors {{{
     # Taken from https://faq.i3wm.org/question/2071/how-can-i-change-look-of-windows.1.html
