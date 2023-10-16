@@ -116,6 +116,8 @@ require('packer').startup(function(use)
         }
     }
 
+    use { 'norcalli/nvim-colorizer.lua', config = function() require('colorizer').setup() end }
+
     -- stevearc/aerial.nvim: code outline window for skimming and quick navigation
     use {
         'stevearc/aerial.nvim',
