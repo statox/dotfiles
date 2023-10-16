@@ -13,4 +13,6 @@
 #  i3 4.20.1
 
 pane_current_path=$(tmux display-message -p "#{pane_current_path}")
-gnome-terminal -- tmux new -c "$pane_current_path"
+
+# Setting the env variable seems to fix an issue where sometimes the terminal doesn't start
+GNOME_TERMINAL_SCREEN="" gnome-terminal -- tmux new -c "$pane_current_path"
