@@ -148,7 +148,7 @@ type = custom/script
 exec = ~/.config/polybar/scripts/calendar.sh
 interval = 5
 click-left = ~/.config/polybar/scripts/calendar.sh --popup
-format-underline = #0a6cf5
+format-underline = ${colors.primary}
 
 [module/wlan]
 type = internal/network
