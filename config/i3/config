@@ -94,6 +94,9 @@
     # Use Mouse+$mod to drag floating windows to their wanted position
     floating_modifier $mod
 
+    # Prevent focus commands to wrap around screen
+    focus_wrapping no
+
     # start a terminal
     bindsym $mod+Return exec gnome-terminal
 
