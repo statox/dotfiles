@@ -1,6 +1,24 @@
 # vim:fdm=marker
 # Start up {{{
-    exec i3-msg 'workspace 3; exec gnome-terminal; workspace 2; exec firefox; workspace 1; exec slack;'
+    exec i3-msg 'workspace 2; exec firefox; layout tabbed;'
+
+    # All the slack windows are automatically created in workspace 1
+    assign [class="Slack"] 1
+    exec --no-startup-id slack
+
+    # All the spotify windows are automatically created in workspace 9
+    assign [class="Spotify"] 9
+    exec --no-startup-id spotify
+
+    # Only the first gnome terminal window is created on workspace 3
+    # the --role parameter is specific to gnome-terminal
+    assign [window_role="FirstGnomeTerminal"] 3
+    exec gnome-terminal --role='FirstGnomeTerminal'
+
+    # Start a terminal which will go to scrathpad
+    for_window [window_role="FirstFloatingGnomeTerminal"] floating enable, move scratchpad
+    exec --no-startup-id gnome-terminal --role='FirstGnomeTerminal,FirstFloatingGnomeTerminal'
+
     exec --no-startup-id warpd
 
     # Make sure the package network-manager is installed for this to work
@@ -12,11 +30,9 @@
     # Night shift
     exec i3-msg 'exec redshift-gtk'
     # Wallpaper
-    exec always --no-startup-id node $HOME/dev/NWotD/index.js &
+    exec_always --no-startup-id ~/dev/NWotD/index.sh >> /var/log/nwotd.log 2>&1
     # Flameshot
     exec --no-startup-id flameshot
-    # Start a terminal which will go to scrathpad
-    exec --no-startup-id gnome-terminal -name __scratchpad
 # }}}
 # Appearance {{{
     font pango:monospace 8
