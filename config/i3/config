@@ -244,23 +244,10 @@
     bindsym $mod+m exec "rofi -show m -modi 'm:~/.config/rofi/monitors/monitors.sh'"
 # }}}
 # colors {{{
-    # Taken from https://faq.i3wm.org/question/2071/how-can-i-change-look-of-windows.1.html
-    # color defines for zenburn styled i3
-    set $bg     #2c2c2e
-    set $fg     #9f9f9f
-    set $fgbar  #2c2c2e
-    set $hi     #efef8f
-    set $ac     #a0afa0
-    set $tx     #040404
-    set $ia     #8f8f8f
-    set $be     #8faf9f
-    set $yw     #ccdc90
-    set $gn     #88b090
-    set $rd     #e89393
-
-    # set some nice colors      border     background  text
-    client.focused              $ac        $ac         $tx
-    client.unfocused            $bg        $bg         $ia
-    client.focused_inactive     $bg        $bg         $ac
-    client.urgent               $rd        $rd         $tx
+    # Default colors from https://i3wm.org/docs/userguide.html#client_colors
+    # class                 border  backgr. text
+    client.focused          #4c7899 #285577 #ffffff
+    client.focused_inactive #333333 #5f676a #ffffff
+    client.unfocused        #333333 #222222 #888888
+    client.urgent           #2f343a #900000 #ffffff
 # }}}
