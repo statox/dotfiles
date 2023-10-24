@@ -15,6 +15,19 @@ shutdown=''
 yes=''
 no=''
 
+declare -A messages=(
+    ["--shutdown"]="Shutdown"
+    ["--reboot"]="Reboot"
+    ["--suspend"]="Suspend"
+    ["--logout"]="Log out"
+)
+declare -A commands=(
+    ["--shutdown"]="sudo poweroff"
+    ["--reboot"]="sudo reboot"
+    ["--suspend"]="$HOME/.bin/i3-lock-suspend"
+    ["--logout"]="i3-msg exit"
+)
+
 rofi_cmd() {
     rofi -dmenu -theme "$theme"
 }
@@ -40,20 +53,12 @@ run_rofi() {
 
 # Execute Command
 run_cmd() {
-    selected="$(echo -e "$no\n$yes" | confirm_cmd "$1")"
+    selected="$(echo -e "$no\n$yes" | confirm_cmd "${messages[$1]}")"
     if [[ "$selected" != "$yes" ]]; then
         exit 0
     fi
 
-    if [[ $1 == '--shutdown' ]]; then
-        sudo poweroff
-    elif [[ $1 == '--reboot' ]]; then
-        sudo reboot
-    elif [[ $1 == '--suspend' ]]; then
-        "$HOME"/.bin/i3-lock-suspend
-    elif [[ $1 == '--logout' ]]; then
-        i3-msg exit
-    fi
+    ${commands[$1]}
 }
 
 # Actions
