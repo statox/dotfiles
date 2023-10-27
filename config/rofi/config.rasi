@@ -12,6 +12,18 @@ configuration {
     kb-row-up: "Control+k,Up,Control+p,ISO_Left_Tab";
     kb-row-down: "Control+j,Down,Control+n";
 
+    // Select entries by index
+    kb-select-1: "Super+1";
+    kb-select-2: "Super+2";
+    kb-select-3: "Super+3";
+    kb-select-4: "Super+4";
+    kb-select-5: "Super+5";
+    kb-select-6: "Super+6";
+    kb-select-7: "Super+7";
+    kb-select-8: "Super+8";
+    kb-select-9: "Super+9";
+    kb-select-10: "Super+0";
+
     timeout {
         action: "kb-cancel";
         delay:  0;
