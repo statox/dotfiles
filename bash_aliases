@@ -67,7 +67,10 @@ improvedGitDiff() {
     # ctrl-y to yank the current file name in the tmux buffer
     bind_yank='ctrl-y:execute-silent(tmux set-buffer $(echo -n {-1}))+abort'
     bind_scroll='ctrl-j:preview-down,ctrl-k:preview-up'
-    git diff "$@" --name-only | fzf -m --ansi --reverse --preview "$preview" --bind "$bind_yank" --bind "$bind_scroll" --preview-window top,90%,wrap
+    local selection=$( git diff "$@" --name-only | fzf -m --ansi --reverse --preview "$preview" --bind "$bind_yank" --bind "$bind_scroll" --preview-window top,90%,wrap )
+    # Put the selected lines in the next prompt line (only work with ZSH)
+    # TODO find a way to move the cursor to the begining of the line (probably with zle)
+    [ -n "$selection" ] && [ -n $ZSH_VERSION ] && print -z -- "${selection[@]//$'\n'/ }"
 }
 
 alias man='improvedMan'
