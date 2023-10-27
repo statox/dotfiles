@@ -126,7 +126,8 @@ label = %percentage_used%%
 ; On my current machine zone 9 is the one named x86_pkg_temp which is supposed to be the zone of the CPU itself
 type = internal/temperature
 thermal-zone = 9
-warn-temperature = 60
+warn-temperature = 70
+base-temperature = 50
 
 format = <ramp> <label>
 format-warn = <ramp> <label-warn>
@@ -136,11 +137,9 @@ label = %temperature-c%
 label-warn = %temperature-c%
 label-warn-foreground = ${colors.alert}
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-3 = 
-ramp-4 = 
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
 ramp-foreground = ${colors.primary}
 
 [module/popup-calendar]
