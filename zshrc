@@ -160,6 +160,9 @@ alias python='python3'
     # Arrows for reverse search
     bindkey '^[[A' up-line-or-search
     bindkey '^[[B' down-line-or-search
+
+    bindkey '^a' beginning-of-line
+    bindkey '^e' end-of-line
 # }}}
 # Sourcing oh my zsh {{{
     source $ZSH/oh-my-zsh.sh
