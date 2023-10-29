@@ -80,7 +80,7 @@ while [[ $# -gt 0 && $1 != "--" ]]; do
 done
 [[ $1 == "--" ]] && shift
 
-action=$(echo -e "Copy to clipboard\nClear" | $menu "$@" -p "= $answer")
+action=$(echo -e "Clear\nCopy to clipboard" | $menu "$@" -p "= $answer")
 
 case $action in
     "Clear") $0 "--dmenu=$menu" "--" "$@" ;;
