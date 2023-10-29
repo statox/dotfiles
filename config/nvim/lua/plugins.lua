@@ -138,12 +138,6 @@ require('packer').startup(function(use)
     -- lukas-reineke/lsp-format.nvim: Autoformating from lsp
     use "lukas-reineke/lsp-format.nvim"
 
-    -- coc.nvim
-    -- use { 'neoclide/coc.nvim', branch = 'release'}
-    -- vim.g.coc_disable_startup_warning = 1
-    -- vim.g.coc_disable_transparent_cursor = 1
-    -- vim.g.coc_global_extensions = {'coc-marketplace', 'coc-json', 'coc-git', 'coc-css', 'coc-prettier', 'coc-tsserver', 'coc-eslint', 'coc-sql', 'coc-html'}
-
     use 'vim-test/vim-test'
 
     -- hrsh7th/nvim-cmp: LSP completion
