@@ -9,7 +9,10 @@
 
 /*****----- Configuration -----*****/
 configuration {
-    show-icons:                 false;
+    show-icons: false;
+    kb-row-up: "k";
+    kb-row-down: "j";
+    kb-accept-entry: "Return,KP_Enter,l";
 }
 
 /*****----- Global Properties -----*****/
