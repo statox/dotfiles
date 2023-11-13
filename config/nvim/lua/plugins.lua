@@ -159,7 +159,6 @@ require('packer').startup(function(use)
         }
     }
 
-    -- use "huggingface/hfcc.nvim"
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
@@ -175,5 +174,4 @@ require 'plugins/telescope'
 require 'plugins/lsp'
 require 'plugins/comment'
 require 'plugins/vim-test'
--- require 'plugins/hfcc'
 -- require 'plugins/wilder'
