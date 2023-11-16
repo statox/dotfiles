@@ -164,7 +164,7 @@
     bindsym $mod+Shift+space floating toggle
 
     # change focus between tiling / floating windows
-    bindsym $mod+space focus mode_toggle
+    bindsym $mod+Shift+f focus mode_toggle
 
     # Close dunst messages with $mod+tab (/!\ Tab must have a capital T)
     bindsym $mod+Tab exec dunstctl close
@@ -242,6 +242,17 @@
 
     # Monitors screen layout with rofi
     bindsym $mod+m exec "rofi -show m -modi 'm:~/.config/rofi/monitors/monitors.sh'"
+
+    # Mode to quickly launch specific apps
+    bindsym $mod+space mode "quicklaunch"
+    mode "quicklaunch"{
+        bindsym c exec chromium; mode "default"
+        bindsym f exec firefox; mode "default"
+        bindsym s exec slack; mode "default"
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+    }
 # }}}
 # colors {{{
     # Default colors from https://i3wm.org/docs/userguide.html#client_colors
