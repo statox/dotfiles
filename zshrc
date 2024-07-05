@@ -9,6 +9,9 @@ alias python='python3'
 # tmux plugin configuration {{{
     export ZSH_TMUX_AUTOQUIT='false'
     export ZSH_TMUX_AUTOCONNECT='false'
+    # Tmux plugin need it to start Tmux at connexion
+    export ZSH_TMUX_AUTOSTART=true
+
     # If in tmux and fzf is installed, CTRL-R, CTRL-T and ALT-C open in a tmux pane
     export FZF_TMUX=1
 # }}}
@@ -50,24 +53,6 @@ alias python='python3'
     # Use Vi-like keybinding
     set -o vi
 
-    # # Remove mode switching delay.
-    # KEYTIMEOUT=5
-
-    # # Change cursor shape for different vi modes.
-    # function zle-keymap-select {
-      # if [[ ${KEYMAP} == vicmd ]] ||
-         # [[ $1 = 'block' ]]; then
-        # echo -ne '\e[1 q'
-
-      # elif [[ ${KEYMAP} == main ]] ||
-           # [[ ${KEYMAP} == viins ]] ||
-           # [[ ${KEYMAP} = '' ]] ||
-           # [[ $1 = 'beam' ]]; then
-        # echo -ne '\e[5 q'
-      # fi
-    # }
-    # zle -N zle-keymap-select
-
     # Use beam shape cursor on startup.
     echo -ne '\e[5 q'
 
@@ -96,9 +81,6 @@ alias python='python3'
 
     # snaps
     export PATH="$PATH:/snap/bin/"
-
-    # Tmux plugin need it to start Tmux at connexion
-    export ZSH_TMUX_AUTOSTART=true
 
     # Path to oh-my-zsh installation.
     export ZSH=~/.oh-my-zsh
