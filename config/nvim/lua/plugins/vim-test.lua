@@ -1,11 +1,11 @@
-vim.api.nvim_exec([[
+vim.api.nvim_exec2([[
     " I should turn that to lua but I need to figure out the substitution with regex
     function! MochaTransform(cmd) abort
       let cmd = substitute(a:cmd, "node_modules/.bin/mocha", "debug=true pnpm run test --", "")
       let cmd2 = substitute(cmd, "-r ts-node/register [^ ]*", "", "")
       return cmd2
     endfunction
-]], false)
+]], {})
 
 local MochaTransformLua = vim.fn['MochaTransform']
 

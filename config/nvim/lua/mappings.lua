@@ -108,7 +108,7 @@ nnoremap('Y', 'yy')
 vim.keymap.set('t', '<Esc>', "<C-\\><C-n>")
 -- }}}
 -- Search for selected text, forwards or backwards {{{
-vim.api.nvim_exec([[
+vim.api.nvim_exec2([[
 xnoremap <silent> # :<C-U>
   \let saveReg=[getreg('"'), getregtype('"')]<CR>
   \gvy?<C-R><C-R>=substitute(escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
@@ -118,7 +118,7 @@ xnoremap <silent> * :<C-U>
   \let saveReg=[getreg('"'), getregtype('"')]<CR>
   \gvy/<C-R><C-R>=substitute(escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
   \gV:call setreg('"', saveReg[0], saveReg[1])<CR>N
-]], false)
+]], {})
 -- }}}
 -- Buffer mappings {{{
 nnoremap('<Leader><CR>', '<cmd>Telescope find_files<cr>')
