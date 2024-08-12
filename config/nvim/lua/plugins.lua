@@ -55,17 +55,6 @@ require('packer').startup(function(use)
     -- lukas-reineke/indent-blankline.nvim: Indent guides
     use 'lukas-reineke/indent-blankline.nvim'
 
-    -- gelguy/wilder.nvim: Improved wild menu
-    -- On neovim requires to install pynvim with
-    -- python3 -m pip install --user --upgrade pynvim
-    -- TODO configure this plugin (For now it shouldn't be enabled)
-    --[[
-       [ use {
-       [     'gelguy/wilder.nvim',
-       [     run = ':UpdateRemotePlugins',
-       [ }
-       ]]
-
     -- modern replacement for matchit
     use 'andymass/vim-matchup'
 
@@ -136,6 +125,7 @@ require('packer').startup(function(use)
     use 'sbdchd/neoformat'
     vim.g.neoformat_try_node_exe = 1
 
+    -- Run test suites from buffer in terminal buffer
     use 'vim-test/vim-test'
 
     -- hrsh7th/nvim-cmp: LSP completion
@@ -173,4 +163,3 @@ require 'plugins/lsp'
 require 'plugins/cmp'
 require 'plugins/comment'
 require 'plugins/vim-test'
--- require 'plugins/wilder'
