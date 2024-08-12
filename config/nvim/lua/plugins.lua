@@ -14,11 +14,8 @@ local packer_bootstrap = ensure_packer()
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
-    -- nanotech/jellybeans.vim: Cool colorscheme (keeping it for the diff mode)
-    use 'nanotech/jellybeans.vim'
-    -- sainnhe/forest-night: Main colorscheme
-    use 'sainnhe/forest-night'
-
+    -- colorscheme: the plugin provides both my regular colorscheme and the
+    -- one I use for diff mode
     use {
         "EdenEast/nightfox.nvim",
         config = require('nightfox').setup({
