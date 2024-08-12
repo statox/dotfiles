@@ -143,7 +143,8 @@ require('packer').startup(function(use)
             'hrsh7th/cmp-vsnip',
             'hrsh7th/cmp-calc',
             'hrsh7th/cmp-nvim-lsp-document-symbol',
-            'hrsh7th/cmp-nvim-lsp-signature-help'
+            'hrsh7th/cmp-nvim-lsp-signature-help',
+            'hrsh7th/cmp-nvim-lua'
         }
     }
 
