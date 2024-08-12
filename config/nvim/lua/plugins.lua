@@ -28,14 +28,14 @@ require('packer').startup(function(use)
     -- numToStr/Comment.nvim: Smart and powerful comment plugin for
     use 'numToStr/Comment.nvim'
 
-    -- godlygeek/tabular: Vim script for text filtering and alignment{{{
-    use 'godlygeek/tabular'
-
     -- tpope/vim-surround: Surround text with matching caracters{{{
     use 'tpope/vim-surround'
 
     -- svermeulen/vim-subversive: Operator motions to perform quick substitutions
     use 'svermeulen/vim-subversive'
+
+    -- godlygeek/tabular: Vim script for text filtering and alignment{{{
+    use 'godlygeek/tabular'
 
     -- tpope/vim-fugitive: Git wrapper
     use 'tpope/vim-fugitive'
@@ -52,8 +52,17 @@ require('packer').startup(function(use)
     -- lukas-reineke/indent-blankline.nvim: Indent guides
     use 'lukas-reineke/indent-blankline.nvim'
 
+    -- nunjucks templates syntax plugin
+    use 'Glench/Vim-Jinja2-Syntax'
+
     -- modern replacement for matchit
     use 'andymass/vim-matchup'
+
+    -- norcalli/nvim-colorizer.lua: Provides a function to colorize RGB and CSS colors in buffer
+    use { 'norcalli/nvim-colorizer.lua', config = function() require('colorizer').setup() end }
+
+    -- Run test suites from buffer in terminal buffer
+    use 'vim-test/vim-test'
 
     -- Markdown preview with :MarkdownPreview
     use({
@@ -61,11 +70,20 @@ require('packer').startup(function(use)
         run = function() vim.fn["mkdp#util#install"]() end,
     })
 
-    -- nunjucks templates syntax plugin
-    use 'Glench/Vim-Jinja2-Syntax'
-
-    -- Nvim Treesitter configurations and abstraction layer
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+    -- stevearc/aerial.nvim: Opens a split with the symbols of the current file
+    -- to help navigating the file quickly
+    use {
+        'stevearc/aerial.nvim',
+        config = function() require('aerial').setup({
+            layout = {
+                -- Determines the default direction to open the aerial window. The 'prefer'
+                -- options will open the window in the other direction *if* there is a
+                -- different buffer in the way of the preferred direction
+                -- Enum: prefer_right, prefer_left, right, left, float
+                default_direction = "prefer_left",
+            },
+        }) end
+    }
 
     -- nvim-neo-tree/neo-tree.nvim: Filesystem viewer
     use {
@@ -78,14 +96,21 @@ require('packer').startup(function(use)
     }
     vim.g.neo_tree_remove_legacy_commands = 1
 
+    -- Nvim Treesitter configurations and abstraction layer
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+
     -- nvim-telescope/telescope.nvim: Fuzzy finder
     use {
         'nvim-telescope/telescope.nvim', branch = '0.1.x',
         requires = {
             'nvim-lua/plenary.nvim',
+            'nvim-telescope/telescope-fzf-native.nvim'
         }
     }
 
+    -- nvim-telescope/telescope-fzf-native.nvim: Implements the FZF algorithm in C
+    -- to be used by telescope requires to call load_extension('fzf') after the
+    -- telescope setup call
     use {
         'nvim-telescope/telescope-fzf-native.nvim',
         run = 'make'
@@ -102,30 +127,14 @@ require('packer').startup(function(use)
         }
     }
 
-    use { 'norcalli/nvim-colorizer.lua', config = function() require('colorizer').setup() end }
-
-    -- stevearc/aerial.nvim: code outline window for skimming and quick navigation
-    use {
-        'stevearc/aerial.nvim',
-        config = function() require('aerial').setup({
-            layout = {
-                -- Determines the default direction to open the aerial window. The 'prefer'
-                -- options will open the window in the other direction *if* there is a
-                -- different buffer in the way of the preferred direction
-                -- Enum: prefer_right, prefer_left, right, left, float
-                default_direction = "prefer_left",
-            },
-        }) end
-    }
-
     -- For prettier formating
     use 'sbdchd/neoformat'
     vim.g.neoformat_try_node_exe = 1
 
-    -- Run test suites from buffer in terminal buffer
-    use 'vim-test/vim-test'
-
-    -- hrsh7th/nvim-cmp: LSP completion
+    -- hrsh7th/nvim-cmp: Completion engine using different sources
+    -- The various completion source plugins are enabled in the plugins/cmp.lua config file
+    -- TODO Check if vim-vsnip is really necessary (it is commented in plugins/cmp.lua)
+    --      because I don't really use snippets
     use {
         'hrsh7th/nvim-cmp',
         requires = {
@@ -144,7 +153,6 @@ require('packer').startup(function(use)
             'hrsh7th/cmp-nvim-lua'
         }
     }
-
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
