@@ -134,9 +134,7 @@ require('packer').startup(function(use)
 
     -- For prettier formating
     use 'sbdchd/neoformat'
-
-    -- lukas-reineke/lsp-format.nvim: Autoformating from lsp
-    use "lukas-reineke/lsp-format.nvim"
+    vim.g.neoformat_try_node_exe = 1
 
     use 'vim-test/vim-test'
 

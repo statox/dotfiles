@@ -33,8 +33,6 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', ']c', vim.diagnostic.goto_next, bufopts)
     vim.keymap.set('n', '<leader>d', '<cmd>Telescope diagnostics<CR>', bufopts)
 
-    require("lsp-format").on_attach(client)
-
     -- Show line diagnostics automatically in hover window
     vim.api.nvim_create_autocmd({ "CursorHold" }, {
         buffer = bufnr,
