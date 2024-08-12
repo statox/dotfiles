@@ -94,7 +94,6 @@ require('packer').startup(function(use)
             'MunifTanjim/nui.nvim'
         }
     }
-    vim.g.neo_tree_remove_legacy_commands = 1
 
     -- Nvim Treesitter configurations and abstraction layer
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }

@@ -1,4 +1,3 @@
-vim.g.neo_tree_remove_legacy_commands = 1
 require("neo-tree").setup({
     window = {
         position = "current",
@@ -20,3 +19,5 @@ require("neo-tree").setup({
         }
     }
 })
+
+vim.g.neo_tree_remove_legacy_commands = 1
