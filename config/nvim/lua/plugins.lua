@@ -129,7 +129,6 @@ require('packer').startup(function(use)
 
     -- For prettier formating
     use 'sbdchd/neoformat'
-    vim.g.neoformat_try_node_exe = 1
 
     -- hrsh7th/nvim-cmp: Completion engine using different sources
     -- The various completion source plugins are enabled in the plugins/cmp.lua config file
@@ -169,3 +168,4 @@ require 'plugins/lsp'
 require 'plugins/cmp'
 require 'plugins/comment'
 require 'plugins/vim-test'
+require 'plugins/neoformat'

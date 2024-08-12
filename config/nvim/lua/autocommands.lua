@@ -16,15 +16,6 @@ vim.api.nvim_exec([[
 ]], false)
 
 vim.api.nvim_exec([[
-    augroup Neoformat
-        autocmd!
-        autocmd BufWritePre *.js Neoformat
-        autocmd BufWritePre *.ts Neoformat
-        autocmd BufWritePre *.tsx Neoformat
-    augroup END
-]], false)
-
-vim.api.nvim_exec([[
     augroup Term
         autocmd!
         autocmd BufNew term* setlocal nonumber
