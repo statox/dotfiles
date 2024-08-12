@@ -1,12 +1,11 @@
 -- Try to format on save
-vim.api.nvim_exec([[
-    augroup Neoformat
-        autocmd!
-        autocmd BufWritePre *.js Neoformat
-        autocmd BufWritePre *.ts Neoformat
-        autocmd BufWritePre *.tsx Neoformat
-    augroup END
-]], false)
+local neoformatAG = vim.api.nvim_create_augroup('Neoformat', { clear = true })
+vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+    desc = 'Automatically format buffer on save with Neoformat plugin',
+    pattern = {'*.js', '*.ts', '*.tsx'},
+    group = neoformatAG,
+    command = 'Neoformat',
+})
 
 -- Try to find the binary of the formater in a node_modules/.bin
 -- useful for eslint and prettier
