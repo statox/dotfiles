@@ -24,9 +24,5 @@ command('GFS', 'Neotree toggle show git_status left', { force = true })
 
 -- Disambiguate fugitive commands {{{
 command('Gblame', 'Git blame', { force = true })
-command('Gl', 'Git pull', { force = true })
-command('Gp', 'Git push', { force = true })
-command('Gc', 'Git commit', { force = true })
-command('Gs', 'Git status', { force = true })
 command('Gco', 'execute input("Checkout current file? [yY] ") ==? "y" ? "Git checkout %" : ""', { force = true })
 -- }}}
