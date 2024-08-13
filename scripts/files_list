@@ -18,7 +18,8 @@ config/htop/htoprc
 config/i3/config
 config/i3status/config
 config/kitty/kitty.conf
-config/nvim/coc-settings.json
+# TODO Check if I can link config/nvim directly
+config/nvim/after
 config/nvim/init.lua
 config/nvim/lua
 config/picom
