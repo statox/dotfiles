@@ -1,4 +1,4 @@
-require 'nvim-treesitter.configs'.setup {
+require("nvim-treesitter.configs").setup({
     ensure_installed = { -- one of "all", "maintained" (parsers with maintainers), or a list of languages
         "bash",
         "c",
@@ -24,12 +24,12 @@ require 'nvim-treesitter.configs'.setup {
         "typescript",
         "vim",
         "vue",
-        "yaml"
+        "yaml",
     },
     sync_install = false, -- Install parsers synchronously (only applied to `ensure_installed`)
     auto_install = true, -- Automatically install missing parsers when entering buffer
     highlight = {
-        enable = true
+        enable = true,
     },
     incremental_selection = {
         enable = true,
@@ -37,13 +37,13 @@ require 'nvim-treesitter.configs'.setup {
             init_selection = "gnn",
             node_incremental = "grn",
             scope_incremental = "grc",
-            node_decremental = "grm"
-        }
+            node_decremental = "grm",
+        },
     },
     indent = {
-        enable = true
+        enable = true,
     },
     matchup = {
         enable = true, -- mandatory, false will disable the whole extension
     },
-}
+})

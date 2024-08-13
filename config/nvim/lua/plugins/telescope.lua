@@ -1,38 +1,42 @@
 local actions = require("telescope.actions")
 local action_layout = require("telescope.actions.layout")
 
-require("telescope").setup {
+require("telescope").setup({
     defaults = {
-        layout_strategy = 'center',
+        layout_strategy = "center",
         layout_config = {
-            center = { width = 0.9, height = 0.5, anchor = "N" }
+            center = { width = 0.9, height = 0.5, anchor = "N" },
         },
         prompt_prefix = "🔍 ",
         mappings = {
             n = {
                 ["?"] = action_layout.toggle_preview,
                 ["<C-j>"] = {
-                    actions.move_selection_next, type = "action",
-                    opts = { nowait = true, silent = true }
+                    actions.move_selection_next,
+                    type = "action",
+                    opts = { nowait = true, silent = true },
                 },
                 ["<C-k>"] = {
-                    actions.move_selection_previous, type = "action",
-                    opts = { nowait = true, silent = true }
+                    actions.move_selection_previous,
+                    type = "action",
+                    opts = { nowait = true, silent = true },
                 },
                 ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-                ["<Backspace>"] = actions.drop_all
+                ["<Backspace>"] = actions.drop_all,
             },
             i = {
                 ["?"] = action_layout.toggle_preview,
                 ["<C-j>"] = {
-                    actions.move_selection_next, type = "action",
-                    opts = { nowait = true, silent = true }
+                    actions.move_selection_next,
+                    type = "action",
+                    opts = { nowait = true, silent = true },
                 },
                 ["<C-k>"] = {
-                    actions.move_selection_previous, type = "action",
-                    opts = { nowait = true, silent = true }
+                    actions.move_selection_previous,
+                    type = "action",
+                    opts = { nowait = true, silent = true },
                 },
-                ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist
+                ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
             },
         },
     },
@@ -46,6 +50,6 @@ require("telescope").setup {
             },
         },
     },
-}
+})
 
-require('telescope').load_extension('fzf')
+require("telescope").load_extension("fzf")

@@ -2,14 +2,13 @@
 -- can't be automatically installed by Mason.nvim so we install
 -- them manually.
 
-
 -- Try to format on save
-local neoformatAG = vim.api.nvim_create_augroup('Neoformat', { clear = true })
-vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-    desc = 'Automatically format buffer on save with Neoformat plugin',
-    pattern = {'*.js', '*.ts', '*.tsx', '*.lua'},
+local neoformatAG = vim.api.nvim_create_augroup("Neoformat", { clear = true })
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+    desc = "Automatically format buffer on save with Neoformat plugin",
+    pattern = { "*.js", "*.ts", "*.tsx", "*.lua" },
     group = neoformatAG,
-    command = 'Neoformat',
+    command = "Neoformat",
 })
 
 -- Try to find the binary of the formater in a node_modules/.bin

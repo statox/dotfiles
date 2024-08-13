@@ -6,20 +6,20 @@ vim.api.nvim_command('set path& | let &path .= "**"')
 
 -- Detect the type of a file automatically
 -- and use the ftplugin and indent plugin for this ft
-vim.api.nvim_command('filetype plugin indent on')
+vim.api.nvim_command("filetype plugin indent on")
 -- Enable syntax highlighting
-vim.api.nvim_command('syntax on')
+vim.api.nvim_command("syntax on")
 
 -- Custom settings in lua
-require 'options'
-require 'mappings'
-require 'commands'
-require 'abbreviations'
-require 'statusline'
-require 'autocommands'
+require("options")
+require("mappings")
+require("commands")
+require("abbreviations")
+require("statusline")
+require("autocommands")
 
-require 'plugins'
+require("plugins")
 -- Remainder of vimscript vimrc
 -- vim.api.nvim_command("source ~/.vimrc")
-require 'custom_colorscheme'
-require 'diffsettings'
+require("custom_colorscheme")
+require("diffsettings")
