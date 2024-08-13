@@ -1,0 +1,10 @@
+# This is the config file for stylua, a lua formatter https://github.com/JohnnyMorganz/StyLua
+# The idea is to use this style only on nvim configuration files since for now
+# I don't have other lua projects
+
+line_endings = "Unix"
+indent_type = "Spaces"
+indent_width = 4
+quote_style = "AutoPreferDouble"
+call_parentheses = "Always"
+collapse_simple_statement = "Never"
