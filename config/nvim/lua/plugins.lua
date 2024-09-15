@@ -99,7 +99,7 @@ require("packer").startup(function(use)
         "nvim-neo-tree/neo-tree.nvim",
         requires = {
             "nvim-lua/plenary.nvim",
-            "kyazdani42/nvim-web-devicons",
+            "nvim-tree/nvim-web-devicons",
             "MunifTanjim/nui.nvim",
         },
     })
