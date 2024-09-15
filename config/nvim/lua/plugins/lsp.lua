@@ -80,7 +80,7 @@ local serversToInstall = {
     "sqlls",
     "svelte",
     "terraformls",
-    "tsserver",
+    "ts_ls",
     "vimls",
 }
 
@@ -102,7 +102,7 @@ for _, server in ipairs(serversToInstall) do
         capabilities = capabilities,
     }
 
-    if server == "tsserver" then
+    if server == "ts_ls" then
         opts.commands = {
             OrganizeImports = {
                 organize_imports,
