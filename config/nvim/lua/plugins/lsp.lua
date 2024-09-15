@@ -69,7 +69,9 @@ local lsp_flags = {
 
 local serversToInstall = {
     "ansiblels",
+    "arduino_language_server",
     "bashls",
+    "clangd", -- required by arduino_language_server
     "cssls",
     "dockerls",
     "eslint",
@@ -108,6 +110,14 @@ for _, server in ipairs(serversToInstall) do
             },
         }
     end
+
+    -- if server == "arduino_language_server" then
+    --     opts.filetypes = { "arduino", "cpp" }
+    -- end
+
+    -- if server == "clangd" then
+    --     opts.filetypes = { "cpp", "arduino" }
+    -- end
 
     require("lspconfig")[server].setup(opts)
 end
