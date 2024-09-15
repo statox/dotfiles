@@ -3,9 +3,12 @@
     name  = Adrien Fabre
     email = adrien.fabre@dashlane.com
 
+[commit]
+    gpgsign = true
+
 [core]
     excludesfile = ~/.gitignore_global
-    editor       = nvim --clean
+    editor       = nvim
     ; autocrlf     = input
     pager = less -+F
 
