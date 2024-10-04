@@ -5,7 +5,8 @@ require("telescope").setup({
     defaults = {
         layout_strategy = "center",
         layout_config = {
-            center = { width = 0.9, height = 0.5, anchor = "N" },
+            center = { width = 0.9, height = 0.3, anchor = "N" },
+            horizontal = { width = 0.99, height = 0.98, anchor = "N" },
         },
         prompt_prefix = "🔍 ",
         mappings = {
@@ -41,7 +42,12 @@ require("telescope").setup({
         },
     },
     pickers = {
+        find_files = {
+            layout_strategy = "horizontal",
+            path_display = { "truncate" },
+        },
         live_grep = {
+            layout_strategy = "center",
             mappings = {
                 -- After searching for a word with live_grep use <C-f> to
                 -- fuzzy find the files with a result
