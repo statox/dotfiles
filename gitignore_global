@@ -200,7 +200,7 @@ nb-configuration.xml
 #####=== Node ===#####
 
 # Logs
-logs
+# logs # Creates issues with nodews audit logs directory
 *.log
 
 # Runtime data
