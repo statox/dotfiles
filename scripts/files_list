@@ -28,8 +28,8 @@ config/nvim/spell
 config/picom
 config/polybar/config
 config/polybar/launch.sh
-config/polybar/stop.sh
 config/polybar/scripts
+config/polybar/stop.sh
 config/redshift
 config/rofi
 dircolors
