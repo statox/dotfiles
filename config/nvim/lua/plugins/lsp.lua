@@ -77,6 +77,9 @@ local serversToInstall = {
     "eslint",
     "html",
     "prosemd_lsp", -- markdown
+    -- "pylsp",
+    "pyright",
+    "ruff",
     "sqlls",
     "svelte",
     "terraformls",
@@ -109,6 +112,10 @@ for _, server in ipairs(serversToInstall) do
                 description = "Organize Imports",
             },
         }
+    end
+
+    if server == "terraformls" then
+        opts.filetypes = { "tf", "terraform" }
     end
 
     -- if server == "arduino_language_server" then
