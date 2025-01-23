@@ -100,6 +100,10 @@ alias python='python3'
     # pick item but stay in the menu
     bindkey -M menuselect "+" accept-and-menu-complete
 
+    # Avoid polluting home with .zcompdump* files
+    # https://stackoverflow.com/a/71271754/4194289
+    export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
+
     # command auto-correction.
     ENABLE_CORRECTION="true"
 
