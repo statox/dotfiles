@@ -46,7 +46,7 @@ font-2 = AurulentSansMono Nerd Font:style=Regular:monospace:pixelsize=10;1
 
 modules-left = i3 memory temperature cpu filesystem clocks
 modules-center = popup-calendar
-modules-right = dunst pulseaudio battery wlan warp eth powermenu
+modules-right = dunst pulseaudio pulseaudio2 battery wlan warp eth powermenu
 
 tray-position = right
 tray-padding = 2
@@ -193,9 +193,41 @@ type = internal/pulseaudio
 
 format-volume = <label-volume> <bar-volume>
 
-label-volume =   %percentage%
+label-volume =  (def.)  %percentage%
 label-volume-foreground = ${root.foreground}
-label-muted =   muted
+label-muted =  (def.)  muted
+label-muted-foreground = ${colors.foreground-alt}
+
+bar-volume-width = 10
+bar-volume-foreground-0 = ${colors.success}
+bar-volume-foreground-1 = ${colors.success}
+bar-volume-foreground-2 = ${colors.success}
+bar-volume-foreground-3 = ${colors.success}
+bar-volume-foreground-4 = ${colors.success}
+bar-volume-foreground-5 = ${colors.warning}
+bar-volume-foreground-6 = ${colors.alert}
+
+bar-volume-gradient = false
+bar-volume-indicator = 雷
+bar-volume-indicator-font = 2
+
+bar-volume-fill = 雷
+bar-volume-fill-font = 2
+
+bar-volume-empty = 雷
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
+
+[module/pulseaudio2]
+# For my XPS93: External sounds: TODO make that more flexible for other machines
+sink = alsa_output.pci-0000_00_1f.3-platform-sof_sdw.HiFi__hw_sofsoundwire_2__sink
+type = internal/pulseaudio
+
+format-volume = <label-volume> <bar-volume>
+
+label-volume =  (int.)  %percentage%
+label-volume-foreground = ${root.foreground}
+label-muted =  (default)  muted
 label-muted-foreground = ${colors.foreground-alt}
 
 bar-volume-width = 10
