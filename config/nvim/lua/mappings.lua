@@ -77,6 +77,8 @@ nnoremap("*", "*N")
 nnoremap("#", "#N")
 -- }}}
 -- Telescope mappings {{{
+-- Open the previous picker
+nnoremap("<leader>tr", "<cmd>lua require('telescope.builtin').resume({})<CR>")
 nnoremap("ga", "<cmd>lua require('telescope.builtin').live_grep()<cr>")
 xnoremap(
     "ga",
