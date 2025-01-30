@@ -33,6 +33,7 @@ alias l='ls -CF'
 alias g='git'
 alias gs='git status -s'
 alias gd='improvedGitDiff'
+alias gfu='improvedGitFixup'
 alias gdc='git diff --cached'
 alias gdw='git diff -w'
 alias ga='git add'
@@ -71,6 +72,38 @@ improvedGitDiff() {
     # Put the selected lines in the next prompt line (only work with ZSH)
     # TODO find a way to move the cursor to the begining of the line (probably with zle)
     [ -n "$selection" ] && [ -n $ZSH_VERSION ] && print -z -- "${selection[@]//$'\n'/ }"
+}
+
+improvedGitFixup() {
+    # Make it easier to fixup a commit:
+    #  $ git add ./whatever
+    #  $ improvedGitFixup (or gfu) # choose the commit to update from the fzf list
+    #       ^ this creates a new commit with some special commit message that git autosquash knows how to handle
+    #  $ git rebase -i --autosquash origin/master # does the autosquash, which squashes the commits into the right commits
+
+    if [ "$#" -gt 1 ]; then
+        echo "Usage: [commit]"
+        echo "Expected 0 or 1 args, got $#"
+        return 1
+    fi
+
+    if $(git diff --cached --quiet); then
+        echo "No files have been staged. Use 'git add' before running this command."
+        return 1
+    fi
+
+    COMMIT_TO_FIXUP=$1
+    if [ -z $COMMIT_TO_FIXUP ]; then
+        preview="git log -p -n1 --color=always {1}"
+        bind_scroll='ctrl-j:preview-down,ctrl-k:preview-up'
+        COMMIT_TO_FIXUP=$(git log --color  --pretty=format:'%C(red)%h%C(reset) - %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' --abbrev-commit | fzf --ansi --reverse --preview "$preview" --preview-window top,80%,wrap --bind "$bind_scroll" | cut -d' ' -f1)
+    fi
+
+    git commit --fixup $COMMIT_TO_FIXUP
+
+    PREVIOUS_COMMIT=$(git rev-parse --short "$COMMIT_TO_FIXUP^1")
+    echo '\nCreated fixup commit. Run the following command to apply:\n'
+    echo "    git rebase -i --autosquash $PREVIOUS_COMMIT"
 }
 
 alias man='improvedMan'
