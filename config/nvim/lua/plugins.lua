@@ -46,6 +46,27 @@ require("packer").startup(function(use)
     -- statox/GOD.vim: Get online doc links
     use("statox/GOD.vim")
 
+    -- danilamihailov/beacon.nvim: Highlight cursor when it moves
+    use({
+        "danilamihailov/beacon.nvim",
+        config = function()
+            require("beacon").setup({
+                enabled = function()
+                    local disabled_ft = { "neo-tree", "help" }
+                    for _, ft in ipairs(disabled_ft) do
+                        if vim.bo.ft == ft then
+                            return false
+                        end
+                    end
+                    return true
+                end,
+                width = 20, --- integer width of the beacon window
+                min_jump = 1, --- integer what is considered a jump. Number of lines
+                highlight = { bg = "red", ctermbg = 9 }, -- vim.api.keyset.highlight table passed to vim.api.nvim_set_hl
+            })
+        end,
+    })
+
     -- statox/vim-compare-lines: Compare lines easily
     use("statox/vim-compare-lines")
 
