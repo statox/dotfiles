@@ -9,7 +9,7 @@ configuration {
 
     kb-remove-to-eol: "Control+D";
     kb-accept-entry: "Return,KP_Enter";
-    kb-row-up: "Control+k,Up,Control+p,ISO_Left_Tab";
+    kb-row-up: "Control+k,Up,Control+p";
     kb-row-down: "Control+j,Down,Control+n";
 
     // Select entries by index
