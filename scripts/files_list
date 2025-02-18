@@ -1,5 +1,6 @@
 # This file contains the dotfiles to treat
-# You can comment a file with # so the file wont be proceded
+# - Comments starting with # and empty lines are not processed
+# - The script supports individual files and whole directories
 
 bash_aliases
 bash_logout
@@ -10,14 +11,9 @@ bin/i3-lock-suspend
 bin/mm
 bin/open-terminal
 bin/rofi-calc
-config/alacritty/alacritty.yml
-config/dunst/dunstrc
+config/dunst
 config/espanso
-config/htop/htoprc
-config/i3/config
-config/i3status/config
-config/kitty/kitty.conf
-# TODO Check if I can link config/nvim directly
+config/i3
 config/nvim/after
 config/nvim/autoload
 config/nvim/ftdetect
@@ -25,10 +21,7 @@ config/nvim/init.lua
 config/nvim/lua
 config/nvim/spell
 config/picom
-config/polybar/config
-config/polybar/launch.sh
-config/polybar/scripts
-config/polybar/stop.sh
+config/polybar
 config/redshift
 config/rofi
 dircolors
