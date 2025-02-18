@@ -1,7 +1,7 @@
 [user]
     signingkey = E87FB9FFDF70C089E1EA5854B64D9E37A91844F2
-    name  = Adrien Fabre
-    email = adrien.fabre@dashlane.com
+    name  = statox
+    email = me@statox.fr
 
 [commit]
     gpgsign = true
