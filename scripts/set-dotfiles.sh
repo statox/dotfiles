@@ -12,15 +12,18 @@ make-symlinks() {
     echo "files list: $FILES"
     echo "creating the simlinks"
 
-    # go to home directory
-    cd ~ || exit
-
     while read -r line; do
         # ignore empty lines and comments in files_list
         [[ -z $line  ]] && continue
         [[ "$line" =~ ^#.*$  ]] && continue
-            echo "${line}"
-            ln -s "$CUR_DIR"/../"$line" ."$line"
+
+        echo "${line}"
+        dest_path="$HOME/.$line"
+        containing_directory=$(dirname $dest_path)
+        origin_path=$(readlink -m "$CUR_DIR/../$line")
+
+        mkdir -p $containing_directory
+        ln -s "$origin_path" "$dest_path"
     done < "$FILES"
 }
 
