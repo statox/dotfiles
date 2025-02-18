@@ -15,7 +15,7 @@
 
 /* Import color-scheme from `colors` directory */
 
-@import "/home/afabre/.dotfiles/config/rofi/rounded-nord.rasi"
+@import "../../rounded-nord.rasi"
 
 * {
     background:     @bg0;

@@ -91,7 +91,7 @@ alias python='python3'
     zmodload zsh/complist
 
     # added by zsh auto install
-    zstyle :compinstall filename '/home/afabre/.zshrc'
+    zstyle :compinstall filename "$HOME/.zshrc"
 
     # allow autocomplet on zshrc aliases and selection of suggestions
     zstyle ':completion:*' menu select
