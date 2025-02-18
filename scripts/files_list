@@ -4,7 +4,6 @@
 bash_aliases
 bash_logout
 bash_profile
-bashrc
 bin/changeVolume
 bin/dmenu-i3-window-jumper.sh
 bin/i3-lock-suspend

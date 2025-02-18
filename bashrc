@@ -47,15 +47,11 @@ shopt -s cmdhist
 shopt -s checkwinsize
 
 # By default, Bash only records a session to the .bash_history file on disk when the session terminates. 
-# on force a sauvegarder a chaque commande histoire de pas perdre en cas de sessions qui plante
+# force saving with each command in case the session crashes
 PROMPT_COMMAND='history -a'
 
 #------------------------------------------------------------
 #         Fancy prompt :)
-
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
