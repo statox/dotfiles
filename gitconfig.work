@@ -1,0 +1,6 @@
+[user]
+    name  = Adrien Fabre
+
+# Automatically use SSH instead of HTTPS
+[url "git@gitlab.dashlane.com:"]
+    insteadOf = https://gitlab.dashlane.com

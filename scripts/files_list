@@ -26,6 +26,8 @@ config/redshift
 config/rofi
 dircolors
 gitconfig
+gitconfig.personal
+gitconfig.work
 gitignore_global
 inputrc
 tmux.conf

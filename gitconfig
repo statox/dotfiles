@@ -1,7 +1,10 @@
-[user]
-    signingkey = 66868859E17A915F
-    name  = statox
-    email = me@statox.fr
+# Include appropriate [user] section based on path
+[includeIf "gitdir:~/dev/"]
+  path = ~/.gitconfig.personal
+[includeIf "gitdir:~/.dotfiles/"]
+  path = ~/.gitconfig.personal
+[includeIf "gitdir:~/projects/"]
+  path = ~/.gitconfig.work
 
 [commit]
     gpgsign = true
@@ -18,10 +21,6 @@
 [help]
     # When mispelling a fonction automatically correct it
     autocorrect = 5
-
-# Automatically use SSH instead of HTTPS
-[url "git@gitlab.dashlane.com:"]
-    insteadOf = https://gitlab.dashlane.com
 
 # Messages coloring
 [color]
