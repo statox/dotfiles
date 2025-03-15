@@ -11,9 +11,6 @@ alias python='python3'
     export ZSH_TMUX_AUTOCONNECT='false'
     # Tmux plugin need it to start Tmux at connexion
     export ZSH_TMUX_AUTOSTART=true
-
-    # If in tmux and fzf is installed, CTRL-R, CTRL-T and ALT-C open in a tmux pane
-    export FZF_TMUX=1
 # }}}
 # Plugins {{{
     # IMPORTANT: zsh-syntax-highlighting MUST be placed in last position
@@ -182,11 +179,12 @@ RPROMPT=$RPROMPT"\
 %{$reset_color%}"
 # }}}
 # FZF configuration {{{
-    # For some reason it works only if I source the files twice
-    [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh  && source /usr/share/doc/fzf/examples/key-bindings.zsh
-    [ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh && source /usr/share/doc/fzf/examples/completion.zsh
+    # This config works with fzf 0.60+, on Ubuntu that requires installing the binary instead of using the apt repo version
     # Set FZF to use ag if it is installed
     command -v ag >/dev/null 2>&1 && export FZF_DEFAULT_COMMAND='ag --nocolor -f --hidden --ignore .git -g ""'
+    export FZF_DEFAULT_OPTS='--height 40% --tmux bottom,40% --layout reverse --border top'
+    # Setup the keybinding for ctrl-r, ctrl-t, etc
+    source <(fzf --zsh)
 # }}}
 # NVM configuration {{{
 export NVM_DIR="$HOME/.config/nvm"
