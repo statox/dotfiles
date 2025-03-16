@@ -1,6 +1,6 @@
 # vim:fdm=marker
 # Start up {{{
-    exec i3-msg 'workspace 2; exec firefox; layout tabbed;'
+    exec i3-msg 'workspace 2; exec firefox;'
 
     # All the slack windows are automatically created in workspace 1
     assign [class="Slack"] 1
