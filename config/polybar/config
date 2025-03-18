@@ -46,7 +46,7 @@ font-2 = AurulentSansMono Nerd Font:style=Regular:monospace:pixelsize=10;1
 
 modules-left = i3 memory temperature cpu filesystem clocks
 modules-center = popup-calendar
-modules-right = dunst pulseaudio pulseaudio2 battery wlan warp eth powermenu
+modules-right = dunst pulseaudio pulseaudio2 battery wlan eth powermenu
 
 tray-position = right
 tray-padding = 2
@@ -175,18 +175,18 @@ label-connected = %local_ip%
 format-disconnected-prefix = ""
 label-disconnected = %ifname% disconnected
 
-[module/warp]
-type = internal/network
-interface = CloudflareWARP
-interval = 3.0
+# [module/warp]
+# type = internal/network
+# interface = CloudflareWARP
+# interval = 3.0
 
-format-connected-prefix = 
-format-connected-prefix-foreground = ${colors.success}
-label-connected = %local_ip%
+# format-connected-prefix = 
+# format-connected-prefix-foreground = ${colors.success}
+# label-connected = %local_ip%
 
-format-disconnected-prefix = 
-format-disconnected-prefix-foreground = ${colors.alert}
-label-disconnected = "No vpn"
+# format-disconnected-prefix = 
+# format-disconnected-prefix-foreground = ${colors.alert}
+# label-disconnected = "No vpn"
 
 [module/pulseaudio]
 type = internal/pulseaudio
