@@ -77,8 +77,7 @@ local serversToInstall = {
     "eslint",
     "html",
     "prosemd_lsp", -- markdown
-    -- "pylsp",
-    "pyright",
+    "pylsp", -- run :PylspInstall pylsp-mypy
     "ruff",
     "sqlls",
     "svelte",
