@@ -75,8 +75,8 @@ local serversToInstall = {
     "cssls",
     "dockerls",
     "eslint",
+    "harper_ls", -- General grammar check
     "html",
-    "prosemd_lsp", -- markdown
     "pylsp", -- run :PylspInstall pylsp-mypy
     "ruff",
     "sqlls",
@@ -115,6 +115,10 @@ for _, server in ipairs(serversToInstall) do
 
     if server == "terraformls" then
         opts.filetypes = { "tf", "terraform" }
+    end
+
+    if server == "harper_ls" then
+        opts.filetypes = { "c", "cpp", "css", "gitcommit", "html", "javascript", "lua", "markdown", "python", "svelte", "toml", "typescript", "typescriptreact" }
     end
 
     -- if server == "arduino_language_server" then
