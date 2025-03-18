@@ -182,7 +182,7 @@ RPROMPT=$RPROMPT"\
     # This config works with fzf 0.60+, on Ubuntu that requires installing the binary instead of using the apt repo version
     # Set FZF to use ag if it is installed
     command -v ag >/dev/null 2>&1 && export FZF_DEFAULT_COMMAND='ag --nocolor -f --hidden --ignore .git -g ""'
-    export FZF_DEFAULT_OPTS='--height 40% --tmux bottom,40% --layout reverse --border top'
+    export FZF_DEFAULT_OPTS='--height 40% --tmux bottom,40% --border none --no-separator'
     # Setup the keybinding for ctrl-r, ctrl-t, etc
     source <(fzf --zsh)
 # }}}
