@@ -1,9 +1,9 @@
 #Dotfiles
 
-This repo is used to save and sync my dotfiles between differents machines.
-When cloning and executing the scripts for the first time, the current dotfiles are saved and remplaced by symlinks to the ones in the repo.
+This repo is used to save and sync my dotfiles between different machines.
+When cloning and executing the scripts for the first time, the current dotfiles are saved and replaced by symlinks to the ones in the repo.
 
-The instructions belows are a reminder on how to use the scripts.
+The instructions below are a reminder on how to use the scripts.
 
 ## Installation
 
