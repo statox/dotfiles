@@ -63,3 +63,35 @@ require("telescope").setup({
 })
 
 require("telescope").load_extension("fzf")
+
+
+-- Helper function for live_grep_buffers()
+local function get_open_buffers()
+    local buffers = {}
+    for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+        -- Only include buffers that are loaded and listed
+        if vim.api.nvim_buf_is_loaded(bufnr) and vim.api.nvim_buf_get_option(bufnr, 'buflisted') then
+            local path = vim.api.nvim_buf_get_name(bufnr)
+            -- Only include buffers with a valid path
+            if path and #path > 0 then
+                table.insert(buffers, path)
+            end
+        end
+    end
+    return buffers
+end
+
+-- Export a module to be able to use the function in the mappings file
+return {
+    live_grep_buffers = function(...)
+        -- live grep only in the currently open buffers
+        local args = {...}
+        local buffers = get_open_buffers()
+
+        require('telescope.builtin').live_grep({
+            search_dirs = buffers,
+            prompt_title = "Live Grep Open Buffers",
+            cwd = vim.fn.getcwd(),
+        })
+    end
+}

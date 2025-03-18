@@ -84,6 +84,7 @@ xnoremap(
     "ga",
     "y<cmd>lua require('telescope.builtin').grep_string({word_match = '-w', search = vim.fn.getreg('\"')})<CR>"
 )
+nnoremap("gA", "<cmd>lua require('plugins.telescope').live_grep_buffers()<cr>")
 -- }}}
 -- make h and l skip indentation white spaces {{{
 vim.keymap.set("n", "h", ":call motion#SkipOrH()<CR>", { noremap = true, silent = true })
