@@ -1,6 +1,8 @@
 [user]
+    signingkey = 17A8CB3D87091A8D
     name  = Adrien Fabre
+    email = adrien.fabre@alice-bob.com
 
 # Automatically use SSH instead of HTTPS
-[url "git@gitlab.dashlane.com:"]
-    insteadOf = https://gitlab.dashlane.com
+[url "git@git.alice-bob.com:"]
+    insteadOf = https://git.alice-bob.com

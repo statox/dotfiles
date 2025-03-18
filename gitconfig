@@ -5,6 +5,8 @@
   path = ~/.gitconfig.personal
 [includeIf "gitdir:~/projects/"]
   path = ~/.gitconfig.work
+[includeIf "gitdir:~/notes_a_and_b/"]
+  path = ~/.gitconfig.work
 
 [commit]
     gpgsign = true
