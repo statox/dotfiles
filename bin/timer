@@ -1,0 +1,67 @@
+#!/usr/bin/env node
+/* vim: set ft=javascript */
+
+/*
+ * A simple timer script. This is not meant to be precise to the ms, just
+ * to give a rough estimated of an elapsed time.
+ *
+ * Stop it with ctrl+c or `kill {PID}` to get the total run time
+ */
+
+const getRuntimeMs = () => (new Date()).getTime() - start.getTime();
+
+const formatMs = (runtime) => {
+    const totalSeconds = Math.floor(runtime / 1000);
+    const totalMinutes = Math.floor(totalSeconds / 60);
+    const totalHours = Math.floor(totalMinutes / 60);
+
+    if (totalSeconds === 0) {
+        return `${runtime}ms`;
+    }
+
+    if (totalMinutes === 0) {
+        return `${totalSeconds}s`;
+    }
+
+    if (totalHours === 0) {
+        return `${totalMinutes}m ${totalSeconds % 60}s`;
+    }
+
+    return `${totalHours}h ${totalMinutes % 60}m ${totalSeconds % 60}s`;
+}
+
+// Clear and update the current terminal line
+const updateLine = (text) => {
+    // \r returns cursor to start of line
+    // \x1B[2K clears the line
+    process.stdout.write('\x1B[2K\r');
+    process.stdout.write(text);
+}
+
+const shutdown = () => {
+        if (shuttingDown) {
+            return;
+        }
+        shuttingDown = true;
+
+        const runtimeMs = getRuntimeMs();
+        clearInterval(interval);
+
+        updateLine("");
+        console.log("Stopped at", new Date());
+        console.log("Total runtime ", formatMs(runtimeMs));
+        process.exit(0);
+}
+
+let shuttingDown = false;
+const start = new Date()
+const interval = setInterval(() => {
+    updateLine("Elapsed time: " + formatMs(getRuntimeMs()));
+}, 500);
+
+console.log(`Stop with: Ctrl+c or \`kill ${process.pid}\``);
+console.log("Started at", start);
+
+['SIGINT', 'SIGTERM', 'SIGQUIT'].forEach(signal => {
+    process.on(signal, shutdown);
+});

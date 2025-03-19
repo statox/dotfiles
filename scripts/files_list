@@ -11,6 +11,7 @@ bin/i3-lock-suspend
 bin/mm
 bin/open-terminal
 bin/rofi-calc
+bin/timer
 config/dunst
 config/espanso
 config/i3
