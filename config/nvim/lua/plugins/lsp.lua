@@ -27,8 +27,6 @@ local on_attach = function(client, bufnr)
     vim.keymap.set("n", "gR", '<cmd>lua require("telescope.builtin").lsp_references({trim_text = true})<CR>', bufopts)
     vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, bufopts)
 
-    vim.keymap.set("n", "[c", vim.diagnostic.goto_prev, bufopts)
-    vim.keymap.set("n", "]c", vim.diagnostic.goto_next, bufopts)
     vim.keymap.set("n", "<leader>d", "<cmd>Telescope diagnostics<CR>", bufopts)
 
     -- Show line diagnostics automatically in hover window
