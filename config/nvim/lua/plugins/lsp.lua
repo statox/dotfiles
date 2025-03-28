@@ -116,7 +116,8 @@ for _, server in ipairs(serversToInstall) do
     end
 
     if server == "harper_ls" then
-        opts.filetypes = { "c", "cpp", "css", "gitcommit", "html", "javascript", "lua", "markdown", "python", "svelte", "toml", "typescript", "typescriptreact" }
+        -- opts.filetypes = { "c", "cpp", "css", "gitcommit", "html", "javascript", "lua", "markdown", "python", "svelte", "toml", "typescript", "typescriptreact" }
+        opts.filetypes = {"markdown"}
     end
 
     -- if server == "arduino_language_server" then
