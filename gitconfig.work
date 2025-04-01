@@ -6,3 +6,6 @@
 # Automatically use SSH instead of HTTPS
 [url "git@git.alice-bob.com:"]
     insteadOf = https://git.alice-bob.com
+
+[safe]
+	directory = /home/afabre/remotes/measure1/exptools-core
