@@ -9,6 +9,8 @@ else
     vim.g.colorsDefault = "nightfox"
     vim.g.colorsDiff = "nordfox"
 end
+vim.g.colorsDefault = "dayfox"
+vim.g.colorsDiff = "dayfox"
 
 vim.cmd("colorscheme " .. vim.g.colorsDefault)
 
