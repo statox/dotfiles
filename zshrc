@@ -1,6 +1,8 @@
 #~/.zshrc
 # vim:fdm=marker
 
+setxkbmap -model pc105 -layout us -option caps:escape
+
 # Hacky hack
 # `python` is not available but `python3` is.
 # The `python` command is needed by git-prompt plugin
