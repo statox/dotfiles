@@ -3,7 +3,7 @@ local module = {}
 local light_colorscheme = 'dayfox';
 local dark_colorscheme = 'nightfox'
 
-module.default_colorscheme = dark_colorscheme
+module.default_colorscheme = light_colorscheme
 
 function module.toggle_colorscheme(window, pane)
     -- We can't read an environment variable set by zshrc to read the the
