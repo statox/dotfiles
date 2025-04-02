@@ -1,6 +1,16 @@
+! Use the following command to get the keycodes
+!   xev -event keyboard
+
+
 ! Map caps lock to escape
 clear Lock
 ! On parll-afabre built in keyboard
 keycode 0x42 = Escape
 ! On rk bluetooth keyboard
 keycode 0x66 = Escape
+
+! Disable Thinkpad page up keys above arrow key on PC-PF514G4Z
+! Prior
+keycode 112 =
+! Next
+keycode 117 =
