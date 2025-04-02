@@ -30,7 +30,7 @@
     # Night shift
     exec i3-msg 'exec redshift-gtk'
     # Wallpaper
-    exec_always --no-startup-id ~/dev/NWotD/index.sh >> /var/log/nwotd.log 2>&1
+    exec_always --no-startup-id ~/dev/NWotD/index.sh -fw >> /var/log/nwotd.log 2>&1
     # Flameshot
     exec --no-startup-id flameshot
 # }}}
