@@ -20,7 +20,7 @@ command("Gbcommits", "Telescope git_bcommits", { force = true })
 command("Diag", "Telescope diagnostics", { force = true })
 
 -- :GFS Show git modified files
-command("GFS", "Neotree toggle show git_status left", { force = true })
+command("GFS", "Neotree action=focus source=git_status position=left", { force = true })
 
 -- Disambiguate fugitive commands {{{
 command("Gblame", "Git blame", { force = true })
