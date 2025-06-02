@@ -9,6 +9,8 @@
   path = ~/.gitconfig.work
 [includeIf "gitdir:~/remotes/"]
   path = ~/.gitconfig.work
+[includeIf "gitdir:~/remotes/"]
+  path = ~/.gitconfig.work
 
 [commit]
     gpgsign = true
@@ -71,3 +73,9 @@
 
 [init]
     defaultBranch = main
+
+# This should live in ./gitconfig.work but for some reason that doesn't work
+# Used to allow using git on sshfs mounted servers
+[safe]
+    directory = /home/afabre/remotes/measure1/exptools-core
+    directory = /home/afabre/remotes/measure1/anb-exp
