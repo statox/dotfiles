@@ -183,6 +183,40 @@ require("packer").startup(function(use)
         },
     })
 
+    use({
+        "olimorris/codecompanion.nvim",
+        config = function()
+            require("codecompanion").setup({
+                adapters = {
+                    openai = function()
+                        return require("codecompanion.adapters").extend("openai", {
+                            env = {
+                                -- Use dashlane cli to get the API key
+                                api_key = "cmd:dcli note 'LLM API Keys for code companion' | sed -n '2p'",
+                            },
+                        })
+                    end,
+                },
+
+                strategies = {
+                    chat = {
+                        adapter = "openai",
+                    },
+                    inline = {
+                        adapter = "openai",
+                    },
+                    cmd = {
+                        adapter = "openai",
+                    }
+                },
+            })
+        end,
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+        }
+    })
+
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if packer_bootstrap then
