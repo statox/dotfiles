@@ -219,6 +219,13 @@
     bindsym $mod+Ctrl+8 move container to workspace 8; workspace 8
     bindsym $mod+Ctrl+9 move container to workspace 9; workspace 9
 
+    # Move current workspace to another monitor
+    bindsym $mod+Ctrl+h move workspace to output left
+    bindsym $mod+Ctrl+l move workspace to output right
+    bindsym $mod+Ctrl+j move workspace to output down
+    bindsym $mod+Ctrl+k move workspace to output up
+    bindsym $mod+Ctrl+n move workspace to output next
+
     # lock the screen with mod + escape
     # must install i3lock-fancy package for this to work
     bindsym $mod+Escape exec "i3lock-fancy -gp -- scrot -z -q 1"
