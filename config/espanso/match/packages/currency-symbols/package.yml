@@ -1,0 +1,63 @@
+# individual currencies—themnemonic is to use the letter with a hyphen to combine them into the symbol
+matches:
+    - triggers: [":c|", ":cent", ":C|", ":|c", ":|C"]
+      replace: "¢"
+    - triggers: [":e-", ":-e", ":E-", ":-E", ":euro"]
+      replace: "€"
+    - triggers: [":-l", ":l-", ":pound"]
+      replace: "£"
+    - triggers: [":-L", ":L-", ":Pound", ":POUND"]
+      replace: "￡"
+    - triggers: [":r-", ":-r", ":rupee"]
+      replace: "₹"
+    - triggers: [":w-", ":-w", ":won"]
+      replace: "₩"
+    - triggers: [":W-", ":-W", ":WON"]
+      replace: "￦"
+    - triggers: [":y-", ":yen", ":-y"]
+      replace: "¥"
+    - triggers: [":Yen", ":YEN", ":Y-", ":-Y"]
+      replace: "￥"
+# type :$: to bring up a menu for these
+    - trigger: ":$:"
+      label: "₳ AUSTRAL"
+      replace: "₳"
+    - trigger: ":$:"
+      label: "₿ BITCOIN"
+      replace: "₿"
+    - trigger: ":$:"
+      label: "¢ CENT"
+      replace: "¢"
+    - trigger: ":$:"
+      label: "$ DOLLAR"
+      replace: "$"
+    - trigger: ":$:"
+      label: "€ EURO"
+      replace: "€"
+    - trigger: ":$:"
+      label: "₣ FRENCH FRANC"
+      replace: "₣"
+    - trigger: ":$:"
+      label: "￠ FULLWIDTH CENT"
+      replace: "￠"
+    - trigger: ":$:"
+      label: "＄ FULLWIDTH DOLLAR"
+      replace: "＄"
+    - trigger: ":$:"
+      label: "￡ FULLWIDTH POUND"
+      replace: "￡"
+    - trigger: ":$:"
+      label: "￦ FULLWIDTH WON"
+      replace: "￦"
+    - trigger: ":$:"
+      label: "￥ FULLWIDTH YEN"
+      replace: "￥"
+    - trigger: ":$:"
+      label: "£ POUND"
+      replace: "£"
+    - trigger: ":$:"
+      label: "₩ WON"
+      replace: "₩"
+    - trigger: ":$:"
+      label: "¥ YEN"
+      replace: "¥"
