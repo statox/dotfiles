@@ -10,5 +10,5 @@ local command = vim.api.nvim_create_user_command
 
 command("DT", 'execute "colorscheme " . g:colorsDiff | windo diffthis', { force = true })
 command("DO", 'execute "colorscheme " . g:colorsDefault | windo diffoff', { force = true })
-command("DG", "diffget ", { force = true })
-command("DP", "diffput ", { force = true })
+command("DG", "echo 'Use `do` in normal mode instead'", { force = true })
+command("DP", "echo 'Use `dp` in normal mode instead'", { force = true })
