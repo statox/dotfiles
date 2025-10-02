@@ -62,19 +62,12 @@
     keepBackup = false
     keepTemporaries = false
 
-[merge]
-    tool = nvimdiff
-    ; stat = true
-
-[mergetool "nvimdiff"]
-    cmd = nvim -d
-
 [diff]
-    tool = winmerge
+    tool = nvim
 
-[difftool "winmerge"]
-    name = WinMerge
-    trustExitCode = true
-    cmd = winmergeportable.exe -u -e $LOCAL $REMOTE
+[difftool "nvim"]
+    name = nvim
+    cmd = nvim -d $LOCAL $REMOTE
+
 [init]
-	defaultBranch = main
+    defaultBranch = main
