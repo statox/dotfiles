@@ -71,6 +71,7 @@ case ${chosen} in
         run_cmd --reboot
         ;;
     "$lock")
+        notify-send 'Locking' -t 1000
         i3lock-fancy -gp -- scrot -z -q 1
         ;;
     "$suspend")

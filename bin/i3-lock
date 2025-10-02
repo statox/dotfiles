@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+notify-send 'Locking' -u low -t 3000
+i3lock-fancy -gp -- scrot -z -q 1 &

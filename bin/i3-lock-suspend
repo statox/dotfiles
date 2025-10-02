@@ -6,6 +6,7 @@
 # is triggered before the screen is lock and there are a few seconds restore before the screen is locked
 
 
+notify-send 'Suspending' -u low -t 3000
 i3lock-fancy -gp -- scrot -z -q 1 &
 sleep 3
 systemctl suspend
