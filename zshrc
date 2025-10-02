@@ -186,5 +186,15 @@ RPROMPT=$RPROMPT"\
     export CLAUDE_DEVCONTAINER_HOME="$HOME/.claude_devcontainer"
     source "$CLAUDE_DEVCONTAINER_HOME/shell-init.sh"
 # }}}
+# GCP CLI configuration {{{
+    # The next line updates PATH for the Google Cloud SDK.
+    if [ -f '/home/afabre/.bin/google-cloud-cli/google-cloud-sdk/path.zsh.inc' ]; then . '/home/afabre/.bin/google-cloud-cli/google-cloud-sdk/path.zsh.inc'; fi
+
+    # The next line enables shell command completion for gcloud.
+    if [ -f '/home/afabre/.bin/google-cloud-cli/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/afabre/.bin/google-cloud-cli/google-cloud-sdk/completion.zsh.inc'; fi
+
+    alias gcloudauth='gcloud auth login --login-config=$HOME/.config/wif-login-config.json'
+    alias gcloudauthapp='gcloud auth application-default login --login-config=$HOME/.config/wif-login-config.json'
+# }}}
 
 export MOCHA_COLORS=true
