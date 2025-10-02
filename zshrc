@@ -194,13 +194,4 @@ export NVM_DIR="$HOME/.config/nvm"
 # Necessary to make kitty work
 export TERM=screen-256color
 
-# Completion for local command isp
-# compdef -a _custom-iam-switch-profile custom-iam-switch-profile
-
-# Dashlane containerized tools
-export DOCKER_TOOLS_ENABLED=false
-export DOCKER_TOOLS_PROJECTS='/home/adrien/projects'
-export WORKSPACES='/home/adrien/projects'
-export DOCKER_TOOLS_RUNNER='podman'
-
 export MOCHA_COLORS=true
