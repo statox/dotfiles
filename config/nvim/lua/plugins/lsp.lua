@@ -128,7 +128,8 @@ for _, server in ipairs(serversToInstall) do
     --     opts.filetypes = { "cpp", "arduino" }
     -- end
 
-    require("lspconfig")[server].setup(opts)
+    vim.lsp.config(server, opts)
+    vim.lsp.enable({server})
 end
 
 -- Disable virtual_text since it's redundant with the autocmd showing them in the floating window
