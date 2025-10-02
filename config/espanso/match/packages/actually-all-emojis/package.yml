@@ -9,8 +9,10 @@ matches:
     replace: "\U0001F604"
   - trigger: ":grin"
     replace: "\U0001F62C"
-  - trigger: ":+1"
+  - trigger: ":+1:"
     replace: "\U0001F44D"
+  - trigger: ":-1:"
+    replace: "\U0001F44E"
 
   - trigger: ":grinning:"
     replace: "\U0001F600"
