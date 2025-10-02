@@ -91,7 +91,7 @@ vim.keymap.set("n", "h", ":call motion#SkipOrH()<CR>", { noremap = true, silent 
 vim.keymap.set("n", "l", ":call motion#SkipOrL()<CR>", { noremap = true, silent = true })
 -- }}}
 -- Explore with - {{{
-nnoremap("-", ":Neotree toggle focus filesystem %:p<cr>")
+nnoremap("-", ":Neotree toggle current reveal_force_cwd<cr>")
 -- }}}
 -- Disable Q to toggle ex mode {{{
 nnoremap("Q", "<nop>")
