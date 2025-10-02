@@ -38,3 +38,6 @@
 # clipboard_threshold: 100
 
 # For a list of all the available options, visit the official docs at: https://espanso.org/docs/
+
+# Using this because espanso regularly shows "espanso is running" notifications and its annoying
+show_notifications: false
