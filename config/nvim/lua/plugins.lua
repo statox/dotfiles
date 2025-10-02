@@ -100,11 +100,11 @@ require("packer").startup(function(use)
     use({
         'MeanderingProgrammer/render-markdown.nvim',
         after = { 'nvim-treesitter' },
-        -- requires = { 'nvim-mini/mini.nvim', opt = true }, -- if you use the mini.nvim suite
-        -- requires = { 'nvim-mini/mini.icons', opt = true }, -- if you use standalone mini plugins
-        requires = { 'nvim-tree/nvim-web-devicons', opt = true }, -- if you prefer nvim-web-devicons
+        requires = { 'nvim-tree/nvim-web-devicons', opt = true },
         config = function()
-            require('render-markdown').setup({})
+            require('render-markdown').setup({
+                completions = { lsp = { enabled = true } },
+            })
         end,
     })
 
