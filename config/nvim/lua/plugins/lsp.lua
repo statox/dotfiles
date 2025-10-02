@@ -10,9 +10,17 @@ local function organize_imports()
 end
 
 -- on_attach function used after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-    -- Enable completion triggered by <c-x><c-o>
-    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+local on_attach = function(args)
+    local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+    if client.server_capabilities.completionProvider then
+        -- -- Enable completion triggered by <c-x><c-o>
+        vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
+    end
+    if client.server_capabilities.definitionProvider then
+        vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
+    end
 
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -50,6 +58,7 @@ local on_attach = function(client, bufnr)
         end,
     })
 end
+vim.api.nvim_create_autocmd("LspAttach", { callback = on_attach });
 
 local lsp_flags = {
     -- This is the default in Nvim 0.7+
@@ -97,7 +106,6 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 -- Set up the different lsp server installed by mason with lspconfig
 for _, server in ipairs(serversToInstall) do
     local opts = {
-        on_attach = on_attach,
         flags = lsp_flags,
         capabilities = capabilities,
     }
