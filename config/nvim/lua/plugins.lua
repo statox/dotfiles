@@ -79,14 +79,6 @@ require("packer").startup(function(use)
     -- modern replacement for matchit
     use("andymass/vim-matchup")
 
-    -- norcalli/nvim-colorizer.lua: Provides a function to colorize RGB and CSS colors in buffer
-    use({
-        "norcalli/nvim-colorizer.lua",
-        config = function()
-            require("colorizer").setup()
-        end,
-    })
-
     -- Run test suites from buffer in terminal buffer
     use("vim-test/vim-test")
 
