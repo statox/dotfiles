@@ -46,6 +46,10 @@ require("packer").startup(function(use)
     -- statox/GOD.vim: Get online doc links
     use("statox/GOD.vim")
 
+    -- dependency for some plugins. Installed at top level to access :NvimWebDeviconsHiTest while
+    -- evaluating new terminal emulators
+    use("nvim-tree/nvim-web-devicons")
+
     -- danilamihailov/beacon.nvim: Highlight cursor when it moves
     use({
         "danilamihailov/beacon.nvim",
