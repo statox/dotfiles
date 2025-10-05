@@ -37,21 +37,12 @@ config.color_scheme = "nightfox"
 config.leader = { key = ' ', mods = 'CTRL', timeout_milliseconds = 1000 }
 config.keys = {
     -- Activates the Command Palette, a modal overlay that enables discovery and activation of various commands.
-    {
-        key = 'P',
-        mods = 'CTRL',
-        action = wezterm.action.ActivateCommandPalette,
-    },
-    {
-        key = '!',
-        mods = 'LEADER|SHIFT',
-        action = wezterm.action.SplitHorizontal({ domain = 'CurrentPaneDomain' }),
-    },
-    {
-        key = '/',
-        mods = 'LEADER',
-        action = wezterm.action.SplitVertical ( { domain = 'CurrentPaneDomain' } ),
-    },
+    { key = 'P', mods = 'CTRL', action = wezterm.action.ActivateCommandPalette, },
+
+    -- Split current window
+    { key = '!', mods = 'LEADER|SHIFT', action = wezterm.action.SplitHorizontal({ domain = 'CurrentPaneDomain' }), },
+    { key = '/', mods = 'LEADER', action = wezterm.action.SplitVertical ( { domain = 'CurrentPaneDomain' } ), },
+
     -- Move focus between panes
     { key = 'h', mods = 'LEADER', action = wezterm.action.ActivatePaneDirection('Left') },
     { key = 'j', mods = 'LEADER', action = wezterm.action.ActivatePaneDirection('Down') },
