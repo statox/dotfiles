@@ -32,6 +32,7 @@ gitconfig.work
 gitignore_global
 inputrc
 tmux.conf
+config/wezterm
 xdefaults
 Xmodmap
 Xresources
