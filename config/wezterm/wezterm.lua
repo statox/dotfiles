@@ -1,11 +1,37 @@
 -- Pull in the wezterm API
 local wezterm = require 'wezterm'
 
+local toggle_colorscheme = function(window, pane)
+    -- We can't read an environment variable set by zshrc to read the the
+    -- so instead we create a mapping to switch manually. To be improved.
+    if not window:get_config_overrides() then
+        local scheme = "dayfox"
+        window:set_config_overrides {
+            color_scheme = scheme,
+        }
+        return
+    end
+
+    if window:get_config_overrides().color_scheme == "dayfox" then
+        local scheme = "nightfox"
+        window:set_config_overrides {
+            color_scheme = scheme,
+        }
+        return
+    else
+        local scheme = "dayfox"
+        window:set_config_overrides {
+            color_scheme = scheme,
+        }
+        return
+    end
+end
+
 local config = wezterm.config_builder()
 
 -- Changing the font size and color scheme.
 config.font_size = 11
-config.color_scheme = 'AdventureTime'
+config.color_scheme = "nightfox"
 
 
 config.leader = { key = ' ', mods = 'CTRL', timeout_milliseconds = 1000 }
@@ -60,6 +86,15 @@ config.keys = {
 
     -- Enter copy mode
     { key = 'Escape', mods = 'LEADER', action = wezterm.action.ActivateCopyMode },
+
+    -- Toggle light and dark colorscheme
+    {
+     key = 'f',
+     mods = 'LEADER',
+     action = wezterm.action_callback(function(window, pane)
+            toggle_colorscheme(window, pane)
+        end)
+    },
 }
 
 -- Show a notification when the config reloads
