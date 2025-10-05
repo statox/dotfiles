@@ -46,6 +46,8 @@
     hide_edge_borders smart
 
     # Hide window title bar for specific applications
+    # Use `xprops` to find out the class (Search for `WM_CLASS(STRING)`)
+    for_window [class="org.wezfurlong.wezterm"] border pixel 1
     for_window [class="Gnome-terminal"] border pixel 1
     for_window [class="(?i)chromium|firefox|brave" window_role="browser"] border pixel 1
     for_window [class="(?i)spotify|zoom|Slack"] border pixel 1
