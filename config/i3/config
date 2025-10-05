@@ -269,6 +269,7 @@
         bindsym c exec chromium; mode "default"
         bindsym f exec firefox; mode "default"
         bindsym s exec slack; mode "default"
+        bindsym k exec ~/.bin/wezterm; mode "default"
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
