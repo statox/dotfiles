@@ -6,15 +6,10 @@
 # The `python` command is needed by git-prompt plugin
 # TODO find a way to fix that properly
 alias python='python3'
-# tmux plugin configuration {{{
-    export ZSH_TMUX_AUTOQUIT='false'
-    export ZSH_TMUX_AUTOCONNECT='false'
-    # Tmux plugin need it to start Tmux at connexion
-    export ZSH_TMUX_AUTOSTART=true
-# }}}
+# export LIGHT_THEME=1 # That should be set in ~/.profile instead to work
 # Plugins {{{
     # IMPORTANT: zsh-syntax-highlighting MUST be placed in last position
-    plugins=(bgnotify colored-man-pages cp docker docker-compose extract git git-prompt npm tmux nvm z zsh-syntax-highlighting)
+    plugins=(bgnotify colored-man-pages cp docker docker-compose extract git git-prompt npm nvm z zsh-syntax-highlighting)
 
     # zsh-syntax-highlighting configuration {{{
         # Remember to git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins
@@ -190,7 +185,7 @@ RPROMPT=$RPROMPT"\
     # This config works with fzf 0.60+, on Ubuntu that requires installing the binary instead of using the apt repo version
     # Set FZF to use ag if it is installed
     command -v ag >/dev/null 2>&1 && export FZF_DEFAULT_COMMAND='ag --nocolor -f --hidden --ignore .git -g ""'
-    export FZF_DEFAULT_OPTS='--height 40% --tmux bottom,40% --border none --no-separator'
+    export FZF_DEFAULT_OPTS='--height 90% --border none --no-separator'
     # Setup the keybinding for ctrl-r, ctrl-t, etc
     source <(fzf --zsh)
 # }}}
