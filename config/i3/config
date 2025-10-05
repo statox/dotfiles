@@ -12,12 +12,13 @@
 
     # Only the first gnome terminal window is created on workspace 3
     # the --role parameter is specific to gnome-terminal
-    assign [window_role="FirstGnomeTerminal"] 3
-    exec gnome-terminal --role='FirstGnomeTerminal'
+    assign [class="org.wezfurlong.wezterm"] 3
+    exec wezterm
 
-    # Start a terminal which will go to scrathpad
-    for_window [window_role="FirstFloatingGnomeTerminal"] floating enable, resize set 90 ppt 90 ppt, move scratchpad
-    exec --no-startup-id gnome-terminal --role='FirstGnomeTerminal,FirstFloatingGnomeTerminal'
+    # TODO Find a way to recreate that with wezterm
+    # Start a terminal which will go to the scrathpad
+    # for_window [window_role="FirstFloatingGnomeTerminal"] floating enable, resize set 90 ppt 90 ppt, move scratchpad
+    # exec --no-startup-id gnome-terminal --role='FirstGnomeTerminal,FirstFloatingGnomeTerminal'
 
     exec --no-startup-id warpd
 
@@ -26,7 +27,7 @@
     # Polybar
     exec_always --no-startup-id $HOME/.config/polybar/launch.sh
     # Picom: Compositor for transparency
-    exec_always --no-startup-id picom -b
+    # exec_always --no-startup-id picom -b # Disabled because it doesn't play well with wezterm and creates slowdown for the whole system
     # Night shift
     exec i3-msg 'exec redshift-gtk'
     # Wallpaper
@@ -46,6 +47,8 @@
     hide_edge_borders smart
 
     # Hide window title bar for specific applications
+    # Use `xprops` to find out the class (Search for `WM_CLASS(STRING)`)
+    for_window [class="org.wezfurlong.wezterm"] border pixel 1
     for_window [class="Gnome-terminal"] border pixel 1
     for_window [class="(?i)chromium|firefox|brave" window_role="browser"] border pixel 1
     for_window [class="(?i)spotify|zoom|Slack"] border pixel 1
@@ -114,7 +117,8 @@
     focus_wrapping no
 
     # start a terminal
-    bindsym $mod+Return exec gnome-terminal
+    # bindsym $mod+Return exec gnome-terminal
+    bindsym $mod+Return exec wezterm
 
     # kill focused window
     bindsym $mod+Shift+q kill
