@@ -117,7 +117,7 @@
 
     # start a terminal
     # bindsym $mod+Return exec gnome-terminal
-    bindsym $mod+Return exec ~/.bin/wezterm
+    bindsym $mod+Return exec wezterm
 
     # kill focused window
     bindsym $mod+Shift+q kill
