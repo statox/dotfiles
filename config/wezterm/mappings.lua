@@ -1,5 +1,6 @@
 
 local wezterm = require 'wezterm'
+local colorscheme = require 'colorscheme'
 local module = {}
 
 function module.setup_bindings(config)
