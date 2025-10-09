@@ -48,6 +48,8 @@ function module.setup_bindings(config)
 
         -- Enter copy mode
         { key = 'Escape', mods = 'LEADER', action = wezterm.action.ActivateCopyMode },
+        -- paste from the clipboard
+        { key = 'p', mods = 'LEADER', action = wezterm.action.PasteFrom('Clipboard') },
 
         -- Toggle light and dark colorscheme
         {
