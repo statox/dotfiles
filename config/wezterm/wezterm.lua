@@ -8,7 +8,7 @@ local config = wezterm.config_builder()
 
 -- Show a notification when the config reloads
 wezterm.on("window-config-reloaded", function(window, pane)
-  window:toast_notification("wezterm", "Config reloaded!", nil, 4000)
+  window:toast_notification("wezterm", "Config reloaded!", nil, 1000)
 end)
 
 ui.setup_ui(config)
