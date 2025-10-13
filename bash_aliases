@@ -32,6 +32,7 @@ alias l='ls -CF'
 #git
 alias g='git'
 alias gs='git status -s'
+alias gss='git status'
 alias gd='improvedGitDiff'
 alias gfu='improvedGitFixup'
 alias gdc='git diff --cached'
