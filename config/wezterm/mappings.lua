@@ -6,6 +6,24 @@ local module = {}
 function module.setup_bindings(config)
     config.leader = { key = ' ', mods = 'CTRL', timeout_milliseconds = 1000 }
 
+    config.key_tables = {
+        -- Defines the keys that are active in our resize-pane mode.
+        -- Since we're likely to want to make multiple adjustments,
+        -- we made the activation one_shot=false. We therefore need
+        -- to define a key assignment for getting out of this mode.
+        -- 'resize_pane' here corresponds to the name="resize_pane" in
+        -- the key assignments above.
+        resize_pane = {
+            { key = 'LeftArrow', action = wezterm.action.AdjustPaneSize { 'Left', 1 } },
+            { key = 'RightArrow', action = wezterm.action.AdjustPaneSize { 'Right', 1 } },
+            { key = 'UpArrow', action = wezterm.action.AdjustPaneSize { 'Up', 1 } },
+            { key = 'DownArrow', action = wezterm.action.AdjustPaneSize { 'Down', 1 } },
+
+            -- Cancel the mode by pressing escape
+            { key = 'Escape', action = 'PopKeyTable' },
+        },
+    }
+
     config.keys = {
         -- Activates the Command Palette, a modal overlay that enables discovery and activation of various commands.
         { key = 'P', mods = 'CTRL', action = wezterm.action.ActivateCommandPalette, },
@@ -20,11 +38,12 @@ function module.setup_bindings(config)
         { key = 'k', mods = 'LEADER', action = wezterm.action.ActivatePaneDirection('Up')   },
         { key = 'l', mods = 'LEADER', action = wezterm.action.ActivatePaneDirection('Right')},
 
-        -- Resize panes with <leader>+CTRL+h/j/k/l
-        { key = 'LeftArrow', mods = 'LEADER', action = wezterm.action.AdjustPaneSize { 'Left', 3 } },
-        { key = 'DownArrow', mods = 'LEADER', action = wezterm.action.AdjustPaneSize { 'Down', 3 } },
-        { key = 'UpArrow', mods = 'LEADER', action = wezterm.action.AdjustPaneSize { 'Up', 3 } },
-        { key = 'RightArrow', mods = 'LEADER', action = wezterm.action.AdjustPaneSize { 'Right', 3 } },
+        -- Resize panes with <leader>+Left,Up,RightDown
+        -- { key = 'r', mods = 'LEADER', action = act.ActivateKeyTable { name = 'resize_pane', one_shot = false } },
+        { key = 'LeftArrow', mods = 'LEADER', action = wezterm.action.ActivateKeyTable { name = 'resize_pane', one_shot = false } },
+        { key = 'DownArrow', mods = 'LEADER', action = wezterm.action.ActivateKeyTable { name = 'resize_pane', one_shot = false } },
+        { key = 'UpArrow', mods = 'LEADER', action = wezterm.action.ActivateKeyTable { name = 'resize_pane', one_shot = false } },
+        { key = 'RightArrow', mods = 'LEADER', action = wezterm.action.ActivateKeyTable { name = 'resize_pane', one_shot = false } },
 
         -- Close pane
         { key = 'x', mods = 'LEADER', action = wezterm.action.CloseCurrentPane { confirm = true }, },
