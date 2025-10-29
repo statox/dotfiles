@@ -27,7 +27,7 @@
     # Polybar
     exec_always --no-startup-id $HOME/.config/polybar/launch.sh
     # Picom: Compositor for transparency
-    exec_always --no-startup-id picom -b
+    # exec_always --no-startup-id picom -b # Disabled because it doesn't play well with wezterm and creates slowdown for the whole system
     # Night shift
     exec i3-msg 'exec redshift-gtk'
     # Wallpaper
