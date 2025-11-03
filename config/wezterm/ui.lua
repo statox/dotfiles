@@ -1,6 +1,56 @@
 local wezterm = require 'wezterm'
 local colorscheme = require 'colorscheme'
 
+-- This function returns the suggested title for a tab.
+-- It prefers the title that was set via `tab:set_title()`
+-- or `wezterm cli set-tab-title`, but falls back to the
+-- title of the active pane in that tab.
+-- TODO Maybe rework to show the tab cwd
+function tab_title(tab_info)
+    local title = tab_info.tab_title
+    -- if the tab title is explicitly set, take that
+    if title and #title > 0 then
+        return title
+    end
+    -- Otherwise, use the title from the active pane in that tab
+    return tab_info.active_pane.title
+end
+
+wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
+    local default_background = '#333333'
+    local edge_background = '#333333'
+    local background = default_background
+    local foreground = '#a0a0a0' -- default inactive color
+    local zoomed = false
+
+    -- Check if this tab has a zoomed pane
+    for _, pane in ipairs(tab.panes) do
+        if pane.is_zoomed then
+            zoomed = true
+            break
+        end
+    end
+
+    -- Change foreground color for active tab and zoomed state
+    if tab.is_active then
+        if zoomed then
+            foreground = '#00afff' -- blue if zoomed
+        else
+            foreground = '#ffffff' -- white if active but not zoomed
+            background = "#3a4460"
+        end
+    end
+
+    local title = tab_title(tab)
+    return {
+        { Background = { Color = background } },
+        { Foreground = { Color = foreground } },
+        { Text = ' ' .. title .. ' ' },
+        { Background = { Color = default_background } },
+        { Text = '|' },
+    }
+end)
+
 local module = {}
 
 function module.setup_ui(config)
