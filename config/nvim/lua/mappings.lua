@@ -158,3 +158,17 @@ end
 -- Access the last tab with g9
 nnoremap("g9", ":tablast<CR>")
 --}}}
+-- Use <leader>* to make available the unnamed register to the system clipboard {{{
+nnoremap("<leader>*", function()
+    local unnamed = vim.fn.getreg('"')
+    local regtype = vim.fn.getregtype('"')
+
+    local ok = pcall(vim.fn.setreg, '+', unnamed, regtype)
+
+    if not ok then
+        vim.notify('Error - Failed copying unnamed register to system clipboard.')
+    end
+
+    vim.notify('Copied unnamed register to system clipboard.')
+end)
+-- }}}
