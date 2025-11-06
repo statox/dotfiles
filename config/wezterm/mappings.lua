@@ -39,11 +39,11 @@ function module.setup_bindings(config)
         { key = 'l', mods = 'LEADER', action = wezterm.action.ActivatePaneDirection('Right')},
 
         -- Resize panes with <leader>+Left,Up,RightDown
-        -- { key = 'r', mods = 'LEADER', action = act.ActivateKeyTable { name = 'resize_pane', one_shot = false } },
-        { key = 'LeftArrow', mods = 'LEADER', action = wezterm.action.ActivateKeyTable { name = 'resize_pane', one_shot = false } },
-        { key = 'DownArrow', mods = 'LEADER', action = wezterm.action.ActivateKeyTable { name = 'resize_pane', one_shot = false } },
-        { key = 'UpArrow', mods = 'LEADER', action = wezterm.action.ActivateKeyTable { name = 'resize_pane', one_shot = false } },
-        { key = 'RightArrow', mods = 'LEADER', action = wezterm.action.ActivateKeyTable { name = 'resize_pane', one_shot = false } },
+        -- Use `until_unknown` to exit the resize pane mode on any other key than the arrows
+        { key = 'LeftArrow', mods = 'LEADER',  action = wezterm.action.ActivateKeyTable { name = 'resize_pane', one_shot = false, until_unknown = true } },
+        { key = 'DownArrow', mods = 'LEADER',  action = wezterm.action.ActivateKeyTable { name = 'resize_pane', one_shot = false, until_unknown = true } },
+        { key = 'UpArrow', mods = 'LEADER',    action = wezterm.action.ActivateKeyTable { name = 'resize_pane', one_shot = false, until_unknown = true } },
+        { key = 'RightArrow', mods = 'LEADER', action = wezterm.action.ActivateKeyTable { name = 'resize_pane', one_shot = false, until_unknown = true } },
 
         -- Close pane
         { key = 'x', mods = 'LEADER', action = wezterm.action.CloseCurrentPane { confirm = true }, },
