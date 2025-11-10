@@ -1,4 +1,5 @@
 # ~/.bash_aliases
+# vim:ft=bash
 #
 # Author: Adrien Fabre
 #
@@ -103,8 +104,11 @@ improvedGitFixup() {
     git commit --fixup $COMMIT_TO_FIXUP
 
     PREVIOUS_COMMIT=$(git rev-parse --short "$COMMIT_TO_FIXUP^1")
+    commandToRun="git rebase -i --autosquash $PREVIOUS_COMMIT"
     echo '\nCreated fixup commit. Run the following command to apply:\n'
-    echo "    git rebase -i --autosquash $PREVIOUS_COMMIT"
+    echo "    $commandToRun"
+    echo "$commandToRun" | xclip -selection clipboard
+    echo "       (Command is available in clipboard)"
 }
 
 alias man='improvedMan'
