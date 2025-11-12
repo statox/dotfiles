@@ -1,8 +1,0 @@
-!! This file configure X applications
-!!! remember to use
-!!!   xrdb -merge ~/.Xresources
-!!! to load changes
-
-#include ".xdefaults/colors.jellybeans.rc"
-#include ".xdefaults/xterm.rc"
-#include ".xdefaults/rxvt.rc"
