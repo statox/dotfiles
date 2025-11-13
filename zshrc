@@ -13,8 +13,10 @@ alias python='python3'
     export ZSH_TMUX_AUTOSTART=true
 # }}}
 # Plugins {{{
+    # NVM is slow, make the plugin lazy loading to improve the startup time of new shells
+    zstyle ':omz:plugins:nvm' lazy yes
     # IMPORTANT: zsh-syntax-highlighting MUST be placed in last position
-    plugins=(bgnotify colored-man-pages cp docker docker-compose extract git git-prompt npm tmux z zsh-syntax-highlighting)
+    plugins=(bgnotify colored-man-pages cp docker docker-compose extract git git-prompt npm tmux nvm z zsh-syntax-highlighting)
 
     # zsh-syntax-highlighting configuration {{{
         # Remember to git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins
@@ -186,12 +188,5 @@ RPROMPT=$RPROMPT"\
     # Setup the keybinding for ctrl-r, ctrl-t, etc
     source <(fzf --zsh)
 # }}}
-# NVM configuration {{{
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-# }}}
-# Necessary to make kitty work
-export TERM=screen-256color
 
 export MOCHA_COLORS=true
