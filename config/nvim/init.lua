@@ -17,6 +17,7 @@ require("commands")
 require("abbreviations")
 require("statusline")
 require("autocommands")
+require("nvm")
 
 require("plugins")
 -- Remainder of vimscript vimrc

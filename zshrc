@@ -14,7 +14,7 @@ alias python='python3'
 # }}}
 # Plugins {{{
     # IMPORTANT: zsh-syntax-highlighting MUST be placed in last position
-    plugins=(bgnotify colored-man-pages cp docker docker-compose extract git git-prompt npm tmux z zsh-syntax-highlighting)
+    plugins=(bgnotify colored-man-pages cp docker docker-compose extract git git-prompt npm tmux nvm z zsh-syntax-highlighting)
 
     # zsh-syntax-highlighting configuration {{{
         # Remember to git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins
@@ -29,6 +29,14 @@ alias python='python3'
         ZSH_HIGHLIGHT_STYLES[path]='fg=yellow'
         ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=124,bold' # Red
     # }}}
+# }}}
+# NVM {{{
+# We use the oh-my-zsh nvm plugin to load nvm so this configuration must happen before sourcing oh-my-zsh
+
+# Using lazy loading to considerably reduce zsh startup time
+zstyle ':omz:plugins:nvm' lazy yes
+# list of commands which trigger loading nvm. Nvim is here because some LSP servers need node in the path
+zstyle ':omz:plugins:nvm' lazy-cmd nvim
 # }}}
 # Miscelanious zsh configuration {{{
     # perform cd when something which is not a command is entered
@@ -186,12 +194,5 @@ RPROMPT=$RPROMPT"\
     # Setup the keybinding for ctrl-r, ctrl-t, etc
     source <(fzf --zsh)
 # }}}
-# NVM configuration {{{
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-# }}}
-# Necessary to make kitty work
-export TERM=screen-256color
 
 export MOCHA_COLORS=true
