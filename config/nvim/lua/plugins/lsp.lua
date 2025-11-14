@@ -73,6 +73,8 @@ local lsp_flags = {
 -- prettier
 -- prettierd
 -- stylua
+-- ruff
+-- mypy
 
 local serversToInstall = {
     "ansiblels",
@@ -85,7 +87,7 @@ local serversToInstall = {
     "eslint",
     "harper_ls", -- General grammar check
     "html",
-    "pylsp", -- run :PylspInstall pylsp-mypy
+    -- "basedpyright",
     "ruff",
     "sqlls",
     "svelte",
