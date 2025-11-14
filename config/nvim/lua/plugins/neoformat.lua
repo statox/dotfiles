@@ -34,6 +34,8 @@ vim.g.neoformat_enabled_arduino = { "clang-format" }
 
 vim.g.neoformat_enabled_lua = { "stylua" }
 
+vim.g.neoformat_enabled_python = { "ruff" }
+
 vim.g.neoformat_json_jq = {
     exe = "jq",
     args = { "--indent 4" },
