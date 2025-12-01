@@ -1,6 +1,5 @@
 -- Pull in the wezterm API
 local wezterm = require 'wezterm'
-local colorscheme = require 'colorscheme'
 local ui = require 'ui'
 local mappings = require 'mappings'
 

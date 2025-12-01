@@ -55,7 +55,7 @@ local module = {}
 function module.setup_ui(config)
     -- Changing the font size and color scheme.
     config.font_size = 11
-    config.color_scheme = colorscheme.default_colorscheme
+    config.color_scheme = colorscheme.init_colorscheme()
 
     -- tab bar
     config.window_frame = {

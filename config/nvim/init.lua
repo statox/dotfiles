@@ -21,5 +21,6 @@ require("autocommands")
 require("plugins")
 -- Remainder of vimscript vimrc
 -- vim.api.nvim_command("source ~/.vimrc")
-require("custom_colorscheme")
+require("colorscheme_custom")
+require("colorscheme_watcher")
 require("diffsettings")

@@ -1,4 +1,4 @@
-#Dotfiles
+# Dotfiles
 
 This repo is used to save and sync my dotfiles between different machines.
 When cloning and executing the scripts for the first time, the current dotfiles are saved and replaced by symlinks to the ones in the repo.
