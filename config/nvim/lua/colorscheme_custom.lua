@@ -2,16 +2,7 @@ if vim.fn.has("termguicolors") then
     vim.opt.termguicolors = true
 end
 
-if os.getenv("LIGHT_THEME") == "1" then
-    vim.g.colorsDefault = "dayfox"
-    vim.g.colorsDiff = "dayfox"
-else
-    vim.g.colorsDefault = "nightfox"
-    vim.g.colorsDiff = "nordfox"
-end
-
-vim.cmd("colorscheme " .. vim.g.colorsDefault)
-
+-- This code is useful when using the colorschemes provided by nightfox
 -- I want the font of the current tab in the tabline line to be
 -- mode visible than what the colorscheme does.
 -- So I update the group TabLineSel which is used to define the
