@@ -31,7 +31,7 @@ alias python='python3'
 # Using lazy loading to considerably reduce zsh startup time
 zstyle ':omz:plugins:nvm' lazy yes
 # list of commands which trigger loading nvm. Nvim is here because some LSP servers need node in the path
-zstyle ':omz:plugins:nvm' lazy-cmd nvim
+zstyle ':omz:plugins:nvm' lazy-cmd git nvim uv
 # }}}
 # Miscelanious zsh configuration {{{
     # perform cd when something which is not a command is entered
