@@ -270,6 +270,7 @@
     # Mode to quickly launch specific apps
     bindsym $mod+space mode "quicklaunch"
     mode "quicklaunch"{
+        bindsym a exec arandr; mode "default"
         bindsym c exec chromium; mode "default"
         bindsym f exec firefox; mode "default"
         bindsym s exec slack; mode "default"
