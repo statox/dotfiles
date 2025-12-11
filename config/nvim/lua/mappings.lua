@@ -172,3 +172,5 @@ nnoremap("<leader>*", function()
     vim.notify('Copied unnamed register to system clipboard.')
 end)
 -- }}}
+
+nnoremap("<Leader>`", ':AerialToggle<CR>')
