@@ -1,3 +1,5 @@
+local wezterm = require 'wezterm'
+
 local change_colorscheme = function(window, pane)
     -- This method is a helper to list the available colorscheme.
     -- When one is selected the function uses sed to update ~/.wezterm.lua
@@ -5,6 +7,8 @@ local change_colorscheme = function(window, pane)
     -- feature this changes the colorscheme in the window immediately
 
     -- To use it add a mapping in the config like this:
+    -- local change_colorscheme = require 'colorscheme_util'
+    --
     -- {
     --  key = 'f',
     --  mods = 'LEADER',
@@ -59,3 +63,4 @@ local change_colorscheme = function(window, pane)
     )
 end
 
+return change_colorscheme
