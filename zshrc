@@ -9,7 +9,10 @@ alias python='python3'
 # export LIGHT_THEME=1 # That should be set in ~/.profile instead to work
 # Plugins {{{
     # IMPORTANT: zsh-syntax-highlighting MUST be placed in last position
-    plugins=(bgnotify colored-man-pages cp docker docker-compose extract git git-prompt npm nvm z zsh-syntax-highlighting)
+    plugins=(bgnotify colored-man-pages docker docker-compose extract git-prompt npm nvm z zsh-syntax-highlighting)
+    # Don't let oh-my-zsh plugins install their aliases
+    zstyle ':omz:plugins:*' aliases no
+    zstyle ':omz:plugins:z' aliases yes
 
     # zsh-syntax-highlighting configuration {{{
         # Remember to git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins
