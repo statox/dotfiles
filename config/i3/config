@@ -126,6 +126,9 @@
     # Use rofi as the application launcher/window switcher
     bindsym $mod+d exec rofi -show combi
 
+    # Use custom script to update system theme
+    bindsym $mod+Shift+d exec "~/.bin/toggle_theme"
+
     # change focus
     bindsym $mod+h focus left
     bindsym $mod+j focus down

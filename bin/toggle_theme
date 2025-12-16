@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+# Update the config files defining the colorscheme for different applications
+# - /tmp/colorscheme is watched by WezTerm and Neovim to update their scheme on the fly
+# - ~/.config/gtk-*.0/settings.ini are used by some gtk snap apps like slack and chromium
+#
+# Apps working
+#   - Wezterm + Neovim
+#       - That relies on both apps watching /tmp/colorscheme. This mechanism leaves in both configs.
+#   - Slack snap
+#   - Chromium snap
+#       - Chromium needs to be configured to use GTK theme Hamburger > Settings > Appearance > Theme
+#   - Postman snap
+# Apps which still need configuration:
+#   - Firefox
+#   - Gnome files
+#   - Spotify
+# For now firefox doesn't seem to responde to any of these settings
+
+STATE_FILE="/tmp/colorscheme"
+CURRENT=$(cat "$STATE_FILE" 2>/dev/null || echo "dark")
+
+if [ "$CURRENT" = "dark" ]; then
+    NEW="light"
+    GTK_THEME="Adwaita"
+    COLOR_SCHEME="prefer-light"
+    GTK_PREFER_DARK="0"
+else
+    NEW="dark"
+    GTK_THEME="Adwaita-dark"
+    COLOR_SCHEME="prefer-dark"
+    GTK_PREFER_DARK="1"
+fi
+
+# Update state file (for WezTerm/Neovim)
+echo "$NEW" > "$STATE_FILE"
+
+# Update GTK 3.0 and 4.0 settings.ini files
+# This is useful for snap apps like slack and chromium. But the apps require a restart
+# to take into account the new values
+for gtk_config in "$HOME/.config/gtk-3.0/settings.ini" "$HOME/.config/gtk-4.0/settings.ini"; do
+    if [ ! -f "$gtk_config" ]; then
+        touch "$gtk_config"
+        echo "gtk-application-prefer-dark-theme=0" >> "$gtk_config"
+        echo "gtk-theme-name=Adwaita" >> "$gtk_config"
+    fi
+    sed -i "s/^gtk-application-prefer-dark-theme=.*/gtk-application-prefer-dark-theme=$GTK_PREFER_DARK/" "$gtk_config"
+    sed -i "s/^gtk-theme-name=.*/gtk-theme-name=$GTK_THEME/" "$gtk_config"
+done
+
+# Update GTK settings
+gsettings set org.gnome.desktop.interface gtk-theme "$GTK_THEME"
+gsettings set org.gnome.desktop.interface color-scheme "$COLOR_SCHEME"

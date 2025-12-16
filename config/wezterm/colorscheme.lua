@@ -62,6 +62,14 @@ function init_colorscheme()
 end
 module.init_colorscheme = init_colorscheme
 
+-- When the file containing the theme changes reload the config
+-- which triggers init_colorscheme() again.
+-- This allows external scripts to modify the file and have
+-- WezTerm updating automatically
+wezterm.add_to_config_reload_watch_list(colorscheme_file_path)
+
+-- Since the colorscheme_file_path is added to the config reload watch list
+-- in init_colorscheme() this function will trigger a reload of the config
 function module.toggle_colorscheme(window, pane, config)
     local success, content = pcall(read_colorscheme_file)
 
@@ -71,10 +79,6 @@ function module.toggle_colorscheme(window, pane, config)
         file:write(new_value)
         file:close()
     end
-
-    -- We reload the config which triggers setup_ui() which uses
-    -- init_colorscheme() to setup the colorschme based on the file content
-    wezterm.reload_configuration()
 end
 
 return module

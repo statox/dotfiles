@@ -12,6 +12,7 @@ bin/mm
 bin/open-terminal
 bin/rofi-calc
 bin/timer
+bin/toggle_theme
 config/dunst
 config/espanso
 config/i3
