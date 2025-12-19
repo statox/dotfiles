@@ -4,13 +4,6 @@ saved-dotfiles/*
 # save files
 scripts/files_list
 
-# tmp files
-*.swp
-
-# Vim plugins directory
-vim/plugged
-vim/viminfo
-
 # Vim custom dictionaries
 vim/spell/*.add*
 
