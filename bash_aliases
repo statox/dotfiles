@@ -284,6 +284,8 @@ function o {
 }
 
 # function Extract for common file formats
+# Create the function only on bash system, on zsh I use oh-my-zsh extract plugin
+if [[ $SHELL =~ 'bash' ]]; then
 function extract {
 if [ -z "$1" ]; then
   # display usage if no parameters given
@@ -317,6 +319,7 @@ else
   fi
 fi
 }
+fi
 
 # Creates an archive (*.tar.gz) from given directory.
 function maketar { tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"; }
