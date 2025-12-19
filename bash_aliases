@@ -1,31 +1,18 @@
 # ~/.bash_aliases
-# vim:ft=bash
-#
-# Author: Adrien Fabre
-#
-# This file contains useful aliases and functions
-# It must be called in ~/basrc
+# vim:ft=bash fdm=marker
 
-####################################################
-#                 local  aliases                   #
-####################################################
-
+# Local aliases {{{
 # Aliases used only in this machine (not synched with git)
-
 if [ -f ~/.bash_aliases_local ]; then
     . ~/.bash_aliases_local
 fi
-
-####################################################
-#                   aliases                        #
-####################################################
-
-#ls
+# }}}
+# ls {{{
+alias la='ls -ACF'
 alias ldot='ls -d .*'
 alias ll='ls -AlFh'
-alias la='ls -ACF'
-
-#git
+# }}}
+# git {{{
 alias g='git'
 alias gs='git status -s'
 alias gss='git status'
@@ -43,8 +30,20 @@ alias glgn='git log --name-only'
 alias gco='git checkout'
 alias glgme='git log --author "$(git config user.name)"'
 alias glgpme='git log -p --author "$(git config user.name)"'
-
 alias gcoi='git checkout $(git branch | fzf)'
+alias glgi='fzf-show-commits'
+
+# Taken from fshow - git commit browser on https://github.com/junegunn/fzf/wiki/examples#git
+fzf-show-commits() {
+  git log --graph --color=always \
+      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      --bind "ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                {}
+FZF-EOF"
+}
 
 improvedGitDiff() {
     # If any argument is passed behave like git diff
@@ -105,6 +104,36 @@ improvedGitFixup() {
     echo "       (Command is available in clipboard)"
 }
 
+# Add git completion to aliases if we are in bash
+# (zsh already has that by default)
+if [[ $SHELL =~ 'bash' && -f ~/.git-completion.bash ]]; then
+    source ~/.git-completion.bash
+
+    __git_complete g __git_main
+    __git_complete gs _git_status
+    __git_complete gd _git_diff
+    __git_complete ga _git_add
+    __git_complete gp _git_pull
+    __git_complete gP _git_push
+    __git_complete gc _git_commit
+    __git_complete gl _git_log
+    __git_complete gco _git_checkout
+fi
+# }}}
+# node {{{
+alias ni='node -i'
+alias npmr='npm run'
+alias pnpmr='pnpm run'
+alias noded='node --inspect-brk'
+# }}}
+# vim {{{
+alias v='nvim'
+alias vi='vim'
+alias n='nvim'
+alias vim='nvim'
+alias lvim='vim -S ~/Session.vim' # restore vim with a session file
+# }}}
+# man {{{
 # Use fzf to fuzzy find man entries and display man page in preview window
 alias man='improvedMan'
 improvedMan() {
@@ -125,74 +154,8 @@ improvedMan() {
 
     man "$man_entry"
 }
-
-alias glgi='fzf-show-commits'
-# Taken from fshow - git commit browser on https://github.com/junegunn/fzf/wiki/examples#git
-fzf-show-commits() {
-  git log --graph --color=always \
-      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
-  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
-      --bind "ctrl-m:execute:
-                (grep -o '[a-f0-9]\{7\}' | head -1 |
-                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
-                {}
-FZF-EOF"
-}
-
-# Ag the silver searcher
-alias agw='ag --word-regex'
-
-# node repl
-alias ni='node -i'
-# npm
-alias npmr='npm run'
-alias pnpmr='pnpm run'
-
-# terraform
-alias tf="terraform"
-
-
-alias ts='date +"%s"'
-alias ts2date='timestamp2date'
-function timestamp2date {
-    echo $(date -d @$1)
-}
-
-# Restart polybar
-if [ -f ~/.config/polybar/launch.sh ]; then
-    alias polystart='source ~/.config/polybar/launch.sh &'
-fi
-
-# Add git completion to aliases if we are in bash
-# (zsh already has that by default)
-if [[ $SHELL =~ 'bash' && -f ~/.git-completion.bash ]]; then
-    source ~/.git-completion.bash
-
-    __git_complete g __git_main
-    __git_complete gs _git_status
-    __git_complete gd _git_diff
-    __git_complete ga _git_add
-    __git_complete gp _git_pull
-    __git_complete gP _git_push
-    __git_complete gc _git_commit
-    __git_complete gl _git_log
-    __git_complete gco _git_checkout
-fi
-
-#power management
-# shutdown
-alias shutnow='sudo shutdown -h now'
-# restart
-alias restnow='sudo shutdown -r now'
-
-#vim
-alias v='nvim'
-alias vi='vim'
-alias n='nvim'
-alias vim='nvim'
-
-# directories navigation
-alias back='cd $OLDPWD'
+# }}}
+# cd {{{
 alias ..='cd ../'
 alias ...='cd ../../'
 alias ....='cd ../../../'
@@ -202,11 +165,8 @@ alias .......='cd ../../../../../../'
 alias ........='cd ../../../../../../../'
 alias .........='cd ../../../../../../../../'
 alias ..........='cd ../../../../../../../../../'
-
-# directories navigation with z + fzf
-# TODO add check for existance of the commands
-alias zf='z $(z | fzf)'
-
+# }}}
+# ping {{{
 # quickping with human readable timestamp
 function p {
     ping -vD 8.8.8.8 | while read row
@@ -219,25 +179,48 @@ function p {
 }
 
 alias p1='ping 1.1.1.1'
-
-# restore vim with a session file
-alias lvim='vim -S ~/Session.vim'
-
-# Node
-# Start node with debugging
-alias noded='node --inspect-brk'
-
-# Sudo
+# }}}
+# Power management {{{
+# shutdown
+alias shutnow='sudo shutdown -h now'
+# restart
+alias restnow='sudo shutdown -r now'
+# }}}
+# Ag - the silver searcher {{{
+alias agw='ag --word-regex'
+# }}}
+# Terraform {{{
+alias tf="terraform"
+# }}}
+# Date and timestamps {{{
+alias ts='date +"%s"'
+alias ts2date='timestamp2date'
+function timestamp2date {
+    echo $(date -d @$1)
+}
+# }}}
+# polybar {{{
+if [ -f ~/.config/polybar/launch.sh ]; then
+    alias polystart='source ~/.config/polybar/launch.sh &'
+fi
+# }}}
+# z + fzf {{{
+# directories navigation with z + fzf
+# TODO add check for existance of the commands
+alias zf='z $(z | fzf)'
+# }}}
+# sudo {{{
 # https://askubuntu.com/a/22043
 # alias sudo='sudo '
 # Use sode with the current $PATH (useful when using docker)
 alias sudop='sudo env PATH=$PATH'
-
-# Docker
+# }}}
+# docker {{{
 # Use docker with sudo and $PATH set
 alias sdocker='sudo env PATH=$PATH docker'
 alias sdocker-compose='sudo env PATH=$PATH docker-compose'
-
+# }}}
+# ansible {{{
 alias ansible-playbook='ansiblePlaybookDebug'
 function ansiblePlaybookDebug {
     export ANSIBLE_STDOUT_CALLBACK=default
@@ -245,11 +228,8 @@ function ansiblePlaybookDebug {
 
     'ansible-playbook' "$@"
 }
-
-####################################################
-#                   functions                      #
-####################################################
-# Open files or directory in GUI application
+# }}}
+# o - Open files or directory in GUI application {{{
 # (xdg-open is better than gnome-open because it is desktop agnostic)
 function o {
     # If no parameter is passed open current folder
@@ -259,46 +239,46 @@ function o {
         xdg-open $@ 
     fi
 }
-
-# function Extract for common file formats
+# }}}
+# Extract for common file formats {{{
 # Create the function only on bash system, on zsh I use oh-my-zsh extract plugin
 if [[ $SHELL =~ 'bash' ]]; then
-function extract {
-if [ -z "$1" ]; then
-  # display usage if no parameters given
-  echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
-else
-  if [ -f $1 ] ; then
-     # creation of the folder where to extract the files
-     #NAME=${1%.*}
-     #mkdir $NAME && cd $NAME
-     # extraction
-     case $1 in
-        *.tar.bz2) tar xvjf ./$1 ;;
-        *.tar.gz) tar xvzf ./$1 ;;
-        *.tar.xz) tar xvJf ./$1 ;;
-        *.lzma) unlzma ./$1 ;;
-        *.bz2) bunzip2 ./$1 ;;
-        *.rar) unrar x -ad ./$1 ;;
-        *.gz) gunzip ./$1 ;;
-        *.tar) tar xvf ./$1 ;;
-        *.tbz2) tar xvjf ./$1 ;;
-        *.tgz) tar xvzf ./$1 ;;
-        *.zip) unzip ./$1 ;;
-        *.Z) uncompress ./$1 ;;
-        *.7z) 7z x ./$1 ;;
-        *.xz) unxz ./$1 ;;
-        *.exe) cabextract ./$1 ;;
-        *) echo "extract: '$1' - unknown archive method" ;;
-     esac
-  else
-     echo "$1 - file does not exist"
-  fi
+    function extract {
+        if [ -z "$1" ]; then
+            # display usage if no parameters given
+            echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
+        else
+            if [ -f $1 ] ; then
+                # creation of the folder where to extract the files
+                #NAME=${1%.*}
+                #mkdir $NAME && cd $NAME
+                # extraction
+                case $1 in
+                    *.tar.bz2) tar xvjf ./$1 ;;
+                    *.tar.gz) tar xvzf ./$1 ;;
+                    *.tar.xz) tar xvJf ./$1 ;;
+                    *.lzma) unlzma ./$1 ;;
+                    *.bz2) bunzip2 ./$1 ;;
+                    *.rar) unrar x -ad ./$1 ;;
+                    *.gz) gunzip ./$1 ;;
+                    *.tar) tar xvf ./$1 ;;
+                    *.tbz2) tar xvjf ./$1 ;;
+                    *.tgz) tar xvzf ./$1 ;;
+                    *.zip) unzip ./$1 ;;
+                    *.Z) uncompress ./$1 ;;
+                    *.7z) 7z x ./$1 ;;
+                    *.xz) unxz ./$1 ;;
+                    *.exe) cabextract ./$1 ;;
+                    *) echo "extract: '$1' - unknown archive method" ;;
+                esac
+            else
+                echo "$1 - file does not exist"
+            fi
+        fi
+    }
 fi
-}
-fi
-
-# looping through a command
+# }}}
+# Loop - looping through a command {{{
 loop() {
     echo Starting: "$@"
     while true; do
@@ -308,7 +288,6 @@ loop() {
 }
 
 loopd() {
-
     CMD=""
     DELAY=1
     re='^[0-9]+$'
@@ -331,3 +310,4 @@ loopd() {
         sleep $DELAY;
     done
 }
+# }}}
