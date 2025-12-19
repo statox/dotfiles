@@ -20,15 +20,10 @@ fi
 #                   aliases                        #
 ####################################################
 
-# reload .bashrc (after modifying it)
-alias reloadbashrc='source ~/.bashrc'
-alias reloadzshrc='source ~/.zshrc'
-
 #ls
 alias ldot='ls -d .*'
 alias ll='ls -AlFh'
 alias la='ls -ACF'
-alias l='ls -CF'
 
 #git
 alias g='git'
@@ -37,7 +32,6 @@ alias gss='git status'
 alias gd='improvedGitDiff'
 alias gfu='improvedGitFixup'
 alias gdc='git diff --cached'
-alias gdw='git diff -w'
 alias ga='git add'
 alias gp='git push'
 alias gc='git commit'
@@ -111,6 +105,7 @@ improvedGitFixup() {
     echo "       (Command is available in clipboard)"
 }
 
+# Use fzf to fuzzy find man entries and display man page in preview window
 alias man='improvedMan'
 improvedMan() {
     # If any argument is passed behave like man
@@ -130,14 +125,6 @@ improvedMan() {
 
     man "$man_entry"
 }
-
-# if command -v fzf > /dev/null 2>&1; then
-    # alias gcoi='git checkout $(git branch | fzf)'
-    # alias gdi='git diff $(git status --porcelain | sed "s/\w //" | fzf)'
-# else
-    # alias gcoi='echo "fzf not found no aliases"'
-    # alias gdi='echo "fzf not found no aliases"'
-# fi
 
 alias glgi='fzf-show-commits'
 # Taken from fshow - git commit browser on https://github.com/junegunn/fzf/wiki/examples#git
@@ -192,9 +179,6 @@ if [[ $SHELL =~ 'bash' && -f ~/.git-completion.bash ]]; then
     __git_complete gco _git_checkout
 fi
 
-#mkdir: create parents directories + verbose
-alias mkdir='mkdir -p -v'
-
 #power management
 # shutdown
 alias shutnow='sudo shutdown -h now'
@@ -239,16 +223,9 @@ alias p1='ping 1.1.1.1'
 # restore vim with a session file
 alias lvim='vim -S ~/Session.vim'
 
-# Get debian version codename
-alias debianversion='lsb_release -a'
-
 # Node
 # Start node with debugging
 alias noded='node --inspect-brk'
-
-# Podman
-alias pps='podman ps'
-alias ppsa='podman ps -a'
 
 # Sudo
 # https://askubuntu.com/a/22043
@@ -320,30 +297,6 @@ else
 fi
 }
 fi
-
-# Creates an archive (*.tar.gz) from given directory.
-function maketar { tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"; }
-# Create a ZIP archive of a file or folder.
-function makezip { zip -r "${1%%/}.zip" "$1" ; }
-
-# Create an archive of a given format from a given file or directory
-function archive {
-
-  if [ ! -d "$2" ] && [ ! -f "$2" ];then
-    echo "not a file or directory"
-    echo "Usage: archive [format] [path/to/file/or/directory]"
-    return -1
-  fi
-
-  case "$1" in
-    tar.gz)   tar cvzf "${2%%/}.tar.gz"  "${2%%/}/";;
-    zip)      zip -r "${2%%/}.zip" "$2" ;;
-    gz|gzip)  cat $2 | gzip > $2.gz;;
-    *)    echo "wrong archive type" 
-          echo "Usage: archive [format] [path/to/file/or/directory]";;
-  esac
-}
-
 
 # looping through a command
 loop() {
