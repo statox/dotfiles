@@ -1,11 +1,13 @@
 #~/.zshrc
 # vim:fdm=marker
 
-# Hacky hack
-# `python` is not available but `python3` is.
-# The `python` command is needed by git-prompt plugin
-# TODO find a way to fix that properly
-alias python='python3'
+# Python alias {{{
+    # Hacky hack: By default on Ubuntu `python` is not available but `python3` is.
+    # The `python` command is needed by git-prompt plugin
+    # TODO find a way to fix that properly
+    # Note: This alias is here since September 2022. It's probably not worth fixing in the end
+    alias python='python3'
+# }}}
 # Plugins {{{
     plugins=(bgnotify colored-man-pages docker docker-compose extract git-prompt npm nvm z)
     # Don't let oh-my-zsh plugins install their aliases
