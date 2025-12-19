@@ -290,3 +290,5 @@ target/
 Session.vim
 .netrwhist
 *~
+
+.claude
