@@ -6,7 +6,6 @@
 # The `python` command is needed by git-prompt plugin
 # TODO find a way to fix that properly
 alias python='python3'
-# export LIGHT_THEME=1 # That should be set in ~/.profile instead to work
 # Plugins {{{
     plugins=(bgnotify colored-man-pages docker docker-compose extract git-prompt npm nvm z)
     # Don't let oh-my-zsh plugins install their aliases
