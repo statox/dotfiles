@@ -1,177 +1,208 @@
--- automatically install and set up packer.nvim
-local ensure_packer = function()
-    local fn = vim.fn
-    local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-    if fn.empty(fn.glob(install_path)) > 0 then
-        fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
-        vim.cmd([[packadd packer.nvim]])
-        return true
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+    if vim.v.shell_error ~= 0 then
+        vim.api.nvim_echo({
+            { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+            { out, "WarningMsg" },
+            { "\nPress any key to exit..." },
+        }, true, {})
+        vim.fn.getchar()
+        os.exit(1)
     end
-    return false
 end
-local packer_bootstrap = ensure_packer()
+vim.opt.rtp:prepend(lazypath)
 
-require("packer").startup(function(use)
-    use("wbthomason/packer.nvim")
-
+-- Plugin specifications
+local plugins = {
     -- colorscheme: the plugin provides both my regular colorscheme and the
     -- one I use for diff mode
-    use({
+    {
         "EdenEast/nightfox.nvim",
-        config = require("nightfox").setup({
-            options = {
-                dim_inactive = true,
-            },
-        }),
-    })
+        lazy = false,
+        priority = 1000,
+        opts = {
+            options = { dim_inactive = true },
+        },
+    },
 
     -- numToStr/Comment.nvim: Smart and powerful comment plugin for
-    use("numToStr/Comment.nvim")
+    {
+        "numToStr/Comment.nvim",
+        config = function()
+            require("plugins.comment")
+        end,
+    },
 
-    -- tpope/vim-surround: Surround text with matching caracters{{{
-    use("tpope/vim-surround")
+    -- tpope/vim-surround: Surround text with matching caracters
+    { "tpope/vim-surround" },
 
     -- svermeulen/vim-subversive: Operator motions to perform quick substitutions
-    use("svermeulen/vim-subversive")
+    { "svermeulen/vim-subversive" },
 
-    -- godlygeek/tabular: Vim script for text filtering and alignment{{{
-    use("godlygeek/tabular")
+    -- godlygeek/tabular: Vim script for text filtering and alignment
+    { "godlygeek/tabular" },
 
     -- tpope/vim-fugitive: Git wrapper
-    use("tpope/vim-fugitive")
+    { "tpope/vim-fugitive" },
 
     -- mhinz/vim-signify: show git diff in gutter
-    use("mhinz/vim-signify")
+    { "mhinz/vim-signify" },
 
     -- statox/GOD.vim: Get online doc links
-    use("statox/GOD.vim")
+    { "statox/GOD.vim" },
 
     -- dependency for some plugins. Installed at top level to access :NvimWebDeviconsHiTest while
     -- evaluating new terminal emulators
-    use("nvim-tree/nvim-web-devicons")
+    { "nvim-tree/nvim-web-devicons" },
 
     -- danilamihailov/beacon.nvim: Highlight cursor when it moves
-    use({
+    {
         "danilamihailov/beacon.nvim",
-        config = function()
-            require("beacon").setup({
-                enabled = function()
-                    local disabled_ft = { "neo-tree", "help" }
-                    for _, ft in ipairs(disabled_ft) do
-                        if vim.bo.ft == ft then
-                            return false
-                        end
+        opts = {
+            enabled = function()
+                local disabled_ft = { "neo-tree", "help" }
+                for _, ft in ipairs(disabled_ft) do
+                    if vim.bo.ft == ft then
+                        return false
                     end
-                    return true
-                end,
-                width = 20, --- integer width of the beacon window
-                min_jump = 1, --- integer what is considered a jump. Number of lines
-                highlight = { bg = "red", ctermbg = 9 }, -- vim.api.keyset.highlight table passed to vim.api.nvim_set_hl
-            })
-        end,
-    })
+                end
+                return true
+            end,
+            width = 20,
+            min_jump = 1,
+            highlight = { bg = "red", ctermbg = 9 },
+        },
+    },
 
     -- statox/vim-compare-lines: Compare lines easily
-    use("statox/vim-compare-lines")
+    { "statox/vim-compare-lines" },
 
     -- lukas-reineke/indent-blankline.nvim: Indent guides
-    use("lukas-reineke/indent-blankline.nvim")
+    { "lukas-reineke/indent-blankline.nvim" },
 
     -- nunjucks templates syntax plugin
-    use("Glench/Vim-Jinja2-Syntax")
+    { "Glench/Vim-Jinja2-Syntax" },
 
     -- modern replacement for matchit
-    use("andymass/vim-matchup")
+    { "andymass/vim-matchup" },
 
     -- Run test suites from buffer in terminal buffer
-    use("vim-test/vim-test")
+    {
+        "vim-test/vim-test",
+        config = function()
+            require("plugins.vim-test")
+        end,
+    },
 
     -- Markdown preview with :MarkdownPreview
-    use({
+    {
         "iamcco/markdown-preview.nvim",
-        run = function()
+        build = function()
             vim.fn["mkdp#util#install"]()
         end,
-    })
-    use({
-        'MeanderingProgrammer/render-markdown.nvim',
-        after = { 'nvim-treesitter' },
-        requires = { 'nvim-tree/nvim-web-devicons', opt = true },
-        config = function()
-            require('render-markdown').setup({
-                completions = { lsp = { enabled = true } },
-            })
-        end,
-    })
+    },
+
+    {
+        "MeanderingProgrammer/render-markdown.nvim",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-tree/nvim-web-devicons",
+        },
+        opts = {
+            completions = { lsp = { enabled = true } },
+        },
+    },
 
     -- stevearc/aerial.nvim: Opens a split with the symbols of the current file
     -- to help navigating the file quickly
-    use({
+    {
         "stevearc/aerial.nvim",
-        config = function()
-            require("aerial").setup({
-                layout = {
-                    -- Determines the default direction to open the aerial window. The 'prefer'
-                    -- options will open the window in the other direction *if* there is a
-                    -- different buffer in the way of the preferred direction
-                    -- Enum: prefer_right, prefer_left, right, left, float
-                    default_direction = "prefer_left",
-                },
-            })
-        end,
-    })
+        opts = {
+            layout = {
+                -- Determines the default direction to open the aerial window. The 'prefer'
+                -- options will open the window in the other direction *if* there is a
+                -- different buffer in the way of the preferred direction
+                -- Enum: prefer_right, prefer_left, right, left, float
+                default_direction = "prefer_left",
+            },
+        },
+    },
 
     -- nvim-neo-tree/neo-tree.nvim: Filesystem viewer
-    use({
+    {
         "nvim-neo-tree/neo-tree.nvim",
-        requires = {
+        dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-tree/nvim-web-devicons",
             "MunifTanjim/nui.nvim",
         },
-    })
+        config = function()
+            require("plugins.neo-tree")
+        end,
+    },
 
     -- Nvim Treesitter configurations and abstraction layer
-    use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+    -- Note: nvim-treesitter docs state it doesn't support lazy-loading
+    -- Important! This plugin requires the tree-sitter cli to be installed on system
+    -- the version in Ubuntu repository is outdated, instead download from:
+    -- https://github.com/tree-sitter/tree-sitter/releases/tag/
+    {
+        "nvim-treesitter/nvim-treesitter",
+        lazy = false,
+        build = ":TSUpdate",
+        config = function()
+            require("plugins.nvim-treesitter")
+        end,
+    },
 
     -- nvim-telescope/telescope.nvim: Fuzzy finder
-    use({
+    {
         "nvim-telescope/telescope.nvim",
-        requires = {
+        branch = "0.1.x",
+        dependencies = {
             "nvim-lua/plenary.nvim",
-            "nvim-telescope/telescope-fzf-native.nvim",
+            -- nvim-telescope/telescope-fzf-native.nvim: Implements the FZF algorithm in C
+            -- to be used by telescope requires to call load_extension('fzf') after the
+            -- telescope setup call
+            { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
         },
-    })
-
-    -- nvim-telescope/telescope-fzf-native.nvim: Implements the FZF algorithm in C
-    -- to be used by telescope requires to call load_extension('fzf') after the
-    -- telescope setup call
-    use({
-        "nvim-telescope/telescope-fzf-native.nvim",
-        run = "make",
-    })
+        config = function()
+            require("plugins.telescope")
+        end,
+    },
 
     -- neovim/nvim-lspconfig: Configurations for Nvim LSP
-    use({
+    {
         "neovim/nvim-lspconfig",
-        requires = {
+        dependencies = {
             -- manage external editor tooling such as LSP servers, DAP servers, linters, and formatters
             "williamboman/mason.nvim",
             -- bridge mason.nvim and nvim-lspconfig
             "williamboman/mason-lspconfig.nvim",
         },
-    })
+        config = function()
+            require("plugins.lsp")
+        end,
+    },
 
     -- For prettier formating
-    use("sbdchd/neoformat")
+    {
+        "sbdchd/neoformat",
+        config = function()
+            require("plugins.neoformat")
+        end,
+    },
 
     -- hrsh7th/nvim-cmp: Completion engine using different sources
     -- The various completion source plugins are enabled in the plugins/cmp.lua config file
     -- TODO Check if vim-vsnip is really necessary (it is commented in plugins/cmp.lua)
     --      because I don't really use snippets
-    use({
+    {
         "hrsh7th/nvim-cmp",
-        requires = {
+        dependencies = {
             -- Required dependencies
             "neovim/nvim-lspconfig",
             "hrsh7th/vim-vsnip",
@@ -186,7 +217,10 @@ require("packer").startup(function(use)
             "hrsh7th/cmp-nvim-lsp-signature-help",
             "hrsh7th/cmp-nvim-lua",
         },
-    })
+        config = function()
+            require("plugins.cmp")
+        end,
+    },
 
     -- use({
     --     "olimorris/codecompanion.nvim",
@@ -202,7 +236,7 @@ require("packer").startup(function(use)
     --                     })
     --                 end,
     --             },
-
+    --
     --             strategies = {
     --                 chat = {
     --                     adapter = "openai",
@@ -216,25 +250,12 @@ require("packer").startup(function(use)
     --             },
     --         })
     --     end,
-    --     requires = {
+    --     dependencies = {
     --         "nvim-lua/plenary.nvim",
     --         "nvim-treesitter/nvim-treesitter",
     --     }
-    -- })
+    -- }),
+}
 
-    -- Automatically set up your configuration after cloning packer.nvim
-    -- Put this at the end after all plugins
-    if packer_bootstrap then
-        require("packer").sync()
-    end
-end)
-
--- Plugins configuration
-require("plugins/nvim-treesitter")
-require("plugins/neo-tree")
-require("plugins/telescope")
-require("plugins/lsp")
-require("plugins/cmp")
-require("plugins/comment")
-require("plugins/vim-test")
-require("plugins/neoformat")
+-- Setup lazy.nvim
+require("lazy").setup(plugins)
