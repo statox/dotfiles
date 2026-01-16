@@ -139,8 +139,6 @@ nnoremap("<Leader>bd", ":bdelete<CR>")
 nnoremap("<Leader><Leader>b", ":enew<CR>")
 -- Show buffer list with Neotree
 nnoremap("<Leader>bb", ":Neotree toggle show buffers right<cr>")
--- show buffer list and allow to type the buffer name to use with <Leader>bb
-nnoremap("gb", ":ls<CR>:b<space>")
 -- }}}
 -- Manage tabs {{{
 -- open/close tab
