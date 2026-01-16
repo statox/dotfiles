@@ -92,7 +92,13 @@ local plugins = {
     { "Glench/Vim-Jinja2-Syntax" },
 
     -- modern replacement for matchit
-    { "andymass/vim-matchup" },
+    { "andymass/vim-matchup",
+        opts = {
+            matchparen = {
+                offscreen = { method = "popup" }
+            }
+        }
+    },
 
     -- Run test suites from buffer in terminal buffer
     {
