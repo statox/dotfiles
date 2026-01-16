@@ -81,6 +81,7 @@ local serversToInstall = {
     "clangd", -- required by arduino_language_server
     "cssls",
     "docker_language_server",
+    "dockerls",
     "eslint",
     "harper_ls", -- General grammar check
     "html",
@@ -119,12 +120,12 @@ for _, server in ipairs(serversToInstall) do
         }
     end
 
-    if server == "docker_language_server" then
-        -- Files `docker-compose.yml` take the yaml filetype so I had to add it here
-        -- TODO: Ideally make them have the ft yaml.docker-compose which is automatically
-        -- used by this lsp
-        opts.filetypes = { "yaml", "Dockerfile" }
-    end
+    -- if server == "docker_language_server" then
+    --     -- Files `docker-compose.yml` take the yaml filetype so I had to add it here
+    --     -- TODO: Ideally make them have the ft yaml.docker-compose which is automatically
+    --     -- used by this lsp
+    --     opts.filetypes = { "yaml", "Dockerfile" }
+    -- end
 
     if server == "terraformls" then
         opts.filetypes = { "tf", "terraform" }
