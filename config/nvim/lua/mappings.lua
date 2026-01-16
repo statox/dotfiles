@@ -64,7 +64,7 @@ cnoremap("<C-j>", "<S-Down>")
 vim.keymap.set("n", "<C-J>", "&diff ? ']c' : '<C-J>'", { noremap = true, silent = true, expr = true })
 vim.keymap.set("n", "<C-K>", "&diff ? '[c' : '<C-K>'", { noremap = true, silent = true, expr = true })
 -- }}}
--- Use ]g and [g to navigate through git hunk thanks to a plugin {{{
+-- Signify - Use ]g and [g to navigate through git hunk {{{
 vim.keymap.set("n", "]g", "<plug>(signify-next-hunk)")
 vim.keymap.set("n", "[g", "<plug>(signify-prev-hunk)")
 -- }}}
@@ -172,5 +172,12 @@ nnoremap("<leader>*", function()
     vim.notify('Copied unnamed register to system clipboard.')
 end)
 -- }}}
-
+-- AerialMappings - Navigate between LSP symbols {{{
 nnoremap("<Leader>`", ':AerialToggle<CR>')
+-- Jump to forward/backward symbol (larger scope than next mappings)
+nnoremap("]]", ':AerialNext<CR>')
+nnoremap("[[", ':AerialPrev<CR>')
+-- Jump to next/prev closest symbol
+nnoremap("<Leader>[", "<cmd>lua require('aerial').prev()<cr>")
+nnoremap("<Leader>]", "<cmd>lua require('aerial').next()<cr>")
+-- }}}
