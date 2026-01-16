@@ -81,7 +81,12 @@ local plugins = {
     { "statox/vim-compare-lines" },
 
     -- lukas-reineke/indent-blankline.nvim: Indent guides
-    { "lukas-reineke/indent-blankline.nvim" },
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        config = function()
+            require("plugins.indent-blankline")
+        end,
+    },
 
     -- nunjucks templates syntax plugin
     { "Glench/Vim-Jinja2-Syntax" },
