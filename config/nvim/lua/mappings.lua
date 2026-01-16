@@ -59,11 +59,6 @@ cnoremap("<C-h>", "<Left>")
 cnoremap("<C-k>", "<S-Up>")
 cnoremap("<C-j>", "<S-Down>")
 -- }}}
--- Diff mode mapping {{{
--- Use <C-J> and <C-K> for ]c and [c in diff mode
-vim.keymap.set("n", "<C-J>", "&diff ? ']c' : '<C-J>'", { noremap = true, silent = true, expr = true })
-vim.keymap.set("n", "<C-K>", "&diff ? '[c' : '<C-K>'", { noremap = true, silent = true, expr = true })
--- }}}
 -- Signify - Use ]g and [g to navigate through git hunk {{{
 vim.keymap.set("n", "]g", "<plug>(signify-next-hunk)")
 vim.keymap.set("n", "[g", "<plug>(signify-prev-hunk)")
