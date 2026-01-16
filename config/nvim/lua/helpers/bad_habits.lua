@@ -7,9 +7,11 @@
 local M = {}
 
 function M.break_habits_window(message)
+    -- Define the size of the floating window
     local width = 50
     local height = 10
 
+    -- Create the scratch buffer displayed in the floating window
     local buf = vim.api.nvim_create_buf(false, true)
 
     -- Create the lines to draw a box

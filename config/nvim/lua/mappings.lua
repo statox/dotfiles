@@ -98,8 +98,15 @@ nnoremap("Q", "<nop>")
 -- }}}
 -- vim-subversive mappings {{{
 -- Use gc as a word to replace a text object with the content of the unmaned register
-vim.keymap.set("n", "gc", "<plug>(SubversiveSubstitute)")
-vim.keymap.set("n", "gcc", "<plug>(SubversiveSubstituteLine)")
+vim.keymap.set("n", "s", "<plug>(SubversiveSubstitute)")
+vim.keymap.set("n", "ss", "<plug>(SubversiveSubstituteLine)")
+vim.keymap.set("n", "S", "<plug>(SubversiveSubstituteToEndOfLine)")
+
+-- Once I remove these from my muscle memory I can use these mappings as comment mappings
+-- (as they are the default for comment.nvim and for nvim builtin commenting `:h gc`)
+local bad_habits = require('helpers.bad_habits')
+vim.keymap.set("n", "gc", function() bad_habits.break_habits_window({ "NO! BAD!", "Use `s` instead" }) end, {silent = true, nowait = true, noremap = true})
+vim.keymap.set("n", "gcc", function() bad_habits.break_habits_window({ "NO! BAD!", "Use `ss` instead" }) end, {silent = true, nowait = true, noremap = true})
 -- }}}
 -- Switch j and k with gj and gk respectively to improve wrapped lines navigation {{{
 nnoremap("j", "gj")
