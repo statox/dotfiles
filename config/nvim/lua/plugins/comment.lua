@@ -15,9 +15,9 @@ require("Comment").setup({
     ---LHS of operator-pending mappings in NORMAL and VISUAL mode
     opleader = {
         ---Line-comment keymap
-        line = "<leader>c<space>",
+        line = "<leader>c",
         ---Block-comment keymap
-        block = "<leader>cs<space>",
+        block = "<leader>cs",
     },
     ---LHS of extra mappings
     extra = {
