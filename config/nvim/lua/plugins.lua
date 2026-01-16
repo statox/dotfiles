@@ -136,6 +136,22 @@ local plugins = {
         },
         opts = {
             completions = { lsp = { enabled = true } },
+            heading = {
+                icons = {"𝟭 ", "𝟮 ", "𝟯 ", "𝟰 ", "𝟱 ", "𝟲 "},
+                right_pad = 2,
+                backgrounds = {
+                    'RenderMarkdownH1Bg',
+                },
+                width = 'block'
+            },
+            code = {
+                position = "right",
+                left_pad = 2,
+                right_pad = 2,
+                border = 'thick',
+                conceal_delimiters = true,
+                width = 'block'
+            }
         },
     },
 
