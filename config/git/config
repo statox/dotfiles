@@ -1,20 +1,21 @@
 # Include appropriate [user] section based on path
 [includeIf "gitdir:~/dev/"]
-  path = ~/.gitconfig.personal
+  path = ./config.personal
 [includeIf "gitdir:~/.dotfiles/"]
-  path = ~/.gitconfig.personal
+  path = ./config.personal
 [includeIf "gitdir:~/projects/"]
-  path = ~/.gitconfig.work
+  path = ./config.work
 [includeIf "gitdir:~/notes_a_and_b/"]
-  path = ~/.gitconfig.work
+  path = ./config.work
 [includeIf "gitdir:~/remotes/"]
-  path = ~/.gitconfig.work
+  path = ./config.work
+[includeIf "gitdir:~/remotes/"]
+  path = ./config.work
 
 [commit]
     gpgsign = true
 
 [core]
-    excludesfile = ~/.gitignore_global
     editor       = nvim
     ; autocrlf     = input
     pager = less -+F
@@ -71,3 +72,9 @@
 
 [init]
     defaultBranch = main
+
+# This should live in ./config.work but for some reason that doesn't work
+# Used to allow using git on sshfs mounted servers
+[safe]
+    directory = /home/afabre/remotes/measure1/exptools-core
+    directory = /home/afabre/remotes/measure1/anb-exp

@@ -2,6 +2,7 @@
 # - Comments starting with # and empty lines are not processed
 # - The script supports individual files and whole directories
 
+Xmodmap
 bash_aliases
 bash_logout
 bash_profile
@@ -15,6 +16,7 @@ bin/timer
 bin/toggle_theme
 config/dunst
 config/espanso
+config/git
 config/i3
 config/nvim/after
 config/nvim/autoload
@@ -25,12 +27,7 @@ config/nvim/spell
 config/polybar
 config/redshift
 config/rofi
-gitconfig
-gitconfig.personal
-gitconfig.work
-gitignore_global
+config/wezterm
 inputrc
 tmux.conf
-config/wezterm
-Xmodmap
 zshrc

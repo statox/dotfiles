@@ -7,5 +7,8 @@
 [url "git@git.alice-bob.com:"]
     insteadOf = https://git.alice-bob.com
 
-[safe]
-	directory = /home/afabre/remotes/measure1/exptools-core
+# For some reason that doesn't work here, moved temporarily to ./config
+#[safe]
+#    directory = /home/afabre/remotes/measure1/exptools-core
+#    directory = /home/afabre/remotes/measure1/anb-exp
+
