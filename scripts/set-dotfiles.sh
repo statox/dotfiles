@@ -62,11 +62,6 @@ save-dotfiles() {
     done < "$FILES"
 }
 
-additional-installs() {
-    echo "Installing git bash completion file"
-    curl -fLo ~/.git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
-}
-
 # Get the files needed to work
 CUR_DIR=$(cd  $(dirname $0);pwd)
 SAVE_DIR=$CUR_DIR/../saved-dotfiles
@@ -78,8 +73,4 @@ echo ""
 
 # creating symlinks
 make-symlinks
-echo ""
-
-# additional installations
-additional-installs
 echo ""

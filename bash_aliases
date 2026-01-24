@@ -103,22 +103,6 @@ improvedGitFixup() {
     echo "$commandToRun" | xclip -selection clipboard
     echo "       (Command is available in clipboard)"
 }
-
-# Add git completion to aliases if we are in bash
-# (zsh already has that by default)
-if [[ $SHELL =~ 'bash' && -f ~/.git-completion.bash ]]; then
-    source ~/.git-completion.bash
-
-    __git_complete g __git_main
-    __git_complete gs _git_status
-    __git_complete gd _git_diff
-    __git_complete ga _git_add
-    __git_complete gp _git_pull
-    __git_complete gP _git_push
-    __git_complete gc _git_commit
-    __git_complete gl _git_log
-    __git_complete gco _git_checkout
-fi
 # }}}
 # node {{{
 alias ni='node -i'
