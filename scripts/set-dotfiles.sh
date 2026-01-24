@@ -17,10 +17,10 @@ make-symlinks() {
 
         echo "  ${line}"
         dest_path="$HOME/.$line"
-        containing_directory=$(dirname $dest_path)
+        containing_directory=$(dirname "$dest_path")
         origin_path=$(readlink -m "$CUR_DIR/../$line")
 
-        mkdir -p $containing_directory
+        mkdir -p "$containing_directory"
         ln -s "$origin_path" "$dest_path"
     done < "$FILES"
 }
@@ -67,7 +67,7 @@ save-dotfiles() {
 }
 
 # Get the files needed to work
-CUR_DIR=$(cd  $(dirname $0);pwd)
+CUR_DIR=$(cd  $(dirname "$0");pwd)
 SAVE_DIR=$CUR_DIR/../saved-dotfiles
 FILES=$CUR_DIR/files_list
 
