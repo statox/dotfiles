@@ -9,15 +9,14 @@
 
 # Symlinks all the dotfiles of the home directory to the saving dir
 make-symlinks() {
-    echo "files list: $FILES"
-    echo "creating the simlinks"
+    echo "## Create symlinks"
 
     while read -r line; do
         # ignore empty lines and comments in files_list
         [[ -z $line  ]] && continue
         [[ "$line" =~ ^#.*$  ]] && continue
 
-        echo "${line}"
+        echo "  ${line}"
         dest_path="$HOME/.$line"
         containing_directory=$(dirname $dest_path)
         origin_path=$(readlink -m "$CUR_DIR/../$line")
@@ -34,7 +33,7 @@ save-dotfiles() {
 
     SAVE_DIR=$SAVE_DIR/$DATE
 
-    echo "saving current dotfiles"
+    echo "## Save current dotfiles"
 
     if [ ! -d "$SAVE_DIR" ]; then
         echo "Creating saving directory: $SAVE_DIR"
@@ -45,9 +44,10 @@ save-dotfiles() {
 
 
     while read -r line; do
-    # ignore empty lines and comments in files_list
-    [[ -z $line  ]] && continue
-    [[ "$line" =~ ^#.*$  ]] && continue
+        # ignore empty lines and comments in files_list
+        [[ -z $line  ]] && continue
+        [[ "$line" =~ ^#.*$  ]] && continue
+
         if [ -d ~/."$line" ]; then
             echo "directory ${line}"
             cp -Lr ~/."$line" "$SAVE_DIR"/"$line"
@@ -83,15 +83,3 @@ echo ""
 # additional installations
 additional-installs
 echo ""
-
-# source the shell configuration file
-if [ -f ~/.bashrc ]
-then
-    echo "sourcing bashrc"
-    source ~/.bashrc
-elif [ -f ~/.zshrc ]
-then
-    echo "sourcing zshrc"
-    source ~/.zshrc
-fi
-
