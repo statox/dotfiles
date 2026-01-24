@@ -1,11 +1,10 @@
 #!/bin/bash
-#
-# Author: Adrien Fabre (statox)
-#
-# This script is to use after cloning the repo
+
+# Use this script after cloning the repo
 # It saves the original dotfiles in ./saved-dotfiles
 # and symlinks the files to replace them
 
+set -e
 
 # Symlinks all the dotfiles of the home directory to the saving dir
 make-symlinks() {
@@ -48,6 +47,11 @@ save-dotfiles() {
         [[ -z $line  ]] && continue
         [[ "$line" =~ ^#.*$  ]] && continue
 
+        # Create the parent directory if needed
+        # (e.g to save `config/dunst` we need to create `config/` first)
+        containing_directory="$SAVE_DIR/$(dirname $line)"
+        mkdir -p "$containing_directory"
+
         if [ -d ~/."$line" ]; then
             echo "directory ${line}"
             cp -Lr ~/."$line" "$SAVE_DIR"/"$line"
@@ -57,7 +61,7 @@ save-dotfiles() {
             cat ~/."$line" > "$SAVE_DIR"/"$line"
             rm -f ~/."$line"
         else
-            echo "not found ${line}"
+            echo "not found can't save  ${line}"
         fi
     done < "$FILES"
 }
