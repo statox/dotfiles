@@ -32,6 +32,7 @@ alias glgme='git log --author "$(git config user.name)"'
 alias glgpme='git log -p --author "$(git config user.name)"'
 alias gcoi='git checkout $(git branch | fzf)'
 alias glgi='fzf-show-commits'
+alias glgd='fzf-search-diff'
 
 # Taken from fshow - git commit browser on https://github.com/junegunn/fzf/wiki/examples#git
 fzf-show-commits() {
@@ -42,6 +43,40 @@ fzf-show-commits() {
                 (grep -o '[a-f0-9]\{7\}' | head -1 |
                 xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
                 {}
+FZF-EOF"
+}
+
+# Search for commits containing a diff matching a query string in fzf
+fzf-search-diff() {
+    local fmt='%C(auto)%h%d %s %C(yellow)%C(bold)%cr'
+    local git_log="git log --color=always --format=\"$fmt\""
+
+    # Build the sh -c script using a placeholder for the git log command.
+    # Expanding $reload_script inside a double-quoted string later lets us wrap
+    # it in single quotes (for sh -c '...')
+    # Here "$1" is the query typed in fzf and passed as {q} in change:reload:sh
+    # if the query is not defined we default to a simple git log command
+    local reload_script='[ -n "$1" ] && GIT_LOG -G "$1" || GIT_LOG'
+    reload_script="${reload_script//GIT_LOG/$git_log}"
+
+    # The command in $() extracts the commit hash from the selected line
+    # $'...' lets us use \' for literal single quotes and \\{ for literal \{
+    # The \{7\} form is required: fzf would expand {7} as its 7th-field placeholder
+    local preview=$'git show --color=always $(echo {} | grep -o \'[a-f0-9]\\{7\\}\' | head -1)'
+    local bind_scroll='ctrl-j:preview-down,ctrl-k:preview-up'
+
+    fzf < /dev/null \
+        --ansi --no-sort --reverse --tiebreak=index \
+        --disabled \
+        --bind "start:reload:$git_log" \
+        --bind "change:reload:sh -c '$reload_script' -- {q}" \
+        --preview "$preview" \
+        --preview-window top,80%,wrap \
+        --bind "$bind_scroll" \
+        --bind "ctrl-m:execute:
+                  (grep -o '[a-f0-9]\{7\}' | head -1 |
+                  xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                  {}
 FZF-EOF"
 }
 
@@ -303,3 +338,6 @@ loopd() {
     done
 }
 # }}}
+
+alias dive="docker run -ti --rm  -v /var/run/docker.sock:/var/run/docker.sock docker.io/wagoodman/dive"
+alias copilot="npx copilot"
