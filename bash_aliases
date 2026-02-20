@@ -64,9 +64,17 @@ improvedGitDiff() {
     bind_yank='ctrl-y:execute-silent(tmux set-buffer $(echo -n {-1}))+abort'
     bind_scroll='ctrl-j:preview-down,ctrl-k:preview-up'
     local selection=$( git diff "$@" --name-only | fzf -m --tmux center,95% --preview-border none --border none --ansi --reverse --preview "$preview" --bind "$bind_yank" --bind "$bind_scroll" --preview-window top,90%,wrap)
+
     # Put the selected lines in the next prompt line (only work with ZSH)
-    # TODO find a way to move the cursor to the begining of the line (probably with zle)
-    [ -n "$selection" ] && [ -n $ZSH_VERSION ] && print -z -- "${selection[@]//$'\n'/ }"
+    if [ -n "$selection" ] && [ -n "$ZSH_VERSION" ]; then
+        # Make the file paths relative to the current directory so that the command can be used from nested directories in the repo
+        # Also apply sed 's/[()]/\\\\&/g' to escape all ( and ) in paths (this is useful in the front end of my monorepo with directories like `routes/(apps)`
+        local git_root=$(git rev-parse --show-toplevel)
+        local converted=$(echo "$selection" | while IFS= read -r f; do realpath --relative-to="$PWD" "$git_root/$f"; done | sed 's/[()]/\\\\&/g' | tr '\n' ' ')
+
+        # TODO find a way to move the cursor to the begining of the line (probably with zle, but that implies registering the function as a ZLE widget)
+        print -z -- " ${converted% }"
+    fi
 }
 
 improvedGitFixup() {
