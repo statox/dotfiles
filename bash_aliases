@@ -243,9 +243,30 @@ alias zf='z $(z | fzf)'
 alias sudop='sudo env PATH=$PATH'
 # }}}
 # docker {{{
-# Use docker with sudo and $PATH set
-alias sdocker='sudo env PATH=$PATH docker'
-alias sdocker-compose='sudo env PATH=$PATH docker-compose'
+docker() {
+    # Custom docker compose format, pass through to other docker commands
+    if [[ $* == "ps" ]]; then
+          (echo -e "ID\tNAME\tIMAGE\tSTATUS\tCREATED"
+          command docker ps --format '{{.ID}} {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.RunningFor}}' \
+            | awk -F'\t' '{n=split($2,a,"/"); $2=a[n]; printf "%s\t%s\t%s\t%s\n",$1,$2,$3,$4}') \
+            | column -t -s$'\t'
+    elif [[ $* == "ps --complete" ]]; then
+          (echo -e "ID\tNAME\tIMAGE\tSTATUS\tCREATED"
+          command docker ps --format '{{.ID}} {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.RunningFor}}' \
+            | awk -F'\t' '{n=split($2,a,"/"); $2=a[n]; printf "%s\t%s\t%s\t%s\n",$1,$2,$3,$4}') \
+            | column -t -s$'\t'
+
+            echo ""
+            command docker ps --format="table {{.ID}} {{.Names}}\n\t{{.Ports}}\n\t{{.Mounts}}"
+    else
+        command docker "$@"
+    fi
+}
+
+# Lazdydocker https://github.com/jesseduffield/lazydocker
+alias lzd='docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/config:/.config/jesseduffield/lazydocker lazyteam/lazydocker'
+# Dive https://github.com/wagoodman/dive
+alias dive="docker run -ti --rm  -v /var/run/docker.sock:/var/run/docker.sock docker.io/wagoodman/dive"
 # }}}
 # ansible {{{
 alias ansible-playbook='ansiblePlaybookDebug'
@@ -339,5 +360,4 @@ loopd() {
 }
 # }}}
 
-alias dive="docker run -ti --rm  -v /var/run/docker.sock:/var/run/docker.sock docker.io/wagoodman/dive"
 alias copilot="npx copilot"
