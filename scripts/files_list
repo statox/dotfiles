@@ -11,6 +11,7 @@ bin/mm
 bin/rofi-calc
 bin/timer
 bin/toggle_theme
+config/btop/btop.conf
 config/dunst
 config/espanso
 config/git
