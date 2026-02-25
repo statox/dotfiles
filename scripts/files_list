@@ -20,6 +20,7 @@ config/nvim/after
 config/nvim/autoload
 config/nvim/ftdetect
 config/nvim/init.lua
+config/nvim/lazy-lock.json
 config/nvim/lua
 config/nvim/spell
 config/polybar
