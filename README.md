@@ -17,6 +17,12 @@ It is possible to add to $PATH the path to the scripts.
 
     export PATH=$PATH:path/to/.dotfiles/scripts
 
+### Configure the git hooks
+
+We have a [`post-merge`](./githooks/files/post-merge) git hook which updates nvim plugins if the lockfile of nvim plugins changed (`lazy-lock.json` when using [lazy.nvim](https://github.com/folke/lazy.nvim)).
+
+When cloning the repo set it up by running `./githooks/setup.sh`
+
 ### Select which files to manage
 
 In `./scripts/files_list` 

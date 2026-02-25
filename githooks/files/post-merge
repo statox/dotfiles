@@ -1,0 +1,19 @@
+# git hook to run a command after `git pull` if a specified file was changed
+changed_files="$(git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD)"
+
+check_changed() {
+    echo "$changed_files" | grep --quiet -E "$1"
+}
+
+update_nvim_plugins() {
+    tput setaf 3
+    echo "lazy-lock.json changed, nvim plugins probably need updating."
+    echo "running \"npm install\" in $dir/"
+    tput sgr0
+
+    # `:Lazy restore` updates all plugins to the state in the lockfile
+    # `:Lazy!` makes the command synchronous
+    nvim --headless "+Lazy! restore" +qa
+}
+
+check_changed 'lazy-lock.json' && update_nvim_plugins back
