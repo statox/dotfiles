@@ -283,6 +283,12 @@ local plugins = {
         end,
     },
     {
+        "github/copilot.vim",
+        config = function()
+            require("plugins.copilot")
+        end,
+    },
+    {
         "coder/claudecode.nvim",
         dependencies = { "folke/snacks.nvim" },
         config = true,
