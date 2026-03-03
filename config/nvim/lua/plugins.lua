@@ -260,6 +260,13 @@ local plugins = {
         end,
     },
 
+    {
+        "github/copilot.vim",
+        config = function()
+            require("plugins.copilot")
+        end,
+    },
+
     -- use({
     --     "olimorris/codecompanion.nvim",
     --     config = function()
