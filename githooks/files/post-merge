@@ -8,7 +8,7 @@ check_changed() {
 update_nvim_plugins() {
     tput setaf 3
     echo "lazy-lock.json changed, nvim plugins probably need updating."
-    echo "running \"npm install\" in $dir/"
+    echo 'running "nvim --headless "+Lazy! restore" +qa" to update plugins...'
     tput sgr0
 
     # `:Lazy restore` updates all plugins to the state in the lockfile
