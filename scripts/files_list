@@ -27,5 +27,4 @@ config/polybar
 config/redshift
 config/rofi
 config/wezterm
-inputrc
 zshrc
