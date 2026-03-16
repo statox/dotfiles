@@ -176,7 +176,6 @@ nnoremap("<Leader>[", "<cmd>lua require('aerial').prev()<cr>")
 nnoremap("<Leader>]", "<cmd>lua require('aerial').next()<cr>")
 -- }}}
 
-
 -- In `comment.lua` we use the default mappings of comment.nvim,
 -- setting up these until I removed them from my muscle memory
 local bad_habits = require('helpers.bad_habits')

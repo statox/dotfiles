@@ -47,4 +47,52 @@ require("Comment").setup({
     post_hook = nil,
 })
 
-vim.keymap.set("n", "<leader>cy", "Y<leader>c<space>", { noremap = false })
+local api = require('Comment.api')
+local config = require('Comment.config')
+
+-- Use gcy/gcyy to yank then comment {{{
+-- Maybe consider leaving a comment here once I'll have tested the solution long enough
+-- https://github.com/numToStr/Comment.nvim/issues/468
+
+-- Operatorfunc callback for gcy{motion}
+function _G._yank_and_comment(motion)
+    -- Save '[ and '] marks (g@ sets them, but yank overwrites them)
+    local s = vim.api.nvim_buf_get_mark(0, '[')
+    local e = vim.api.nvim_buf_get_mark(0, ']')
+
+    -- Yank the region linewise
+    vim.cmd.normal({ args = { "'[V']y" }, bang = true })
+
+    -- Restore marks so Comment.nvim reads the correct region
+    vim.api.nvim_buf_set_mark(0, '[', s[1], s[2], {})
+    vim.api.nvim_buf_set_mark(0, ']', e[1], e[2], {})
+
+    api.locked('toggle.linewise')(motion)
+end
+
+-- Operatorfunc callback for gcyy (current line)
+function _G._yank_and_comment_current(_motion)
+    vim.cmd.normal({ args = { 'yy' }, bang = true })
+    api.locked('toggle.linewise.current')()
+end
+
+-- gcy{motion}: operator-pending (e.g. gcyip, gcyab, gcy3j)
+vim.keymap.set('n', 'gcy', function()
+    vim.o.operatorfunc = "v:lua._yank_and_comment"
+    config.position = config:get().sticky and vim.api.nvim_win_get_cursor(0) or nil
+    return 'g@'
+end, { expr = true, desc = 'Yank and comment (operator)' })
+
+-- gcyy: current line (dot-repeatable via g@$)
+vim.keymap.set('n', 'gcyy', function()
+    vim.o.operatorfunc = "v:lua._yank_and_comment_current"
+    config.position = config:get().sticky and vim.api.nvim_win_get_cursor(0) or nil
+    return 'g@$'
+end, { expr = true, desc = 'Yank and comment current line' })
+
+-- Visual gcy: yank selection then comment
+vim.keymap.set('x', 'gcy', function()
+    vim.cmd.normal({ args = { 'Y' }, bang = true })
+    api.locked('toggle.linewise')(vim.fn.visualmode())
+end, { desc = 'Yank and comment selection' })
+-- }}}
