@@ -5,29 +5,31 @@ require("Comment").setup({
     sticky = true,
     ---Lines to be ignored while (un)comment
     ignore = "^$",
-    ---LHS of toggle mappings in NORMAL mode
-    toggler = {
-        ---Line-comment toggle keymap
-        line = "<leader>c<space>",
-        ---Block-comment toggle keymap
-        block = "<leader>cs<space>",
-    },
-    ---LHS of operator-pending mappings in NORMAL and VISUAL mode
-    opleader = {
-        ---Line-comment keymap
-        line = "<leader>c",
-        ---Block-comment keymap
-        block = "<leader>cs",
-    },
+    -- Test using the default mappings
+    -- TODO remove bad habit config in mappings.lua when removing these lines
+    -- ---LHS of toggle mappings in NORMAL mode
+    -- toggler = {
+    --     ---Line-comment toggle keymap
+    --     line = "<leader>c<space>",
+    --     ---Block-comment toggle keymap
+    --     block = "<leader>cs<space>",
+    -- },
+    -- ---LHS of operator-pending mappings in NORMAL and VISUAL mode
+    -- opleader = {
+    --     ---Line-comment keymap
+    --     line = "<leader>c",
+    --     ---Block-comment keymap
+    --     block = "<leader>cs",
+    -- },
     ---LHS of extra mappings
-    extra = {
-        ---Add comment on the line above
-        above = "gcO",
-        ---Add comment on the line below
-        below = "gco",
-        ---Add comment at the end of line
-        eol = "gcA",
-    },
+    -- extra = {
+    --     ---Add comment on the line above
+    --     above = "gcO",
+    --     ---Add comment on the line below
+    --     below = "gco",
+    --     ---Add comment at the end of line
+    --     eol = "gcA",
+    -- },
     ---Enable keybindings
     ---NOTE: If given `false` then the plugin won't create any mappings
     mappings = {
