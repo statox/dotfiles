@@ -1,0 +1,25 @@
+{
+    "hooks": {
+        "Notification": [
+            {
+                "matcher": "*",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "notify-send '⏳ Claude is waiting for input' -u low -t 1500"
+                    }
+                ]
+            }
+        ],
+        "Stop": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "notify-send '✅ Claude is done' -u low -t 1500"
+                    }
+                ]
+            }
+        ]
+    }
+}
