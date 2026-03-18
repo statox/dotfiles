@@ -12,6 +12,7 @@ bin/rofi-calc
 bin/timer
 bin/toggle_theme
 claude/settings.json
+claude/statusline-command.sh
 config/btop/btop.conf
 config/dunst
 config/espanso
