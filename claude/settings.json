@@ -22,7 +22,7 @@
                 "hooks": [
                     {
                         "type": "command",
-                        "command": "notify-send '⏳ Claude is waiting for input' -u low -t 1500"
+                        "command": "notify-send '⏳ Waiting for input' -a Claude -u low -t 1500"
                     }
                 ]
             }
@@ -32,7 +32,7 @@
                 "hooks": [
                     {
                         "type": "command",
-                        "command": "notify-send '✅ Claude is done' -u low -t 1500"
+                        "command": "notify-send '✅ Done' -a Claude -u low -t 1500"
                     }
                 ]
             }
