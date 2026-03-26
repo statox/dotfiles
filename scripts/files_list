@@ -5,6 +5,7 @@
 Xmodmap
 bash_aliases
 bin/changeVolume
+bin/monitor-battery
 bin/dmenu-i3-window-jumper.sh
 bin/i3-lock-suspend
 bin/mm
@@ -26,6 +27,8 @@ config/nvim/lazy-lock.json
 config/nvim/lua
 config/nvim/spell
 config/polybar
+config/systemd/user/monitor_battery.service
+config/systemd/user/monitor_battery.timer
 config/redshift
 config/rofi
 config/wezterm

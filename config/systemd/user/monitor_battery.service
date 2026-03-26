@@ -1,0 +1,8 @@
+[Unit]
+Description=Low battery popup notification
+
+[Service]
+Type=oneshot
+ExecStart=%h/.bin/monitor-battery
+# notify-send requires a running D-Bus session
+Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/%U/bus

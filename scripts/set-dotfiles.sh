@@ -66,6 +66,12 @@ save-dotfiles() {
     done < "$FILES"
 }
 
+# Enable user's systemd services
+enable-systemd-services() {
+    # See config/systemd/monitor_battery.timer
+    systemctl --user enable --now monitor_battery.timer
+}
+
 # Get the files needed to work
 CUR_DIR=$(cd  $(dirname "$0");pwd)
 SAVE_DIR=$CUR_DIR/../saved-dotfiles

@@ -255,9 +255,15 @@ type = internal/battery
 battery = BAT0
 adapter = AC
 full-at = 98
+low-at = 20
 
 format-charging = <animation-charging> <label-charging>
 format-discharging = <animation-discharging> <label-discharging>
+
+label-low =   %percentage%%
+format-low = <label-low>
+format-low-prefix = ⚠
+format-low-foreground = ${colors.alert}
 
 format-full-prefix = 
 format-full-prefix-foreground = ${colors.primary}

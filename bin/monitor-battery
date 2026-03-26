@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+# Check the current state of the battery and trigger a notification if needed
+# This script is meant to be run at startup and then periodically
+# to do this we use ~/.config/systemd/user
+
+THRESHOLD=20
+
+get_battery_level() {
+    # /sys/class/power_supply is available on all Linux systems without extra packages
+    local battery_path
+    battery_path=$(find /sys/class/power_supply -name "BAT*" | head -1)
+
+    if [[ -z "$battery_path" ]]; then
+        echo "No battery found" >&2
+        exit 1
+    fi
+
+    cat "$battery_path/capacity"
+}
+
+get_charging_status() {
+    local battery_path
+    battery_path=$(find /sys/class/power_supply -name "BAT*" | head -1)
+    cat "$battery_path/status"
+}
+
+notify_low_battery() {
+    local level=$1
+    notify-send \
+        --urgency=critical \
+        --icon=battery-caution \
+        "Low Battery" \
+        "Battery at ${level}%. Please plug in your charger."
+}
+
+main() {
+    local level
+    level=$(get_battery_level)
+
+    local status
+    status=$(get_charging_status)
+
+    local alerted=0
+    # Only alert when discharging to avoid nagging while plugged in
+    if [[ "$status" != "Charging" && "$level" -le "$THRESHOLD" ]]; then
+        notify_low_battery "$level"
+        alerted=1
+    fi
+    echo "$(date) level='$level' status='$status' alerted='$alerted'"
+}
+
+main
