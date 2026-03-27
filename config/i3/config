@@ -272,10 +272,12 @@
     bindsym $mod+space mode "quicklaunch"
     mode "quicklaunch"{
         bindsym a exec arandr; mode "default"
+        bindsym b exec blueman-manager; mode "default"
         bindsym c exec chromium; mode "default"
         bindsym f exec firefox; mode "default"
-        bindsym s exec slack; mode "default"
         bindsym k exec ~/.bin/wezterm; mode "default"
+        bindsym p exec ~/.config/polybar/launch.sh &; mode "default"
+        bindsym s exec slack; mode "default"
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
