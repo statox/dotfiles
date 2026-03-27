@@ -70,6 +70,7 @@ save-dotfiles() {
 enable-systemd-services() {
     # See config/systemd/monitor_battery.timer
     systemctl --user enable --now monitor_battery.timer
+    systemctl --user start monitor_battery.timer
 }
 
 # Get the files needed to work
