@@ -1,41 +1,44 @@
 {
-    "$schema": "https://json.schemastore.org/claude-code-settings.json",
-    "autoMemoryEnabled": false,
-    "permissions": {
-        "allow": [
-            "Bash(npm run lint)",
-            "Bash(npm run tests *)",
-            "Read(~/.zshrc)"
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "env": {
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "0"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(npm run lint)",
+      "Bash(npm run tests *)",
+      "Read(~/.zshrc)"
+    ]
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "paplay ~/.claude/bell.wav && notify-send '⏳ Waiting for input' -a Claude -u low -t 1500"
+          }
         ]
-    },
-    "statusLine": {
-        "type": "command",
-        "command": "bash ~/.claude/statusline-command.sh"
-    },
-    "env": {
-        "CLAUDE_CODE_ENABLE_TELEMETRY": "0"
-    },
-    "hooks": {
-        "Notification": [
-            {
-                "matcher": "*",
-                "hooks": [
-                    {
-                        "type": "command",
-                        "command": "notify-send '⏳ Waiting for input' -a Claude -u low -t 1500"
-                    }
-                ]
-            }
-        ],
-        "Stop": [
-            {
-                "hooks": [
-                    {
-                        "type": "command",
-                        "command": "notify-send '✅ Done' -a Claude -u low -t 1500"
-                    }
-                ]
-            }
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "paplay ~/.claude/bell.wav && notify-send '✅ Done' -a Claude -u low -t 1500"
+          }
         ]
-    }
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
+  "autoMemoryEnabled": false,
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true
+  }
 }
