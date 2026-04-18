@@ -12,3 +12,4 @@
 - Run lint/tests before completion.
 - Never auto-commit: only commit on explicit instruction.
 - State and run verification for all code changes.
+- Prefer POSIX shell tools (jq, awk, sed, grep, find) over throwaway Python scripts for one-off data manipulation. Use `jq` for JSON processing.
