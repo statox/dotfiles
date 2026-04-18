@@ -37,8 +37,8 @@
     "type": "command",
     "command": "bash ~/.claude/statusline-command.sh"
   },
-  "autoMemoryEnabled": false,
   "enabledPlugins": {
-    "superpowers@claude-plugins-official": true
-  }
+    "superpowers@superpowers-marketplace": true
+  },
+  "autoMemoryEnabled": false
 }
