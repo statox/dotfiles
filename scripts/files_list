@@ -12,6 +12,7 @@ bin/mm
 bin/rofi-calc
 bin/timer
 bin/toggle_theme
+claude/CLAUDE.md
 claude/bell.wav
 claude/settings.json
 claude/statusline-command.sh
