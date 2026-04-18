@@ -1,44 +1,93 @@
 {
-  "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "env": {
-    "CLAUDE_CODE_ENABLE_TELEMETRY": "0"
-  },
-  "permissions": {
-    "allow": [
-      "Bash(npm run lint)",
-      "Bash(npm run tests *)",
-      "Read(~/.zshrc)"
-    ]
-  },
-  "hooks": {
-    "Notification": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "paplay ~/.claude/bell.wav && notify-send '⏳ Waiting for input' -a Claude -u low -t 1500"
-          }
+    "$schema": "https://json.schemastore.org/claude-code-settings.json",
+    "env": {
+        "CLAUDE_CODE_ENABLE_TELEMETRY": "0"
+    },
+    "permissions": {
+        "allow": [
+            "Bash(find)",
+            "Bash(ag)",
+            "Bash(jq)",
+            "Bash(grep)",
+            "Bash(npm run build)",
+            "Bash(npm run format)",
+            "Bash(npm run check*)",
+            "Bash(npm run lint)",
+            "Bash(npm run tests*)",
+            "Read(~/.zshrc)",
+            "Bash(git log*)",
+            "Bash(git diff*)",
+            "Bash(git status*)",
+            "Bash(git show*)",
+            "Bash(git blame*)",
+            "Bash(git shortlog*)",
+            "Bash(git describe*)",
+            "Bash(git rev-parse*)",
+            "Bash(git ls-files*)",
+            "Bash(git grep*)",
+            "Bash(git branch -a*)",
+            "Bash(git branch -r*)",
+            "Bash(git branch --list*)",
+            "Bash(git branch --show-current*)",
+            "Bash(git remote -v*)",
+            "Bash(git stash list*)",
+            "Bash(git tag --list*)",
+            "Bash(git tag -l*)"
+        ],
+        "ask": [
+            "Bash(git commit*)",
+            "Bash(git merge*)",
+            "Bash(git rebase*)",
+            "Bash(git push*)",
+            "Bash(git pull*)",
+            "Bash(git fetch*)",
+            "Bash(git reset*)",
+            "Bash(git restore*)",
+            "Bash(git checkout*)",
+            "Bash(git switch*)",
+            "Bash(git cherry-pick*)",
+            "Bash(git revert*)",
+            "Bash(git stash pop*)",
+            "Bash(git stash apply*)",
+            "Bash(git stash drop*)",
+            "Bash(git stash clear*)",
+            "Bash(git clean*)",
+            "Bash(git branch -d*)",
+            "Bash(git branch -D*)",
+            "Bash(git branch -m*)",
+            "Bash(git tag -d*)",
+            "Bash(git am*)"
         ]
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "paplay ~/.claude/bell.wav && notify-send '✅ Done' -a Claude -u low -t 1500"
-          }
+    },
+    "hooks": {
+        "Notification": [
+            {
+                "matcher": "*",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "paplay ~/.claude/bell.wav && notify-send '⏳ Waiting for input' -a Claude -u low -t 1500"
+                    }
+                ]
+            }
+        ],
+        "Stop": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "paplay ~/.claude/bell.wav && notify-send '✅ Done' -a Claude -u low -t 1500"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "bash ~/.claude/statusline-command.sh"
-  },
-  "enabledPlugins": {
-    "superpowers@superpowers-marketplace": true
-  },
-  "autoMemoryEnabled": false
+    },
+    "statusLine": {
+        "type": "command",
+        "command": "bash ~/.claude/statusline-command.sh"
+    },
+    "enabledPlugins": {
+        "superpowers@superpowers-marketplace": true
+    },
+    "autoMemoryEnabled": false
 }
