@@ -11,6 +11,7 @@
             "Bash(ag)",
             "Bash(jq)",
             "Bash(grep)",
+            "Bash(ls)",
             "Bash(npm run build)",
             "Bash(npm run format)",
             "Bash(npm run check*)",
@@ -91,5 +92,8 @@
     "enabledPlugins": {
         "superpowers@superpowers-marketplace": true
     },
-    "autoMemoryEnabled": false
+    "autoMemoryEnabled": false,
+    "theme": "dark-daltonized",
+    "editorMode": "vim",
+    "verbose": true
 }
