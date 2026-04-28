@@ -293,3 +293,5 @@ Session.vim
 
 .claude
 **/.claude/settings.local.json
+
+superpowers/
