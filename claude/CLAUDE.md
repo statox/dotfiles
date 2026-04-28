@@ -22,3 +22,7 @@ Do NOT use placeholders for internal content (code comments, technical docs, REA
 - After writing or modifying code, check for available validation scripts (e.g. `lint`, `format`, `check`, `build` in `package.json` or equivalent) and run them. Fix any errors before reporting the task as complete.
 - Prefer POSIX shell tools (jq, awk, sed, grep, find) over throwaway Python scripts for one-off data manipulation. Use `jq` for JSON processing.
 - For one-shot tool execution, prefer `uv run <tool>` (Python) and `npx <tool>` (JavaScript) over system-wide or user-wide installs.
+
+## Superpowers
+- The superpowers skills should be available. Warn the user if they are not.
+- When a superpower tries to create documents never use `docs/superpowers` instead use `superpowers/` directly because `docs/` is often used for temporary build directories
