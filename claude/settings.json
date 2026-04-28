@@ -1,7 +1,9 @@
 {
     "$schema": "https://json.schemastore.org/claude-code-settings.json",
     "env": {
-        "CLAUDE_CODE_ENABLE_TELEMETRY": "0"
+        "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
+        "EDITOR": "nvim",
+        "VISUAL": "nvim"
     },
     "permissions": {
         "allow": [
