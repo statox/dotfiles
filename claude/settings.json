@@ -95,5 +95,6 @@
     "autoMemoryEnabled": false,
     "theme": "dark-daltonized",
     "editorMode": "vim",
-    "verbose": true
+    "verbose": true,
+    "effortLevel": "medium"
 }
