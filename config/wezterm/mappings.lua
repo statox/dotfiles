@@ -79,6 +79,7 @@ function module.setup_bindings(config)
             end)
         },
         -- Vim buffer navigation for ClaudeCode
+        -- https://github.com/coder/claudecode.nvim/issues/53#issuecomment-3177713206
         {
             key = "h",
             mods = "CTRL",
