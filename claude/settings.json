@@ -96,7 +96,7 @@
     },
     "autoMemoryEnabled": false,
     "theme": "dark-daltonized",
-    "editorMode": "vim",
+    "editorMode": "normal",
     "verbose": true,
     "effortLevel": "medium"
 }
