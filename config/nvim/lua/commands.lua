@@ -1,13 +1,22 @@
 local command = vim.api.nvim_create_user_command
 
 -- :H Open help vertically with H
-command("H", "call help#VerticalHelp(<f-args>)", { complete = "help", nargs = 1, force = true })
+command("H", function(opts)
+    vim.cmd("vertical botright help " .. opts.args)
+    vim.cmd("vertical resize 78")
+end, { complete = "help", nargs = 1, force = true })
 
 -- :W save file with sudo permissions
 command("W", "w !sudo tee % > /dev/null", { force = true })
 
 -- :E equivalent to :e%
-command("E", "call utils#ReloadOrEdit(<q-args>)", { nargs = "?", complete = "file", force = true })
+command("E", function(opts)
+    if opts.args == "" then
+        vim.cmd("e %")
+    else
+        vim.cmd("e " .. opts.args)
+    end
+end, { nargs = "?", complete = "file", force = true })
 
 -- :GGUK Shortcut for a plugin command undoing the current git hunk
 command("GGUH", "SignifyHunkUndo", { force = true })
