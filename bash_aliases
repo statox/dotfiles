@@ -267,6 +267,8 @@ docker() {
 alias lzd='docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/config:/.config/jesseduffield/lazydocker lazyteam/lazydocker'
 # Dive https://github.com/wagoodman/dive
 alias dive="docker run -ti --rm  -v /var/run/docker.sock:/var/run/docker.sock docker.io/wagoodman/dive"
+# Claude Code in isolated container
+alias c='claude-docker'
 # }}}
 # ansible {{{
 alias ansible-playbook='ansiblePlaybookDebug'
