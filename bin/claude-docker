@@ -2,13 +2,18 @@
 # Runs Claude Code in an isolated Docker container.
 #
 # Mount strategy (all config mounts are read-only to protect host settings):
-#   $PWD                         -> /workdir          (rw) current project files
-#   ~/.dotfiles/claude/          -> /home/dev/.claude/ (ro) CLAUDE.md, settings.json, etc.
-#   ~/.dotfiles/config/nvim/     -> /home/dev/.config/nvim/ (ro) neovim config (EDITOR=nvim)
-#   ~/.claude/.credentials.json  -> /home/dev/.claude/.credentials.json (ro) auth token overlay
+#   $PWD                                  -> /workdir                              (rw) current project files
+#   ~/.dotfiles/claude/CLAUDE.md          -> /home/dev/.claude/CLAUDE.md          (ro) global instructions
+#   ~/.dotfiles/claude/settings.json      -> /home/dev/.claude/settings.json      (ro) Claude Code settings
+#   ~/.dotfiles/claude/bell.wav           -> /home/dev/.claude/bell.wav           (ro) notification sound
+#   ~/.dotfiles/claude/statusline-command.sh -> /home/dev/.claude/statusline-command.sh (ro) statusline helper
+#   ~/.claude/.credentials.json           -> /home/dev/.claude/.credentials.json  (ro) auth token
+#   ~/.dotfiles/config/nvim/              -> /home/dev/.config/nvim/              (ro) neovim config (EDITOR=nvim)
 #
-# The credentials file is overlaid on top of the claude/ directory mount so the
-# container can authenticate without being able to write back to the host.
+# Individual file mounts are used (rather than mounting the whole claude/ directory) because
+# Docker cannot bind-mount a file into a read-only bind-mounted directory.
+# /home/dev/.claude/ itself is writable so Claude Code can write history and cache there;
+# only the tracked dotfiles within it are read-only overlays.
 #
 # Container state (history, cache) lives inside the container and is discarded on exit.
 #
@@ -34,7 +39,10 @@ fi
 
 exec docker run --rm -it \
     -v "${PWD}:/workdir" \
-    -v "${DOTFILES}/claude:/home/dev/.claude:ro" \
-    -v "${DOTFILES}/config/nvim:/home/dev/.config/nvim:ro" \
+    -v "${DOTFILES}/claude/CLAUDE.md:/home/dev/.claude/CLAUDE.md:ro" \
+    -v "${DOTFILES}/claude/settings.json:/home/dev/.claude/settings.json:ro" \
+    -v "${DOTFILES}/claude/bell.wav:/home/dev/.claude/bell.wav:ro" \
+    -v "${DOTFILES}/claude/statusline-command.sh:/home/dev/.claude/statusline-command.sh:ro" \
     -v "${HOME}/.claude/.credentials.json:/home/dev/.claude/.credentials.json:ro" \
+    -v "${DOTFILES}/config/nvim:/home/dev/.config/nvim:ro" \
     "$IMAGE_NAME"

@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 RUN useradd -m -s /bin/bash dev
 USER dev
+RUN mkdir -p /home/dev/.claude /home/dev/.config
 WORKDIR /workdir
 
 RUN curl -fsSL https://claude.ai/install.sh | bash
