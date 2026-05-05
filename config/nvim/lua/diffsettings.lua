@@ -4,7 +4,7 @@
 vim.opt.diffopt = "filler,iwhite"
 
 -- Use custom command to create the diff
-vim.opt.diffexpr = "diff#DiffW()"
+vim.opt.diffexpr = "v:lua.require('helpers.diff').diff_w()"
 
 local command = vim.api.nvim_create_user_command
 
