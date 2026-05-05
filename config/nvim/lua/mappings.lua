@@ -82,8 +82,9 @@ xnoremap(
 nnoremap("gA", "<cmd>lua require('plugins.telescope').live_grep_buffers()<cr>")
 -- }}}
 -- make h and l skip indentation white spaces {{{
-vim.keymap.set("n", "h", ":call motion#SkipOrH()<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "l", ":call motion#SkipOrL()<CR>", { noremap = true, silent = true })
+local motion = require("motion")
+vim.keymap.set("n", "h", motion.skip_or_h, { noremap = true, silent = true })
+vim.keymap.set("n", "l", motion.skip_or_l, { noremap = true, silent = true })
 -- }}}
 -- Explore with - {{{
 nnoremap("-", ":Neotree toggle current reveal_force_cwd<cr>")
