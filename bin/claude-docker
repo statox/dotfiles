@@ -34,9 +34,14 @@ done
 
 if [[ "$REBUILD" == "1" ]] || ! docker image inspect "$IMAGE_NAME" &>/dev/null; then
     echo "Building ${IMAGE_NAME}..."
-    docker build -t "$IMAGE_NAME" -f "$DOCKERFILE" "${DOTFILES}/docker/claude"
+    docker build \
+        --build-arg USER_UID="$(id -u)" \
+        --build-arg USER_GID="$(id -g)" \
+        -t "$IMAGE_NAME" -f "$DOCKERFILE" "${DOTFILES}/docker/claude"
 fi
 
+
+# Use `--entrypoint bash` for interactive debug
 exec docker run --rm -it \
     -v "${PWD}:/workdir" \
     -v "${DOTFILES}/claude/CLAUDE.md:/home/dev/.claude/CLAUDE.md:ro" \
@@ -45,4 +50,5 @@ exec docker run --rm -it \
     -v "${DOTFILES}/claude/statusline-command.sh:/home/dev/.claude/statusline-command.sh:ro" \
     -v "${HOME}/.claude/.credentials.json:/home/dev/.claude/.credentials.json:ro" \
     -v "${DOTFILES}/config/nvim:/home/dev/.config/nvim:ro" \
+    --entrypoint bash \
     "$IMAGE_NAME"
