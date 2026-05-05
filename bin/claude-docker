@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# Runs Claude Code in an isolated Docker container.
+#
+# Mount strategy (all config mounts are read-only to protect host settings):
+#   $PWD                         -> /workdir          (rw) current project files
+#   ~/.dotfiles/claude/          -> /home/dev/.claude/ (ro) CLAUDE.md, settings.json, etc.
+#   ~/.dotfiles/config/nvim/     -> /home/dev/.config/nvim/ (ro) neovim config (EDITOR=nvim)
+#   ~/.claude/.credentials.json  -> /home/dev/.claude/.credentials.json (ro) auth token overlay
+#
+# The credentials file is overlaid on top of the claude/ directory mount so the
+# container can authenticate without being able to write back to the host.
+#
+# Container state (history, cache) lives inside the container and is discarded on exit.
+#
+# Usage:
+#   claude-docker           # build image if missing, then run
+#   claude-docker --rebuild # force image rebuild, then run
+
+set -euo pipefail
+
+DOTFILES="${HOME}/.dotfiles"
+DOCKERFILE="${DOTFILES}/docker/claude/Dockerfile"
+IMAGE_NAME="claude-docker"
+
+REBUILD=0
+for arg in "$@"; do
+    [[ "$arg" == "--rebuild" ]] && REBUILD=1
+done
+
+if [[ "$REBUILD" == "1" ]] || ! docker image inspect "$IMAGE_NAME" &>/dev/null; then
+    echo "Building ${IMAGE_NAME}..."
+    docker build -t "$IMAGE_NAME" -f "$DOCKERFILE" "${DOTFILES}/docker/claude"
+fi
+
+exec docker run --rm -it \
+    -v "${PWD}:/workdir" \
+    -v "${DOTFILES}/claude:/home/dev/.claude:ro" \
+    -v "${DOTFILES}/config/nvim:/home/dev/.config/nvim:ro" \
+    -v "${HOME}/.claude/.credentials.json:/home/dev/.claude/.credentials.json:ro" \
+    "$IMAGE_NAME"
