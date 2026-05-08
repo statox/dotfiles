@@ -41,6 +41,9 @@ local on_attach = function(args)
     vim.api.nvim_create_autocmd({ "CursorHold" }, {
         buffer = bufnr,
         callback = function()
+            if not vim.diagnostic.is_enabled({ bufnr = bufnr }) then
+                return
+            end
             local opts = {
                 focusable = false,
                 close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
