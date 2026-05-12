@@ -8,8 +8,10 @@
     "permissions": {
         "defaultMode": "acceptEdits",
         "allow": [
-            "Bash(ag)",
-            "Bash(find)",
+            "Bash(ag *)",
+            "Bash(find *)",
+            "Bash(gh pr diff*)",
+            "Bash(gh pr view*)",
             "Bash(git add*)",
             "Bash(git blame*)",
             "Bash(git branch --list*)",
@@ -29,15 +31,14 @@
             "Bash(git status*)",
             "Bash(git tag --list*)",
             "Bash(git tag -l*)",
-            "Bash(grep)",
-            "Bash(jq)",
-            "Bash(ls)",
+            "Bash(grep *)",
+            "Bash(jq *)",
+            "Bash(ls *)",
             "Bash(npm run build)",
             "Bash(npm run check*)",
             "Bash(npm run format)",
             "Bash(npm run lint)",
-            "Bash(npm run tests*)",
-            "Read(~/.zshrc)"
+            "Bash(npm run tests*)"
         ],
         "ask": [
             "Bash(git am*)",
