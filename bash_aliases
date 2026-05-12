@@ -95,10 +95,31 @@ improvedGitDiff() {
     preview="git diff $@ --color=always -- $(git rev-parse --show-toplevel)/{-1}"
     # bind options: Use
     # ctrl-j/ctrl-k to scroll the preview
-    # ctrl-y to yank the current file name in the tmux buffer
-    bind_yank='ctrl-y:execute-silent(tmux set-buffer $(echo -n {-1}))+abort'
     bind_scroll='ctrl-j:preview-down,ctrl-k:preview-up'
-    local selection=$( git diff "$@" --name-only | fzf -m --tmux center,95% --preview-border none --border none --ansi --reverse --preview "$preview" --bind "$bind_yank" --bind "$bind_scroll" --preview-window top,90%,wrap)
+
+    x0='left,1%,wrap'
+    xLeft='left,32%,wrap'
+    xCenter='left,50%,wrap'
+    xRight='left,64%,wrap'
+    x100='left,99%,wrap'
+    bind_resize_left="left:change-preview-window($xCenter|$xLeft|$x0)"
+    bind_resize_right="right:change-preview-window($xCenter|$xRight|$x100)"
+
+    y0='top,90%,wrap'
+    y1='top,75%,wrap'
+    bind_resize_b="ctrl-b:change-preview-window($y0|$y1)"
+    local selection=$(git diff "$@" --name-only | fzf \
+        --multi \
+        --ansi \
+        --reverse \
+        --preview-border none \
+        --border none \
+        --preview "$preview" \
+        --preview-window left,50%,wrap \
+        --bind "$bind_scroll" \
+        --bind "$bind_resize_left" \
+        --bind "$bind_resize_right" \
+        --bind "$bind_resize_b")
 
     # Put the selected lines in the next prompt line (only work with ZSH)
     if [ -n "$selection" ] && [ -n "$ZSH_VERSION" ]; then
