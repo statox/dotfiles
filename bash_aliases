@@ -18,7 +18,7 @@ alias gs='git status -s'
 alias gss='git status'
 alias gd='improvedGitDiff'
 alias gfu='improvedGitFixup'
-alias gdc='git diff --cached'
+alias gdc='improvedGitDiff --cached'
 alias ga='git add'
 alias gp='git push'
 alias gc='git commit'
@@ -81,18 +81,25 @@ FZF-EOF"
 }
 
 improvedGitDiff() {
-    # If any argument is passed behave like git diff
-    if [ "$#" -gt 0 ]; then
+    local cached=false
+    # If a single -c/--cached argument is passed, set cached mode
+    if [ "$#" -eq 1 ] && { [ "$1" = "-c" ] || [ "$1" = "--cached" ]; }; then
+        cached=true
+    # If any other argument(s) are passed behave like git diff
+    elif [ "$#" -gt 0 ]; then
         git diff "$@"
         return 0
     fi
+
+    local cached_flag=""
+    $cached && cached_flag="--cached"
 
     # Open fzf with currently modified files as choices
     # The preview window shows the diff for the file
     # $(git rev-parse --show-toplevel) returns the root of the git directory
     # and {-1} is the file path from the root directory
     # We need that otherwise then calling the function from a subdirectory in the project won't work
-    preview="git diff --color=always -- $(git rev-parse --show-toplevel)/{-1}"
+    preview="git diff $cached_flag --color=always -- $(git rev-parse --show-toplevel)/{-1}"
     # bind options: Use
     # ctrl-j/ctrl-k to scroll the preview
     bind_scroll='ctrl-j:preview-down,ctrl-k:preview-up'
@@ -108,7 +115,7 @@ improvedGitDiff() {
     y0='top,90%,wrap'
     y1='top,75%,wrap'
     bind_resize_b="ctrl-b:change-preview-window($y0|$y1)"
-    local selection=$(git diff --name-only | fzf \
+    local selection=$(git diff $cached_flag --name-only | fzf \
         --multi \
         --ansi \
         --reverse \
