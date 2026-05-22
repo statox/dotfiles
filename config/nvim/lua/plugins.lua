@@ -143,6 +143,8 @@ local plugins = {
         end,
         init = function()
             if vim.fn.executable "npx" then vim.g.mkdp_filetypes = { "markdown" } end
+            vim.g.mkdp_markdown_css = vim.fn.stdpath("config") .. "/lua/markdown/style.css"
+            vim.g.mkdp_highlight_css = vim.fn.stdpath("config") .. "/lua/markdown/highlight.css"
         end,
     },
 
