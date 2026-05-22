@@ -25,6 +25,24 @@ local plugins = {
         priority = 1000,
         opts = {
             options = { dim_inactive = true },
+            groups = {
+                nightfox = {
+                    RenderMarkdownH1Bg = { bg = '#1060d0' },
+                    RenderMarkdownH2Bg = { bg = '#0d4faa' },
+                    RenderMarkdownH3Bg = { bg = '#0a3e84' },
+                    RenderMarkdownH4Bg = { bg = '#072d5e' },
+                    RenderMarkdownH5Bg = { bg = '#041c38' },
+                    RenderMarkdownH6Bg = { bg = '#010b12' },
+                },
+                dayfox = {
+                    RenderMarkdownH1Bg = { bg = '#2a7ec0' },
+                    RenderMarkdownH2Bg = { bg = '#5698d4' },
+                    RenderMarkdownH3Bg = { bg = '#82b2e8' },
+                    RenderMarkdownH4Bg = { bg = '#aeccf2' },
+                    RenderMarkdownH5Bg = { bg = '#dae6fc' },
+                    RenderMarkdownH6Bg = { bg = '#f4f9ff' },
+                },
+            },
         },
     },
 
@@ -137,12 +155,17 @@ local plugins = {
         opts = {
             completions = { lsp = { enabled = true } },
             heading = {
-                icons = {"𝟭 ", "𝟮 ", "𝟯 ", "𝟰 ", "𝟱 ", "𝟲 "},
-                right_pad = 2,
-                backgrounds = {
-                    'RenderMarkdownH1Bg',
-                },
-                width = 'block'
+                icons = {"# ", "## ", "### ", "#### ", "𝟱# ", "𝟲# "},
+                right_pad = 0.5,
+                width = 'block',
+                -- Determines if a border is added above and below headings.
+                -- Can also be a list of booleans evaluated by `clamp(value, context.level)`.
+                border = true,
+                -- Always use virtual lines for heading borders instead of attempting to use empty lines.
+                border_virtual = true,
+                -- Highlight the start of the border using the foreground highlight.
+                border_prefix = true,
+                above = '',
             },
             code = {
                 position = "right",
