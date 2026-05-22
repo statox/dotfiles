@@ -167,6 +167,14 @@ nnoremap("<leader>*", function()
     vim.notify('Copied unnamed register to system clipboard.')
 end)
 -- }}}
+-- MarkdownPreview - Preview markdown in browser {{{
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    callback = function()
+        vim.keymap.set("n", "MM", ":MarkdownPreview<CR>", { silent = true, noremap = true, buffer = true })
+    end,
+})
+-- }}}
 -- AerialMappings - Navigate between LSP symbols {{{
 nnoremap("<Leader>`", ':AerialToggle<CR>')
 -- Jump to forward/backward symbol (larger scope than next mappings)
