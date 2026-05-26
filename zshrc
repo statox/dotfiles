@@ -1,6 +1,9 @@
 #~/.zshrc
 # vim:fdm=marker
 
+# Neovim debugging:
+export NVIM_LOG_FILE=~/.local/state/nvim/nvim.log
+
 # Thinkpad PF514G4Z: Setup keyboard layout to qwerty + remap caps to escape{{{
     setxkbmap -model pc105 -layout us -option caps:escape
 # }}}
