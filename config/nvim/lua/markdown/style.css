@@ -100,7 +100,6 @@ body:has([data-theme="dark"]) {
 [data-theme="dark"] a:hover { text-decoration: underline; color: #82aad8; }
 
 [data-theme="dark"] code {
-    background-color: #212e3f;
     color: #81b29a;
 }
 
@@ -161,7 +160,6 @@ body:has([data-theme="light"]) {
 [data-theme="light"] a:hover { text-decoration: underline; }
 
 [data-theme="light"] code {
-    background-color: rgba(27, 31, 35, 0.05);
     color: #24292e;
 }
 
