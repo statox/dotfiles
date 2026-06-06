@@ -172,6 +172,7 @@ vim.api.nvim_create_autocmd("FileType", {
     pattern = "markdown",
     callback = function()
         vim.keymap.set("n", "MM", ":MarkdownPreview<CR>", { silent = true, noremap = true, buffer = true })
+        vim.keymap.set("n", "MT", ":RenderMarkdown toggle<CR>", { silent = true, noremap = true, buffer = true })
     end,
 })
 -- }}}
