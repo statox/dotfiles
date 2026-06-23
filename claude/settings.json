@@ -6,7 +6,6 @@
         "VISUAL": "nvim"
     },
     "permissions": {
-        "defaultMode": "acceptEdits",
         "allow": [
             "Bash(ag *)",
             "Bash(find *)",
@@ -63,7 +62,8 @@
             "Bash(git stash pop*)",
             "Bash(git switch*)",
             "Bash(git tag -d*)"
-        ]
+        ],
+        "defaultMode": "acceptEdits"
     },
     "hooks": {
         "Notification": [
@@ -93,11 +93,13 @@
         "command": "bash ~/.claude/statusline-command.sh"
     },
     "enabledPlugins": {
-        "superpowers@superpowers-marketplace": true
+        "superpowers@superpowers-marketplace": true,
+        "superpowers@claude-plugins-official": true
     },
+    "effortLevel": "medium",
     "autoMemoryEnabled": false,
-    "theme": "dark-daltonized",
+    "skipDangerousModePermissionPrompt": true,
+    "theme": "light",
     "editorMode": "normal",
-    "verbose": true,
-    "effortLevel": "medium"
+    "verbose": true
 }
