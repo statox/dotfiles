@@ -8,6 +8,7 @@ mkdir -p "${workdir}/.venv-claude"
 #   --userns=keep-id \
 docker run -it \
     --user "$(id -u)":"$(id -g)"  \
+    --network host \
     -v "${workdir}:/workdir" \
     -v "${workdir}/.venv-claude:/workdir/.venv" \
     -v "$HOME/.claude:/home/dev/.claude:z" \
