@@ -101,5 +101,6 @@
     "skipDangerousModePermissionPrompt": true,
     "theme": "light",
     "editorMode": "normal",
-    "verbose": true
+    "verbose": true,
+    "tui": "fullscreen"
 }
