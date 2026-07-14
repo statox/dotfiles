@@ -390,4 +390,5 @@ loopd() {
 
 alias copilot="npx copilot"
 
-alias claude="$HOME/.dotfiles/claude_docker/run.sh"
+alias devcontainer="npx @devcontainers/cli"
+alias claude="$HOME/.dotfiles/devcontainer/scripts/claude-devcontainer"

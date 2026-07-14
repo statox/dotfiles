@@ -1,0 +1,33 @@
+#!/bin/bash
+# Launch (or attach to) a per-workspace Claude agent devcontainer.
+#
+# Usage: cd into the project you want to work on, then run this script
+# with no arguments. It brings up the global broker (see
+# claude-devcontainer-compose), starts/reuses the devcontainer for the
+# current working directory, and drops you into a shell inside it.
+#
+# The broker is a separate, global-singleton compose project (one broker
+# for all workspaces) that the agent container talks to for things like
+# desktop notifications; it must be running before the agent container
+# starts, which is why it's brought up first below.
+set -euo pipefail
+
+DOTFILES_DEVCONTAINER_DIR="$HOME/.dotfiles/devcontainer"
+DOTFILES_DEVCONTAINER_JSON="$DOTFILES_DEVCONTAINER_DIR/devcontainer.json"
+
+WORKSPACE_FOLDER="$(pwd)"
+
+# Passed into the devcontainer so files created there are owned by the host user.
+export DEV_UID
+DEV_UID="$(id -u)"
+
+# Bootstrap files/dirs the container expects to already exist on the host.
+[ -e "$HOME/.claude.json" ] || echo "{}" > "$HOME/.claude.json"
+mkdir -p "${WORKSPACE_FOLDER}/.venv-claude"
+
+# Start the global broker singleton (idempotent if already running).
+docker compose -f "$DOTFILES_DEVCONTAINER_DIR/broker/docker-compose.yml" up -d --wait
+
+# Create/start the workspace-scoped agent container, then exec a shell in it.
+npx @devcontainers/cli up --workspace-folder "$WORKSPACE_FOLDER" --config "$DOTFILES_DEVCONTAINER_JSON"
+exec npx @devcontainers/cli exec --workspace-folder "$WORKSPACE_FOLDER" --config "$DOTFILES_DEVCONTAINER_JSON" bash
