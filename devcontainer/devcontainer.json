@@ -5,6 +5,7 @@
         "context": "agent"
     },
     "features": {
+        "ghcr.io/devcontainers/features/github-cli:1": {},
         "ghcr.io/devcontainers/features/node": {
             "version": "lts"
         },
