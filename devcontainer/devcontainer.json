@@ -1,0 +1,23 @@
+{
+    "name": "claude-agent",
+    "build": {
+        "dockerfile": "agent/Dockerfile",
+        "context": "agent"
+    },
+    "workspaceFolder": "/workdir",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workdir,type=bind",
+    "remoteUser": "dev",
+    "updateRemoteUserUID": true,
+    "postCreateCommand": "/home/dev/postCreate.sh",
+    "runArgs": ["--network=host"],
+    "shutdownAction": "stopContainer",
+    "mounts": [
+        "source=${localWorkspaceFolder}/.venv-claude,target=/workdir/.venv,type=bind",
+        "source=claude-home,target=/home/dev/.claude,type=volume",
+        "source=glab-config,target=/home/dev/.config/glab-cli,type=volume",
+        "source=broker-sock,target=/run/broker,type=volume",
+        "source=${localEnv:HOME}/.dotfiles,target=/home/dev/.dotfiles,type=bind",
+        "source=${localEnv:HOME}/.claude.json,target=/home/dev/.claude.json,type=bind",
+        "source=${localEnv:HOME}/.netrc,target=/home/dev/.netrc,type=bind"
+    ]
+}

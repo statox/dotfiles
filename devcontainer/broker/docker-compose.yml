@@ -1,0 +1,26 @@
+services:
+  broker:
+    build:
+      context: .
+    network_mode: host
+    user: "${DEV_UID}"
+    # Ubuntu's AppArmor userspace mediation for D-Bus blocks the session bus
+    # from Docker's default confined profile regardless of UID; the broker's
+    # sole job is talking to that bus, so it runs unconfined.
+    security_opt:
+      - apparmor:unconfined
+    restart: unless-stopped
+    volumes:
+      - broker-sock:/run/broker
+      - /run/user/${DEV_UID}:/run/user/${DEV_UID}
+      - ${HOME}/.dotfiles/claude:/claude-assets:ro
+    environment:
+      - PULSE_SERVER=unix:/run/user/${DEV_UID}/pulse/native
+      - DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/${DEV_UID}/bus
+
+volumes:
+  # Fixed name so this matches the plain (non-Compose) volume reference the
+  # agent's devcontainer.json mounts by name — otherwise Compose would
+  # namespace it as "broker_broker-sock", a different volume the agent never sees.
+  broker-sock:
+    name: broker-sock
