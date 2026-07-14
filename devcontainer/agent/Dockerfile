@@ -10,9 +10,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     jq \
     less \
     openssh-client \
-    python3 \
-    python3-pip \
-    python3-venv \
+    # Should not be needed with the uv feature (To be confirmed)
+    # python3 \
+    # python3-pip \
+    # python3-venv \
     ripgrep \
     shellcheck \
     socat \
@@ -40,9 +41,6 @@ RUN mkdir -p /home/dev/.config/glab-cli /home/dev/.claude
 
 # Install Claude Code
 RUN curl -fsSL https://claude.ai/install.sh | bash
-
-# Install uv
-RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
 ENV PATH="/home/dev/.claude/local/bin:/home/dev/.local/bin:${PATH}"
 

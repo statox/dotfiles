@@ -4,12 +4,20 @@
         "dockerfile": "agent/Dockerfile",
         "context": "agent"
     },
+    "features": {
+        "ghcr.io/devcontainers/features/node": {
+            "version": "lts"
+        },
+        "ghcr.io/jsburckhardt/devcontainer-features/uv:1": {}
+    },
     "workspaceFolder": "/workdir",
     "workspaceMount": "source=${localWorkspaceFolder},target=/workdir,type=bind",
     "remoteUser": "dev",
     "updateRemoteUserUID": true,
     "postCreateCommand": "/home/dev/postCreate.sh",
-    "runArgs": ["--network=host"],
+    "runArgs": [
+        "--network=host"
+    ],
     "shutdownAction": "stopContainer",
     "mounts": [
         "source=${localWorkspaceFolder}/.venv-claude,target=/workdir/.venv,type=bind",
