@@ -39,10 +39,5 @@ WORKDIR /workdir
 # ownership (1000) instead of being root-owned and unwritable.
 RUN mkdir -p /home/dev/.config/glab-cli /home/dev/.claude
 
-# Install Claude Code
-RUN curl -fsSL https://claude.ai/install.sh | bash
-
-ENV PATH="/home/dev/.claude/local/bin:/home/dev/.local/bin:${PATH}"
-
 COPY --chown=dev:dev postCreate.sh /home/dev/postCreate.sh
 RUN chmod 755 /home/dev/postCreate.sh

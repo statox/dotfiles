@@ -8,7 +8,8 @@
         "ghcr.io/devcontainers/features/node": {
             "version": "lts"
         },
-        "ghcr.io/jsburckhardt/devcontainer-features/uv:1": {}
+        "ghcr.io/jsburckhardt/devcontainer-features/uv:1": {},
+        "ghcr.io/stu-bell/devcontainer-features/claude-code:0": {}
     },
     "workspaceFolder": "/workdir",
     "workspaceMount": "source=${localWorkspaceFolder},target=/workdir,type=bind",

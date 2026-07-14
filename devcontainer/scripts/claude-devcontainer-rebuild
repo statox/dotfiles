@@ -1,0 +1,34 @@
+#!/bin/bash
+# Rebuild the per-workspace Claude agent devcontainer from scratch, picking up
+# devcontainer.json/Dockerfile changes (new features, base image bumps, etc.)
+# that a plain `claude-devcontainer` run might not pick up because it reuses
+# the existing container.
+#
+# Usage: cd into the project you want to rebuild, then run this script with
+# no arguments. It removes the existing container and rebuilds the image
+# without cache, then drops you into a shell inside the fresh container.
+set -euo pipefail
+
+DOTFILES_DEVCONTAINER_DIR="$HOME/.dotfiles/devcontainer"
+DOTFILES_DEVCONTAINER_JSON="$DOTFILES_DEVCONTAINER_DIR/devcontainer.json"
+
+WORKSPACE_FOLDER="$(pwd)"
+
+# Passed into the devcontainer so files created there are owned by the host user.
+export DEV_UID
+DEV_UID="$(id -u)"
+
+# Bootstrap files/dirs the container expects to already exist on the host.
+[ -e "$HOME/.claude.json" ] || echo "{}" > "$HOME/.claude.json"
+mkdir -p "${WORKSPACE_FOLDER}/.venv-claude"
+
+# Start the global broker singleton (idempotent if already running).
+docker compose -f "$DOTFILES_DEVCONTAINER_DIR/broker/docker-compose.yml" up -d --wait
+
+# Force a fresh container and image build, then exec a shell in it.
+npx @devcontainers/cli up \
+    --workspace-folder "$WORKSPACE_FOLDER" \
+    --config "$DOTFILES_DEVCONTAINER_JSON" \
+    --remove-existing-container \
+    --build-no-cache
+exec npx @devcontainers/cli exec --workspace-folder "$WORKSPACE_FOLDER" --config "$DOTFILES_DEVCONTAINER_JSON" bash

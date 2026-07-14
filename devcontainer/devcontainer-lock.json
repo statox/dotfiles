@@ -9,6 +9,11 @@
       "version": "1.0.0",
       "resolved": "ghcr.io/jsburckhardt/devcontainer-features/uv@sha256:542a0bc2203205b3c696de650ba862f280b20af3543493cc232edd9ac35791f7",
       "integrity": "sha256:542a0bc2203205b3c696de650ba862f280b20af3543493cc232edd9ac35791f7"
+    },
+    "ghcr.io/stu-bell/devcontainer-features/claude-code:0": {
+      "version": "0.1.0",
+      "resolved": "ghcr.io/stu-bell/devcontainer-features/claude-code@sha256:f87b4da3f8648db9111cb25c6bd3817d096018d81f3fb596340f7ffdba14409a",
+      "integrity": "sha256:f87b4da3f8648db9111cb25c6bd3817d096018d81f3fb596340f7ffdba14409a"
     }
   }
 }
