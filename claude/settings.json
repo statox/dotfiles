@@ -72,7 +72,7 @@
                 "hooks": [
                     {
                         "type": "command",
-                        "command": "paplay ~/.claude/bell.wav && notify-send '⏳ Waiting for input' -a Claude -u low -t 1500"
+                        "command": "bash ~/.claude/bell-notify.sh waiting \"⏳ Waiting for input\""
                     }
                 ]
             }
@@ -82,7 +82,7 @@
                 "hooks": [
                     {
                         "type": "command",
-                        "command": "paplay ~/.claude/bell.wav && notify-send '✅ Done' -a Claude -u low -t 1500"
+                        "command": "bash ~/.claude/bell-notify.sh done \"✅ Done\""
                     }
                 ]
             }
@@ -97,10 +97,10 @@
         "superpowers@claude-plugins-official": true
     },
     "effortLevel": "medium",
+    "tui": "fullscreen",
     "autoMemoryEnabled": false,
     "skipDangerousModePermissionPrompt": true,
-    "theme": "light",
+    "theme": "dark-ansi",
     "editorMode": "normal",
-    "verbose": true,
-    "tui": "fullscreen"
+    "verbose": true
 }
