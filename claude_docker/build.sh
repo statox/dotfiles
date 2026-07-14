@@ -1,5 +1,6 @@
 # Container
-docker build --no-cache -t claude-dev .
+docker build -t claude-dev .
 
 # Volumes
 docker volume create glab-config
+docker volume create claude-home

@@ -3,14 +3,21 @@
 # docker run -it \
 #   --user "$(id -u)":"$(id -g)"  \
 #   -v "$(pwd):/workdir:z" \
-#   -v "$HOME/.claude:/home/dev/.claude:z" \
+#   -v claude-home:/home/dev/.claude \
+#   -v "$HOME/.dotfiles:$HOME/.dotfiles:z" \
 #   -v "$HOME/.claude.json:/home/dev/.claude.json:z" \
 #   -v "$HOME/.netrc:/home/dev/.netrc:z" \
 #   -v glab-config:/home/dev/.config/glab-cli \
 #   claude-anb:latest
 #
-# The glab-config named volume persists your glab login. Create it once with:
+# claude-home and glab-config are named volumes that persist container state
+# across runs. Create them once with:
+#   docker volume create claude-home
 #   docker volume create glab-config
+#
+# The entrypoint symlinks the dotfiles-managed files from claude/ (bind-mounted
+# via $HOME/.dotfiles above) into the claude-home volume on every start, so
+# those specific files stay live between host and container in both directions.
 
 FROM ubuntu:24.04
 
@@ -46,9 +53,9 @@ RUN useradd -m -s /bin/bash -u 1000 dev
 USER dev
 WORKDIR /workdir
 
-# Pre-create the glab config dir owned by dev so a named volume mounted here
-# inherits dev's ownership (1000) instead of being root-owned and unwritable.
-RUN mkdir -p /home/dev/.config/glab-cli
+# Pre-create dirs owned by dev so named volumes mounted here inherit dev's
+# ownership (1000) instead of being root-owned and unwritable.
+RUN mkdir -p /home/dev/.config/glab-cli /home/dev/.claude
 
 # Install Claude Code
 RUN curl -fsSL https://claude.ai/install.sh | bash
@@ -58,4 +65,8 @@ RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
 ENV PATH="/home/dev/.claude/local/bin:/home/dev/.local/bin:${PATH}"
 
-ENTRYPOINT ["bash"]
+COPY --chown=dev:dev entrypoint.sh /home/dev/entrypoint.sh
+RUN chmod 755 /home/dev/entrypoint.sh
+
+ENTRYPOINT ["/home/dev/entrypoint.sh"]
+CMD ["bash"]
