@@ -12,6 +12,15 @@
 # starts, which is why it's brought up first below.
 set -euo pipefail
 
+# The `claude` alias in bash_aliases shadows the zsh nvm plugin's lazy-load
+# stub for this command name (aliases are expanded before functions are
+# looked up), so nvm never loads and npx is never put on PATH. Load it here
+# instead, so this script works regardless of interactive shell state.
+export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+if ! command -v npx >/dev/null 2>&1 && [ -s "$NVM_DIR/nvm.sh" ]; then
+    \. "$NVM_DIR/nvm.sh"
+fi
+
 DOTFILES_DEVCONTAINER_DIR="$HOME/.dotfiles/devcontainer"
 DOTFILES_DEVCONTAINER_JSON="$DOTFILES_DEVCONTAINER_DIR/devcontainer.json"
 
