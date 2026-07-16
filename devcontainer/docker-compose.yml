@@ -1,7 +1,7 @@
 services:
   broker:
     build:
-      context: .
+      context: ./broker
     network_mode: host
     user: "${DEV_UID}"
     # Ubuntu's AppArmor userspace mediation for D-Bus blocks the session bus
@@ -18,9 +18,23 @@ services:
       - PULSE_SERVER=unix:/run/user/${DEV_UID}/pulse/native
       - DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/${DEV_UID}/bus
 
+  mcp-everything:
+    build:
+      context: ./mcp-everything
+    restart: unless-stopped
+    networks:
+      - mcp-net
+
+networks:
+  # Fixed name so the agent's `--network=mcp-net` runArg (devcontainer.json)
+  # attaches to this network by name, rather than Compose's default
+  # project-prefixed naming.
+  mcp-net:
+    name: mcp-net
+
 volumes:
   # Fixed name so this matches the plain (non-Compose) volume reference the
   # agent's devcontainer.json mounts by name — otherwise Compose would
-  # namespace it as "broker_broker-sock", a different volume the agent never sees.
+  # namespace it under the project name, a different volume the agent never sees.
   broker-sock:
     name: broker-sock

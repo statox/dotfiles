@@ -1,9 +1,10 @@
 #!/bin/bash
-# Thin wrapper around `docker compose` for the global broker project, for
-# diagnostics (e.g. `claude-devcontainer-compose logs -f`, `... ps`,
-# `... down`). The broker is normally started automatically by
-# claude-devcontainer; use this script directly when you need to inspect
-# or manage it outside of that flow.
+# Thin wrapper around `docker compose` for the global singleton services
+# project (broker, mcp-everything, ...), for diagnostics (e.g.
+# `claude-devcontainer-compose logs -f`, `... ps`, `... down`). These
+# services are normally started automatically by claude-devcontainer; use
+# this script directly when you need to inspect or manage them outside of
+# that flow.
 #
 # Usage: claude-devcontainer-compose <any docker compose subcommand/args>
 set -euo pipefail
@@ -12,4 +13,4 @@ set -euo pipefail
 export DEV_UID
 DEV_UID="$(id -u)"
 
-exec docker compose -f "$HOME/.dotfiles/devcontainer/broker/docker-compose.yml" "$@"
+exec docker compose -f "$HOME/.dotfiles/devcontainer/docker-compose.yml" "$@"

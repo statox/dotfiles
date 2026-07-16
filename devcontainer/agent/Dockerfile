@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     jq \
     less \
+    netcat-openbsd \
     openssh-client \
     # Should not be needed with the uv feature (To be confirmed)
     # python3 \

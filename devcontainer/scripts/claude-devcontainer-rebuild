@@ -28,8 +28,8 @@ DEV_UID="$(id -u)"
 [ -e "$HOME/.claude.json" ] || echo "{}" > "$HOME/.claude.json"
 mkdir -p "${WORKSPACE_FOLDER}/.venv-claude"
 
-# Start the global broker singleton (idempotent if already running).
-docker compose -f "$DOTFILES_DEVCONTAINER_DIR/broker/docker-compose.yml" up -d --wait
+# Start the global singleton services (broker, mcp-everything, ...) — idempotent if already running.
+docker compose -f "$DOTFILES_DEVCONTAINER_DIR/docker-compose.yml" up -d --wait
 
 # Force a fresh container and image build, then exec a shell in it.
 npx @devcontainers/cli up \

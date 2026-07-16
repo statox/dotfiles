@@ -25,7 +25,7 @@
     "updateRemoteUserUID": true,
     "postCreateCommand": "/home/dev/postCreate.sh",
     "runArgs": [
-        "--network=host"
+        "--network=mcp-net"
     ],
     "shutdownAction": "stopContainer",
     "mounts": [
