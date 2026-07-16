@@ -1,0 +1,9 @@
+{
+  "marketplaces": [
+    "anthropics/claude-plugins-official"
+  ],
+  "plugins": [
+    "superpowers@claude-plugins-official",
+    "skill-creator@claude-plugins-official"
+  ]
+}

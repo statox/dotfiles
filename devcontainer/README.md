@@ -117,6 +117,28 @@ file's content — `~/.claude.json` itself stays untracked (it accumulates
 session/project state you don't want versioned), while the MCP server list
 stays under version control.
 
+**Claude Code plugins:** required plugins (and the marketplaces they come
+from) are declared in `claude/plugins.json` (tracked in this dotfiles repo),
+e.g.:
+```json
+{
+  "marketplaces": ["anthropics/claude-plugins-official"],
+  "plugins": ["skill-creator@claude-plugins-official"]
+}
+```
+`postCreate.sh` reads this file on every container creation and, for
+anything not already present, runs `claude plugin marketplace add
+<source>` / `claude plugin install <name>@<marketplace> --scope user` —
+idempotent, so re-running is a no-op except for entries added since the last
+container creation. Installing a plugin doesn't enable it: also add
+`"<name>@<marketplace>": true` to `enabledPlugins` in `claude/settings.json`
+(see "Claude Code customizations" below), which is picked up for free since
+that file is already symlinked into `~/.claude`. To add a new plugin: find
+its `name@marketplace` id (`claude plugin list --available --json` inside a
+container, once the marketplace is added), add it to `plugins.json`, add the
+matching `enabledPlugins` entry, then `claude-devcontainer-rebuild` (or just
+recreate the container) to pick it up.
+
 **Exception — the `typescript` MCP server runs in-process, not as a
 container.** Unlike `mcp-everything`, a language server needs to see the
 actual repo checked out in *this* workspace's agent container, which a
@@ -153,6 +175,8 @@ Claude Code too:
 - `mcp-servers.json` — the `mcpServers` config (user scope), tracked here
   instead of directly in `~/.claude.json` since that file accumulates other
   session/project state you don't want versioned; see "MCP servers" above.
+- `plugins.json` — required plugins and their marketplaces, installed by
+  `postCreate.sh`; see "Claude Code plugins" above.
 
 `agent/postCreate.sh` symlinks every file under `~/.dotfiles/claude/` into
 `~/.claude` (a named volume, `claude-home`) inside the agent container, on
@@ -264,6 +288,12 @@ claude-devcontainer-rebuild
 This removes the existing container and rebuilds the image with `--no-cache`,
 then drops you into a shell in the fresh container. Run it once per repo whose
 agent container needs the update (each repo has its own container instance).
+
+**Add a required Claude Code plugin**: add its `name@marketplace` id to
+`plugins.json` (adding the marketplace source too if it's new), add
+`"<name>@<marketplace>": true` under `enabledPlugins` in `settings.json`,
+then recreate the container (`claude` or `claude-devcontainer-rebuild`) —
+see "Claude Code plugins" above.
 
 **Change what gets symlinked into `~/.claude`** (settings, hooks, statusline
 script, etc.): edit the files under `~/.dotfiles/claude/`. They're re-symlinked

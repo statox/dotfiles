@@ -94,7 +94,8 @@
     },
     "enabledPlugins": {
         "superpowers@superpowers-marketplace": true,
-        "superpowers@claude-plugins-official": true
+        "superpowers@claude-plugins-official": true,
+        "skill-creator@claude-plugins-official": true
     },
     "effortLevel": "medium",
     "tui": "fullscreen",
