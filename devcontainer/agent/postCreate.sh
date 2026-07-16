@@ -10,6 +10,15 @@ DOTFILES_CLAUDE="$HOME/.dotfiles/claude"
 
 mkdir -p "$CLAUDE_HOME"
 
+# ~/.claude/skills is the one dotfiles-managed entry that's a directory
+# rather than a plain file. If it already exists as a real directory (e.g.
+# a skill created directly inside a container before this symlink existed),
+# `ln -sf <dir> <existing-dir>` below would nest a symlink inside it instead
+# of replacing it. Dotfiles always win: clear out a real directory first.
+if [ -d "$CLAUDE_HOME/skills" ] && [ ! -L "$CLAUDE_HOME/skills" ]; then
+    rm -rf "$CLAUDE_HOME/skills"
+fi
+
 if [ -d "$DOTFILES_CLAUDE" ]; then
     for f in "$DOTFILES_CLAUDE"/*; do
         ln -sf "$f" "$CLAUDE_HOME/$(basename "$f")"

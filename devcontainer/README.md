@@ -177,6 +177,14 @@ Claude Code too:
   session/project state you don't want versioned; see "MCP servers" above.
 - `plugins.json` — required plugins and their marketplaces, installed by
   `postCreate.sh`; see "Claude Code plugins" above.
+- `skills/` — personal Claude Code skills, one subdirectory per skill
+  (e.g. `skills/repo-onboarding/SKILL.md`), in the layout Claude Code
+  expects for personal skills. Symlinked as a whole directory into
+  `~/.claude/skills` like every other entry here; unlike plain files,
+  though, `postCreate.sh` first deletes `~/.claude/skills` if it exists as
+  a real (non-symlink) directory — e.g. left over from a skill created
+  directly inside a container before this existed — so the dotfiles
+  version always wins and no manual reconciliation is needed.
 
 `agent/postCreate.sh` symlinks every file under `~/.dotfiles/claude/` into
 `~/.claude` (a named volume, `claude-home`) inside the agent container, on
@@ -296,7 +304,9 @@ then recreate the container (`claude` or `claude-devcontainer-rebuild`) —
 see "Claude Code plugins" above.
 
 **Change what gets symlinked into `~/.claude`** (settings, hooks, statusline
-script, etc.): edit the files under `~/.dotfiles/claude/`. They're re-symlinked
-into the `claude-home` volume by `agent/postCreate.sh` on every container
-creation, so a plain `claude` (which recreates the container if needed) or
+script, personal skills, etc.): edit the files under `~/.dotfiles/claude/`,
+including adding/editing skills under `claude/skills/<name>/SKILL.md`.
+They're re-symlinked into the `claude-home` volume by `agent/postCreate.sh`
+on every container creation, so a plain `claude` (which recreates the
+container if needed) or
 `claude-devcontainer-rebuild` picks them up — no separate step required.
