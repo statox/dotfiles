@@ -1,0 +1,6 @@
+{
+  "everything": {
+    "command": "nc",
+    "args": ["mcp-everything", "3001"]
+  }
+}

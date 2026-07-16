@@ -15,3 +15,24 @@ if [ -d "$DOTFILES_CLAUDE" ]; then
         ln -sf "$f" "$CLAUDE_HOME/$(basename "$f")"
     done
 fi
+
+# Merge the dotfiles-tracked mcpServers config into ~/.claude.json (a
+# bind-mounted file, not part of the symlink loop above) without touching
+# any of its other content. Idempotent: safe to re-run on every container
+# creation, and any server keys present in mcp-servers.json always win over
+# a stale entry left in ~/.claude.json from a previous run.
+MCP_SERVERS_FILE="$DOTFILES_CLAUDE/mcp-servers.json"
+CLAUDE_JSON="$HOME/.claude.json"
+if [ -f "$MCP_SERVERS_FILE" ]; then
+    [ -f "$CLAUDE_JSON" ] || echo '{}' > "$CLAUDE_JSON"
+    # ~/.claude.json is a bind mount (devcontainer.json), i.e. a mount point
+    # in this container's mount namespace. `mv`/rename(2) onto a mount point
+    # fails with EBUSY ("Device or resource busy") since it would require
+    # detaching the mount. Overwrite the file's contents in place instead of
+    # replacing the inode.
+    jq --slurpfile mcp "$MCP_SERVERS_FILE" \
+        '.mcpServers = ((.mcpServers // {}) + $mcp[0])' \
+        "$CLAUDE_JSON" > "$CLAUDE_JSON.tmp"
+    cat "$CLAUDE_JSON.tmp" > "$CLAUDE_JSON"
+    rm "$CLAUDE_JSON.tmp"
+fi
