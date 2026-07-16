@@ -9,6 +9,12 @@
 # without cache, then drops you into a shell inside the fresh container.
 set -euo pipefail
 
+# See claude-devcontainer comment
+export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+if ! command -v npx >/dev/null 2>&1 && [ -s "$NVM_DIR/nvm.sh" ]; then
+    \. "$NVM_DIR/nvm.sh"
+fi
+
 DOTFILES_DEVCONTAINER_DIR="$HOME/.dotfiles/devcontainer"
 DOTFILES_DEVCONTAINER_JSON="$DOTFILES_DEVCONTAINER_DIR/devcontainer.json"
 
@@ -30,5 +36,5 @@ npx @devcontainers/cli up \
     --workspace-folder "$WORKSPACE_FOLDER" \
     --config "$DOTFILES_DEVCONTAINER_JSON" \
     --remove-existing-container \
-    --build-no-cache
+    # --build-no-cache
 exec npx @devcontainers/cli exec --workspace-folder "$WORKSPACE_FOLDER" --config "$DOTFILES_DEVCONTAINER_JSON" bash

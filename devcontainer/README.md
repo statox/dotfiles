@@ -48,6 +48,7 @@ host
 │   │   └── handle-notify.sh           <- runs inside broker; plays sound + notify-send per message
 │   └── scripts/
 │       ├── claude-devcontainer            <- `claude` alias target: up broker, up/exec agent
+│       ├── code-devcontainer              <- `code-devcontainer` alias target: up broker/agent, open VS Code attached
 │       ├── claude-devcontainer-compose    <- thin `docker compose` wrapper for the broker project
 │       └── claude-devcontainer-rebuild    <- force a clean rebuild of the agent image/container
 │
@@ -56,6 +57,7 @@ host
 └── docker volumes
     ├── claude-home    <- ~/.claude inside agent containers (session state, persists across repos)
     ├── glab-config    <- ~/.config/glab-cli inside agent containers
+    ├── vscode-server  <- ~/.vscode-server inside agent containers (VS Code Server + extensions)
     └── broker-sock    <- /run/broker inside both agent and broker (the notify socket lives here)
 ```
 
@@ -139,6 +141,39 @@ claude-devcontainer-compose ps
 claude-devcontainer-compose logs -f
 claude-devcontainer-compose down
 ```
+
+## Using it: the VS Code Claude Code extension
+
+VS Code's Claude Code extension can run confined inside the same `agent` container the CLI uses,
+instead of on the bare host. Rather than the usual "Reopen in Container" flow (which expects a
+`.devcontainer/devcontainer.json` inside the repo), VS Code **attaches** to the container that the
+CLI flow above already creates — no changes to the repo, no separate container.
+
+1. `cd` into the repo you want to work on.
+2. Run `code-devcontainer` (alias for
+   `~/.dotfiles/devcontainer/scripts/code-devcontainer`, set in `bash_aliases`).
+
+That single command brings up the broker and the `agent` container exactly like `claude` does,
+then opens VS Code already attached to that container with `/workdir` open. The Claude Code
+extension (`anthropic.claude-code`) installs itself automatically the first time VS Code connects —
+listed under `customizations.vscode.extensions` in `devcontainer.json`, which both the "Reopen in
+Container" flow and attaching to a CLI-created container honor. It persists across container
+recreation via the `vscode-server` volume, so it won't reinstall on every rebuild. It runs remotely
+inside the container, so it's exactly as confined as the CLI.
+
+Adding/removing extensions this way only takes effect on containers created *after* the change —
+run `claude-devcontainer-rebuild` once to pick it up on an existing container.
+
+`code-devcontainer` opens VS Code via an **undocumented VS Code URI scheme**
+(`vscode-remote://attached-container+<hex>`), so it could break on a future VS Code update. If it
+does, the fallback is fully manual and doesn't depend on the script at all: run `claude` (or just
+`code-devcontainer`, ignoring its own failure) to make sure the container is up, then in VS Code use
+Command Palette → **Dev Containers: Attach to Running Container…** → pick the repo's container →
+**File → Open Folder** → `/workdir`.
+
+Running `code-devcontainer` more than once against the same repo doesn't create a second
+container — `devcontainers/cli up` reuses the existing one (same as `claude`), and VS Code supports
+multiple windows attached to the same container concurrently.
 
 ## Updating the setup
 

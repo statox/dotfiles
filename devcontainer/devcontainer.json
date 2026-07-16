@@ -12,6 +12,13 @@
         "ghcr.io/jsburckhardt/devcontainer-features/uv:1": {},
         "ghcr.io/stu-bell/devcontainer-features/claude-code:0": {}
     },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "anthropic.claude-code"
+            ]
+        }
+    },
     "workspaceFolder": "/workdir",
     "workspaceMount": "source=${localWorkspaceFolder},target=/workdir,type=bind",
     "remoteUser": "dev",
@@ -24,6 +31,7 @@
     "mounts": [
         "source=${localWorkspaceFolder}/.venv-claude,target=/workdir/.venv,type=bind",
         "source=claude-home,target=/home/dev/.claude,type=volume",
+        "source=vscode-server,target=/home/dev/.vscode-server,type=volume",
         "source=glab-config,target=/home/dev/.config/glab-cli,type=volume",
         "source=broker-sock,target=/run/broker,type=volume",
         "source=${localEnv:HOME}/.dotfiles,target=/home/dev/.dotfiles,type=bind",

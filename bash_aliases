@@ -392,3 +392,4 @@ alias copilot="npx copilot"
 
 alias devcontainer="npx @devcontainers/cli"
 alias claude="$HOME/.dotfiles/devcontainer/scripts/claude-devcontainer"
+alias code-devcontainer="$HOME/.dotfiles/devcontainer/scripts/code-devcontainer"
