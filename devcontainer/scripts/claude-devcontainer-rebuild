@@ -12,6 +12,7 @@ set -euo pipefail
 # See claude-devcontainer comment
 export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
 if ! command -v npx >/dev/null 2>&1 && [ -s "$NVM_DIR/nvm.sh" ]; then
+    echo "Activating nvm"
     \. "$NVM_DIR/nvm.sh"
 fi
 
@@ -29,12 +30,16 @@ DEV_UID="$(id -u)"
 mkdir -p "${WORKSPACE_FOLDER}/.venv-claude"
 
 # Start the global singleton services (broker, mcp-everything, ...) — idempotent if already running.
+echo "Start up singleton services"
 docker compose -f "$DOTFILES_DEVCONTAINER_DIR/docker-compose.yml" up -d --wait
 
 # Force a fresh container and image build, then exec a shell in it.
+echo "Rebuild devcontainer"
 npx @devcontainers/cli up \
     --workspace-folder "$WORKSPACE_FOLDER" \
     --config "$DOTFILES_DEVCONTAINER_JSON" \
     --remove-existing-container \
     # --build-no-cache
+#
+echo "Start devcontainer"
 exec npx @devcontainers/cli exec --workspace-folder "$WORKSPACE_FOLDER" --config "$DOTFILES_DEVCONTAINER_JSON" bash
