@@ -15,9 +15,12 @@ A per-repo development container for running Claude Code, with a small always-on
   - **Today:** the broker forwards desktop notifications (sound + `notify-send`)
     so Claude can nudge you when it needs input or finishes a task, without the
     agent container needing PulseAudio/D-Bus access itself.
-  - **Tomorrow:** the same pattern generalizes to an MCP broker, forwarding MCP
-    traffic via `socat` so credentials/tools stay off the agent container and
-    are mediated at a single, auditable point (see "Future MCP broker" below).
+- **MCP servers, each isolated in its own container.** Rather than running as
+  local subprocesses of the agent, MCP servers run in their own singleton
+  containers (e.g. `mcp-everything`), reached directly over a dedicated
+  Docker network — no broker involvement, since these servers don't hold
+  host-facing credentials the way the notification broker does (see "MCP
+  servers" below).
 - **One command to get in.** A shell alias (`claude`) wraps the whole flow —
   bring up the broker, bring up/reuse the per-repo agent container, drop you into
   a shell in it — so day-to-day use is just `cd <repo> && claude`.
@@ -39,33 +42,39 @@ A per-repo development container for running Claude Code, with a small always-on
 host
 ├── ~/.dotfiles/devcontainer/          <- this directory, shared across all repos
 │   ├── devcontainer.json              <- agent container config (per-repo instance)
+│   ├── docker-compose.yml             <- singleton services: broker + mcp-everything (global, all workspaces)
 │   ├── agent/
 │   │   ├── Dockerfile                 <- agent image: bash, git, vim, ripgrep, gh, glab, ...
 │   │   └── postCreate.sh              <- symlinks ~/.dotfiles/claude/* into ~/.claude on create
 │   ├── broker/
 │   │   ├── Dockerfile                 <- broker image: socat, dbus, libnotify-bin, pulseaudio-utils
-│   │   ├── docker-compose.yml         <- broker service definition (global singleton)
 │   │   └── handle-notify.sh           <- runs inside broker; plays sound + notify-send per message
+│   ├── mcp-everything/
+│   │   └── Dockerfile                 <- MCP test server image: node, socat, @modelcontextprotocol/server-everything
 │   └── scripts/
-│       ├── claude-devcontainer            <- `claude` alias target: up broker, up/exec agent
-│       ├── code-devcontainer              <- `code-devcontainer` alias target: up broker/agent, open VS Code attached
-│       ├── claude-devcontainer-compose    <- thin `docker compose` wrapper for the broker project
+│       ├── claude-devcontainer            <- `claude` alias target: up broker+mcp, up/exec agent
+│       ├── code-devcontainer              <- `code-devcontainer` alias target: up broker+mcp/agent, open VS Code attached
+│       ├── claude-devcontainer-compose    <- thin `docker compose` wrapper for the singleton services project
 │       └── claude-devcontainer-rebuild    <- force a clean rebuild of the agent image/container
 │
 ├── <repo>/.venv-claude/               <- per-repo bind mount target for the agent's /workdir/.venv
 │
-└── docker volumes
-    ├── claude-home    <- ~/.claude inside agent containers (session state, persists across repos)
-    ├── glab-config    <- ~/.config/glab-cli inside agent containers
-    ├── vscode-server  <- ~/.vscode-server inside agent containers (VS Code Server + extensions)
-    └── broker-sock    <- /run/broker inside both agent and broker (the notify socket lives here)
+├── docker volumes
+│   ├── claude-home    <- ~/.claude inside agent containers (session state, persists across repos)
+│   ├── glab-config    <- ~/.config/glab-cli inside agent containers
+│   ├── vscode-server  <- ~/.vscode-server inside agent containers (VS Code Server + extensions)
+│   └── broker-sock    <- /run/broker inside both agent and broker (the notify socket lives here)
+│
+└── docker networks
+    └── mcp-net        <- bridge network joining the agent container and mcp-* singleton containers
 ```
 
 **Two containers, two lifecycles:**
 
 - `broker` is a **global singleton** — one instance total, shared by every repo's
-  agent container, started via `docker compose` (`broker/docker-compose.yml`) and
-  left running (`restart: unless-stopped`). It's the only container with
+  agent container, started via `docker compose` (the top-level
+  `docker-compose.yml`, shared with `mcp-everything`) and left running
+  (`restart: unless-stopped`). It's the only container with
   host-facing access (`network_mode: host`, the host's PulseAudio/D-Bus sockets
   bind-mounted in, `apparmor:unconfined` because Ubuntu's AppArmor D-Bus mediation
   blocks the session bus otherwise). Its whole job is to sit on
@@ -74,7 +83,9 @@ host
 - `agent` is **per-repo** — one instance per workspace folder, built from
   `agent/Dockerfile`, created/reused by the `devcontainers` CLI
   (`devcontainer.json`). It mounts the repo at `/workdir`, gets `broker-sock` so it
-  can reach the broker's socket, but never touches the host directly.
+  can reach the broker's socket, and joins the `mcp-net` bridge network so it can
+  reach singleton MCP server containers (e.g. `mcp-everything`) by service name —
+  but never touches the host directly.
 
 **Notification flow (today's only broker traffic):** a Claude Code hook in the
 agent container runs `bell-notify.sh <type> <message>`, which pipes
@@ -84,12 +95,27 @@ forks a handler running `handle-notify.sh`, which plays `bell.wav` and fires a
 D-Bus round-trip survives `socat` tearing down the connection handler as soon as
 the client disconnects.
 
-**Future MCP broker:** the same pattern (dedicated minimal container, socket in
-its own named volume, agent never gets host access directly) generalizes to an
-`mcp-broker` service that forwards MCP traffic via `socat`, keeping credentials
-and tool access off the agent container and mediated at one auditable point —
-the isolation approach described in Dashlane's write-up on sandboxing AI coding
-tools. Not built yet.
+**MCP servers:** each MCP server runs in its own container, alongside the
+broker, as a singleton service in the top-level `docker-compose.yml` (e.g.
+`mcp-everything`, wrapping `@modelcontextprotocol/server-everything`). The
+agent container reaches them directly over the `mcp-net` bridge network by
+service name — no broker involvement for MCP traffic; this is a deliberate
+simplification over the "future MCP broker" idea floated in an earlier
+version of this doc, since these servers don't hold host-facing credentials
+the way the notification broker does. Each server's container wraps its
+stdio-based process behind `socat TCP-LISTEN:<port>,fork`, and Claude Code is
+configured to reach it with `nc <service-name> <port>` as the MCP server's
+`command`.
+
+To add a new MCP server: add a `devcontainer/mcp-<name>/Dockerfile` following
+the `mcp-everything` pattern, add a matching service to the top-level
+`docker-compose.yml` on the `mcp-net` network, and add an entry to
+`claude/mcp-servers.json` (tracked in this dotfiles repo). `postCreate.sh`
+merges that file's contents into the `mcpServers` key of `~/.claude.json` on
+every container creation, via `jq`, without disturbing the rest of that
+file's content — `~/.claude.json` itself stays untracked (it accumulates
+session/project state you don't want versioned), while the MCP server list
+stays under version control.
 
 **Extensibility seam for per-repo customization (not built yet):**
 `devcontainer.json`'s `dockerComposeFile` field accepts an array of compose
@@ -110,10 +136,17 @@ Claude Code too:
   hooks in `settings.json`.
 - `statusline-command.sh` — the statusline script referenced by `settings.json`.
 - `.claude.json` — other persisted Claude Code state.
+- `mcp-servers.json` — the `mcpServers` config (user scope), tracked here
+  instead of directly in `~/.claude.json` since that file accumulates other
+  session/project state you don't want versioned; see "MCP servers" above.
 
 `agent/postCreate.sh` symlinks every file under `~/.dotfiles/claude/` into
-`~/.claude` (a named volume, `claude-home`) inside the agent container, on every
-container creation. So editing a file under `~/.dotfiles/claude/` on the host
+`~/.claude` (a named volume, `claude-home`) inside the agent container, on
+every container creation, and separately merges `mcp-servers.json`'s
+contents into the `mcpServers` key of `~/.claude.json` via `jq` (that file is
+bind-mounted directly rather than part of the symlink loop, so a plain
+symlink would clobber its other content instead of merging). So editing a
+file under `~/.dotfiles/claude/` on the host
 takes effect the next time a container is created or recreated — no rebuild
 needed, and no copy to keep in sync since it's a symlink both ways.
 
@@ -195,11 +228,17 @@ alongside the `devcontainer.json` change.
 **Add a tool to the agent image** (when no feature exists for it): edit
 `agent/Dockerfile`, then rebuild.
 
-**Change the broker** (new notification behavior, future MCP forwarding): edit
-`broker/Dockerfile`, `broker/docker-compose.yml`, or `broker/handle-notify.sh`,
-then recreate the broker:
+**Change the broker** (new notification behavior): edit `broker/Dockerfile` or
+`broker/handle-notify.sh`, then recreate just that service:
 ```
-claude-devcontainer-compose up -d --build --force-recreate
+claude-devcontainer-compose up -d --build --force-recreate broker
+```
+
+**Change an MCP server** (new server, dependency bump): edit
+`mcp-<name>/Dockerfile` or the top-level `docker-compose.yml`, then recreate
+just that service:
+```
+claude-devcontainer-compose up -d --build --force-recreate mcp-everything
 ```
 
 **Rebuild the agent container from scratch** (picks up Dockerfile/feature
