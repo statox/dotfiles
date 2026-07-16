@@ -2,5 +2,9 @@
   "everything": {
     "command": "nc",
     "args": ["mcp-everything", "3001"]
+  },
+  "typescript": {
+    "command": "mcp-language-server",
+    "args": ["--workspace", "/workdir", "--lsp", "typescript-language-server", "--", "--stdio"]
   }
 }

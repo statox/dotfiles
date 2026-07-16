@@ -1,3 +1,9 @@
+# Builds mcp-language-server (Go binary) in an isolated stage so it doesn't
+# depend on the node feature, which is layered onto this image by the
+# devcontainers CLI *after* this Dockerfile builds.
+FROM golang:1.24-alpine AS mcp-language-server-builder
+RUN go install github.com/isaacphi/mcp-language-server@latest
+
 FROM ubuntu:24.04
 
 ARG DEBIAN_FRONTEND=noninteractive
@@ -27,6 +33,8 @@ RUN curl -fsSL -o /tmp/glab.deb \
     "https://gitlab.com/gitlab-org/cli/-/releases/v${GLAB_VERSION}/downloads/glab_${GLAB_VERSION}_linux_amd64.deb" \
     && apt-get install -y --no-install-recommends /tmp/glab.deb \
     && rm -f /tmp/glab.deb /var/lib/apt/lists/* 2>/dev/null || true
+
+COPY --from=mcp-language-server-builder /go/bin/mcp-language-server /usr/local/bin/mcp-language-server
 
 # Create dev user with a known UID; devcontainer CLI's updateRemoteUserUID
 # remaps this to match the host user at container-creation time.

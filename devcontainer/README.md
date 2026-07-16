@@ -117,6 +117,20 @@ file's content — `~/.claude.json` itself stays untracked (it accumulates
 session/project state you don't want versioned), while the MCP server list
 stays under version control.
 
+**Exception — the `typescript` MCP server runs in-process, not as a
+container.** Unlike `mcp-everything`, a language server needs to see the
+actual repo checked out in *this* workspace's agent container, which a
+global singleton container never has mounted. So instead of a
+`docker-compose.yml` service, `agent/Dockerfile` builds
+[`mcp-language-server`](https://github.com/isaacphi/mcp-language-server) (a
+Go binary, in an isolated builder stage so it doesn't depend on the node
+feature) and `postCreate.sh` installs `typescript-language-server` via npm
+once Node is available. Claude Code spawns it directly as a local stdio
+process — `command: mcp-language-server`, pointed at `/workdir` — no `nc`,
+no `mcp-net`. This is the pattern to follow for any other MCP server that
+needs filesystem access to the repo rather than being a stateless shared
+service.
+
 **Extensibility seam for per-repo customization (not built yet):**
 `devcontainer.json`'s `dockerComposeFile` field accepts an array of compose
 files merged in order, so a repo can later append its own
