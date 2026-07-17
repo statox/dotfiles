@@ -21,7 +21,13 @@ fi
 
 if [ -d "$DOTFILES_CLAUDE" ]; then
     for f in "$DOTFILES_CLAUDE"/*; do
-        ln -sf "$f" "$CLAUDE_HOME/$(basename "$f")"
+        # -n: CLAUDE_HOME lives in a volume shared by every repo's container,
+        # so on the second and later container creations this symlink already
+        # exists. Without -n, `ln -sf` would dereference an existing
+        # symlink-to-directory and nest the new link inside it instead of
+        # replacing it - which is how a stray `skills/skills` symlink ended up
+        # created inside the dotfiles-managed skills/ directory itself.
+        ln -sfn "$f" "$CLAUDE_HOME/$(basename "$f")"
     done
 fi
 
