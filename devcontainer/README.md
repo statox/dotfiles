@@ -310,3 +310,24 @@ They're re-symlinked into the `claude-home` volume by `agent/postCreate.sh`
 on every container creation, so a plain `claude` (which recreates the
 container if needed) or
 `claude-devcontainer-rebuild` picks them up — no separate step required.
+
+## Limitations / TODOs
+
+### Long build time
+
+The rebuild time can get fairly long:
+
+- For the agent docker we create a base image with the [`Dockerfile`](agent/Dockerfile).
+  This image contains some base customizations (packages, volumes, ...)
+- Devcontainer uses this base image to apply the different features
+  used in [`devcontainer.jon`](devcontainer.json)
+- The consequence is that very simple change to the base image or to
+  [`postCreate.sh`](agent/postCreate.sh) trigger a full re-build which
+  is long because the features images are re-built
+
+This is normal Docker behavior but this can get pretty annoying when trying
+to evolve this setup.
+
+Next step is to create a local devcontainer feature to install our customizations
+and use `overrideFeatureInstallOrder` in `devcontainer.json` to make sure it applies
+last. This way the rebuilds would keep the base images cached and get faster.
