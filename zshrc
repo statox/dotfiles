@@ -178,5 +178,10 @@ RPROMPT=$RPROMPT"\
     # Setup the keybinding for ctrl-r, ctrl-t, etc
     source <(fzf --zsh)
 # }}}
+# Claude Conde Devcontainer setup {{{
+    # See https://github.com/statox/claude-devcontainer
+    export CLAUDE_DEVCONTAINER_HOME="$HOME/.claude_devcontainer"
+    source "$CLAUDE_DEVCONTAINER_HOME/shell-init.sh"
+# }}}
 
 export MOCHA_COLORS=true
