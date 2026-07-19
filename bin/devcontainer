@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+#
+# Get devcontainer cli available in the path without install
+#
+
+# Since we use nvm to get npx lazily we make sure to source nvm when invoking
+# this command
+export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+if ! command -v npx >/dev/null 2>&1 && [ -s "$NVM_DIR/nvm.sh" ]; then
+    . "$NVM_DIR/nvm.sh"
+fi
+
+exec npx --yes @devcontainers/cli "$@"

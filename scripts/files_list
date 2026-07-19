@@ -5,6 +5,7 @@
 Xmodmap
 bash_aliases
 bin/changeVolume
+bin/devcontainer
 bin/monitor-battery
 bin/dmenu-i3-window-jumper.sh
 bin/i3-lock-suspend
