@@ -11,6 +11,8 @@ underline-highlight = #ffb52a
 success = #a9d387
 alert = #e8796a
 primary = #7ca9dd
+secondary = #A98BDB
+tertiary = #6FC3B2
 warning = #f5a70a
 
 [bar/main]
@@ -44,7 +46,7 @@ font-0 = pango:monospace:pixelsize=10;1
 font-1 = OpenSymbol:style=Regular
 font-2 = AurulentSansMono Nerd Font:style=Regular:monospace:pixelsize=10;1
 
-modules-left = i3 memory temperature cpu filesystem clocks
+modules-left = i3 memory temperature cpu filesystem home-tracker-salon home-tracker-jardiniere clocks
 modules-center = popup-calendar
 modules-right = dunst pulseaudio pulseaudio2 battery wlan eth powermenu
 
@@ -283,6 +285,22 @@ type = custom/text
 content = 
 
 click-left = ~/.config/rofi/powermenu/powermenu.sh
+
+[module/home-tracker-salon]
+type = custom/script
+exec = ~/.config/polybar/scripts/home-tracker.sh salon
+interval = 1
+click-left = ~/.config/polybar/scripts/home-tracker.sh salon --toggle
+format-prefix = "  "
+format-prefix-foreground = ${colors.tertiary}
+
+[module/home-tracker-jardiniere]
+type = custom/script
+exec = ~/.config/polybar/scripts/home-tracker.sh jardiniere
+interval = 1
+click-left = ~/.config/polybar/scripts/home-tracker.sh jardiniere --toggle
+format-prefix = "  "
+format-prefix-foreground = ${colors.secondary}
 
 [module/clocks]
 type= custom/script
