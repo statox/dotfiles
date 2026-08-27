@@ -80,6 +80,8 @@ xnoremap(
     "y<cmd>lua require('telescope.builtin').grep_string({word_match = '-w', search = vim.fn.getreg('\"')})<CR>"
 )
 nnoremap("gA", "<cmd>lua require('plugins.telescope').live_grep_buffers()<cr>")
+-- Search only in the current buffer, similar to ga but scoped to the buffer
+nnoremap("<leader>/", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>")
 -- }}}
 -- make h and l skip indentation white spaces {{{
 local motion = require("motion")
