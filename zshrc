@@ -183,5 +183,10 @@ RPROMPT=$RPROMPT"\
     export CLAUDE_DEVCONTAINER_HOME="$HOME/.claude_devcontainer"
     source "$CLAUDE_DEVCONTAINER_HOME/shell-init.sh"
 # }}}
+# Mise-en-place setup {{{
+if command -v mise >/dev/null 2>&1; then
+    eval "$(mise activate zsh)"
+fi
+# }}}
 
 export MOCHA_COLORS=true
