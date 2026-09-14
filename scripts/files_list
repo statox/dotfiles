@@ -23,7 +23,6 @@ config/espanso
 config/git
 config/i3
 config/nvim/after
-config/nvim/autoload
 config/nvim/ftdetect
 config/nvim/init.lua
 config/nvim/lazy-lock.json
