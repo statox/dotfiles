@@ -178,6 +178,18 @@ local plugins = {
         },
     },
 
+    -- 3rd/image.nvim: Render images inline (used in markdown buffers)
+    -- Note: build = false because the magick_cli processor shells out to
+    -- ImageMagick rather than building the magick luarock
+    {
+        "3rd/image.nvim",
+        build = false,
+        ft = { "markdown", "vimwiki" },
+        config = function()
+            require("plugins.image")
+        end,
+    },
+
     -- stevearc/aerial.nvim: Opens a split with the symbols of the current file
     -- to help navigating the file quickly
     {
