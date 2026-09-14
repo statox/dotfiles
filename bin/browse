@@ -1,0 +1,116 @@
+#!/usr/bin/env bash
+
+# Browse a list of files in fzf with the preview window
+# Examples: `browse *`   `browse file1 file2`  `browse dir/`  `browse -a dir/`
+
+# Internal mode: fzf calls back into this script to render one file's
+# preview, so the logic below is plain bash regardless of the user's $SHELL.
+if [ "$1" = "--preview-file" ]; then
+    file="$2"
+
+    pager="cat --"
+    if command -v bat >/dev/null 2>&1; then
+        pager="bat --style=numbers --color=always --"
+    elif command -v batcat >/dev/null 2>&1; then
+        pager="batcat --style=numbers --color=always --"
+    fi
+
+    if command -v chafa >/dev/null 2>&1; then
+        extension=$(printf '%s' "${file##*.}" | tr '[:upper:]' '[:lower:]')
+        case "$extension" in
+        png | jpg | jpeg | gif | bmp | webp | tiff | tif | ico)
+            exec chafa --size="${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}" "$file"
+            ;;
+        esac
+    fi
+
+    exec $pager "$file"
+fi
+
+show_all=0
+while getopts ":a" opt; do
+    case "$opt" in
+    a) show_all=1 ;;
+    *)
+        echo "Usage: browse [-a] <file|dir> [file|dir ...]"
+        exit 1
+        ;;
+    esac
+done
+shift $((OPTIND - 1))
+
+if [ "$#" -eq 0 ]; then
+    echo "Usage: browse [-a] <file|dir> [file|dir ...]"
+    exit 1
+fi
+
+# List one directory's files: ag when available else find
+# -a makes ag show hidden and gitignored files too
+list_dir() {
+    dir="$1"
+    if command -v ag >/dev/null 2>&1; then
+        if [ "$show_all" -eq 1 ]; then
+            ag -f -g "" --hidden --skip-vcs-ignores --ignore .git "$dir"
+        else
+            ag -f -g "" --hidden --ignore .git "$dir"
+        fi
+    else
+        find "$dir" -type f
+    fi
+}
+
+# Build the file list: expand directories to their files, keep files as-is.
+# Sorted at the end since `find`'s order is filesystem-dependent, not
+# alphabetical - this matches the order fzf's ctrl-t binding shows.
+files=$(for arg in "$@"; do
+    if [ -d "$arg" ]; then
+        list_dir "$arg"
+    elif [ -e "$arg" ]; then
+        echo "$arg"
+    fi
+done | sort)
+
+if [ -z "$files" ]; then
+    echo "browse: no files to display"
+    exit 1
+fi
+
+# Preview shows the whole file: syntax-highlighted with bat when available,
+# or rendered with chafa when it's an image. See the --preview-file mode above.
+preview="'$0' --preview-file {}"
+
+# bind options: Use
+# ctrl-j/ctrl-k to scroll the preview
+bind_scroll='ctrl-j:preview-down,ctrl-k:preview-up'
+
+x0='left,1%,wrap'
+xLeft='left,32%,wrap'
+xCenter='left,50%,wrap'
+xRight='left,64%,wrap'
+x100='left,99%,wrap'
+bind_resize_left="left:change-preview-window($xCenter|$xLeft|$x0)"
+bind_resize_right="right:change-preview-window($xCenter|$xRight|$x100)"
+
+y0='top,90%,wrap'
+y1='top,75%,wrap'
+bind_resize_b="ctrl-b:change-preview-window($y0|$y1)"
+
+selection=$(echo "$files" | fzf \
+    --multi \
+    --ansi \
+    --reverse \
+    --preview-border none \
+    --border none \
+    --preview "$preview" \
+    --preview-window left,50%,wrap \
+    --bind "$bind_scroll" \
+    --bind "$bind_resize_left" \
+    --bind "$bind_resize_right" \
+    --bind "$bind_resize_b")
+
+# Put the selected lines in the next prompt line (only work with ZSH)
+if [ -n "$selection" ] && [ -n "$ZSH_VERSION" ]; then
+    # Escape all ( and ) in paths (useful for directories like `routes/(apps)`)
+    converted=$(echo "$selection" | sed 's/[()]/\\\\&/g' | tr '\n' ' ')
+    print -z -- " ${converted% }"
+fi
